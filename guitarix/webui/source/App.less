@@ -1,0 +1,161 @@
+/*
+ * Copyright (C) 2013 Andreas Degert
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+/*
+	Put anything you reference with "url()" in ../assets/
+*/
+
+/* Onyx default variable definitions: */
+@import "Theme.less";
+
+.gx-mainscreen {
+    background: #1c1c1c url(../assets/watermark.png) center bottom 120px no-repeat;
+}
+
+.enyo-panels {
+    color: darken(white,10%);
+    background-color: black;
+}
+
+.gx-sliding-panel {
+    width: 300px;
+    z-index: 2;
+    background-color: fade(darken(#8c8c8c, 20%), 90%);
+    color: #f2f2f2;
+}
+
+.gx-sliding-panel * {
+    padding-left: 8px;
+}
+
+.gx-effect .onyx-picker-decorator .onyx-button {
+    min-width: 80%;
+}
+
+.gx-effect .gx-valueslider {
+    margin-top: 10px;
+}
+
+.gx-effect-box .onyx-icon-button {
+    background-color: @onyx-button-background;
+}
+
+.gx-effect-section-header {
+    font-weight: bold;
+}
+
+.nice-padding {
+    padding: 15px;
+}
+
+.test {
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    background-color: black;
+    color: white;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -moz-box-orient: vertical;
+    -moz-box-pack: center;
+}
+
+.preset {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    //width: 80%;
+    //background-color: red;
+    display: block;
+    //-webkit-box-flex: 1;
+}
+
+.gx-selected * {
+    background-color: blue;
+}
+
+.gx-before-selected * {
+    background-color: red;
+}
+
+.gx-after-selected * {
+    background-color: green;
+}
+
+.gx-maxlevel {
+    margin-bottom: 50px;
+    margin-left: 20px;
+    height: 5px;
+}
+
+.gx-maxlevel > canvas {
+    vertical-align: middle;
+}
+
+.gx-eqlevel {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 5px;
+}
+
+.gx-eqlevel > canvas {
+    vertical-align: middle;
+}
+
+.gx-level {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 5px;
+}
+
+.gx-level > canvas {
+    vertical-align: middle;
+}
+
+.led {
+    margin-right: 20px;
+    width: 15px;
+    height: 15px !important;
+    border-radius: 50%;
+    vertical-align: middle;
+    background-color: grey;
+}
+
+.led-on {
+    background-image: -moz-radial-gradient(45% 45% 45deg, circle cover, red 0%, desaturate(yellow, 50%) 100%);
+    background-image: -webkit-radial-gradient(45% 45%, circle cover, red, desaturate(yellow, 50%));
+    background-image: radial-gradient(45% 45% 45deg, circle cover, red 0%, desaturate(yellow, 50%) 100%);
+}
+
+.gx-valuedisplay {
+    width: 50px;
+    padding: 2px;
+    text-align: right;
+    display: inline-block;
+    background-color: green;
+    margin-right: 10px;
+}
+
+.gx-control-switch :first-child {
+    margin-right: 10px;
+}

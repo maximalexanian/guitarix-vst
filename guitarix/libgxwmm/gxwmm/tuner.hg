@@ -1,0 +1,39 @@
+/*
+ * Copyright (C) 2009, 2010 Hermann Meyer, James Warden, Andreas Degert
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+#include <gtkmm/drawingarea.h>
+_DEFS(gxwmm,gxw)
+_PINCLUDE(gtkmm/private/drawingarea_p.h)
+
+namespace Gxw {
+
+class Tuner: public Gtk::DrawingArea {
+	_CLASS_GTKOBJECT(Tuner,GxTuner,GX_TUNER,Gtk::DrawingArea,GtkDrawingArea)
+	public:
+	_CTOR_DEFAULT
+	_WRAP_METHOD(void set_freq(double), gx_tuner_set_freq)
+	_WRAP_METHOD(void set_reference_pitch(double), gx_tuner_set_reference_pitch)
+	_WRAP_METHOD(double get_reference_pitch(), gx_tuner_get_reference_pitch)
+	_WRAP_METHOD(void set_scale(double), gx_tuner_set_scale)
+	_WRAP_METHOD(double get_scale(), gx_tuner_get_scale)
+	_WRAP_PROPERTY(freq, double)
+	_WRAP_PROPERTY(reference_pitch, double)
+	_WRAP_PROPERTY(scale, double)
+};
+
+} // namespace Gxw

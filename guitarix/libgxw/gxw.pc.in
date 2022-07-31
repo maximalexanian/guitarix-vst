@@ -1,0 +1,15 @@
+prefix=/path
+exec_prefix=${prefix}
+libdir=/path
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+includedir=${prefix}/include
+
+
+Name: gxw+
+Description: Additional widgets for the GTK toolkit
+Version: 1
+URL: http://www.gtk.org/
+Requires: gtk+-2.0 >= 2.24.0 
+Libs: -L${libdir} -lgxw
+Cflags: -I${includedir}/gxw

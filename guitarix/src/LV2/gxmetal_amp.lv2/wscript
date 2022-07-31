@@ -1,0 +1,87 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+import sys, os, TaskGen, ctypes, wscript_helper
+
+def configure(conf):
+    pass
+
+def build(bld):
+    bundle = 'gxmetal_amp.lv2'
+
+    src = ['gxmetal_amp.cpp',
+           'gx_metalamp.cc',
+           '../DSP/gx_resampler.cc',
+           '../DSP/gx_convolver.cc'
+           ]
+    incl = ['../faust','./', '../DSP', '../DSP/tube_tables']
+    lib = []
+    if sys.platform.startswith("linux"):
+        lib.append('dl')
+    uselib = ['LV2CORE']
+    if not bld.env['ZITA_CONVOLVER']:
+        if not bld.env['CONVOLVER_FFMPEG']:
+            uselib.append('FFTW3')
+    wscript_helper.add_zita_convolver(bld, uselib, src, incl, base="../..")
+    wscript_helper.add_zita_resampler(bld, uselib, src, incl, base="../..")
+    if sys.platform.startswith("linux"):
+        lib.append('dl')
+    cxxflag =[]
+    ldscript = bld.path.find_resource('gxmetal_amp.lds')
+    mapfile = bld.path.find_or_declare("gxmetal_amp.map")
+    if not bld.env['OPT'] and bld.env['SSE2']:
+        cxxflag = [ "-msse2", "-mfpmath=sse"]
+    lv2_effects = bld(
+        features='cxx cshlib ',
+        includes = incl,
+        lib = lib,
+        uselib = uselib,
+        obj_ext  = '_17.o',
+        cxxflags = cxxflag,
+        defines  = ["LV2_SO"],
+        target   = 'gxmetal_amp',
+        source   = src,
+        install_path = '${LV2DIR}/%s' % bundle,
+        chmod = 0o755,
+        ldflags = ['-Wl,%s,-Map=%s' % (ldscript.srcpath(),mapfile.bldpath(bld.env))],
+        )
+    bld.add_manual_dependency(bld.path.find_or_declare(lv2_effects.target), ldscript)
+    lv2_effects.env['shlib_PATTERN'] = '%s.so'
+
+    if bld.env['LV2GUI']:
+        uselib_local5 = []
+        libpath5 = []
+        lib5 = []
+        incl5 = ['../../../libgxwmm','../../../libgxw','../']
+        if sys.platform.startswith("linux"):
+            lib5.append('dl')
+        if bld.env["GX_LIB_SHARED"]:
+            lib5 += ['gxwmm','gxw']
+            libpath5 += [bld.path.find_dir("../../../libgxw/gxw").bldpath(bld.env),
+                        bld.path.find_dir("../../../libgxwmm/gxwmm").bldpath(bld.env)]
+        else:
+            uselib_local5 += ['gxwmm','gxw']
+
+        lv2_effetcs_gui = bld(
+            features='cxx cshlib ',
+            includes = incl5,
+            lib = lib5,
+            uselib = 'LV2CORE GTKMM',
+            libpath = libpath5,
+            uselib_local = uselib_local5,
+            linkflags = '-Wl,-z,nodelete',
+            defines  = ["LV2_GUI"],
+            target   = 'gxmetal_amp_gui',
+            source   = 'widget.cpp gxmetal_amp_gui.cpp',
+            install_path = '${LV2DIR}/%s' % bundle,
+            chmod = 0o755,
+            )
+        lv2_effetcs_gui.env['shlib_PATTERN'] = '%s.so'
+
+
+    install_path = '${LV2DIR}/%s' % bundle,
+    if bld.env['MODGUI']:
+        bld.install_files('${LV2DIR}/gxmetal_amp.lv2', bld.path.ant_glob('*.ttl'), relative_trick=True)
+        bld.install_files('${LV2DIR}/gxmetal_amp.lv2', bld.path.ant_glob('modgui/**/*'), relative_trick=True)
+    else:
+        bld.install_files('${LV2DIR}/gxmetal_amp.lv2', bld.path.ant_glob('*.ttl', excl=['modgui.ttl']), relative_trick=True)

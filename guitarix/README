@@ -1,0 +1,106 @@
+Hello,
+
+Guitarix is a simple mono amplifier to be used in a 'JACKified'
+environment, i.e. a system using the JACK Audio Connection Kit, a
+professionally-capable audio/MIDI server and master transport control,
+available here:
+
+	http://jackaudio.org/
+
+Guitarix provides one JACK input port and two JACK output ports. It is 
+designed to produce nice trash/metal/rock/blues guitar sounds. Controls 
+for bass, treble, gain, compressor, tube selector, distortion, flanger,
+freeverb, crybaby (wah) and . . . . are available.
+
+
+======================= Building guitarix from source code
+
+---- Build environment
+
+Guitarix uses 'waf' for the build environment. The simplest and
+fastest way to build guitarix is given below:
+
+  cd guitarix_source_directory
+  ./waf configure
+  ./waf build
+  sudo ./waf install
+
+By default, this will install guitarix and related files in
+the /usr/local filesystem, e.g. /usr/local/bin.
+
+The installation prefix can be provided at configure time, e.g.:
+
+  ./waf configure --prefix=/usr
+  ./waf build
+  sudo ./waf install
+
+Thus, guitarix will be installed in /usr/bin.
+Check for all options :
+
+ ./waf --help
+
+---- Dependencies 
+
+To compile and run properly guitarix needs the following extra
+packages (runtime binaries/libraries and development packages):
+
+  GTK+-2.0 >= 2.20
+  libsndfile  >= 1.0.17
+  JACK (jackd, libjack, and their development packages) >= 0.116.2
+  gtkmm-2.4 >= 2.24
+  fftw3f >= 3.1.2
+  ladspa-sdk
+
+By the way, most package managers usually list development packages as 
+'packagename-dev', e.g. libsndfile-dev.
+
+---- Debian
+
+To build a Debian package, run "dpkg-buildpackage -rfakeroot -b"
+
+==================== Startup options
+
+Guitarix provides a few user options at startup.
+Check from the command line the usual -h, 
+--help or --help-all options:
+
+==================== JACK startup when JACK isn't running
+
+Guitarix will pop up a JACK start dialog window if it finds that jackd
+is not running.
+
+The user can choose to activate JACK or exit guitarix.  Note that the
+supported methods for starting JACK are (by preference order):
+
+1- qjackctl --start
+2- Use of $HOME/.jackdrc
+
+=========== Extra information
+
+---- LADSPA
+
+Guitarix also comes as a suite of LADSPA plugins. If the user wishes
+to use guitarix or some of its effects in a LADSPA host (e.g. Ardour),
+the guitarix plugins are available. They are installed by default in
+
+  $PREFIX/lib/ladspa
+
+where PREFIX is either /usr or /usr/local.
+
+===========================================
+
+THANKS:
+
+We use FAUST to build the prototype and will say thanks
+to the following contributors:
+
+Contributors
+        : Julius Smith <http://ccrma.stanford.edu/realsimple/faust/>
+		: Albert Graef <http://www.musikwissenschaft.uni-mainz.de/~ag/ag.html>
+		: Yann Orlary <http://faust.grame.fr/>
+
+Enjoy! :)
+
+If you encounter problems building or running guitarix, please inform us.
+
+     guitarix-developer@lists.sourceforge.net

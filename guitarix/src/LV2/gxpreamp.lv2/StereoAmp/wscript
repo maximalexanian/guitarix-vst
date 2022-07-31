@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+import sys, os, TaskGen, ctypes, wscript_helper
+
+def configure(conf):
+    pass
+
+def build(bld):
+    bundle2 = 'gxpreamp_stereo.lv2'
+    
+    src2 = ['gxpreamp_stereo.cpp'
+           ]
+    incl2 = ['../../','./','../', '../../DSP']
+    lib2 = []
+    if sys.platform.startswith("linux"):
+        lib2.append('dl')
+    uselib2 = ['LV2CORE','GLIBMM']
+    wscript_helper.add_zita_convolver(bld, uselib2, src2, incl2, base="../../..")
+    wscript_helper.add_zita_resampler(bld, uselib2, src2, incl2, base="../../..")
+    cxxflag2 =[]
+    if not bld.env['OPT'] and bld.env['SSE2']:
+        cxxflag2 = [ "-msse2", "-mfpmath=sse"]
+    lv2_plugin_stereo = bld(
+        features='cxx cshlib ',
+        includes = incl2,
+        lib = lib2,
+        uselib = uselib2,
+        obj_ext  = '_12.o',
+        cxxflags = cxxflag2,
+        defines  = ["LV2_SO"],
+        target   = 'gxpreamp_stereo',
+        source   = src2,
+        install_path = '${LV2DIR}/%s' % bundle2,
+        chmod = 0o755,
+        )
+    lv2_plugin_stereo.env['shlib_PATTERN'] = '%s.so'
+    
+    uselib_local3 = []
+    libpath3 = []
+    lib3 = []
+    incl3 = ['../../../../libgxwmm','../../../../libgxw','../']
+    if sys.platform.startswith("linux"):
+        lib3.append('dl')
+    if bld.env["GX_LIB_SHARED"]:
+        lib3 += ['gxwmm','gxw']
+        libpath3 += [bld.path.find_dir("../../../../libgxw/gxw").bldpath(bld.env),
+                    bld.path.find_dir("../../../../libgxwmm/gxwmm").bldpath(bld.env)]
+    else:
+        uselib_local3 += ['gxwmm','gxw']
+    
+    lv2_plugin_gui_stereo = bld(
+        features='cxx cshlib ',
+        includes = incl3,
+        lib = lib3,
+        uselib = 'LV2CORE GTKMM',
+        libpath = libpath3,
+        obj_ext  = '_3.o',
+        uselib_local = uselib_local3,
+        linkflags = '-Wl,-z,nodelete',
+        defines  = ["LV2_GUI"],
+        target   = 'gxpreamp_gui_stereo',
+        source   = '../widget.cpp ../gxpreamp_gui.cpp',
+        install_path = '${LV2DIR}/%s' % bundle2,
+        chmod = 0o755,
+        )
+    lv2_plugin_gui_stereo.env['shlib_PATTERN'] = '%s.so'
+
+    
+    install_path = '${LV2DIR}/%s' % bundle2,
+    bld.install_files('${LV2DIR}/gxpreamp_stereo.lv2', 'manifest.ttl')
+    bld.install_files('${LV2DIR}/gxpreamp_stereo.lv2', 'gxpreamp_stereo.ttl')
+    

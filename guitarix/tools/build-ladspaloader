@@ -1,0 +1,10 @@
+#! /bin/bash
+set -e
+tooldir="$(dirname "$0")"
+pl=ladspaloader
+cython "$tooldir/$pl".pyx -o "$pl".c
+opt="$(python-config --cflags --ldflags)"
+opt="$opt -shared -fPIC -lrt"
+opt="$opt -Wall -Wno-unused-function -Wno-unused-but-set-variable"
+gcc -g $opt "$pl".c -o "$pl".so
+rm "$pl".c

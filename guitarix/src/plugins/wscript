@@ -1,0 +1,167 @@
+#! /usr/bin/env python
+# encoding: utf-8
+
+import os, wscript_helper
+
+csources = [ # generate .so files from c sources that can be loaded by guitarix
+    # element = name or [name, [lib, ...]]
+    
+    ]
+
+sources = [ # generate .so files that can be loaded by guitarix
+    #"dunwah.dsp",
+    ]
+
+lib_csource_defs = [ # put in static library linked with guitarix
+    ["vibe.cc", ("plugin_mono", "plugin_stereo")],
+    "metronome.cc",
+    "abgate.cc",
+    "jcm800pre.cpp",
+    "reversedelay.cc",
+    "vumeter.cc",
+    "vumeter_st.cc",
+    ]
+
+lib_float_sources = [ # put in static library linked with guitarix
+    #"dubber.dsp",
+    ]
+lib_sources = [ # put in static library linked with guitarix
+    "zita_rev1.dsp",
+    "ts9sim.dsp",
+    "flanger_gx.dsp",
+    "mbc.dsp",
+    "mbcs.dsp",
+    "mbd.dsp",
+    "mbe.dsp",
+    "mbdel.dsp",
+    "mbchor.dsp",
+    "mbclipper.dsp",
+    "gcb_95.dsp",
+    "fuzzfacerm.dsp",
+    "fuzzfacefm.dsp",
+    "hfb.dsp",
+    "muff.dsp",
+    "susta.dsp",
+    "scream.dsp",
+    "hornet.dsp",
+    "foxeylady.dsp",
+    "lpbboost.dsp",
+    "hogsfoot.dsp",
+    "cstb.dsp",
+    "coverd.dsp",
+    "rangem.dsp",
+    "ruin.dsp",
+    "ffreak.dsp",
+    "fumaster.dsp",
+    "fuzzdrive.dsp",
+    "rolandwah.dsp",
+    "astrofuzz.dsp",
+    "buffb.dsp",
+    "eldist.dsp",
+    "mole.dsp",
+    "buzz.dsp",
+    "bfuzz.dsp",
+    "axface.dsp",
+    "aclipper.dsp",
+    "bmp.dsp",
+    "mxrdist.dsp",
+    "bossds1.dsp",
+    "bassboom.dsp",
+    ]
+
+def build(bld):
+    if bld.env['FAUST']:
+        arg, float_arg, double_arg = wscript_helper.get_faust_args(bld)
+        arg += ["--init-type=plugin-instance"]
+        bld(name = "dsp2cc sharedlib",
+            source = sources,
+            proc = "../tools/dsp2cc",
+            gen_dir_suffix = "/generated",
+            proc_args = arg+["--template-type=sharedlib"],
+            )
+        bld(name = "dsp2cc staticlib",
+            source = lib_sources,
+            proc = "../tools/dsp2cc",
+            gen_dir_suffix = "/generated",
+            proc_args = arg+["--template-type=staticlib","--in-namespace=pluginlib"],
+            )
+        bld(name = "dsp2cc staticlib",
+            source = lib_float_sources,
+            proc = "../tools/dsp2cc",
+            gen_dir_suffix = "/generated",
+            proc_args = float_arg+["--template-type=staticlib","--in-namespace=pluginlib","--init-type=plugin-instance"],
+            )
+    else:
+        gdir = "generated/"
+        for s in sources+lib_sources:
+            s = s.replace(".dsp",".cc")
+            bld(name = "copy-faust-plugin-cc",
+                rule = "cp ${SRC} ${TGT}",
+                source = gdir + s,
+                target = s,
+            )
+    lib_csources = [v if isinstance(v, str) else v[0] for v in lib_csource_defs]
+    lib_dict = dict([v for v in lib_csource_defs if not isinstance(v, str)])
+    def run(task):
+        l = []
+        for fname in lib_sources+lib_csources:
+            name = os.path.splitext(fname)[0]
+            if fname in lib_dict:
+                for pname in lib_dict[fname]:
+                    l.append("namespace %s { PluginDef *%s(); }\n" % (name, pname))
+            else:
+                l.append("namespace %s { PluginDef *plugin(); }\n" % name)
+        f = open(task.outputs[0].bldpath(task.env),"w")
+        f.write('#include "gx_plugin.h"\n\nnamespace pluginlib {\n')
+        f.write("".join(l))
+        f.write("}\n")
+        f.close()
+    bld(name = "pluginlib.h",
+        source = "wscript",
+        rule = run,
+        target = "pluginlib.h",
+        )
+    bld.add_group()
+    have_pluginlib = len(lib_sources) != 0
+    bld.env["HAVE_PLUGINLIB"] = have_pluginlib
+    incl = [".","../headers", "../gx_head/engine"]
+    if not bld.env['ZITA_RESAMPLER']:
+        incl.append('../zita-resampler-1.1.0')
+    
+    if have_pluginlib:
+        bld(features = ['cxx', 'cstaticlib'],
+            includes = incl,
+            source = [s.replace(".dsp",".cc") for s in lib_sources]+lib_csources,
+            uselib = ["EIGEN3"],
+            target = "plugins", # (also defines name of task)
+            )
+    for s in sources:
+        tsk = bld(name = "create plugin .so",
+            features = ['cxx', 'cshlib'],
+            type = 'cshlib',
+            cxxflags = ["-fvisibility=hidden"],
+            includes = [".","../headers", "../gx_head/engine"],
+            source = [s.replace(".dsp",".cc")],
+            target = s.replace(".dsp",""),
+            )
+        tsk.env['shlib_PATTERN'] = '%s.so'
+    for s in csources:
+        if not isinstance(s, str):
+            uselib = s[1]
+            s = s[0]
+        else:
+            uselib = []
+        tsk = bld(name = "create plugin .so",
+            features = ['cxx', 'cshlib'],
+            type = 'cshlib',
+            cxxflags = ["-fvisibility=hidden"],
+            includes = ["../headers", "../gx_head/engine"],
+            source = s,
+            target = s.replace(".cc",""),
+            uselib = uselib,
+            install_path = None, # for now...
+            )
+        tsk.env['shlib_PATTERN'] = '%s.so'
+
+def configure(conf):
+    conf.check_cfg(package='eigen3', args='--cflags', uselib_store="EIGEN3", mandatory=1)

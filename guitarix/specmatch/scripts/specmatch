@@ -1,0 +1,3 @@
+#! /usr/bin/python
+from specmatch.ui import main
+main()

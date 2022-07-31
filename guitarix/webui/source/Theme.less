@@ -1,0 +1,49 @@
+/* 
+    You can modify the Onyx theme by adding variable and rule overrides to this
+    file.  To enable theming, follow these steps:
+
+    1. In debug.html, uncomment the line referencing "less-<version number>.min.js".
+    2. In package.js, change "$lib/onyx" to "$lib/onyx/source".
+    3. Also in package.js, add "Theme.less" (this file).
+    4. Add variable and rule overrides below.
+
+    See [https://github.com/enyojs/enyo/wiki/UI-Theming] for more information.
+*/
+
+
+/* Onyx default variable definitions: */
+@import "../lib/onyx/css/onyx-variables.less";
+
+/* Place your Onyx variable overrides here -------------------- */
+@onyx-background: #8c8c8c;
+@onyx-gradient: url(../lib/onyx/images/gradient.png);
+@onyx-gradient-invert: url(../lib/onyx/images/gradient-invert.png);
+@onyx-checkbox-image: url(../lib/onyx/images/checkbox.png);
+@onyx-grabber-image: url(../lib/onyx/images/grabbutton.png);
+@onyx-more-toolbar-button-image: url(../lib/onyx/images/more.png);
+@onyx-slider-knob-image: url(../assets/slider_handle.png);
+@onyx-spinner-dark-image: url(../lib/onyx/images/spinner-dark.gif);
+@onyx-spinner-light-image: url(../lib/onyx/images/spinner-light.gif);
+@onyx-progressbar-bar-background: #2c2c2c;
+@onyx-progressbar-background: #4c4c4c;
+@onyx-button-background: #4c4c4c;
+@onyx-button-text-color: #f2f2f2;
+@onyx-togglebutton-background: #3c3c3c;
+@onyx-togglebutton-knob-background: #4c4c4c;
+@onyx-togglebutton-off-background: #2c2c2c;
+
+/* ------------------------------------- end variable overrides */
+
+/* Onyx rule definitions: */
+@import "../lib/onyx/css/onyx-rules.less";
+
+/* Place your Onyx rule overrides here ------------------------ */
+.onyx-progress-bar {
+	height: 4px;
+}
+
+.fix-label-box {
+        width: 30px;
+    }
+
+/* ----------------------------------------- end rule overrides */

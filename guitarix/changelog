@@ -1,0 +1,664 @@
+guitarix2 (0.38.0) unstable; urgency=low
+
+  * fix bug #67, dont use malloc.h on FreeBSD
+  * remove assert for ports count, to allow save removing of changed LV2 plugins
+  * add new option -E --hideonquit, this makes the UI experience smooth when used as LV2 plugin
+  * add support for LV2_URID_Map, LV2_URID_Unmap and LV2_OPTIONS to allow more plugs to load
+  * fix compiler warnings with gcc 8
+  * add exit handler and warning when samplerate is above 96kHz
+  * hide splash on error message
+  * set online help to sourcforge/discussion
+  * add Russian-language translation by Valeriy Shtobbe and Olesya Gerasimenko, many thanks!
+  * update all build scripts to use faust version 2.15.11 and update all generated faust files
+
+ -- brummer <brummer-@web.de>  Sun, 07 Apr 2019 07:28:15 +0200 
+
+guitarix2 (0.37.3) unstable; urgency=low
+
+  * add support for zita-convolver4
+  * implemented "Thick Distortion" plugin by Viacheslav Lotsmanov 
+  * switch to use libcurl for download online presets
+  * point online help to reddit/guitarix
+  * add direct output unit for drumsequencer (bypass rack)
+  * add overdubbing to live looper
+  * add direct output support to live looper
+  * add midi channel selector, fix bug #64
+
+ -- brummer <brummer-@web.de>  Sun, 22 Jul 2018 08:28:15 +0200 
+
+guitarix2 (0.37.1) unstable; urgency=low
+
+  * fix build for FreeBSD
+
+ -- brummer <brummer-@web.de>  Fri, 01 Jun 2018 08:28:15 +0200 
+
+guitarix2 (0.37.0) unstable; urgency=low
+
+  * new plug Ampimpulse-stereo
+  * new build parameters in wscript by Simon van der Veldt
+    please check ./waf --help for mor info.
+  * fix Live Looper freezes the remote UI
+  * fix Tuner stick is not saved in remote UI
+  * fix DrumSequencer remote UI
+  * fix rc files for older clearlooks engine
+  * fix disable online preset download in remote UI
+  * fix GxDigitalDelay sync BPM when UI is not shown
+  * add new commandline switch (_d, --disable-multi-client)
+    to allow running guitarix as single client application 
+  * fix portmap when running as single client
+  * again some fixes and additions on the DK_simulator
+    contributed by Yoann Le BORGNE
+
+ -- brummer <brummer-@web.de>  Tue, 24 Apr 2018 08:28:15 +0200 
+
+guitarix2 (0.36.1) unstable; urgency=low
+
+  * switch to use faust 0.9.90
+  * fix constante midi toggle change on preset load
+  * add set midi switch to load next preset
+  * add set midi switch to load previous preset
+  * fix midi value change trigger double
+  * add mono and stereo vumeter plugin
+  * add option to make tuner sticky
+  * add better tooltips for Lv2 and Ladspa plugs
+  * some fixes on the DK_simulator contributed by Yoann Le BORGNE
+
+ -- brummer <brummer-@web.de>  Fri, 01 Dec 2017 09:06:15 +0200 
+
+guitarix2 (0.36.0) unstable; urgency=low
+
+  * new release
+
+ -- brummer <brummer-@web.de>  Mon, 05 Jul 2017 11:03:15 +0200 
+
+guitarix2 (0.35.4) unstable; urgency=low
+
+  * remove webkit
+
+ -- brummer <brummer-@web.de>  Mon, 05 Jul 2017 11:03:15 +0200 
+
+guitarix2 (0.35.3) unstable; urgency=low
+
+  * maintaince
+
+ -- brummer <brummer-@web.de>  Mon, 08 May 2017 06:30:35 +0200 
+
+guitarix2 (0.35.0) unstable; urgency=low
+  * New UI design/style
+  * disable Gtk warnings in non debug build
+  * add option to enable LSF support in guitarix
+  * add new MultiBand Clipper
+  * patch waf to use stdout as default output and write only error messages to stderr.
+  * add format .w64 to recorder
+  * add configure flag to disable installation of the MOD stuff
+  * add MXR Distortion and Boss DS1 as LV2 plugins
+  * add new plugin emulated Boss DS1 distortion
+  * apply patches from Víctor Cuadrado (Debian Multimedia team)
+  * add new comandline option -F (set tuner reference pitch at startup)
+  * add comandline option -t (set tuner temperament)
+  * disable Fixrate resampler when jack sample rate is higher then the fixed rate
+  * use 96kHz internal samplerate for main amp simulation
+  * use fixed samplerate (41000Hz) in Pitchtracker to fix tracking of low frequencys at high samplerate
+  * use the new Musical Artifacts Interface for Online Presets
+  * Add MXR Distortion plus guitarix plugin
+  * add BigMuffPi guitarix and LV2 plugin
+  * add gx_aclipper.lv2 (RAT)
+  * add bypass mode for jack insert ports
+  * fix Guitarix starts with 19-tet tuner, while stating 12-tet
+  * add new configure option group style with option --install-roboto-font
+  * add check if roboto condensed is installed
+  * add warning when roboto condensed isn't installed and --install-roboto-font isn't choosen
+  * use <Control S> to save changes to current preset, use <Alt s> for show/hide values.
+  * fix detune for inplace processing
+  * add new distortion gx plugin "RAT"
+  * new French translation by Frédéric Rech (many thanks fred)
+  * Add new modgui artwork data (even bigger commit)
+  * Add new modgui ttl files (big commit)
+  * Add references to new modgui files
+  * fix guitarix crash when plugin fail to instantiate
+ 
+ -- brummer <brummer-@web.de>  Tue, 24 Apr 2016 06:30:35 +0200 
+
+guitarix2 (0.34.0) unstable; urgency=low
+
+  * Add BOSS OC-2 partial emulation LV2 plugin (by drgreenthumb)
+  * Add gx_hogsfoot.lv2 gx_mole.lv2 and gx_rangem.lv2
+  * Add gx_plugins AxeFace, BassFuzz, Buzz and the Mole
+  * Add Gx_Wah.lv2 plugin
+  * Add colorsound bass wah plugin emulation
+  * Add Roland Wah add Jen Bass Wah emulation
+  * Add bitdowner distortion plugin (by Viacheslav Lotsmanov)
+
+  * Add volume control to gcb95 plug
+  * Add file browser and file load support to dubber (livelooper) plugin
+  * Add play all button to the dubber (livelooper) plugin
+  * Add support to import LV2 plugin presets into guitarix
+  * Add 24-edo tuner option
+  * Add 53-edo tuner option
+
+  * Disable LILV_OPTION_DYN_MANIFEST to avoid crashes from
+    naspro-bridges (dssi).
+
+  * Add online preset download widget (requires libwebkit-1.0)
+    thanks to lfz for creating https://musical-artifacts.com/
+ 
+  * Fix GxAmplifier-x GxAmplifierStereo-X and GxCabinet for the new
+    ardour buffersize behave.
+
+  * Implement double click on plugin handle remove plugin from rack
+
+  * Fix guitarix build for the new libsigc++ library and the new GCC5
+    compiler. Guitarix use now the default build flag -std=c++11
+    (you can disable it, see ./waf --help for more optional flags)
+
+ -- 08.11.2015
+
+guitarix2 (0.33.0) unstable; urgency=low
+
+  * New Plugins in guitarix
+    - A new Wah plugin with manual/auto/alien mode and the following
+      emulated wah wah's to select from:
+      * Colorsond Wah
+      * DallasArbiter Wah
+      * Foxx Wah
+      * JEN Wah
+      * Maestro Boomer Wah
+      * Selmer Wah
+      * Vox Wah
+    - A new Fuzz section with emulations of the:
+      * Astrotone Fuzz
+      * Dunlop Fuzzface
+      * Fuzzface Roger Mayer Mods
+      * Fuzzface Fuller Mods
+      * Foxeylady
+      * Hornet
+      * Sustainer
+      * Muff
+      * Screaming Bird
+      * Colorsound Tonebender
+      * Vintage Fuzzmaster
+      * Ruiner
+      * Fat Furry Freak
+      * Fuzz Drive
+    - And emulations of:
+      * LPB-1 Linear power Booster
+      * High Frequency Brightener
+      * Hogs Foot
+      * Dallas Rangemaster
+      * Buffer Booster
+      * Transistor Buffer
+      * Colorsound Overdrive
+
+ -- 01.08.2015
+
+guitarix2 (0.32.3) unstable; urgency=low
+  * fix some rcstyle bugs for KDE Qtcurve engine
+  * add 2 new rc-styles (flat and green
+  * replace old outdated factory presets 
+  * add some new plugin presets
+  * add jack midi out port to report state (CC messages) and control 
+    multiple instances
+  * set engine.mute to default midi controller 120 (All Sounds Off)
+  * add new command-line options -L start with Live Play GUI
+    and -M start with engine muted
+  * fix some issues with remote control GUI and external plugs (LADSPA, LV2)
+  
+ -- brummer <brummer-@web.de>  Tue, 03 Feb 2015 13:30:35 +0200 
+
+guitarix2 (0.32.2) unstable; urgency=low
+  * fix some rcstyle bugs for gtk-2.24.25 and maybe fixed for KDE
+  * allow load of preset-files witch contain Denormal Numbers (flush to zero)
+  * add warning when denormal value found in preset file
+  * if parameter is out of range, set it to the default value
+  * add missing Icons to glade-gxw
+  * add wavesharper plugin
+  * use long int to compare regions size in gx_mlock.cc -> (Gcc: 4.9.2)
+  
+ -- brummer <brummer-@web.de>  Tue, 26 Dec 2014 04:30:35 +0200 
+
+guitarix2 (0.32.1) unstable; urgency=low
+  * fix LADSPA/LV2 plugin load / unload / UI modification
+  
+ -- brummer <brummer-@web.de>  Tue, 04 Dec 2014 04:30:35 +0200 
+
+guitarix2 (0.32.0) unstable; urgency=low
+  * add GxMultiBandReverb.LV2
+  * add 19-TET and 31-TET tuning scale to guitarix and gxtuner.lv2
+  * fix empty effect menu with clear-skin option
+  * add Midi Clock support
+  * add Jack Transport Support
+  * move a couple of Controllers from unit:ms|hz to unit:bpm
+  
+ -- brummer <brummer-@web.de>  Fri, 20 Nov 2014 14:30:35 +0200 
+
+guitarix2 (0.31.0) unstable; urgency=low
+  * add GxDigitalDelay.LV2
+  * add GxRoomSimulation.LV2
+  * Add GxLiveLooper.LV2
+  * fix vowel mutation not allowed in preset names
+  
+ -- brummer <brummer-@web.de>  Tue, 02 Nov 2014 06:30:35 +0200 
+
+guitarix2 (0.30.0) unstable; urgency=low
+  * add LV2 support
+  * fix zita-rev1 control range
+  
+ -- brummer <brummer-@web.de>  Sat, 07 Jul 2014 06:30:35 +0200 
+
+guitarix2 (0.28.3) unstable; urgency=low
+  * MODification (https://github.com/portalmod)
+  * add defines for MOD UI to all LV2 plugs
+  * add a couple of new plugs
+  
+ -- brummer <brummer-@web.de>  Sat, 03 Nov 2013 06:30:35 +0200 
+
+guitarix2 (0.25.2) unstable; urgency=low
+  * add ts9 tube screamer to lv2.plugs
+  * add dunlop wah to lv2.plugs 
+  * add booster /treble/low to lv2.plugs
+  * add factory settings file contributed by kokoko3k
+  * add patch by Brendan Jones to set library install path
+  * fix lv2 build on non ix86 arch 
+  * switch to use fixed block-size in zita-convolver for all lv2 amps
+  
+ -- brummer <brummer-@web.de>  Fri, 31 Dec 2012 9:30:35 +0200 
+
+guitarix2 (0.25.1) unstable; urgency=low
+  * some fixes for the LV2 plugs
+  
+ -- brummer <brummer-@web.de>  Mon, 31 Dec 2012 8:23:37 +0200 
+
+guitarix2 (0.25.0) unstable; urgency=low
+  * add LV2 amplifiers mono and stereo versions
+  
+ -- brummer <brummer-@web.de>  Fri, 28 Dec 2012 15:30:35 +0200 
+
+guitarix2 (0.24.3) unstable; urgency=low
+  * add dark theme rc-file
+  * fix new unsaved banks return no valid iter
+  
+ -- brummer <brummer-@web.de>  Wed, 14 Nov 2012 12:37:35 +0200 
+
+guitarix2 (0.24.2) unstable; urgency=low
+  * remove dunwah from build to avoid unwonted install
+  * correct version mismatch in wscript
+  
+ -- brummer <brummer-@web.de>  Sat, 20 Oct 2012 05:37:35 +0200 
+
+guitarix2 (0.24.1) unstable; urgency=low
+  * fix In "organize" mod copying preset form one bank to the 
+    same one corrupts the bank
+  * add sse4a (optimization) to wscript 
+  * add treble booster unit 
+  * set osc buffersize menu to sensitive false when jack buffer 
+    is larger then 1023
+  
+ -- brummer <brummer-@web.de>  Mon, 14 Oct 2012 05:37:35 +0200 
+
+guitarix2 (0.17.0svn) unstable; urgency=low
+  * SVN head
+  
+ -- brummer <brummer-@web.de>  Mon, 14 Jun 2011 05:37:35 +0200 
+
+guitarix2 (0.16.0svn) unstable; urgency=low
+  * SVN head
+  
+ -- brummer <brummer-@web.de>  Thu, 08 Jun 2011 15:47:15 +0200 
+
+guitarix2 (0.15.0svn) unstable; urgency=low
+  * SVN head
+  
+ -- brummer <brummer-@web.de>  Sun, 25 Apr 2011 05:47:15 +0200 
+
+gx-head (0.14.0) unstable; urgency=low
+  * add tube 6DJ8
+  * add clean tube modes
+  * reworked drive controller (bypass <-> wet)
+  * add clipper
+  * add mono level controller
+  * add French translation by jy
+  * add TACTILE skin by Pete Shorthose
+  * add knob animation support by Pete Shorthose
+  * add new knob images by Pete Shorthose
+  * add new switch images by Pete Shorthose
+  * fix 64bit bug in libgxw by Pete Shorthose
+  * add factory settings by Dave Phillips
+  * add 3bad EQ + sharper
+  * add tremolo by transmogrifox (Rakarrack)
+  
+ -- brummer <brummer-@web.de>  Sun, 10 Apr 2011 08:47:15 +0200 
+
+gx-head (0.13.0) unstable; urgency=low
+  * add post amp
+  * add noise gate
+  * add italian translation by 	Ivan Tarozzi
+  * add desert skin by zettberlin
+  * add factory settigs by zettberlin
+  
+ -- brummer <brummer-@web.de>  Mon, 07 Feb 2011 18:47:15 +0200 
+
+gx-head (0.12.0) unstable; urgency=low
+  * initial release of gx_head
+  
+ -- brummer <brummer-@web.de>  Fri, 14 Aug 2011 18:47:15 +0200 
+
+
+guitarix (0.12.0svn) unstable; urgency=low
+  * SVN head
+  
+ -- brummer <brummer-@web.de>  Sun, 24 Aug 2010 15:47:15 +0200 
+
+guitarix (0.11.1) unstable; urgency=low
+  * fix Bug Echo/Chorus/Delay/Slooper dont work
+  * add pre/post processing switch to all mono Effects
+  
+ -- brummer <brummer-@web.de>  Sun, 24 Aug 2010 15:47:15 +0200  
+
+guitarix (0.11.0) unstable; urgency=low
+  * new version of the impulse response parameter editor. You can 
+    now graphically define a gain line to be applied to the IR data,
+    e.g. emphasize a part of the early reflections or damping the
+    reverb tail to make it fit to your guitar sound.
+  * the multi-line distortion effect now has 4 frequency bands and
+    is better optimized
+  * fix regression from version 0.10.0: now the default preset file is
+    created again if it doesn't exist (e.g. in new installations).  
+  
+ -- Andreas Degert <andreas.degert@googlemail.com>  Tue, 03 Aug 2010 22:13:50 +0200   
+
+guitarix (0.10.0) unstable; urgency=low
+
+  * add tonestack models
+  * add 2. amp model
+  * add cabinet impulse response modul
+  * add Patch Info widget
+  * add Preset File Load/Export option
+  * add simple looper
+  * add Oscilloscope and tuner state to main settings
+  * selectable distortion model (multi/single line)
+  * selectable EQ model (fixed/scalable freq)
+  * free mem when not used (delay lines)
+  * reworked Gui
+  * fix varios bugs
+  
+ -- brummer <brummer-@web.de>  Sun, 11 Jul 2010 07:18:15 +0200
+
+guitarix (0.09.0) unstable; urgency=low
+
+  * make distortion a multiband distortion
+  * fix bug in resample IR-files
+  * resample IR-files now on-the-fly
+  * add insert point ports to the effect chain
+  * add --optimization flag for configure the build
+  * switch to double precision instead of single precision
+  * fix bug in reconfigure convolver when preset change
+  * add patch from Peder Hedlund, build against gtk-2.12.9 and gcc-4.3.1
+  * add faust 0.9.24 to the "good_faust_versions"
+  
+ -- brummer <brummer-@web.de>  Sun, 06 Jun 2010 17:18:15 +0200
+
+guitarix (0.08.0) unstable; urgency=low
+
+  * new portmap window
+  * add Quad Filter
+  * add Moog Filter
+  * add Flanger
+  * add new post processing tube3
+  * add two 10 band parametric EQ's
+  * add oversample mode selector
+  * fix some bugs in midi out
+  * reworked tuner interface (show frequency(hz))
+  * add new configure options (see ./waf --help form more info)
+
+ -- Andreas Degert <andreas.degert@googlemail.com>  Fri, 14 May 2010 15:18:15 +0200
+
+guitarix (0.07.1) unstable; urgency=low
+
+  * version check of ~/.guitarix was commented out
+
+ -- Andreas Degert <andreas.degert@googlemail.com>  Tue, 29 Mar 2010 22:13:50 +0200
+
+guitarix (0.07.0) unstable; urgency=low
+
+  * nearly complete reworked source by Andreas Degert
+  * amp and effect units based direct on faust expressions
+  * all faust sources included
+  * new accumulated tuner unit with new interface (analogue Style needle meter)
+  * Midi controller connections could saved with in presets and/or general
+  * a editable Midi controller map  is available
+  * new human readable preset style
+  * knobs could be used like sliders (press ctrl + mouse-button
+    and move the mouse horizontal, leave the ctrl and hold mouse-button
+    for fine tune), or like real knobs (turn them around)
+  * convolution unit based on zita-convolver is now integrated in the engine
+  * presets could change with Midi Program Messages
+  * I'm sure I have some things forgotten to mention here.
+
+ -- Andreas Degert <andreas.degert@googlemail.com>  Tue, 28 Mar 2010 21:09:25 +0200
+
+guitarix (0.05.4-1) unstable; urgency=low
+  * performace boost by remove float to int casts from engine
+  * reorder GUI
+     
+ -- brummer <brummer-@web.de>  Mon, 02 Dec 2009 16:20:56 +0200
+
+guitarix (0.05.3-1) unstable; urgency=low
+  * quick update to cover renaming of jconv to jconvolver
+     
+ -- brummer <brummer-@web.de>  Mon, 02 Dec 2009 16:20:56 +0200
+
+guitarix (0.05.2-1) unstable; urgency=low
+  * varios improvements
+     
+ -- brummer <brummer-@web.de>  Mon, 30 Nov 2009 13:20:56 +0200
+
+guitarix (0.05.1-1) unstable; urgency=low
+  * varios improvements
+     
+ -- brummer <brummer-@web.de>  Mon, 26 Oct 2009 08:24:42 +0200
+
+guitarix (0.05.0-1) unstable; urgency=low
+  * add keyboard shortcuts
+  * new code structure by James
+  * impruved skin handling
+  * add middle tone control
+  * reworked audio engine
+  * add bypass mode
+  * add logging window
+  * add engine state widget
+     
+ -- brummer <brummer-@web.de>  Mon, 27 Jul 2009 08:24:42 +0200
+
+guitarix (0.04.6-1) unstable; urgency=low
+  * switch to waf build system
+  * use boost libary for cmd commands
+  * varios code cleanups by James
+  * new tube model
+  * add scrollwheel controlls
+     
+ -- brummer <brummer-@web.de>  Wed, 24 Jun 2009 14:24:42 +0200
+
+guitarix (0.04.5-1) unstable; urgency=low
+  * fix wrong porthandling in dsp
+  * add latency menu by James Warden
+  * impruve  midi out
+     
+ -- brummer <brummer-@web.de>  Thu, 26 May 2009 14:24:42 +0200
+
+guitarix (0.04.4-1) unstable; urgency=low
+  * switch back to use portbuffer for midi output
+  * add some audio effect's
+  * impruve tuner and midi out
+  * add fix's for makefile/readme/changlog submit by Orcan Ogetbil 
+     
+ -- brummer <brummer-@web.de>  Wed, 21 May 2009 14:24:42 +0200
+
+guitarix (0.04.3-1) unstable; urgency=low
+  * fix denormals 
+
+ -- brummer <brummer-@web.de>  Wed, 06 Mar 2009 07:24:42 +0200
+
+guitarix (0.04.2-1) unstable; urgency=low
+  * bug fix release, fix wrong porthandling 
+  * add anti aliase unit
+
+ -- brummer <brummer-@web.de>  Tue, 05 Mar 2009 07:24:42 +0200
+
+guitarix (0.04.1-1) unstable; urgency=low
+  * bug fix (upload the wrong source, sorry)
+
+ -- brummer <brummer-@web.de>  Thu, 28 Mar 2009 07:24:42 +0200
+
+guitarix (0.04.0-1) unstable; urgency=low
+  * add more Oscilloscope modes  
+  * fix bug port_registration with jackdmp
+  * set jack_midi_port stable
+  * improve UI
+
+ -- brummer <brummer-@web.de>  Thu, 23 Mar 2009 17:24:42 +0200
+
+guitarix (0.03.9-1) unstable; urgency=low
+  * add Oscilloscope like wave view widget  
+  * fix bug in jconv gain settings
+  * set jack_midi_port to be temporarly (off by default)
+  * remove sse and fast-math flags from makefile
+
+ -- brummer <brummer-@web.de>  Thu, 26 Mar 2009 18:24:42 +0200
+
+guitarix (0.03.8-1) unstable; urgency=low
+  * add wave view and select samples widget to the jconv settings
+  * some bugfixe's, some cleanup's
+  * add auto gain correction to Overdrive
+
+ -- brummer <brummer-@web.de>  Wed, 18 Mar 2009 11:24:42 +0200
+
+guitarix (0.03.7-svn-1) unstable; urgency=low
+  * make single ladspa plugins from the inbuild effects
+  * new sorce structure
+
+ -- brummer <brummer-@web.de>  Fri, 06 Mar 2009 11:24:42 +0200
+
+guitarix (0.03.7-1) unstable; urgency=low
+  * rework distortion
+  * bugfix in adjustment call for entry's, reportet by AurÃ©lien Leblond
+
+ -- brummer <brummer-@web.de>  Thu, 05 Feb 2009 11:24:42 +0200
+
+guitarix (0.03.6-1) unstable; urgency=low
+  * add overdrive
+  * make GUI smaler
+
+ -- brummer <brummer-@web.de>  Thu, 05 Feb 2009 11:24:42 +0200
+
+guitarix (0.03.5-1) unstable; urgency=low
+  * change knob pointer
+
+ -- brummer <brummer-@web.de>  Wed, 04 Feb 2009 17:24:42 +0200
+
+guitarix (0.03.4-1) unstable; urgency=low
+  * use knobs, switchs and graphicaly sliders for the interface
+  * set black style as default
+  * make effekts modular
+  * new preamp model
+
+ -- brummer <brummer-@web.de>  Wed, 04 Feb 2009 14:24:42 +0200
+
+guitarix (0.03.3-1) unstable; urgency=low
+  * add resampler for ir.wav files
+  * autoremove white space in ir.wav file names
+  * protected advanced setting widgets for destroy call from window manager
+  * add experimental tuner
+  * add jack midi out port
+  * add pitch tracker/beatdetector to midi converter
+  * add midi controlls for velocity, channel choose, program choose, okatve switch and sensity
+  * add more midi out channels (3), clean up the processing
+  * add controll interface for pitch tracker/beatdetector
+  * add extra tread for midi processing
+  * add system tray icon with menu
+  * add high cpu load sys tray warning and midi send notify
+  * clean up midi process
+  * set midi process to a lower rt level (-20) when run in realtime
+  * add compressor
+  * add midi controlles for volume and auto pichweel 
+  
+
+ -- brummer <brummer-@web.de>  Wed, 14 Dec 2009 14:24:42 +0200
+
+guitarix (0.03.a-1) unstable; urgency=low
+  * bug fix for jconv wet/dry slider
+  * bug fix for jconv gain settings
+
+ -- brummer <brummer-@web.de>  Thu, 03 Dec 2008 16:24:42 +0200
+
+
+guitarix (0.03.0-1) unstable; urgency=low
+  * add advanced setting widgets to distortion, freeverb, ImpulseResponse and Crybaby
+  * rework the jconv settings window
+  * split code
+
+ -- brummer <brummer-@web.de>  Sun, 23 Nov 2008 16:24:42 +0200
+
+guitarix (0.02.9a-1) unstable; urgency=low
+  * bugfix for the run jconv handling
+  * bugfix a typo in the Makefile for the LADSPAPATH
+  * clean code
+
+ -- brummer <brummer-@web.de>  Mon, 10 Nov 2008 13:55:42 +0200
+
+
+guitarix (0.02.9-1) unstable; urgency=low
+  * add a wet/dry fader for jconv
+  * clean code
+
+ -- brummer <brummer-@web.de>  Sat, 08 Nov 2008 13:55:42 +0200
+
+guitarix (0.02.8-1) unstable; urgency=low
+  * add more settings for jconv
+  * clean code
+
+ -- brummer <brummer-@web.de>  Thu, 06 Nov 2008 13:55:42 +0200
+
+guitarix (0.02.7-1) unstable; urgency=low
+  * add suport for jconv
+  * use jack_capture_gui2 to create the comandline for jack_capture
+  * add preamp
+  * change preset handling to save by name include the jconv settings
+  * rework the distortion funktion 
+  * add all effekts to the ladspa plugin
+  * add versioncheck to make sure the saved presets work with new version 
+
+ -- brummer <brummer-@web.de>  Thu, 02 Nov 2008 13:24:31 +0200
+
+guitarix (0.02.4-1) unstable; urgency=low
+  * change the gui to expander
+  * add suport for meterbridge
+  * add macro for no see environment
+  * add nogui parameter and options
+  * add record with jack_capture
+  * add feedback and feedforward filter
+  * start to clean the code.
+  * remove the skin option, all colers comes now from Gtk. 
+
+ -- brummer <brummer-@web.de>  Thu, 05 Aug 2008 13:24:31 +0200
+
+guitarix (0.02.3-1) unstable; urgency=low
+  * add nogui parameter and options
+  * add record with jack_capture
+  * add feedback and feedforward filter
+  * start to clean the code.
+  * remove the skin option, all colers comes now from Gtk. 
+
+ -- brummer <brummer-@web.de>  Thu, 03 Aug 2008 13:24:31 +0200
+
+guitarix (0.02.2-1) unstable; urgency=low
+  * add echo, crybaby and ImpulseResponse
+  * add menu save and load presets
+ 
+ -- brummer <brummer-@web.de>  Thu, 23 Jul 2008 13:24:31 +0200
+
+guitarix (0.02.1-1) unstable; urgency=low
+  * add Distortion and Freeverb
+  * add skin and gtk.rc file suport
+  * Initial Release.(0.01)
+
+ -- brummer <brummer-@web.de>  Thu, 05 Jul 2008 13:24:31 +0200

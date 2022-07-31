@@ -1,0 +1,106 @@
+# -*- python -*-
+# -*- coding: utf-8 -*-
+
+import Logs, Utils, Configure, Options, os.path, shutil
+
+def set_options(opt):
+    pass
+
+def configure(conf):
+    if conf.env["GX_LIB_SHARED"] or conf.env["GXW_SHARED"]:
+        conf.check_tool("libtool")
+
+def img2c(task):
+    sources = "../libgxw/resources.xml"
+    dst = "../libgxw/gximages.cc"
+    dstdir = task.outputs[0].bldpath(task.env)
+
+    cmd = ("glib-compile-resources --sourcedir=../libgxw/icons/ --target=%s  --generate-source %s" % ( dst, sources))
+    Logs.debug("runner: system command -> %s" % cmd)
+    ret = Utils.exec_command(cmd, shell=True)
+    shutil.copy2(dst,dstdir)
+    return ret
+
+def build_stock_images(bld):
+
+    # generate gresourcefile from resources.xml, to add images add them in
+    # gxinit.cpp and ../resources.xml, then use the --generate-resources flag
+    # to re-generate the gximages.cc file
+
+    if bld.env["HAVE_GLIB"]:
+        bld(name = "generate-resources",
+            target = "gximages.cc",
+            rule = img2c,
+            source = "../resources.xml",
+            )
+    else:
+        bld(name = "copy-resources",
+            rule = "cp ${SRC} ${TGT}",
+            source = "../gximages.cc",
+            target = 'gximages.cc',
+            )
+    bld.add_group()
+
+def build(bld):
+    sources = [
+        'gxinit.cpp',
+        'drawingutils.cpp',
+        'GxFastMeter.cpp',
+        'GxWaveView.cpp',
+        'GxTuner.cpp',
+        'GxRegler.cpp',
+        'GxSelector.cpp',
+        'GxSwitch.cpp',
+        'GxToggleImage.cpp',
+        'GxControlParameter.cpp',
+        'GxIREdit.cpp',
+        'GxRadioButton.cpp',
+        'GxWheel.cpp',
+        'GxWheelVertical.cpp',
+        'GxKnob.cpp',
+        'GxBigKnob.cpp',
+        'GxMidKnob.cpp',
+        'GxSmallKnob.cpp',
+        'GxSmallKnobR.cpp',
+        'GxHSlider.cpp',
+        'GxMiniSlider.cpp',
+        'GxVSlider.cpp',
+        'GxEQSlider.cpp',
+        'GxLevelSlider.cpp',
+        'GxPaintBox.cpp',
+        'GxMeterScale.cpp',
+        'GxGradient.cpp',
+        'GxValueDisplay.cpp',
+        'GxSimpleValueDisplay.cpp',
+        'GxRackTuner.cpp',
+        'GxPortDisplay.cpp',
+        'GxPlayHead.cpp',
+        ]
+    build_stock_images(bld)
+    if bld.env["GX_LIB_STATIC"]:
+        # static library
+        prog = bld(
+            features = ['cxx', 'cstaticlib'],
+            includes = ['.'],
+            #cxxflags = ['-fPIC'],
+            source = sources,
+            uselib = ['GTHREAD', 'GTK2'],
+            target = 'gxw',
+            chmod=0o755,
+            )
+    if bld.env["GX_LIB_SHARED"] or bld.env["GXW_SHARED"]:
+        # shared library
+        prog = bld(
+            features = ['cxx', 'cshlib'],
+            includes = ['.'],
+            source = sources,
+            uselib = ['GTHREAD', 'GTK2'],
+            target = 'gxw',
+            chmod=0o755,
+            )
+        if bld.env["GX_LIB_SHARED"] or bld.env["GXW_SHARED_INSTALL"]:
+            prog.features.append('libtool')
+            prog.type = 'cshlib'
+            prog.vnum = "0.1"
+        else:
+            prog.install_path = None

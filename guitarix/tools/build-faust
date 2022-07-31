@@ -1,0 +1,60 @@
+#! /bin/bash
+function usage() {
+  echo "usage: build-faust {options} <dsp-file> [<module-name>]"
+  echo "options:"
+  echo "    -s:   faust use single precision"
+  echo "    -d:   faust use double precision (default)"
+  echo "    -V:   faust use vectorize"
+  echo "    -S x: faust use vector size x"
+  echo "    -c:   copy generated file to user plugin dir"
+  echo "    -k:   keep in build dir"
+  exit 1
+}
+tooldir="$(dirname "$0")"
+instdir="$tooldir"/..
+prec="--double"
+DIR=""
+faustopt=()
+copy=0
+keep=0
+while getopts sdVS:ck OPT; do
+  case "$OPT" in
+  h) usage;;
+  s) prec="--float";;
+  d) prec="--double";;
+  V) faustopt+=(--vectorize);;
+  S) faustopt+=(--add="-vs $OPTARG");;
+  c) copy=1;;
+  k) keep=1;;
+  \?) usage;;
+  esac
+done
+shift $(expr $OPTIND - 1)
+[ "$1" = "" ] && usage
+if [ "$2" = "" ]; then
+  bname="$(basename "$1" .dsp)"
+else
+  bname="$2"
+fi
+if [ $keep = 1 ]; then
+  DIR="$(dirname "$1")/"
+fi
+set -e
+"$tooldir"/dsp2cc --param-warn --init-type=plugin-instance --template-type=sharedlib \
+  $prec "${faustopt[@]}" -o "$DIR""$bname.cc" "$1"
+opt="$(python-config --cflags --ldflags | sed s/-Wstrict-prototypes//)"
+opt="$opt -shared -fPIC -fvisibility=hidden"
+opt="$opt -I$instdir/src/gx_head/engine -I$instdir/src/headers"
+opt="$opt -Wall -Wno-unused-function"
+#opt="$opt -Wno-unused-but-set-variable"
+opt="$opt -D_= "
+opt="$opt -O3 -march=native -mmmx -msse4.2 -mfpmath=sse -ftree-loop-linear -ffinite-math-only -fno-math-errno -fno-signed-zeros -fstrength-reduce"
+g++ $opt "$DIR""$bname.cc" -o "$DIR""$bname.so"
+#rm -f "$bname.cc"
+if [ $copy = 1 ]; then
+  rm -f ~/.config/guitarix/plugins/"$bname.so"
+  cp "$DIR""$bname.so" ~/.config/guitarix/plugins/.
+  echo "created and copied $DIR$bname.so"
+else
+  echo "created $bname.so"
+fi
