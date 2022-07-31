@@ -50,12 +50,12 @@ class MaxLevel: public PluginDef {
 public:
     static const unsigned int channelcount = 2;
 private:
-    static float maxlevel[channelcount];
+    /*static*/ float maxlevel[channelcount];
     static void process(int count, float *input0, float *input1,
-			float *output0, float *output1, PluginDef*);
+			float *output0, float *output1, PluginDef *plugin);
     static int activate(bool start, PluginDef *plugin);
 public:
-    static float get(unsigned int channel) {
+    /*static*/ float get(unsigned int channel) {
 	assert(channel < channelcount);
 	float v = maxlevel[channel];
 	maxlevel[channel] = 0;
@@ -75,7 +75,7 @@ private:
     static int regparam(const ParamReg& reg);
     static int activate(bool start, PluginDef *plugin);
     static void init(unsigned int samplingFreq, PluginDef *plugin);
-    PitchTracker pitch_tracker;
+    //PitchTracker pitch_tracker;//MAX
     int state;
     ModuleSequencer& engine;
     enum { tuner_use = 0x01, switcher_use = 0x02, midi_use = 0x04 };
@@ -90,9 +90,9 @@ public:
     void used_by_midi(bool on) { set_and_check(midi_use, on); }
     void set_dep_module(Plugin* dep) { dep_plugin = dep; }
     void set_module();
-    Glib::Dispatcher& signal_freq_changed() { return pitch_tracker.new_freq; }
-    float get_freq() { return pitch_tracker.get_estimated_freq(); }
-    float get_note() { return pitch_tracker.get_estimated_note(); }
+    //Glib::Dispatcher& signal_freq_changed() { return pitch_tracker.new_freq; }
+	float get_freq() { return 100.; }// pitch_tracker.get_estimated_freq();}
+	float get_note() { return 40; }// pitch_tracker.get_estimated_note();}
 };
 
 
@@ -224,17 +224,19 @@ public:
 
 class OscilloscopeAdapter: PluginDef {
 private:
-    static float* buffer;
-    static unsigned int size;
-    static void fill_buffer(int count, float *input0, float *output0, PluginDef*);
+    //static float* buffer;//MAX
+    //static unsigned int size;//MAX
+	float* buffer;
+	unsigned int size;
+	static void fill_buffer(int count, float *input0, float *output0, PluginDef*);
     static int osc_register(const ParamReg& reg);
     static int activate(bool start, PluginDef *p);
     void change_buffersize(unsigned int);
     int mul_buffer;
 public:
     Plugin plugin;
-    sigc::signal<int, bool>          activation;
-    sigc::signal<void, unsigned int> size_change;
+    sigc::signal<int (bool)>          activation;
+    sigc::signal<void (unsigned int)> size_change;
     void clear_buffer();
     unsigned int get_size() { return size; }
     inline float *get_buffer() { return buffer; }
@@ -276,13 +278,13 @@ private:
     GxSeqSettings *value;
     GxSeqSettings std_value;
     GxSeqSettings value_storage;
-    sigc::signal<void, const GxSeqSettings*> changed;
+    sigc::signal<void (const GxSeqSettings*)> changed;
 public:
     ParameterV(const string& id, GxSeqSettings *v);
     ParameterV(gx_system::JsonParser& jp);
     ~ParameterV();
     virtual void serializeJSON(gx_system::JsonWriter& jw);
-    sigc::signal<void, const GxSeqSettings*>& signal_changed() { return changed; }
+    sigc::signal<void (const GxSeqSettings*)>& signal_changed() { return changed; }
     static ParameterV<GxSeqSettings> *insert_param(
 	ParamMap &pmap, const string& id, GxSeqSettings *v);
     bool set(const GxSeqSettings& val) const;
@@ -356,13 +358,13 @@ private:
     GxJConvSettings *value;
     GxJConvSettings std_value;
     GxJConvSettings value_storage;
-    sigc::signal<void, const GxJConvSettings*> changed;
+    sigc::signal<void (const GxJConvSettings*)> changed;
 public:
     ParameterV(const string& id, ConvolverAdapter &conv, GxJConvSettings *v);
     ParameterV(gx_system::JsonParser& jp);
     ~ParameterV();
     virtual void serializeJSON(gx_system::JsonWriter& jw);
-    sigc::signal<void, const GxJConvSettings*>& signal_changed() { return changed; }
+    sigc::signal<void (const GxJConvSettings*)>& signal_changed() { return changed; }
     static ParameterV<GxJConvSettings> *insert_param(
 	ParamMap &pmap, const string& id, ConvolverAdapter &conv, GxJConvSettings *v);
     bool set(const GxJConvSettings& val) const;
@@ -387,7 +389,7 @@ protected:
     GxConvolver conv;
     boost::mutex activate_mutex;
     EngineControl& engine;
-    sigc::slot<void> sync;
+    sigc::slot<void ()> sync;
     ParamMap& param;
     bool activated;
     // wrapper for the rack order function pointers
@@ -397,7 +399,7 @@ protected:
 public:
     Plugin plugin;
 public:
-    ConvolverAdapter(EngineControl& engine, sigc::slot<void> sync, ParamMap& param);
+    ConvolverAdapter(EngineControl& engine, sigc::slot<void()> sync, ParamMap& param);
     ~ConvolverAdapter();
     void restart();
     bool conv_start();
@@ -415,8 +417,8 @@ public:
  ** class ConvolverStereoAdapter
  */
 
-#include "faust/jconv_post.h"
-#include "faust/jconv_post_mono.h"
+#include "../../faust-generated/jconv_post.h"
+#include "../../faust-generated/jconv_post_mono.h"
 
 class ConvolverStereoAdapter: public ConvolverAdapter {
 private:
@@ -428,7 +430,7 @@ private:
 			  float *output0, float *output1, PluginDef*);
     static int convolver_register(const ParamReg& reg);
 public:
-    ConvolverStereoAdapter(EngineControl& engine, sigc::slot<void> sync, ParamMap& param);
+    ConvolverStereoAdapter(EngineControl& engine, sigc::slot<void()> sync, ParamMap& param);
     ~ConvolverStereoAdapter();
 };
 
@@ -446,7 +448,7 @@ private:
     static void convolver(int count, float *input, float *output, PluginDef*);
     static int convolver_register(const ParamReg& reg);
 public:
-    ConvolverMonoAdapter(EngineControl& engine, sigc::slot<void> sync, ParamMap& param);
+    ConvolverMonoAdapter(EngineControl& engine, sigc::slot<void()> sync, ParamMap& param);
     ~ConvolverMonoAdapter();
 };
 
@@ -461,7 +463,7 @@ protected:
     GxSimpleConvolver conv;
     boost::mutex activate_mutex;
     EngineControl& engine;
-    sigc::slot<void> sync;
+    sigc::slot<void ()> sync;
     bool activated;
     sigc::connection update_conn;
     static void init(unsigned int samplingFreq, PluginDef *p);
@@ -471,10 +473,11 @@ protected:
     bool check_update_timeout();
     virtual void check_update() = 0;
     virtual bool start(bool force = false) = 0;
+	bool check_update_timeout1() { if (!check_update_timeout()) { update_conn.disconnect(); return false; } else return true; }
 public:
     Plugin plugin;
 public:
-    BaseConvolver(EngineControl& engine, sigc::slot<void> sync, gx_resample::BufferResampler& resamp);
+    BaseConvolver(EngineControl& engine, sigc::slot<void()> sync, gx_resample::BufferResampler& resamp);
     virtual ~BaseConvolver();
     inline void set_sync(bool val) { conv.set_sync(val); }
 };
@@ -489,7 +492,7 @@ protected:
     GxSimpleConvolver conv;
     boost::mutex activate_mutex;
     EngineControl& engine;
-    sigc::slot<void> sync;
+    sigc::slot<void ()> sync;
     bool activated;
     unsigned int SamplingFreq;
     unsigned int buffersize;
@@ -503,10 +506,11 @@ protected:
     bool check_update_timeout();
     virtual void check_update() = 0;
     virtual bool start(bool force = false) = 0;
+	bool check_update_timeout1() { if (!check_update_timeout()) { update_conn.disconnect(); return false; } else return true; }
 public:
     Plugin plugin;
 public:
-    FixedBaseConvolver(EngineControl& engine, sigc::slot<void> sync, gx_resample::BufferResampler& resamp);
+    FixedBaseConvolver(EngineControl& engine, sigc::slot<void()> sync, gx_resample::BufferResampler& resamp);
     virtual ~FixedBaseConvolver();
     inline void set_sync(bool val) { conv.set_sync(val); }
 };
@@ -515,7 +519,7 @@ public:
  ** class CabinetConvolver
  */
 
-#include "faust/cabinet_impulse_former.h"
+#include "../../faust-generated/cabinet_impulse_former.h"
 
 class CabinetConvolver: public FixedBaseConvolver {
 private:
@@ -538,12 +542,12 @@ private:
     bool sum_changed() { return std::abs(sum - (level + bass + treble)) > 0.01; }
     void update_sum() { sum = level + bass + treble; }
 public:
-    CabinetConvolver(EngineControl& engine, sigc::slot<void> sync,
+    CabinetConvolver(EngineControl& engine, sigc::slot<void()> sync,
        gx_resample::BufferResampler& resamp);
     ~CabinetConvolver();
 };
 
-#include "faust/cabinet_impulse_former_st.h"
+#include "../../faust-generated/cabinet_impulse_former_st.h"
 
 class CabinetStereoConvolver: public FixedBaseConvolver {
 private:
@@ -567,7 +571,7 @@ private:
     bool sum_changed() { return fabs(sum - (level + bass + treble)) > 0.01; }
     void update_sum() { sum = level + bass + treble; }
 public:
-    CabinetStereoConvolver(EngineControl& engine, sigc::slot<void> sync,
+    CabinetStereoConvolver(EngineControl& engine, sigc::slot<void()> sync,
        gx_resample::BufferResampler& resamp);
     ~CabinetStereoConvolver();
 };
@@ -577,7 +581,7 @@ public:
  ** class PreampConvolver
  */
 
-#include "faust/preamp_impulse_former.h"
+#include "../../faust-generated/preamp_impulse_former.h"
 
 class PreampConvolver: public FixedBaseConvolver {
 private:
@@ -600,12 +604,12 @@ private:
     bool sum_changed() { return std::abs(sum - (level + bass + treble)) > 0.01; }
     void update_sum() { sum = level + bass + treble; }
 public:
-    PreampConvolver(EngineControl& engine, sigc::slot<void> sync,
+    PreampConvolver(EngineControl& engine, sigc::slot<void()> sync,
        gx_resample::BufferResampler& resamp);
     ~PreampConvolver();
 };
 
-#include "faust/preamp_impulse_former_st.h"
+#include "../../faust-generated/preamp_impulse_former_st.h"
 
 class PreampStereoConvolver: public FixedBaseConvolver {
 private:
@@ -629,7 +633,7 @@ private:
     bool sum_changed() { return fabs(sum - (level + bass + treble)) > 0.01; }
     void update_sum() { sum = level + bass + treble; }
 public:
-    PreampStereoConvolver(EngineControl& engine, sigc::slot<void> sync,
+    PreampStereoConvolver(EngineControl& engine, sigc::slot<void()> sync,
        gx_resample::BufferResampler& resamp);
     ~PreampStereoConvolver();
 };
@@ -638,7 +642,7 @@ public:
  ** class ContrastConvolver
  */
 
-#include "faust/presence_level.h"
+#include "../../faust-generated/presence_level.h"
 
 class ContrastConvolver: public FixedBaseConvolver {
 private:
@@ -654,7 +658,7 @@ private:
     inline bool sum_changed() { return std::abs(sum - level) > 0.01; }
     virtual bool start(bool force = false);
 public:
-    ContrastConvolver(EngineControl& engine, sigc::slot<void> sync,
+    ContrastConvolver(EngineControl& engine, sigc::slot<void()> sync,
        gx_resample::BufferResampler& resamp);
     ~ContrastConvolver();
 };
@@ -662,7 +666,7 @@ public:
 /****************************************************************
  ** class LV2Features
  */
-
+/*
 class LV2Features {
 private:
 
@@ -694,6 +698,7 @@ public:
     void operator=(LV2Features const&)  = delete;
 
 };
+*/
 
 /****************************************************************
  ** class LadspaLoader
@@ -744,7 +749,7 @@ public:
     void readJSON(gx_system::JsonParser& jp);
     void writeJSON(gx_system::JsonWriter& jw);
 };
-
+/*
 class LadspaLoader {
 public:
     typedef std::vector<plugdesc*> pluginarray;
@@ -779,7 +784,7 @@ public:
 	{ return "ladspa"+uid_key.substr(9)+".js"; }
     friend class Lv2Dsp;
 };
-
+*/
 
 /****************************************************************
  ** class Directout
@@ -793,7 +798,7 @@ private:
     int 	bsize;
     bool fdfill;
     EngineControl&  engine;
-    sigc::slot<void> sync;
+    sigc::slot<void ()> sync;
     void mem_alloc();
     void mem_free();
     void init(unsigned int samplingFreq);
@@ -808,7 +813,7 @@ public:
     void set_data(bool dfill);
     Plugin plugin;
     static Plugin directoutput;
-    Directout( EngineControl& engine, sigc::slot<void> sync);
+    Directout( EngineControl& engine, sigc::slot<void ()> sync);
     ~Directout();
 };
 
@@ -957,7 +962,7 @@ private:
     bool save_p;
     ParamMap& param;
 	bool mem_allocated;
-    sigc::slot<void> sync;
+    sigc::slot<void ()> sync;
 	volatile int ready;
     FileResampler smp;
     Directout* d;
@@ -992,7 +997,7 @@ private:
 	static void del_instance(PluginDef *p);
 public:
     Plugin plugin;
-	LiveLooper(ParamMap& param_, sigc::slot<void> sync, const string& loop_dir_);
+	LiveLooper(ParamMap& param_, sigc::slot<void()> sync, const string& loop_dir_);
 	~LiveLooper();
 };
 
@@ -1069,7 +1074,7 @@ public:
  ** class DrumSequencer
  */
 
-#include "faust/drumseq.h"
+#include "../../faust-generated/drumseq.h"
 
 class Drumout {
 private:
@@ -1122,7 +1127,7 @@ private:
 
     EngineControl&  engine;
 	bool            mem_allocated;
-    sigc::slot<void> sync;
+    sigc::slot<void ()> sync;
 	volatile bool ready;
     float *outdata;
     ParamMap& param;
@@ -1160,7 +1165,7 @@ private:
 	static void del_instance(PluginDef *p);
 public:
     Plugin plugin;
-	DrumSequencer(ParamMap& param_, EngineControl& engine, sigc::slot<void> sync);
+	DrumSequencer(ParamMap& param_, EngineControl& engine, sigc::slot<void()> sync);
 	~DrumSequencer();
 };
 
@@ -1187,7 +1192,9 @@ public:
 *****************************************************************************/ 
 
 
+#ifndef M_PI
 #define M_PI 3.14159265358979323846
+#endif
 #define MAX_FRAME_LENGTH 8096
 
 class smbPitchShift : public PluginDef {
@@ -1195,7 +1202,7 @@ private:
     gx_resample::SimpleResampler resamp;
     EngineControl&  engine;
 	bool            mem_allocated;
-    sigc::slot<void> sync;
+    sigc::slot<void ()> sync;
 	volatile bool ready;
     ParamMap& param;
 	float gInFIFO[MAX_FRAME_LENGTH];
@@ -1257,7 +1264,7 @@ private:
 
 public:
     Plugin plugin;
-	smbPitchShift(ParamMap& param_, EngineControl& engine, sigc::slot<void> sync);
+	smbPitchShift(ParamMap& param_, EngineControl& engine, sigc::slot<void()> sync);
 	~smbPitchShift();
 };
 

@@ -1,0 +1,17 @@
+{
+  "system.mainwin_x": -2,
+  "system.mainwin_y": 10,
+  "system.mainwin_height": 838,
+  "system.mainwin_rack_height": 838,
+  "system.preset_window_height": 196,
+  "system.mul_buffer": 1,
+  "ui.skin_name": "Guitarix",
+  "ui.latency_nowarn": 1,
+  "system.order_rack_h": 1,
+  "system.show_value": 1,
+  "system.show_tooltips": 1,
+  "system.animations": 1,
+  "system.show_presets": 1,
+  "system.show_toolbar": 1,
+  "system.show_rack": 1
+}

@@ -87,7 +87,8 @@ inline float sqrf(float x) {
 // ----- jack process callback for the midi output
 void MidiVariables::process_midi(int len, float *audiodata, void *midi_port_buf, float jcpu_load,
 				 float fConsta4, float fConsta1t) {
-    static float fnote = 1000.;
+#if !defined(_WINDOWS) && !defined(__APPLE_CC__)
+	static float fnote = 1000.;
     float fConsta2 = 0.;
     float fTemps45 = fslider45;
     float fTemps38 = fslider38;
@@ -196,7 +197,7 @@ void MidiVariables::process_midi(int len, float *audiodata, void *midi_port_buf,
 		    // controller+ channel
 		    midi_send[0] = 0xC0 | static_cast<int>(iTemps30);
 		}
-	    }
+		}
 
 	    if (send > iTemps27) {     // 20
 		if (fautogain) {
@@ -208,7 +209,7 @@ void MidiVariables::process_midi(int len, float *audiodata, void *midi_port_buf,
 		if (volume != iTemps46) {
 		    volume = iTemps46;
 		    midistat = true;
-		    midi_send = jack_midi_event_reserve(midi_port_buf, i, 3);
+			midi_send = jack_midi_event_reserve(midi_port_buf, i, 3);
 
 		    if (midi_send) {
 			// volume value
@@ -228,7 +229,7 @@ void MidiVariables::process_midi(int len, float *audiodata, void *midi_port_buf,
 		if (( noten >= 0)&&(noten <= 127)) {
 		    // pitch wheel clear
 		    if (fpitch) {
-			midi_send = jack_midi_event_reserve(midi_port_buf, i, 3);
+				midi_send = jack_midi_event_reserve(midi_port_buf, i, 3);
 			if (midi_send) {
 			    // pitch value
 			    midi_send[2] = 0x40;
@@ -237,7 +238,7 @@ void MidiVariables::process_midi(int len, float *audiodata, void *midi_port_buf,
 			    // controller + channel
 			    midi_send[0] = 0xE0 | static_cast<int>(iTemps30);
 			}
-		    }
+			}
 		    midi_send = jack_midi_event_reserve(midi_port_buf, i, 3);
 		    if (midi_send) {
 			// velocity
@@ -495,5 +496,6 @@ void MidiVariables::process_midi(int len, float *audiodata, void *midi_port_buf,
 	    weg+=step;
 	}
     }
+#endif
 }
 } /* end of gx_engine namespace */

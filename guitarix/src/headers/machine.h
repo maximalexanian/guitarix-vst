@@ -24,7 +24,7 @@
 // #include <ext/stdio_filebuf.h>
 #include <boost/iostreams/device/file_descriptor.hpp>
 #include <boost/iostreams/stream.hpp>
-#include "jsonrpc_methods.h"
+#include "jsonrpc_methods-generated.h"
 #ifdef HAVE_AVAHI
 #include "avahi_register.h"
 #endif
@@ -52,16 +52,16 @@ public:
 
 class GxMachineBase {
 protected:
-    sigc::signal<void,const std::string&, std::vector<gx_system::FileName> > impresp_list;
-    sigc::signal<void, MidiAudioBuffer::Load> jack_load_change;
+    sigc::signal<void (const std::string&, std::vector<gx_system::FileName>)> impresp_list;
+    sigc::signal<void (MidiAudioBuffer::Load)> jack_load_change;
 private:
     virtual int _get_parameter_value_int(const std::string& id) = 0;
     virtual int _get_parameter_value_bool(const std::string& id) = 0;
     virtual float _get_parameter_value_float(const std::string& id) = 0;
     virtual std::string _get_parameter_value_string(const std::string& id) = 0;
-    virtual sigc::signal<void, int>& _signal_parameter_value_int(const std::string& id) = 0;
-    virtual sigc::signal<void, bool>& _signal_parameter_value_bool(const std::string& id) = 0;
-    virtual sigc::signal<void, float>& _signal_parameter_value_float(const std::string& id) = 0;
+    virtual sigc::signal<void (int)>& _signal_parameter_value_int(const std::string& id) = 0;
+    virtual sigc::signal<void (bool)>& _signal_parameter_value_bool(const std::string& id) = 0;
+    virtual sigc::signal<void (float)>& _signal_parameter_value_float(const std::string& id) = 0;
 protected:
     GxMachineBase();
 public:
@@ -69,10 +69,10 @@ public:
     // engine
     virtual void set_state(GxEngineState state) = 0;
     virtual GxEngineState get_state() = 0;
-    virtual void load_ladspalist(std::vector<std::string>& old_not_found, ladspa::LadspaPluginList& pluginlist) = 0;
-    virtual void save_ladspalist(ladspa::LadspaPluginList& pluginlist) = 0;
-    virtual void commit_ladspa_changes() = 0;
-    virtual sigc::signal<void,Plugin*,PluginChange::pc>& signal_plugin_changed() = 0;
+//    virtual void load_ladspalist(std::vector<std::string>& old_not_found, ladspa::LadspaPluginList& pluginlist) = 0;
+//    virtual void save_ladspalist(ladspa::LadspaPluginList& pluginlist) = 0;
+//    virtual void commit_ladspa_changes() = 0;
+    virtual sigc::signal<void (Plugin*,PluginChange::pc)>& signal_plugin_changed() = 0;
     virtual Plugin *pluginlist_lookup_plugin(const std::string& id) const = 0;
     virtual bool load_unit(gx_gui::UiBuilderImpl& builder, PluginDef* pdef) = 0;
     virtual void pluginlist_append_rack(UiBuilderBase& ui) = 0;
@@ -82,20 +82,20 @@ public:
     virtual const float *get_oscilloscope_buffer() = 0;
     virtual void clear_oscilloscope_buffer() = 0;
     virtual bool oscilloscope_plugin_box_visible() = 0;
-    virtual sigc::signal<void, int>& signal_oscilloscope_post_pre() = 0;
-    virtual sigc::signal<void, bool>& signal_oscilloscope_visible() = 0;
-    virtual sigc::signal<int, bool>& signal_oscilloscope_activation() = 0;
-    virtual sigc::signal<void, unsigned int>& signal_oscilloscope_size_change() = 0;
+    virtual sigc::signal<void (int)>& signal_oscilloscope_post_pre() = 0;
+    virtual sigc::signal<void (bool)>& signal_oscilloscope_visible() = 0;
+    virtual sigc::signal<int (bool)>& signal_oscilloscope_activation() = 0;
+    virtual sigc::signal<void (unsigned int)>& signal_oscilloscope_size_change() = 0;
     virtual void maxlevel_get(int channels, float *values) = 0;
     virtual void get_oscilloscope_info(int& load, int& frames, bool& is_rt, jack_nframes_t& bsize) = 0;
     virtual gx_system::CmdlineOptions& get_options() const = 0;
-    virtual void start_socket(sigc::slot<void> quit_mainloop, const Glib::ustring& host, int port) = 0;
+    virtual void start_socket(sigc::slot<void()> quit_mainloop, const Glib::ustring& host, int port) = 0;
     virtual void stop_socket() = 0;
-    virtual sigc::signal<void,GxEngineState>& signal_state_change() = 0;
-    sigc::signal<void,MidiAudioBuffer::Load>& signal_jack_load_change() { return jack_load_change; }
+    virtual sigc::signal<void (GxEngineState)>& signal_state_change() = 0;
+    sigc::signal<void (MidiAudioBuffer::Load)>& signal_jack_load_change() { return jack_load_change; }
     virtual void tuner_used_for_display(bool on) = 0;
     virtual const std::vector<std::string>& get_rack_unit_order(PluginType type) = 0;
-    virtual sigc::signal<void,bool>& signal_rack_unit_order_changed() = 0;
+    virtual sigc::signal<void (bool)>& signal_rack_unit_order_changed() = 0;
     virtual void remove_rack_unit(const std::string& unit, PluginType type) = 0;
     virtual void insert_rack_unit(const std::string& unit, const std::string& before, PluginType type) = 0;
     // tuner_switcher
@@ -103,9 +103,9 @@ public:
     virtual void tuner_switcher_activate(bool v) = 0;
     virtual void tuner_switcher_deactivate() = 0;
     virtual void tuner_switcher_toggle(bool v) = 0;
-    virtual sigc::signal<void,const Glib::ustring&,const Glib::ustring&>& tuner_switcher_signal_display() = 0;
-    virtual sigc::signal<void,TunerSwitcher::SwitcherState>& tuner_switcher_signal_set_state() = 0;
-    virtual sigc::signal<void, bool>& tuner_switcher_signal_selection_done() = 0;
+    virtual sigc::signal<void (const Glib::ustring&,const Glib::ustring&)>& tuner_switcher_signal_display() = 0;
+    virtual sigc::signal<void (TunerSwitcher::SwitcherState)>& tuner_switcher_signal_set_state() = 0;
+    virtual sigc::signal<void (bool)>& tuner_switcher_signal_selection_done() = 0;
     // preset
     virtual bool setting_is_preset() = 0;
     virtual const Glib::ustring& get_current_bank() = 0;
@@ -129,8 +129,8 @@ public:
     virtual void plugin_preset_list_save(const PluginDef *pdef, const Glib::ustring& name) = 0;
     virtual void plugin_preset_list_remove(const PluginDef *pdef, const Glib::ustring& name) = 0;
     virtual void disable_autosave(bool v) = 0;
-    virtual sigc::signal<void>& signal_selection_changed() = 0;
-    virtual sigc::signal<void>& signal_presetlist_changed() = 0;
+    virtual sigc::signal<void ()>& signal_selection_changed() = 0;
+    virtual sigc::signal<void ()>& signal_presetlist_changed() = 0;
     virtual gx_system::PresetFileGui *bank_insert_uri(const Glib::ustring& uri, bool move) = 0;
     virtual gx_system::PresetFileGui *bank_insert_new(const Glib::ustring& newname) = 0;
     virtual bool rename_bank(const Glib::ustring& oldname, Glib::ustring& newname) = 0;
@@ -175,12 +175,12 @@ public:
     virtual void set_parameter_value(const std::string& id, const std::string& value) = 0;
     void set_parameter_value(const std::string& id, double value) { set_parameter_value(id, (float)value); }
     template <class T> T get_parameter_value (const std::string& id);
-    template <class T> sigc::signal<void, T>& signal_parameter_value(const std::string& id);
+    template <class T> sigc::signal<void (T)>& signal_parameter_value(const std::string& id);
     // MidiControllerList
     virtual bool midi_get_config_mode(int *ctl = 0) = 0;
     virtual void midi_set_config_mode(bool v, int ctl=-1) = 0;
-    virtual sigc::signal<void>& signal_midi_changed() = 0;
-    virtual sigc::signal<void, int, int>& signal_midi_value_changed() = 0;
+    virtual sigc::signal<void ()>& signal_midi_changed() = 0;
+    virtual sigc::signal<void (int, int)>& signal_midi_value_changed() = 0;
     virtual void request_midi_value_update() = 0;
     virtual int midi_size() = 0;
     virtual midi_controller_list& midi_get(int n) = 0;
@@ -191,7 +191,7 @@ public:
     virtual void set_midi_channel(int s) = 0;
     // Convolver
     virtual void reload_impresp_list(const std::string& path) = 0;
-    sigc::signal<void,const std::string&, std::vector<gx_system::FileName> >& signal_impresp_list() {
+    sigc::signal<void (const std::string&, std::vector<gx_system::FileName>)>& signal_impresp_list() {
 	return impresp_list;
     }
     virtual void load_impresp_dirs(std::vector<gx_system::FileName>& dirs) = 0;
@@ -215,15 +215,15 @@ template <> inline std::string GxMachineBase::get_parameter_value(const std::str
     return _get_parameter_value_string(id);
 }
 
-template <> inline sigc::signal<void, float>& GxMachineBase::signal_parameter_value(const std::string& id) {
+template <> inline sigc::signal<void (float)>& GxMachineBase::signal_parameter_value(const std::string& id) {
     return _signal_parameter_value_float(id);
 }
 
-template <> inline sigc::signal<void, int>& GxMachineBase::signal_parameter_value(const std::string& id) {
+template <> inline sigc::signal<void (int)>& GxMachineBase::signal_parameter_value(const std::string& id) {
     return _signal_parameter_value_int(id);
 }
 
-template <> inline sigc::signal<void, bool>& GxMachineBase::signal_parameter_value(const std::string& id) {
+template <> inline sigc::signal<void (bool)>& GxMachineBase::signal_parameter_value(const std::string& id) {
     return _signal_parameter_value_bool(id);
 }
 
@@ -255,18 +255,23 @@ private:
     virtual int _get_parameter_value_bool(const std::string& id);
     virtual float _get_parameter_value_float(const std::string& id);
     virtual std::string _get_parameter_value_string(const std::string& id);
-    virtual sigc::signal<void, int>& _signal_parameter_value_int(const std::string& id);
-    virtual sigc::signal<void, bool>& _signal_parameter_value_bool(const std::string& id);
-    virtual sigc::signal<void, float>& _signal_parameter_value_float(const std::string& id);
+    virtual sigc::signal<void (int)>& _signal_parameter_value_int(const std::string& id);
+    virtual sigc::signal<void (bool)>& _signal_parameter_value_bool(const std::string& id);
+    virtual sigc::signal<void (float)>& _signal_parameter_value_float(const std::string& id);
 public:
     GxMachine(gx_system::CmdlineOptions& options);
     virtual ~GxMachine();
     virtual void set_state(GxEngineState state);
     virtual GxEngineState get_state();
-    virtual void load_ladspalist(std::vector<std::string>& old_not_found, ladspa::LadspaPluginList& pluginlist);
-    virtual void save_ladspalist(ladspa::LadspaPluginList& pluginlist);
-    virtual void commit_ladspa_changes();
-    virtual sigc::signal<void,Plugin*,PluginChange::pc>& signal_plugin_changed();
+//    virtual void load_ladspalist(std::vector<std::string>& old_not_found, ladspa::LadspaPluginList& pluginlist);
+//    virtual void save_ladspalist(ladspa::LadspaPluginList& pluginlist);
+//    virtual void commit_ladspa_changes();
+
+	gx_preset::GxSettings& get_settings() {return settings;}
+
+	void timerUpdate();
+
+    virtual sigc::signal<void (Plugin*,PluginChange::pc)>& signal_plugin_changed();
     virtual Plugin *pluginlist_lookup_plugin(const std::string& id) const;
     virtual bool load_unit(gx_gui::UiBuilderImpl& builder, PluginDef* pdef);
     virtual void pluginlist_append_rack(UiBuilderBase& ui);
@@ -276,19 +281,19 @@ public:
     virtual const float *get_oscilloscope_buffer();
     virtual void clear_oscilloscope_buffer();
     virtual bool oscilloscope_plugin_box_visible();
-    virtual sigc::signal<void, int>& signal_oscilloscope_post_pre();
-    virtual sigc::signal<void, bool>& signal_oscilloscope_visible();
-    virtual sigc::signal<int, bool>& signal_oscilloscope_activation();
-    virtual sigc::signal<void, unsigned int>& signal_oscilloscope_size_change();
+    virtual sigc::signal<void (int)>& signal_oscilloscope_post_pre();
+    virtual sigc::signal<void (bool)>& signal_oscilloscope_visible();
+    virtual sigc::signal<int (bool)>& signal_oscilloscope_activation();
+    virtual sigc::signal<void (unsigned int)>& signal_oscilloscope_size_change();
     virtual void maxlevel_get(int channels, float *values);
     virtual void get_oscilloscope_info(int& load, int& frames, bool& is_rt, jack_nframes_t& bsize);
     virtual gx_system::CmdlineOptions& get_options() const;
-    virtual void start_socket(sigc::slot<void> quit_mainloop, const Glib::ustring& host, int port);
+    virtual void start_socket(sigc::slot<void ()> quit_mainloop, const Glib::ustring& host, int port);
     virtual void stop_socket();
-    virtual sigc::signal<void,GxEngineState>& signal_state_change();
+    virtual sigc::signal<void (GxEngineState)>& signal_state_change();
     virtual void tuner_used_for_display(bool on);
     virtual const std::vector<std::string>& get_rack_unit_order(PluginType type);
-    virtual sigc::signal<void,bool>& signal_rack_unit_order_changed();
+    virtual sigc::signal<void (bool)>& signal_rack_unit_order_changed();
     virtual void remove_rack_unit(const std::string& unit, PluginType type);
     virtual void insert_rack_unit(const std::string& unit, const std::string& before, PluginType type);
     // tuner_switcher
@@ -296,9 +301,9 @@ public:
     virtual void tuner_switcher_activate(bool v);
     virtual void tuner_switcher_deactivate();
     virtual void tuner_switcher_toggle(bool v);
-    virtual sigc::signal<void,const Glib::ustring&,const Glib::ustring&>& tuner_switcher_signal_display();
-    virtual sigc::signal<void,TunerSwitcher::SwitcherState>& tuner_switcher_signal_set_state();
-    virtual sigc::signal<void, bool>& tuner_switcher_signal_selection_done();
+    virtual sigc::signal<void (const Glib::ustring&,const Glib::ustring&)>& tuner_switcher_signal_display();
+    virtual sigc::signal<void (TunerSwitcher::SwitcherState)>& tuner_switcher_signal_set_state();
+    virtual sigc::signal<void (bool)>& tuner_switcher_signal_selection_done();
     // preset
     virtual bool setting_is_preset();
     virtual const Glib::ustring& get_current_bank();
@@ -322,8 +327,8 @@ public:
     virtual void plugin_preset_list_save(const PluginDef *pdef, const Glib::ustring& name);
     virtual void plugin_preset_list_remove(const PluginDef *pdef, const Glib::ustring& name);
     virtual void disable_autosave(bool v);
-    virtual sigc::signal<void>& signal_selection_changed();
-    virtual sigc::signal<void>& signal_presetlist_changed();
+    virtual sigc::signal<void ()>& signal_selection_changed();
+    virtual sigc::signal<void ()>& signal_presetlist_changed();
     virtual gx_system::PresetFileGui *bank_insert_uri(const Glib::ustring& uri, bool move);
     virtual gx_system::PresetFileGui *bank_insert_new(const Glib::ustring& newname);
     virtual bool rename_bank(const Glib::ustring& oldname, Glib::ustring& newname);
@@ -371,8 +376,8 @@ public:
     // MidiControllerList
     virtual bool midi_get_config_mode(int *ctl = 0);
     virtual void midi_set_config_mode(bool v, int ctl=-1);
-    virtual sigc::signal<void>& signal_midi_changed();
-    virtual sigc::signal<void, int, int>& signal_midi_value_changed();
+    virtual sigc::signal<void ()>& signal_midi_changed();
+    virtual sigc::signal<void (int, int)>& signal_midi_value_changed();
     virtual void request_midi_value_update();
     virtual int midi_size();
     virtual midi_controller_list& midi_get(int n);
@@ -386,6 +391,10 @@ public:
     virtual void load_impresp_dirs(std::vector<gx_system::FileName>& dirs);
     virtual bool read_audio(const std::string& filename, unsigned int *audio_size, int *audio_chan,
 			    int *audio_type, int *audio_form, int *audio_rate, float **buffer);
+
+    void start_ramp_down() { engine.start_ramp_down(); }
+    void wait_ramp_down_finished() { engine.wait_ramp_down_finished(); }
+    void start_ramp_up() {engine.start_ramp_up();}
 };
 
 class GxMachineRemote: public GxMachineBase {
@@ -394,9 +403,9 @@ private:
     ParamMap  pmap;
     PluginListBase pluginlist;
     gx_system::PresetBanks banks;
-    sigc::signal<void,GxEngineState> engine_state_change;
-    sigc::signal<void> selection_changed;
-    sigc::signal<void> presetlist_changed;
+    sigc::signal<void (GxEngineState)> engine_state_change;
+    sigc::signal<void ()> selection_changed;
+    sigc::signal<void ()> presetlist_changed;
     Glib::RefPtr<Gio::Socket> socket;
     // __gnu_cxx::stdio_filebuf<char> *writebuf;
     boost::iostreams::file_descriptor_sink *writebuf;
@@ -406,21 +415,21 @@ private:
     std::vector<gx_system::JsonStringParser*> notify_list;
     sigc::connection idle_conn;
     gx_preset::UnitRacks rack_units;
-    sigc::signal<void> midi_changed;
-    sigc::signal<void, int, int> midi_value_changed;
+    sigc::signal<void ()> midi_changed;
+    sigc::signal<void (int, int)> midi_value_changed;
     ControllerArray midi_controller_map;
     Glib::ustring current_bank;
     Glib::ustring current_preset;
     int bank_drag_get_counter;
     std::string bank_drag_get_path;
-    sigc::signal<int, bool> oscilloscope_activation;
-    sigc::signal<void, unsigned int> oscilloscope_size_change;
+    sigc::signal<int (bool)> oscilloscope_activation;
+    sigc::signal<void (unsigned int)> oscilloscope_size_change;
     float *oscilloscope_buffer;
     unsigned int oscilloscope_buffer_size;
-    sigc::signal<void,const Glib::ustring&,const Glib::ustring&> tuner_switcher_display;
-    sigc::signal<void,TunerSwitcher::SwitcherState> tuner_switcher_set_state;
-    sigc::signal<void, bool> tuner_switcher_selection_done;
-    sigc::signal<void,Plugin*,PluginChange::pc> plugin_changed;
+    sigc::signal<void (const Glib::ustring&,const Glib::ustring&)> tuner_switcher_display;
+    sigc::signal<void (TunerSwitcher::SwitcherState)> tuner_switcher_set_state;
+    sigc::signal<void (bool)> tuner_switcher_selection_done;
+    sigc::signal<void (Plugin*,PluginChange::pc)> plugin_changed;
 private:
     const jsonrpc_method_def& start_call(jsonrpc_method m_id);
     void send();
@@ -445,19 +454,19 @@ private:
     virtual int _get_parameter_value_bool(const std::string& id);
     virtual float _get_parameter_value_float(const std::string& id);
     virtual std::string _get_parameter_value_string(const std::string& id);
-    virtual sigc::signal<void, int>& _signal_parameter_value_int(const std::string& id);
-    virtual sigc::signal<void, bool>& _signal_parameter_value_bool(const std::string& id);
-    virtual sigc::signal<void, float>& _signal_parameter_value_float(const std::string& id);
+    virtual sigc::signal<void (int)>& _signal_parameter_value_int(const std::string& id);
+    virtual sigc::signal<void (bool)>& _signal_parameter_value_bool(const std::string& id);
+    virtual sigc::signal<void (float)>& _signal_parameter_value_float(const std::string& id);
 
 public:
     GxMachineRemote(gx_system::CmdlineOptions& options);
     virtual ~GxMachineRemote();
     virtual void set_state(GxEngineState state);
     virtual GxEngineState get_state();
-    virtual void load_ladspalist(std::vector<std::string>& old_not_found, ladspa::LadspaPluginList& pluginlist);
-    virtual void save_ladspalist(ladspa::LadspaPluginList& pluginlist);
-    virtual void commit_ladspa_changes();
-    virtual sigc::signal<void,Plugin*,PluginChange::pc>& signal_plugin_changed();
+//    virtual void load_ladspalist(std::vector<std::string>& old_not_found, ladspa::LadspaPluginList& pluginlist);
+//    virtual void save_ladspalist(ladspa::LadspaPluginList& pluginlist);
+//    virtual void commit_ladspa_changes();
+    virtual sigc::signal<void (Plugin*,PluginChange::pc)>& signal_plugin_changed();
     virtual Plugin *pluginlist_lookup_plugin(const std::string& id) const;
     virtual bool load_unit(gx_gui::UiBuilderImpl& builder, PluginDef* pdef);
     virtual void pluginlist_append_rack(UiBuilderBase& ui);
@@ -467,19 +476,19 @@ public:
     virtual const float *get_oscilloscope_buffer();
     virtual void clear_oscilloscope_buffer();
     virtual bool oscilloscope_plugin_box_visible();
-    virtual sigc::signal<void, int>& signal_oscilloscope_post_pre();
-    virtual sigc::signal<void, bool>& signal_oscilloscope_visible();
-    virtual sigc::signal<int, bool>& signal_oscilloscope_activation();
-    virtual sigc::signal<void, unsigned int>& signal_oscilloscope_size_change();
+    virtual sigc::signal<void (int)>& signal_oscilloscope_post_pre();
+    virtual sigc::signal<void (bool)>& signal_oscilloscope_visible();
+    virtual sigc::signal<int (bool)>& signal_oscilloscope_activation();
+    virtual sigc::signal<void (unsigned int)>& signal_oscilloscope_size_change();
     virtual void maxlevel_get(int channels, float *values);
     virtual void get_oscilloscope_info(int& load, int& frames, bool& is_rt, jack_nframes_t& bsize);
     virtual gx_system::CmdlineOptions& get_options() const;
-    virtual void start_socket(sigc::slot<void> quit_mainloop, const Glib::ustring& host, int port);
+    virtual void start_socket(sigc::slot<void ()> quit_mainloop, const Glib::ustring& host, int port);
     virtual void stop_socket();
-    virtual sigc::signal<void,GxEngineState>& signal_state_change();
+    virtual sigc::signal<void (GxEngineState)>& signal_state_change();
     virtual void tuner_used_for_display(bool on);
     virtual const std::vector<std::string>& get_rack_unit_order(PluginType type);
-    virtual sigc::signal<void,bool>& signal_rack_unit_order_changed();
+    virtual sigc::signal<void (bool)>& signal_rack_unit_order_changed();
     virtual void remove_rack_unit(const std::string& unit, PluginType type);
     virtual void insert_rack_unit(const std::string& unit, const std::string& before, PluginType type);
     // tuner_switcher
@@ -487,9 +496,9 @@ public:
     virtual void tuner_switcher_activate(bool v);
     virtual void tuner_switcher_deactivate();
     virtual void tuner_switcher_toggle(bool v);
-    virtual sigc::signal<void,const Glib::ustring&,const Glib::ustring&>& tuner_switcher_signal_display();
-    virtual sigc::signal<void,TunerSwitcher::SwitcherState>& tuner_switcher_signal_set_state();
-    virtual sigc::signal<void, bool>& tuner_switcher_signal_selection_done();
+    virtual sigc::signal<void (const Glib::ustring&,const Glib::ustring&)>& tuner_switcher_signal_display();
+    virtual sigc::signal<void (TunerSwitcher::SwitcherState)>& tuner_switcher_signal_set_state();
+    virtual sigc::signal<void (bool)>& tuner_switcher_signal_selection_done();
     // preset
     virtual bool setting_is_preset();
     virtual const Glib::ustring& get_current_bank();
@@ -513,8 +522,8 @@ public:
     virtual void plugin_preset_list_save(const PluginDef *pdef, const Glib::ustring& name);
     virtual void plugin_preset_list_remove(const PluginDef *pdef, const Glib::ustring& name);
     virtual void disable_autosave(bool v);
-    virtual sigc::signal<void>& signal_selection_changed();
-    virtual sigc::signal<void>& signal_presetlist_changed();
+    virtual sigc::signal<void ()>& signal_selection_changed();
+    virtual sigc::signal<void ()>& signal_presetlist_changed();
     virtual gx_system::PresetFileGui *bank_insert_uri(const Glib::ustring& uri, bool move);
     virtual gx_system::PresetFileGui *bank_insert_new(const Glib::ustring& newname);
     virtual bool rename_bank(const Glib::ustring& oldname, Glib::ustring& newname);
@@ -562,8 +571,8 @@ public:
     // MidiControllerList
     virtual bool midi_get_config_mode(int *ctl = 0);
     virtual void midi_set_config_mode(bool v, int ctl=-1);
-    virtual sigc::signal<void>& signal_midi_changed();
-    virtual sigc::signal<void, int, int>& signal_midi_value_changed();
+    virtual sigc::signal<void ()>& signal_midi_changed();
+    virtual sigc::signal<void (int, int)>& signal_midi_value_changed();
     virtual void request_midi_value_update();
     virtual int midi_size();
     virtual midi_controller_list& midi_get(int n);

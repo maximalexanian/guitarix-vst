@@ -24,6 +24,9 @@
 #include <math.h>
 #include <zita-resampler/resampler-table.h>
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 int zita_resampler_major_version (void)
 {

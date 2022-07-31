@@ -88,8 +88,7 @@ void NoiseGate::outputgate_compute(int count, float *input, float *output, Plugi
     }
     while (count--) {
 	*output++ = ngate * *input++;
-    }
-}
+    }}
 
 int NoiseGate::outputgate_activate(bool start, PluginDef *pdef) {
     if (start) {
@@ -315,7 +314,7 @@ bool GxJConvSettings::operator==(const GxJConvSettings& jcset) const {
     if (fGainCor && std::abs(fGain - jcset.fGain) > 1e-4 * (fGain + jcset.fGain)) {
 	return false;
     }
-    if (gainline == jcset.gainline) {
+    if (gainline != jcset.gainline) {
 	return false;
     }
     return true;
@@ -468,11 +467,11 @@ void JConvParameter::setJSON_value() {
  ** class ConvolverAdapter
  */
 
-#include "faust/jconv_post.cc"
-#include "faust/jconv_post_mono.cc"
+#include "../../faust-generated/jconv_post.cc"
+#include "../../faust-generated/jconv_post_mono.cc"
 
 ConvolverAdapter::ConvolverAdapter(
-    EngineControl& engine_, sigc::slot<void> sync_, ParamMap& param_)
+    EngineControl& engine_, sigc::slot<void()> sync_, ParamMap& param_)
     : PluginDef(),
       conv(),
       activate_mutex(),
@@ -570,7 +569,7 @@ bool ConvolverAdapter::conv_start() {
  */
 
 ConvolverStereoAdapter::ConvolverStereoAdapter(
-    EngineControl& engine_, sigc::slot<void> sync_, ParamMap& param_)
+    EngineControl& engine_, sigc::slot<void ()> sync_, ParamMap& param_)
     : ConvolverAdapter(engine_, sync_, param_) {
     id = "jconv";
     name = N_("Convolver");
@@ -587,8 +586,8 @@ void ConvolverStereoAdapter::convolver(int count, float *input0, float *input1,
 				 float *output0, float *output1, PluginDef* plugin) {
     ConvolverStereoAdapter& self = *static_cast<ConvolverStereoAdapter*>(plugin);
     if (self.conv.is_runnable()) {
-        float conv_out0[count];
-        float conv_out1[count];
+        FLOAT_BUF(conv_out0,count);
+		FLOAT_BUF(conv_out1,count);
         if (self.conv.compute(count, input0, input1, conv_out0, conv_out1)) {
             self.jc_post.compute(count, input0, input1,
 				 conv_out0, conv_out1, output0, output1);
@@ -664,7 +663,7 @@ int ConvolverStereoAdapter::activate(bool start, PluginDef *p) {
  */
 
 ConvolverMonoAdapter::ConvolverMonoAdapter(
-    EngineControl& engine_, sigc::slot<void> sync_, ParamMap& param_)
+    EngineControl& engine_, sigc::slot<void()> sync_, ParamMap& param_)
     : ConvolverAdapter(engine_, sync_, param_) {
     id = "jconv_mono";
     name = N_("Convolver");
@@ -680,7 +679,7 @@ ConvolverMonoAdapter::~ConvolverMonoAdapter() {
 void ConvolverMonoAdapter::convolver(int count, float *input, float *output, PluginDef* plugin) {
     ConvolverMonoAdapter& self = *static_cast<ConvolverMonoAdapter*>(plugin);
     if (self.conv.is_runnable()) {
-        float conv_out[count];
+		FLOAT_BUF(conv_out,count);
         if (self.conv.compute(count, input, conv_out)) {
             self.jc_post_mono.compute(count, output, conv_out, output);
 	    return;
@@ -744,7 +743,7 @@ int ConvolverMonoAdapter::activate(bool start, PluginDef *p) {
  */
 
 
-BaseConvolver::BaseConvolver(EngineControl& engine_, sigc::slot<void> sync_, gx_resample::BufferResampler& resamp)
+BaseConvolver::BaseConvolver(EngineControl& engine_, sigc::slot<void()> sync_, gx_resample::BufferResampler& resamp)
     : PluginDef(),
       conv(resamp),
       activate_mutex(),
@@ -808,9 +807,14 @@ int BaseConvolver::activate(bool start, PluginDef *p) {
 	if (!self.start()) {
 	    return -1;
 	}
+#if defined(_WINDOWS) || defined(__APPLE__)
+	self.update_conn = self.engine.signal_timeout().connect(
+		sigc::mem_fun(self, &BaseConvolver::check_update_timeout1));
+#else
 	self.update_conn = Glib::signal_timeout().connect(
-	    sigc::mem_fun(self, &BaseConvolver::check_update_timeout), 200);
-    } else {
+		sigc::mem_fun(self, &BaseConvolver::check_update_timeout), 200);
+#endif
+	} else {
 	self.conv.stop_process();
     }
     self.activated = start;
@@ -828,7 +832,7 @@ int BaseConvolver::conv_start() {
  */
 
 
-FixedBaseConvolver::FixedBaseConvolver(EngineControl& engine_, sigc::slot<void> sync_, gx_resample::BufferResampler& resamp)
+FixedBaseConvolver::FixedBaseConvolver(EngineControl& engine_, sigc::slot<void()> sync_, gx_resample::BufferResampler& resamp)
     : PluginDef(),
       conv(resamp),
       activate_mutex(),
@@ -899,9 +903,14 @@ int FixedBaseConvolver::activate(bool start, PluginDef *p) {
 	if (!self.start()) {
 	    return -1;
 	}
+#if defined(_WINDOWS) || defined(__APPLE__)
+	self.update_conn = self.engine.signal_timeout().connect(
+		sigc::mem_fun(self, &FixedBaseConvolver::check_update_timeout1));
+#else
 	self.update_conn = Glib::signal_timeout().connect(
-	    sigc::mem_fun(self, &FixedBaseConvolver::check_update_timeout), 200);
-    } else {
+		sigc::mem_fun(self, &FixedBaseConvolver::check_update_timeout), 200);
+#endif
+	} else {
 	self.conv.stop_process();
     }
     self.activated = start;
@@ -954,7 +963,7 @@ struct CabEntry {
     { "1x15",        N_("1x15"),              &static_cast<CabDesc&>(cab_data_1x15) },
     { "Mesa Boogie", N_("Mesa Boogie Style"), &static_cast<CabDesc&>(cab_data_mesa) },
     { "Briliant",    N_("Briliant"),          &static_cast<CabDesc&>(cab_data_briliant) },
-    { "Vitalize",     N_("Vitalize"),         &static_cast<CabDesc&>(cab_data_vitalize) },
+    { "Vitalize",    N_("Vitalize"),         &static_cast<CabDesc&>(cab_data_vitalize) },
     { "Charisma",    N_("Charisma"),          &static_cast<CabDesc&>(cab_data_charisma) },
 };
 static const unsigned int cab_table_size = sizeof(cab_table) / sizeof(cab_table[0]);
@@ -968,7 +977,7 @@ static CabEntry& getCabEntry(unsigned int n) {
 
 static const float no_sum = 1e10;
 
-#include "faust/cabinet_impulse_former.cc"
+#include "../../faust-generated/cabinet_impulse_former.cc"
 
 static int cab_load_ui(const UiBuilder& builder, int format) {
     if (format & UI_FORM_GLADE) {
@@ -998,7 +1007,7 @@ static int cab_load_ui(const UiBuilder& builder, int format) {
 
 }
 
-CabinetConvolver::CabinetConvolver(EngineControl& engine, sigc::slot<void> sync,
+CabinetConvolver::CabinetConvolver(EngineControl& engine, sigc::slot<void()> sync,
     gx_resample::BufferResampler& resamp):
     FixedBaseConvolver(engine, sync, resamp),
     current_cab(-1),
@@ -1045,7 +1054,7 @@ bool CabinetConvolver::do_update() {
 	smp.setup(sr, fact*sr);
 	impf.init(cab.ir_sr);
     }
-    float cab_irdata_c[cab.ir_count];
+	FLOAT_BUF(cab_irdata_c,cab.ir_count);
     impf.clear_state_f();
     impf.compute(cab.ir_count,cab.ir_data,cab_irdata_c);
     while (!conv.checkstate());
@@ -1086,7 +1095,7 @@ void CabinetConvolver::check_update() {
 
 void CabinetConvolver::run_cab_conf(int count, float *input0, float *output0, PluginDef *p) {
     CabinetConvolver& self = *static_cast<CabinetConvolver*>(p);
-	FAUSTFLOAT buf[self.smp.max_out_count(count)];
+	FAUSTFLOAT_BUF(buf,self.smp.max_out_count(count));
 	int ReCount = self.smp.up(count, output0, buf);
     if (!self.conv.compute(ReCount,buf)) {
 	self.engine.overload(EngineControl::ov_Convolver, "cab");
@@ -1105,7 +1114,7 @@ int CabinetConvolver::register_cab(const ParamReg& reg) {
 }
 
 //// STEREO /////
-#include "faust/cabinet_impulse_former_st.cc"
+#include "../../faust-generated/cabinet_impulse_former_st.cc"
 
 static int cab_load_stereo_ui(const UiBuilder& builder, int format) {
     if (format & UI_FORM_GLADE) {
@@ -1135,7 +1144,7 @@ static int cab_load_stereo_ui(const UiBuilder& builder, int format) {
 
 }
 
-CabinetStereoConvolver::CabinetStereoConvolver(EngineControl& engine, sigc::slot<void> sync,
+CabinetStereoConvolver::CabinetStereoConvolver(EngineControl& engine, sigc::slot<void()> sync,
     gx_resample::BufferResampler& resamp):
     FixedBaseConvolver(engine, sync, resamp),
     current_cab(-1),
@@ -1184,7 +1193,7 @@ bool CabinetStereoConvolver::do_update() {
 	smps.setup(sr, fact*sr);
 	impf.init(cab.ir_sr);
     }
-    float cab_irdata_c[cab.ir_count];
+    FLOAT_BUF(cab_irdata_c,cab.ir_count);
     impf.clear_state_f();
     impf.compute(cab.ir_count,cab.ir_data,cab_irdata_c);
     while (!conv.checkstate());
@@ -1225,8 +1234,8 @@ void CabinetStereoConvolver::check_update() {
 
 void CabinetStereoConvolver::run_cab_conf(int count, float *input0, float *input1, float *output0, float *output1, PluginDef *p) {
     CabinetStereoConvolver& self = *static_cast<CabinetStereoConvolver*>(p);
-	FAUSTFLOAT buf[self.smp.max_out_count(count)];
-	FAUSTFLOAT buf1[self.smps.max_out_count(count)];
+	FAUSTFLOAT_BUF(buf,self.smp.max_out_count(count));
+	FAUSTFLOAT_BUF(buf1,self.smps.max_out_count(count));
 	int ReCount = self.smp.up(count, output0, buf);
 	self.smps.up(count, output1, buf1);
     if (!self.conv.compute_stereo(ReCount,buf,buf1)) {
@@ -1291,7 +1300,7 @@ static PreEntry& getPreEntry(unsigned int n) {
     return pre_table[n];
 }
 
-#include "faust/preamp_impulse_former.cc"
+#include "../../faust-generated/preamp_impulse_former.cc"
 
 static int pre_load_ui(const UiBuilder& builder, int format) {
     if (format & UI_FORM_GLADE) {
@@ -1321,7 +1330,7 @@ static int pre_load_ui(const UiBuilder& builder, int format) {
 
 }
 
-PreampConvolver::PreampConvolver(EngineControl& engine, sigc::slot<void> sync,
+PreampConvolver::PreampConvolver(EngineControl& engine, sigc::slot<void()> sync,
     gx_resample::BufferResampler& resamp):
     FixedBaseConvolver(engine, sync, resamp),
     current_pre(-1),
@@ -1368,7 +1377,7 @@ bool PreampConvolver::do_update() {
 	smp.setup(sr, fact*sr);
 	impf.init(pre.ir_sr);
     }
-    float pre_irdata_c[pre.ir_count];
+	FLOAT_BUF(pre_irdata_c,pre.ir_count);
     impf.clear_state_f();
     impf.compute(pre.ir_count,pre.ir_data,pre_irdata_c);
     while (!conv.checkstate());
@@ -1409,7 +1418,7 @@ void PreampConvolver::check_update() {
 
 void PreampConvolver::run_pre_conf(int count, float *input0, float *output0, PluginDef *p) {
     PreampConvolver& self = *static_cast<PreampConvolver*>(p);
-	FAUSTFLOAT buf[self.smp.max_out_count(count)];
+	FAUSTFLOAT_BUF(buf,self.smp.max_out_count(count));
 	int ReCount = self.smp.up(count, output0, buf);
      if (!self.conv.compute(ReCount, buf)) {
 	self.engine.overload(EngineControl::ov_Convolver, "pre");
@@ -1428,7 +1437,7 @@ int PreampConvolver::register_pre(const ParamReg& reg) {
 }
 
 //// STEREO /////
-#include "faust/preamp_impulse_former_st.cc"
+#include "../../faust-generated/preamp_impulse_former_st.cc"
 
 static int pre_load_stereo_ui(const UiBuilder& builder, int format) {
     if (format & UI_FORM_GLADE) {
@@ -1458,7 +1467,7 @@ static int pre_load_stereo_ui(const UiBuilder& builder, int format) {
 
 }
 
-PreampStereoConvolver::PreampStereoConvolver(EngineControl& engine, sigc::slot<void> sync,
+PreampStereoConvolver::PreampStereoConvolver(EngineControl& engine, sigc::slot<void()> sync,
     gx_resample::BufferResampler& resamp):
     FixedBaseConvolver(engine, sync, resamp),
     current_pre(-1),
@@ -1507,7 +1516,7 @@ bool PreampStereoConvolver::do_update() {
 	smps.setup(sr, fact*sr);
 	impf.init(pre.ir_sr);
     }
-    float pre_irdata_c[pre.ir_count];
+	FLOAT_BUF(pre_irdata_c,pre.ir_count);
     impf.clear_state_f();
     impf.compute(pre.ir_count,pre.ir_data,pre_irdata_c);
     while (!conv.checkstate());
@@ -1548,8 +1557,8 @@ void PreampStereoConvolver::check_update() {
 
 void PreampStereoConvolver::run_pre_conf(int count, float *input0, float *input1, float *output0, float *output1, PluginDef *p) {
     PreampStereoConvolver& self = *static_cast<PreampStereoConvolver*>(p);
-	FAUSTFLOAT buf[self.smp.max_out_count(count)];
-	FAUSTFLOAT buf1[self.smps.max_out_count(count)];
+	FAUSTFLOAT_BUF(buf,self.smp.max_out_count(count));
+	FAUSTFLOAT_BUF(buf1,self.smps.max_out_count(count));
 	int ReCount = self.smp.up(count, output0, buf);
 	self.smps.up(count, output1, buf1);
     if (!self.conv.compute_stereo(ReCount,buf,buf1)) {
@@ -1573,9 +1582,9 @@ int PreampStereoConvolver::register_pre(const ParamReg& reg) {
  ** class ContrastConvolver
  */
 
-#include "faust/presence_level.cc"
+#include "../../faust-generated/presence_level.cc"
 
-ContrastConvolver::ContrastConvolver(EngineControl& engine, sigc::slot<void> sync,
+ContrastConvolver::ContrastConvolver(EngineControl& engine, sigc::slot<void()> sync,
     gx_resample::BufferResampler& resamp):
     FixedBaseConvolver(engine, sync, resamp),
     level(0),
@@ -1606,7 +1615,7 @@ bool ContrastConvolver::do_update() {
 	smp.setup(sr, fact*sr);
 	presl.init(contrast_ir_desc.ir_sr);
     }
-    float contrast_irdata_c[contrast_ir_desc.ir_count];
+	FLOAT_BUF(contrast_irdata_c,contrast_ir_desc.ir_count);
     presl.compute(contrast_ir_desc.ir_count,contrast_ir_desc.ir_data,contrast_irdata_c);
     while (!conv.checkstate());
     if (configure) {
@@ -1652,7 +1661,7 @@ int ContrastConvolver::register_con(const ParamReg& reg) {
 
 void ContrastConvolver::run_contrast(int count, float *input0, float *output0, PluginDef *p) {
     ContrastConvolver& self = *static_cast<ContrastConvolver*>(p);
-	FAUSTFLOAT buf[self.smp.max_out_count(count)];
+	FAUSTFLOAT_BUF(buf,self.smp.max_out_count(count));
 	int ReCount = self.smp.up(count, output0, buf);
     if (!self.conv.compute(ReCount,buf)) {
 	self.engine.overload(EngineControl::ov_Convolver, "contrast");
@@ -1666,7 +1675,7 @@ void ContrastConvolver::run_contrast(int count, float *input0, float *output0, P
  */
 Plugin Directout::directoutput = Plugin();
 
-Directout::Directout(EngineControl& engine_, sigc::slot<void> sync_) 
+Directout::Directout(EngineControl& engine_, sigc::slot<void()> sync_)
 	: PluginDef(), 
       outdata(0),
 	  engine(engine_),
@@ -1771,7 +1780,7 @@ void __rt_func Directout::compute_static(int count, FAUSTFLOAT *input0, FAUSTFLO
  ** class DrumSequencer
  */
 
-#include "faust/drumseq.cc"
+#include "../../faust-generated/drumseq.cc"
 
 
 float* Drumout::set = 0;
@@ -1821,7 +1830,7 @@ static const char* seq_groups[] = {
 	0
 };
 
-DrumSequencer::DrumSequencer(ParamMap& param_, EngineControl& engine_, sigc::slot<void> sync_)
+DrumSequencer::DrumSequencer(ParamMap& param_, EngineControl& engine_, sigc::slot<void()> sync_)
 	: PluginDef(), 
 	  Vectom(0),
 	  Vectom1(0),
@@ -2069,22 +2078,22 @@ int DrumSequencer::register_par(const ParamReg& reg)
 	kickp = SeqParameter::insert_param(param, "seq.sequencer.kick", &kickset);
 	tomp->signal_changed().connect(
 	sigc::hide(
-		sigc::mem_fun(this, &DrumSequencer::reset_tom)));
+		sigc::mem_fun(*this, &DrumSequencer::reset_tom)));
 	tomp1->signal_changed().connect(
 	sigc::hide(
-		sigc::mem_fun(this, &DrumSequencer::reset_tom1)));
+		sigc::mem_fun(*this, &DrumSequencer::reset_tom1)));
 	tomp2->signal_changed().connect(
 	sigc::hide(
-		sigc::mem_fun(this, &DrumSequencer::reset_tom2)));
+		sigc::mem_fun(*this, &DrumSequencer::reset_tom2)));
 	snarep->signal_changed().connect(
 	sigc::hide(
-		sigc::mem_fun(this, &DrumSequencer::reset_snare)));
+		sigc::mem_fun(*this, &DrumSequencer::reset_snare)));
 	hatp->signal_changed().connect(
 	sigc::hide(
-		sigc::mem_fun(this, &DrumSequencer::reset_hat)));
+		sigc::mem_fun(*this, &DrumSequencer::reset_hat)));
 	kickp->signal_changed().connect(
 	sigc::hide(
-		sigc::mem_fun(this, &DrumSequencer::reset_kick)));
+		sigc::mem_fun(*this, &DrumSequencer::reset_kick)));
 
 	drums.register_par(reg);
 	return 0;
@@ -2145,7 +2154,7 @@ bool smbPitchShift::setParameters(int sampleRate_)
     return true;
 }
 
-smbPitchShift::smbPitchShift(ParamMap& param_, EngineControl& engine_, sigc::slot<void> sync_):
+smbPitchShift::smbPitchShift(ParamMap& param_, EngineControl& engine_, sigc::slot<void()> sync_):
   PluginDef(),
   engine(engine_),
   mem_allocated(false),
@@ -2543,7 +2552,7 @@ int smbPitchShift::register_par(const ParamReg& reg)
     reg.registerVar("smbPitchShift.c", N_("middle treble"), "S", N_("Mid"), &c, 1.0, 0.0, 2.0, 0.01);
     reg.registerVar("smbPitchShift.d", N_("treble"), "S", N_("Hi"), &d, 1.0, 0.0, 2.0, 0.01);
     param["smbPitchShift.latency"].signal_changed_int().connect(
-        sigc::hide(sigc::mem_fun(this, &smbPitchShift::change_latency)));
+        sigc::hide(sigc::mem_fun(*this, &smbPitchShift::change_latency)));
     return 0;
 }
 

@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+
+  <?include GuitarixConfig.wxi ?>
+
+  <Product Name='$(var.ProductString)' Id='*' UpgradeCode='$(var.uguid)'
+    Language='1033' Codepage='1252' Version="$(var.ProductVersion)" Manufacturer='$(var.CompanyName)'>
+
+    <Package Id='*' Keywords='Installer'
+      Description="$(var.ProductString) $(var.ProductVersion) Installer"
+      Manufacturer='$(var.CompanyName)' InstallScope='perMachine'
+      InstallerVersion='200' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+
+    <Media Id='1' Cabinet='$(var.CabName).cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
+    <Property Id='DiskPrompt' Value="$(var.ProductString) Installer [1]" />
+	  <WixVariable Id="WixUILicenseRtf" Value="..\..\Data\License.rtf" />
+    <!--
+    <WixVariable Id="WixUIDialogBmp" Value="..\..\Data\$(var.ShortName)_bg.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="..\..\Data\$(var.ShortName)_hd.bmp" />
+    -->
+    <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
+
+    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+    <Upgrade Id="$(var.uguid)">
+      <UpgradeVersion
+         Minimum="0.0.0.0" Maximum="$(var.ProductVersion)"
+         Property="PREVIOUSVERSIONSINSTALLED"
+         IncludeMinimum="yes" IncludeMaximum="yes" />
+    </Upgrade>
+
+    <Property Id="INSTALLDIR64">
+      <RegistrySearch Id='RegistryPath64' Type='raw' Win64='yes' Root='HKLM' Key='Software\$(var.ConfName)\$(var.AppVerMajor)' Name='InstallDir'/>
+    </Property>
+    <Property Id="INSTALLDIR">
+      <RegistrySearch Id='RegistryPath' Type='raw' Win64='yes' Root='HKLM' Key='Software\$(var.ConfName)\$(var.AppVerMajor)' Name='InstallDir'/>
+    </Property>
+
+    <Property Id="VSTREGINSTALLDIR64">
+      <RegistrySearch Id='VSTRegistry64' Type='raw' Win64='yes' Root='HKLM' Key='Software\VST' Name='VSTPluginsPath' />
+    </Property>
+
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+      <Directory Id='ProgramFiles64Folder' Name='PFiles64'>
+        <Directory Id='INSTALLDIR64' Name='$(var.DisplayName)'>
+          <Component Id='Binaries64' Guid="$(var.fguidprefix)01" Win64='yes'>
+<!--            <File Source='..\..\..\output\Guitarix\x64\Release\$(var.ShortName).exe' KeyPath='yes'>
+              <Shortcut Id='standloneshortcut' Directory="ProgramMenuDir" Name="$(var.DisplayName)" WorkingDirectory='INSTALLDIR64' Advertise="yes" Icon="$(var.CabName).exe" IconIndex="0" />
+              <Shortcut Id='desktopshortcut' Directory="DesktopFolder" Name="$(var.DisplayName)" WorkingDirectory='INSTALLDIR64' Advertise="yes" Icon="$(var.CabName).exe" IconIndex="0" />
+            </File>-->
+            <File Source='..\..\..\output\Guitarix\x64\Release\$(var.ShortName)_VST3_Stub.vst3' />
+            <File Source='..\..\..\output\Guitarix\x64\Release\$(var.ShortName)VST.vst3' KeyPath='yes'/>
+            <File Source='..\..\Data\License.txt' />
+
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\boost_iostreams-vc143-mt-x64-1_79.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\bz2.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\charset-1.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\fftw3f.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\gio-2.0-0.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\giomm-2.68-1.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\glib-2.0-0.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\glibmm-2.68-1.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\gmodule-2.0-0.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\gobject-2.0-0.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\iconv-2.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\intl-8.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\libffi.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\liblzma.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\pcre.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\pthreadVC3.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\sigc-3.0.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\zlib1.dll' />
+            <File Source='..\..\..\library\vcpkg\installed\x64-windows\bin\zstd.dll' />
+
+            <File Source='..\..\..\library\msvc\vcruntime140.dll' />
+            <File Source='..\..\..\library\msvc\vcruntime140_1.dll' />
+            <File Source='..\..\..\library\msvc\msvcp140.dll' />
+            <File Source='..\..\..\library\msvc\msvcp140_1.dll' />
+            <File Source='..\..\..\library\msvc\ucrtbase.dll' />
+
+
+		    <File Id='UnRar' Name='unrar.exe' Source='unrar.exe' />
+            <File Id='DataRar' Name='guitarix.rar' Source='..\..\Data\guitarix.rar' />
+            <File Id='PresetsRar' Name='GuitarixPresetsVST.rar' Source='..\..\Data\GuitarixPresetsVST.rar' />
+
+            <RegistryValue Root='HKLM' Key='Software\$(var.ConfName)\$(var.AppVerMajor)' Name='InstallDir' Type='string' Value='[INSTALLDIR64]' />
+            <RegistryValue Root='HKLM' Key='Software\$(var.ConfName)\$(var.AppVerMajor)' Name='Version' Type='string' Value='$(var.ProductVersion)' />
+
+          </Component>
+          <Directory Id='gx_head' Name='gx_head'>
+            <Directory Id='factorysettings' Name='factorysettings'>
+              <Component Id='FactorySettings' Guid="$(var.fguidprefix)10" Win64='yes'>
+                <File Source='..\..\guitarix\factorysettings\jconv' KeyPath='yes'/>
+                <File Source='..\..\guitarix\factorysettings\brummer.gx' />
+                <File Source='..\..\guitarix\factorysettings\Sonnie_Tele.gx' />
+                <File Source='..\..\guitarix\factorysettings\univibe_mono' />
+                <File Source='..\..\guitarix\factorysettings\jconv_mono' />
+                <File Source='..\..\guitarix\factorysettings\mbcs' />
+                <File Source='..\..\guitarix\factorysettings\flanger_mono_gx' />
+                <File Source='..\..\guitarix\factorysettings\graphiceq' />
+                <File Source='..\..\guitarix\factorysettings\univibe' />
+                <File Source='..\..\guitarix\factorysettings\mbc' />
+                <File Source='..\..\guitarix\factorysettings\HarryVH.gx' />
+                <File Source='..\..\guitarix\factorysettings\dirlist.js' />
+              </Component>
+            </Directory>
+            <Directory Id='sounds' Name='sounds'>
+              <Component Id='Sounds' Guid="$(var.fguidprefix)11" Win64='yes'>
+                <File Source='..\..\guitarix\IR\greathall.wav' KeyPath='yes'/>
+              </Component>
+              <Directory Id='amps' Name='amps'>
+                <Component Id='SoundsAmps' Guid="$(var.fguidprefix)12" Win64='yes'>
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Cicognani Imperivm Luxury.wav' KeyPath='yes'/>
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Marshall JMP 2203  Jose Arredondo mod.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Splawn Quick Rod.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Taurus Stomphead.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Peavey Vypyr 15.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\LICENSE' Id='AmpLicense'/>
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Randall thrasher.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Engl Retro Tube.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Mesa Boogie Mark V.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\EVH 5150 III.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\DV Mark Triple 6.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Laney ironheart.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Krank Krankenstein.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Kaos Sludge 15.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\MakosampCustomHatred.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Randall Satan.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Splawn Nitro.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Engl Special Edition.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Fortin Natas.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Marshall MG 15.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Amps\Blackat Leon S7.wav' />
+                </Component>
+              </Directory>
+              <Directory Id='bands' Name='bands'>
+                <Component Id='SoundsBands' Guid="$(var.fguidprefix)13" Win64='yes'>
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\green day Dookie.wav' KeyPath='yes'/>
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Legion of the Damned Descent Into Chaos.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Divine Heresy bringer of Plagues.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Trivium In Waves.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Dark Tranquility Character.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Chimaira Ressurrection.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Paradise lost Tragic Idol.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Stratovarius legions.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Dream Theater Black Clouds &amp; Silver Linings.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Textures Silhouettes.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Sepultura Arise.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Slayer Christ illusion.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Dying Fetus War of Attrition.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\LICENSE' Id='BandsLicense'/>
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Firewind Days of Defiance.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Black dahlia murder Deflorate.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Machine head Through the ashes of empires.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Asking Alexandria Stand up and scream.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Overkill The Years of Decay.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Black label Society order of the Black.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Gojira L&apos;Enfant Sauvage.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Symphony X Iconoclast.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Deicide The Stench Of Redemption.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Kreator Violent Revolution.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Children of Bodom Are You Dead Yet.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Devildriver The last kind words.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Impending Doom The Serpent Servant.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Carnifex Until I feel nothing.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Manowar Battle Hymns MMXI.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Cannibal Corpse Vile.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Lamb of God Wrath.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Exploited beat the Bastards.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Bullet for my Valentine Temper Temper.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Fear Factory Demanufacture.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\System of a Down Toxicity.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Arch Enemy Doomsday Machine.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Red Fang Murder the Mountains.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Slypknot Iowa.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\NEWSTED.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Belphegor Bondage goat zombie.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\DAATH The Hinderers.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Soulfly Enslaved.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Papa roach Getting away with murder.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Vader Necropolis.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Dimmu Borgir Enthrone Darkness Triumphant.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Testament dark Roots of Earth.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Hexen Being and Nothingness.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Godsmack The Oracle.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Warcry Revolucion.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Mastodon Curl of the Burl.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Napalm Death Time Waits For No Slave.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Pan de Higo.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\The Sorrow  Misery Escape.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Hamlet Amnesia.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Hora Zulu Siempre.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Stone Sour House of Gold and Bones.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Killswitch Engage As Daylight Dies.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Down NOLA.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Evile FIVE SERPENT&apos;S TEETH.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\White Chappel Hate Creation.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Disturbed Indestructible.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Decapitated Carnival Is Forever.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Wayne Static Pighammer.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Avenged sevenfold Nightmare.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Pantera Vulgar display of power.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Helloween better than Raw.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\As I lay dying Awakened.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\In Flames Whoracle.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Exodus Exhibit B The Human Condition .wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\hatebreed The divinity of purpose.wav' />
+                  <File Source='..\..\guitarix\IR\BestPlugins_Bands\Megadeth Youthtanasia.wav' />
+                </Component>
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="CommonFiles64Folder" Name="CFiles">
+        <Directory Id="VST364" Name="VST3">
+          <Component Id='VST3STEINBERG64' Guid="$(var.fguidprefix)05" Win64='yes'>
+            <File Id='VST3STEINBERG64' Name='$(var.ShortName).vst3' Source='..\..\..\output\Guitarix\x64\Release\$(var.ShortName)_VST3_Stub.vst3' />
+          </Component>
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder" Name="Desktop" />
+
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="$(var.DisplayName)">
+          <Component Id="ProgramMenuDir" Guid="$(var.fguidprefix)0A">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\$(var.ConfName)' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+
+      <Directory Id="LocalAppDataFolder" Name="AppData">
+        <Directory Id="MyAppDirectory" Name="$(var.DisplayName)">
+          <Component Id="AppData" Guid="$(var.fguidprefix)0B">
+            <CreateFolder />
+            <RemoveFolder Id="RemoveMyAppDirectory" On="uninstall" />
+            <RegistryValue Root='HKCU' Key='Software\$(var.ConfName)' Type='string' Value='AppData' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+
+    </Directory>
+
+    <Feature Id='Bin64' Title='$(var.ConfName) 64-bit' Description='$(var.ConfName) x64 components' Level='1' ConfigurableDirectory='INSTALLDIR64'>
+      <ComponentRef Id='Binaries64' />
+      <ComponentRef Id='VST3STEINBERG64' />
+      <ComponentRef Id='ProgramMenuDir' />
+      <ComponentRef Id='FactorySettings' />
+      <ComponentRef Id='AppData' />
+      <ComponentRef Id='Sounds' />
+      <ComponentRef Id='SoundsAmps' />
+      <ComponentRef Id='SoundsBands' />
+    </Feature>
+
+    <CustomAction Id="UnRarData_Cmd" Property="UnRarData" Value='"[INSTALLDIR64]UnRar.exe" x -y "[INSTALLDIR64]guitarix.rar" "[LocalAppDataFolder]"' Execute="immediate" />
+    <CustomAction Id="UnRarData" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="check" Impersonate="no" />
+    <CustomAction Id="DeleteData_Cmd" Property="DeleteData" Value='"[SystemFolder]cmd.exe" /c del /q "[INSTALLDIR64]guitarix.rar"' Execute="immediate" />
+    <CustomAction Id="DeleteData" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="ignore" Impersonate="no"/>
+    <CustomAction Id="MkDirPresets_Cmd" Property="MkDirPresets" Value='"[SystemFolder]cmd.exe" /c mkdir "[CommonAppDataFolder]\VST3 Presets\Guitarix\Guitarix"' Execute="immediate" />
+    <CustomAction Id="MkDirPresets" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="ignore" Impersonate="no"/>
+    <CustomAction Id="UnRarPresets_Cmd" Property="UnRarPresets" Value='"[INSTALLDIR64]UnRar.exe" x -y "[INSTALLDIR64]GuitarixPresetsVST.rar" "[CommonAppDataFolder]\VST3 Presets\Guitarix\Guitarix"' Execute="immediate" />
+    <CustomAction Id="UnRarPresets" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="check" Impersonate="no" />
+    <CustomAction Id="DeletePresets_Cmd" Property="DeletePresets" Value='"[SystemFolder]cmd.exe" /c del /q "[INSTALLDIR64]GuitarixPresetsVST.rar"' Execute="immediate" />
+    <CustomAction Id="DeletePresets" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="ignore" Impersonate="no"/>
+    <CustomAction Id="DeleteUnrar_Cmd" Property="DeleteUnrar" Value='"[SystemFolder]cmd.exe" /c del /q "[INSTALLDIR64]unrar.exe"' Execute="immediate" />
+    <CustomAction Id="DeleteUnrar" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="ignore" Impersonate="no"/>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts Before="InstallInitialize" />
+
+      <Custom Action="UnRarData_Cmd" After="InstallFiles">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="UnRarData" After="UnRarData_Cmd">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="DeleteData_Cmd" After="UnRarData">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="DeleteData" After="DeleteData_Cmd">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+	  <Custom Action="MkDirPresets_Cmd" After="DeleteData">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="MkDirPresets" After="MkDirPresets_Cmd">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="UnRarPresets_Cmd" After="MkDirPresets">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="UnRarPresets" After="UnRarPresets_Cmd">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="DeletePresets_Cmd" After="UnRarPresets">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="DeletePresets" After="DeletePresets_Cmd">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="DeleteUnrar_Cmd" After="DeletePresets">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="DeleteUnrar" After="DeleteUnrar_Cmd">Not Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+    </InstallExecuteSequence>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR64" />
+    <UIRef Id="WixUI_InstallDir" />
+
+    <Icon Id="$(var.CabName).exe" SourceFile="..\..\..\output\Guitarix\x64\Release\$(var.ShortName).exe" />
+    <Property Id="ARPPRODUCTICON" Value="$(var.ShortName).exe" />
+  </Product>
+</Wix>

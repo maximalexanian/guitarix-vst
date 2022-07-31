@@ -37,10 +37,10 @@ SCapture::SCapture(EngineControl& engine_, int channel_)
       fRec0(0),
       fRec1(0),
       tape(fRec0),
-      m_pthr(0),
       keep_stream(false),
       mem_allocated(false),
       err(false) {
+	memset(&m_pthr, 0, sizeof(m_pthr));
     version = PLUGINDEF_VERSION;
     flags = PGN_NO_PRESETS;
     if (channel == 1) {
@@ -79,7 +79,8 @@ SCapture::~SCapture() {
 }
 
 inline std::string SCapture::get_ffilename() {
-    struct stat buffer;
+#ifndef _WINDOWS
+	struct stat buffer;
     struct stat sb;
     std::string pPath = getenv("HOME");
     is_wav = int(fformat) ? false : true;
@@ -106,6 +107,9 @@ inline std::string SCapture::get_ffilename() {
         i+=1;
     }
     return pPath+name;
+#else
+	return std::string("");
+#endif
 }
 
 void SCapture::disc_stream() {
@@ -718,8 +722,8 @@ const char *SCapture::glade_def = "\
               </packing>\n\
             </child>\n\
           </object>\n\
-          <packing>\n\
-            <property name=\"expand\">False</property>\n\
+          <packing>\n"
+"            <property name=\"expand\">False</property>\n\
             <property name=\"fill\">False</property>\n\
             <property name=\"position\">1</property>\n\
           </packing>\n\
@@ -1058,8 +1062,8 @@ const char *SCapture::glade_def_st = "\
               </packing>\n\
             </child>\n\
           </object>\n\
-          <packing>\n\
-            <property name=\"expand\">False</property>\n\
+          <packing>\n"
+"            <property name=\"expand\">False</property>\n\
             <property name=\"fill\">False</property>\n\
             <property name=\"position\">1</property>\n\
           </packing>\n\

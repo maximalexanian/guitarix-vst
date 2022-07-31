@@ -1,0 +1,83 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Guitarix_StandalonePlugin", "Guitarix_StandalonePlugin.vcxproj", "{E0683069-9327-CA55-88FE-E24739A1CA5D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838} = {0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}
+		{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3} = {F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Guitarix_VST3", "Guitarix_VST3.vcxproj", "{E11938CD-E60E-4A51-62E4-D2783CA7F29F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838} = {0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}
+		{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3} = {F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}
+		{49C141E3-2847-4CED-9DCA-9407CA333ADF} = {49C141E3-2847-4CED-9DCA-9407CA333ADF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Guitarix_SharedCode", "Guitarix_SharedCode.vcxproj", "{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Guitarix", "Guitarix.vcxproj", "{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Guitarix_VST3_Stub", "Guitarix_VST3_Stub.vcxproj", "{49C141E3-2847-4CED-9DCA-9407CA333ADF}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "GuitarixSetup", "GuitarixSetup.wixproj", "{29C95186-0DBC-49FA-925E-B5B91F02ED7A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E0683069-9327-CA55-88FE-E24739A1CA5D} = {E0683069-9327-CA55-88FE-E24739A1CA5D}
+		{E11938CD-E60E-4A51-62E4-D2783CA7F29F} = {E11938CD-E60E-4A51-62E4-D2783CA7F29F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0683069-9327-CA55-88FE-E24739A1CA5D}.Debug|x64.ActiveCfg = Debug|x64
+		{E0683069-9327-CA55-88FE-E24739A1CA5D}.Debug|x64.Build.0 = Debug|x64
+		{E0683069-9327-CA55-88FE-E24739A1CA5D}.Debug|x86.ActiveCfg = Debug|x64
+		{E0683069-9327-CA55-88FE-E24739A1CA5D}.Release|x64.ActiveCfg = Release|x64
+		{E0683069-9327-CA55-88FE-E24739A1CA5D}.Release|x64.Build.0 = Release|x64
+		{E0683069-9327-CA55-88FE-E24739A1CA5D}.Release|x86.ActiveCfg = Release|x64
+		{E11938CD-E60E-4A51-62E4-D2783CA7F29F}.Debug|x64.ActiveCfg = Debug|x64
+		{E11938CD-E60E-4A51-62E4-D2783CA7F29F}.Debug|x64.Build.0 = Debug|x64
+		{E11938CD-E60E-4A51-62E4-D2783CA7F29F}.Debug|x86.ActiveCfg = Debug|x64
+		{E11938CD-E60E-4A51-62E4-D2783CA7F29F}.Release|x64.ActiveCfg = Release|x64
+		{E11938CD-E60E-4A51-62E4-D2783CA7F29F}.Release|x64.Build.0 = Release|x64
+		{E11938CD-E60E-4A51-62E4-D2783CA7F29F}.Release|x86.ActiveCfg = Release|x64
+		{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}.Debug|x64.ActiveCfg = Debug|x64
+		{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}.Debug|x64.Build.0 = Debug|x64
+		{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}.Debug|x86.ActiveCfg = Debug|x64
+		{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}.Release|x64.ActiveCfg = Release|x64
+		{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}.Release|x64.Build.0 = Release|x64
+		{F186EFE0-A1B2-09A9-E35E-1A09D37ABFC3}.Release|x86.ActiveCfg = Release|x64
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}.Debug|x64.ActiveCfg = Debug|x64
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}.Debug|x64.Build.0 = Debug|x64
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}.Debug|x86.ActiveCfg = Debug|x64
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}.Debug|x86.Build.0 = Debug|x64
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}.Release|x64.ActiveCfg = Release|x64
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}.Release|x64.Build.0 = Release|x64
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}.Release|x86.ActiveCfg = Release|x64
+		{0A4EBFD1-5B39-42EE-9C0B-65911F1EB838}.Release|x86.Build.0 = Release|x64
+		{49C141E3-2847-4CED-9DCA-9407CA333ADF}.Debug|x64.ActiveCfg = Debug|x64
+		{49C141E3-2847-4CED-9DCA-9407CA333ADF}.Debug|x64.Build.0 = Debug|x64
+		{49C141E3-2847-4CED-9DCA-9407CA333ADF}.Debug|x86.ActiveCfg = Debug|x64
+		{49C141E3-2847-4CED-9DCA-9407CA333ADF}.Release|x64.ActiveCfg = Release|x64
+		{49C141E3-2847-4CED-9DCA-9407CA333ADF}.Release|x64.Build.0 = Release|x64
+		{49C141E3-2847-4CED-9DCA-9407CA333ADF}.Release|x86.ActiveCfg = Release|x64
+		{29C95186-0DBC-49FA-925E-B5B91F02ED7A}.Debug|x64.ActiveCfg = Guitarix|x64
+		{29C95186-0DBC-49FA-925E-B5B91F02ED7A}.Debug|x86.ActiveCfg = Guitarix|x64
+		{29C95186-0DBC-49FA-925E-B5B91F02ED7A}.Debug|x86.Build.0 = Guitarix|x64
+		{29C95186-0DBC-49FA-925E-B5B91F02ED7A}.Release|x64.ActiveCfg = Guitarix|x64
+		{29C95186-0DBC-49FA-925E-B5B91F02ED7A}.Release|x86.ActiveCfg = Guitarix|x64
+		{29C95186-0DBC-49FA-925E-B5B91F02ED7A}.Release|x86.Build.0 = Guitarix|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E38CA6C7-6226-4B7B-94B2-B3559A049145}
+	EndGlobalSection
+EndGlobal

@@ -687,8 +687,8 @@ const char *Dsp::glade_def = "\
                     </child>\n\
                   </object>\n\
                   <packing>\n\
-                    <property name=\"left_attach\">7</property>\n\
-                    <property name=\"right_attach\">8</property>\n\
+                    <property name=\"left_attach\">7</property>\n"
+"                    <property name=\"right_attach\">8</property>\n\
                     <property name=\"top_attach\">2</property>\n\
                     <property name=\"bottom_attach\">3</property>\n\
                   </packing>\n\
@@ -1009,8 +1009,8 @@ const char *Dsp::glade_def = "\
                 <child>\n\
                   <object class=\"GxValueDisplay\" id=\"gxvaluedisplay8\">\n\
                     <property name=\"visible\">True</property>\n\
-                    <property name=\"can_focus\">True</property>\n\
-                    <property name=\"receives_default\">True</property>\n\
+                    <property name=\"can_focus\">True</property>\n"
+"                    <property name=\"receives_default\">True</property>\n\
                     <property name=\"var_id\">eqs.freq4k</property>\n\
                   </object>\n\
                   <packing>\n\

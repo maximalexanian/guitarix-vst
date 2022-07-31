@@ -69,8 +69,8 @@ struct PluginChange {
 class GxEngine: public ModuleSequencer {
 private:
     gx_resample::BufferResampler resamp;
-    sigc::signal<void,Plugin*,PluginChange::pc> plugin_changed;
-    LadspaLoader ladspaloader;
+    sigc::signal<void (Plugin*,PluginChange::pc)> plugin_changed;
+    //LadspaLoader ladspaloader;
     void load_static_plugins();
 public:
     MidiControllerList controller_map;
@@ -96,9 +96,9 @@ public:
     PreampConvolver preamp;
     PreampStereoConvolver preamp_st;
     ContrastConvolver contrast;
-    LiveLooper loop;
-    SCapture record;
-    SCapture record_st;
+    //LiveLooper loop;//MAX
+    //SCapture record;//MAX
+    //SCapture record_st;//MAX
     DrumSequencer dseq;
     smbPitchShift detune;
     //
@@ -106,8 +106,8 @@ public:
     GxEngine(const string& plugin_dir, ParameterGroups& groups, const gx_system::CmdlineOptions& options);
     ~GxEngine();
     void set_jack(gx_jack::GxJack *jack) { midiaudiobuffer.set_jack(jack); }
-    void ladspaloader_update_plugins();
-    sigc::signal<void,Plugin*,PluginChange::pc>& signal_plugin_changed() { return plugin_changed; }
+//    void ladspaloader_update_plugins();
+    sigc::signal<void (Plugin*,PluginChange::pc)>& signal_plugin_changed() { return plugin_changed; }
 };
 
 /* ------------------------------------------------------------------- */

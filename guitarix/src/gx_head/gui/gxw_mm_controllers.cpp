@@ -27,7 +27,7 @@
 #include <string>
 
 #include "guitarix.h"
-#include <gtkmm/menu.h>
+//#include <gtkmm/menu.h>
 
 namespace gx_gui
 {

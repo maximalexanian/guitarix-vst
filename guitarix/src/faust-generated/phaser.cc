@@ -513,8 +513,8 @@ const char *Dsp::glade_def = "\
                               <object class=\"GxSmallKnobR\" id=\"gxsmallknob6\">\n\
                                 <property name=\"visible\">True</property>\n\
                                 <property name=\"can_focus\">True</property>\n\
-                                <property name=\"receives_default\">True</property>\n\
-                                <property name=\"var_id\">phaser.MinNotch1Freq</property>\n\
+                                <property name=\"receives_default\">True</property>\n"
+"                                <property name=\"var_id\">phaser.MinNotch1Freq</property>\n\
                                 <property name=\"label_ref\">label7:rack_label_inverse</property>\n\
                               </object>\n\
                               <packing>\n\

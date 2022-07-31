@@ -3,7 +3,7 @@
 
 #include "gx_faust_support.h"
 #include "gx_plugin.h"
-#include "ts9nonlin.h"
+#include "../ts9nonlin.h"
 
 namespace pluginlib {
 namespace ts9sim {
@@ -109,7 +109,7 @@ void Dsp::init_static(unsigned int samplingFreq, PluginDef *p)
 
 void always_inline Dsp::compute(int count, FAUSTFLOAT *input0, FAUSTFLOAT *output0)
 {
-	FAUSTFLOAT buf[smp.max_out_count(count)];
+	FAUSTFLOAT_BUF(buf,smp.max_out_count(count));
 	int ReCount = smp.up(count, input0, buf);
 	double fSlow0 = (1.0 / std::tan((fConst1 * double(fHslider0))));
 	double fSlow1 = (1.0 / (fSlow0 + 1.0));

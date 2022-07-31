@@ -16,10 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <dlfcn.h>
-#include <dirent.h>
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "engine.h"
+
+//#include <dlfcn.h>
+#include <dirent.h>
+
 
 namespace gx_engine {
 
@@ -216,6 +219,10 @@ static void delete_plugindef_instance(PluginDef *p) {
     delete p;
 }
 
+#ifdef __APPLE__
+#define _strdup strdup
+#endif
+
 Plugin::Plugin(gx_system::JsonParser& jp, ParamMap& pmap)
     : pdef(0),
       p_box_visible(0),
@@ -232,10 +239,10 @@ Plugin::Plugin(gx_system::JsonParser& jp, ParamMap& pmap)
 	    jp.read_kv("flags", p->flags)) {
 	} else if (jp.current_value() == "id") {
 	    jp.next(gx_system::JsonParser::value_string);
-	    p->id = strdup(jp.current_value().c_str());
+	    p->id = _strdup(jp.current_value().c_str());
 	} else if (jp.current_value() == "name") {
 	    jp.next(gx_system::JsonParser::value_string);
-	    p->name = strdup(jp.current_value().c_str());
+	    p->name = _strdup(jp.current_value().c_str());
 	} else if (jp.current_value() == "groups") {
 	    jp.next(gx_system::JsonParser::begin_array);
 	    std::vector<std::string> v;
@@ -247,18 +254,18 @@ Plugin::Plugin(gx_system::JsonParser& jp, ParamMap& pmap)
 	    const char **pg  = new const char*[v.size()+1];
 	    p->groups = pg;
 	    for (std::vector<std::string>::iterator i = v.begin(); i != v.end(); ++i) {
-		*pg++ = strdup(i->c_str());
+		*pg++ = _strdup(i->c_str());
 	    }
 	    *pg++ = 0;
 	} else if (jp.current_value() == "description") {
 	    jp.next(gx_system::JsonParser::value_string);
-	    p->description = strdup(jp.current_value().c_str());
+	    p->description = _strdup(jp.current_value().c_str());
 	} else if (jp.current_value() == "category") {
 	    jp.next(gx_system::JsonParser::value_string);
-	    p->category = strdup(jp.current_value().c_str());
+	    p->category = _strdup(jp.current_value().c_str());
 	} else if (jp.current_value() == "shortname") {
 	    jp.next(gx_system::JsonParser::value_string);
-	    p->shortname = strdup(jp.current_value().c_str());
+	    p->shortname = _strdup(jp.current_value().c_str());
 	}
     }
     jp.next(gx_system::JsonParser::end_object);
@@ -407,7 +414,8 @@ Plugin *PluginListBase::lookup_plugin(const std::string& id) const {
 }
 
 int PluginList::load_library(const string& path, PluginPos pos) {
-    void* handle = dlopen(path.c_str(), RTLD_LOCAL|RTLD_NOW);
+#if !defined(_WINDOWS) && !defined(__APPLE__)
+	void* handle = dlopen(path.c_str(), RTLD_LOCAL|RTLD_NOW);
     if (!handle) {
 	gx_print_error(
 	    _("Plugin Loader"),
@@ -440,6 +448,9 @@ int PluginList::load_library(const string& path, PluginPos pos) {
 	}
     }
     return cnt;
+#else
+	return 0;
+#endif
 }
 
 int PluginList::load_from_path(const string& path, PluginPos pos) {

@@ -438,8 +438,8 @@ void always_inline Dsp::compute(int count, FAUSTFLOAT *input0, FAUSTFLOAT *outpu
 {
 	double 	fSlowdw0 = (0.01 * fsliderdw0);
 	double 	fSlowdw1 = (1 - fSlowdw0);
-	FAUSTFLOAT 	dryinput[count];
-	memcpy(&dryinput, input0, count * sizeof(float));
+	FAUSTFLOAT_BUF(dryinput,count);
+	memcpy(dryinput, input0, count * sizeof(float));//MAX FIXED memcpy(&dryinput, input0, count * sizeof(float))
 
 	double fSlow0 = (0.00035000000000000032 * (double(fVslider0) + 0.01));
 	double fSlow1 = (0.0070000000000000062 * double(fVslider1));

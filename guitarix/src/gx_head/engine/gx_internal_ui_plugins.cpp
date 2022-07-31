@@ -69,10 +69,11 @@ MaxLevel::MaxLevel()
     activate_plugin = activate;
 }
 
-float MaxLevel::maxlevel[channelcount] = {0};
+//float MaxLevel::maxlevel[channelcount] = {0};
 
-void MaxLevel::process(int count, float *input1, float *input2, float*, float*, PluginDef*) {
-    const float *data[channelcount] = {input1, input2};
+void MaxLevel::process(int count, float *input1, float *input2, float*, float*, PluginDef* plugin) {
+	MaxLevel& self = *static_cast<MaxLevel*>(plugin);
+	const float *data[channelcount] = {input1, input2};
     assert(channelcount == 2);
     for (unsigned int c = 0; c < channelcount; c++) {
         float level = 0;
@@ -82,14 +83,15 @@ void MaxLevel::process(int count, float *input1, float *input2, float*, float*, 
                 level = t;
             }
         }
-        maxlevel[c] = max(maxlevel[c], level);
+		self.maxlevel[c] = max(self.maxlevel[c], level);
     }
 }
 
 int MaxLevel::activate(bool start, PluginDef *plugin) {
-    if (!start) {
+	MaxLevel& self = *static_cast<MaxLevel*>(plugin);
+	if (!start) {
 	for (unsigned int c = 0; c < channelcount; c++) {
-	    maxlevel[c] = 0;
+		self.maxlevel[c] = 0;
 	}
     }
     return 0;
@@ -104,7 +106,7 @@ TunerAdapter::TunerAdapter(ModuleSequencer& engine_)
     : ModuleSelector(engine_),
       PluginDef(),
       trackable(),
-      pitch_tracker(),
+      //pitch_tracker(),
       state(),
       engine(engine_),
       dep_plugin(),
@@ -125,7 +127,7 @@ void TunerAdapter::init(unsigned int samplingFreq, PluginDef *plugin) {
     int priority, policy;
     // zita-convoler uses 5 levels, so substract 6
     self.engine.get_sched_priority(policy, priority, 6);
-    self.pitch_tracker.init(policy, priority, samplingFreq);
+//    self.pitch_tracker.init(policy, priority, samplingFreq);
 }
 
 void TunerAdapter::set_and_check(int use, bool on) {
@@ -139,19 +141,19 @@ void TunerAdapter::set_and_check(int use, bool on) {
 	engine.set_rack_changed();
     }
     if (use == switcher_use) {
-	pitch_tracker.set_fast_note_detection(on);
+//	pitch_tracker.set_fast_note_detection(on);
     }
 }
 
 int TunerAdapter::activate(bool start, PluginDef *plugin) {
     if (!start) {
-	static_cast<TunerAdapter*>(plugin)->pitch_tracker.reset();
+//	static_cast<TunerAdapter*>(plugin)->pitch_tracker.reset();
     }
     return 0;
 }
 
 void TunerAdapter::feed_tuner(int count, float* input, float*, PluginDef* plugin) {
-    static_cast<TunerAdapter*>(plugin)->pitch_tracker.add(count, input);
+//    static_cast<TunerAdapter*>(plugin)->pitch_tracker.add(count, input);
 }
 
 int TunerAdapter::regparam(const ParamReg& reg) {
@@ -176,7 +178,9 @@ OscilloscopeAdapter::OscilloscopeAdapter(ModuleSequencer& engine)
       mul_buffer(1),
       plugin(),
       activation(),
-      size_change()
+      size_change(),
+	  buffer(0),
+	  size(0)
 {
     assert(buffer == 0);
     version = PLUGINDEF_VERSION;
@@ -209,19 +213,21 @@ void OscilloscopeAdapter::change_buffersize(unsigned int size_) {
     delete b;
 }
 
-float* OscilloscopeAdapter::buffer = 0;
-unsigned int OscilloscopeAdapter::size = 0;
+//MAX
+//float* OscilloscopeAdapter::buffer = 0;
+//unsigned int OscilloscopeAdapter::size = 0;
 
 // rt process function
 void OscilloscopeAdapter::fill_buffer(int count, float *input0, float *output0, PluginDef *p) {
-    OscilloscopeAdapter& self = *static_cast<OscilloscopeAdapter*>(p);
-    if (count*self.mul_buffer != static_cast<int>(size)) {
+   OscilloscopeAdapter& self = *static_cast<OscilloscopeAdapter*>(p);
+
+    if (count*self.mul_buffer != static_cast<int>(self.size)) {
 	return;
     }
     if (self.mul_buffer > 1) {
-	(void)memmove(buffer, &buffer[count], sizeof(float)*count*(self.mul_buffer-1));
+	(void)memmove(self.buffer, &self.buffer[count], sizeof(float)*count*(self.mul_buffer-1));
     }
-    (void)memcpy(&buffer[count*(self.mul_buffer-1)], output0, sizeof(float)*count);
+    (void)memcpy(&self.buffer[count*(self.mul_buffer-1)], output0, sizeof(float)*count);
 }
 
 int OscilloscopeAdapter::activate(bool start, PluginDef *plugin) {

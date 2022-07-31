@@ -25,15 +25,14 @@
 
 #include "guitarix.h"       // NOLINT
 
-#include <gtkmm/main.h>     // NOLINT
-#include <gxwmm/init.h>     // NOLINT
+//#include <gtkmm/main.h>     // NOLINT
+//#include <gxwmm/init.h>     // NOLINT
 #include <string>           // NOLINT
 #include "jsonrpc.h"
 
 #ifdef HAVE_AVAHI
 #include "avahi_discover.h"
 #endif
-
 
 /****************************************************************
  ** class PosixSignals
@@ -42,7 +41,7 @@
  ** Blocking is inherited by all threads created after an
  ** instance of PosixSignals
  */
-
+/*
 class PosixSignals {
 private:
     sigset_t waitset;
@@ -69,10 +68,7 @@ PosixSignals::PosixSignals(bool gui_)
       exit(false) {
     GxExit::get_instance().set_ui_thread();
     sigemptyset(&waitset);
-    /* ----- block signal USR1 ---------
-    ** inherited by all threads which are created later
-    ** signals are processed synchronously by signal_helper_thread
-    */
+    
     sigaddset(&waitset, SIGUSR1);
     sigaddset(&waitset, SIGCHLD);
     sigaddset(&waitset, SIGINT);
@@ -207,13 +203,13 @@ void PosixSignals::signal_helper_thread() {
         }
     }
 }
-
+*/
 
 /****************************************************************
  ** class ErrorPopup
  ** show UI popup for kError messages
  */
-
+/*
 class ErrorPopup {
 private:
     Glib::ustring msg;
@@ -281,8 +277,8 @@ void ErrorPopup::show_msg() {
     align->set_padding(50,20,0,10);
     Gtk::VBox *vbox = dynamic_cast<Gtk::VBox *>(dialog->get_child());
     vbox->set_redraw_on_allocate(true);
-    g_signal_connect(GTK_WIDGET(vbox->gobj()), "expose-event",
-                     G_CALLBACK(gx_cairo::error_box_expose), NULL);
+ //   g_signal_connect(GTK_WIDGET(vbox->gobj()), "expose-event",
+ //                    G_CALLBACK(gx_cairo::error_box_expose), NULL);
    // vbox->signal_expose_event().connect(
 	//sigc::group(&gx_cairo::error_box_expose,GTK_WIDGET(vbox->gobj()),sigc::_1,(void*)0),false);
     dialog->set_title(_("GUITARIX ERROR"));
@@ -290,12 +286,12 @@ void ErrorPopup::show_msg() {
 	sigc::mem_fun(*this, &ErrorPopup::on_response));
     dialog->show();
 }
-
+*/
 /****************************************************************
  ** class GxSplashBox
  ** show splash screen at start up
  */
-
+/*
 class GxSplashBox: public Gtk::Window {
  public:
     explicit GxSplashBox();
@@ -309,8 +305,8 @@ GxSplashBox::GxSplashBox()
     : Gtk::Window(Gtk::WINDOW_POPUP) {
     set_redraw_on_allocate(true);
     set_app_paintable();
-    g_signal_connect(GTK_WIDGET(gobj()), "expose-event",
-                     G_CALLBACK(gx_cairo::splash_expose), NULL);
+//    g_signal_connect(GTK_WIDGET(gobj()), "expose-event",
+//                     G_CALLBACK(gx_cairo::splash_expose), NULL);
     //signal_expose_event().connect(
     //    sigc::group(&gx_cairo::splash_expose, GTK_WIDGET(gobj()),
 	//	    sigc::_1, (void*)0), false);
@@ -330,7 +326,7 @@ void GxSplashBox::on_show() {
     while(Gtk::Main::events_pending())
         Gtk::Main::iteration(false); 
 }
-
+*/
 /****************************************************************
  ** main()
  */
@@ -366,11 +362,123 @@ static void null_handler(const char *log_domain, GLogLevelFlags log_level,
 }
 #endif
 
+//static Glib::Thread *mlthread;
+/*
+	mainloop->quit();
+	mlthread->join();
+	mlthread = 0;
+	*/
+
+volatile bool sInited = false;
+
+void run_mainloop() {
+	Glib::RefPtr<Glib::MainLoop> mainloop(Glib::MainLoop::create(/*Glib::MainContext::create()*/));
+	while (!sInited);
+	mainloop->run();
+}
+
+/*
+gpointer event_loop_thread(gpointer arg)
+{
+	gx_engine::GxMachine* machine = (gx_engine::GxMachine*)arg;
+	Glib::RefPtr<Glib::MainLoop> loop = Glib::MainLoop::create();
+	int port = options.get_rpcport();
+	if (port == RPCPORT_DEFAULT) {
+		port = 7000;
+	}
+
+	if (port != RPCPORT_NONE) {
+		machine->start_socket(sigc::mem_fun(loop.operator->(), &Glib::MainLoop::quit), options.get_rpcaddress(), port);
+		loop->run();
+	}
+
+	return NULL;
+}
+*/
+
+static gx_system::CmdlineOptions *options = 0;
+static volatile int opt_counter=0;
+
+namespace gx_jack { class GxJack; }
+gx_jack::GxJack* gx_start(int argc, char *argv[], gx_engine::GxMachine*& machine) {
+
+    Glib::init();
+    Gio::init();
+	
+	std::locale::global(std::locale("C"));
+
+    opt_counter++;
+    if(options==0)
+        options=new gx_system::CmdlineOptions(argc>=1?argv[0]:"");
+	//TODO MAX: make it multi-instance savvy
+    //MAX 220511 part of the work was done
+
+	machine = 0;
+
+	//   PosixSignals posixsig(false); // catch unix signals in special thread
+	options->parse(argc, argv);
+	options->process(argc, argv);
+	// ---------------- Check for working user directory  -------------
+	bool need_new_preset;
+	if (gx_preset::GxSettings::check_settings_dir(*options, &need_new_preset)) {
+		cerr <<
+			_("old config directory found (.gx_head)."
+				" state file and standard presets file have been copied to"
+				" the new directory (.config/guitarix).\n"
+				" Additional old preset files can be imported into the"
+				" new bank scheme by mouse drag and drop with a file"
+				" manager");
+		return 0;
+	}
+
+	machine=new gx_engine::GxMachine(*options);
+
+	//machine->loadstate();
+	gx_jack::GxJack *jack = machine->get_jack();
+/*	if (!jack->gx_jack_connection(true, true, 0, options)) {
+		cerr << "can't connect to jack\n";
+		return 0;
+	}*/
+	if (need_new_preset) {
+		machine->create_default_scratch_preset();
+	}
+
+	//machine->loadstate();
+
+	//g_thread_new(NULL, event_loop_thread, (gpointer)machine);
+	//mlthread = Glib::Thread::create(sigc::ptr_fun(run_mainloop), true);
+
+	return jack;
+}
+
+void gx_inited()
+{
+	sInited = true;
+}
+
+void gx_load_preset(gx_engine::GxMachine* machine, const char* bank_, const char* name_)
+{
+	Glib::ustring bank(bank_);
+	Glib::ustring name(name_);
+	gx_system::PresetFileGui *cpf = 0;
+	cpf = machine->get_bank_file(bank);
+	machine->load_preset(cpf, name);
+}
+
+void gx_stop(gx_engine::GxMachine* machine)
+{
+	delete machine;
+    opt_counter--;
+	if (opt_counter==0 && options)
+        {delete options; options = 0;}
+}
+
+/*
 static void mainHeadless(int argc, char *argv[]) {
     Glib::init();
     Gio::init();
 
-    PosixSignals posixsig(false); // catch unix signals in special thread
+ //   PosixSignals posixsig(false); // catch unix signals in special thread
     gx_system::CmdlineOptions options;
     options.parse(argc, argv);
     options.process(argc, argv);
@@ -417,8 +525,9 @@ static void mainHeadless(int argc, char *argv[]) {
     } else {
 	loop->run();
     }
-    gx_child_process::childprocs.killall();
+//    gx_child_process::childprocs.killall();
 }
+*/
 
 static void exception_handler() {
     try {
@@ -453,12 +562,12 @@ static void exception_handler() {
 	gx_print_fatal(_("Guitarix fatal error"),_("unknown error"));
     }
 }
-
+/*
 static void mainGtk(int argc, char *argv[]) {
     Glib::init();
     Gxw::init();
 
-    PosixSignals posixsig(true); // catch unix signals in special thread
+//    PosixSignals posixsig(true); // catch unix signals in special thread
     Glib::add_exception_handler(sigc::ptr_fun(exception_handler));
     gx_system::CmdlineOptions options;
     Gtk::Main main(argc, argv, options);
@@ -510,12 +619,14 @@ static void mainGtk(int argc, char *argv[]) {
     gui.run();
     gx_child_process::childprocs.killall();
 }
+*/
 
+/*
 static void mainFront(int argc, char *argv[]) {
     Glib::init();
     Gxw::init();
 
-    PosixSignals posixsig(true); // catch unix signals in special thread
+//    PosixSignals posixsig(true); // catch unix signals in special thread
     Glib::add_exception_handler(sigc::ptr_fun(exception_handler));
     gx_system::CmdlineOptions options;
     Gtk::Main main(argc, argv, options);
@@ -586,6 +697,7 @@ static void mainFront(int argc, char *argv[]) {
     gui.run();
 }
 
+
 static bool is_headless(int argc, char *argv[]) {
     for (int i = 0; i < argc; ++i) {
 	if (strcmp(argv[i], "-N") == 0 || strcmp(argv[i], "--nogui") == 0) {
@@ -622,15 +734,17 @@ int main(int argc, char *argv[]) {
 	    Glib::thread_init();
 	}
 #endif
-	if (is_headless(argc, argv)) {
+	if (1)//is_headless(argc, argv)) 
+	{
 	    mainHeadless(argc, argv);
 	} else if (is_frontend(argc, argv)) {
-	    mainFront(argc, argv);
+//	    mainFront(argc, argv);
 	} else {
-	    mainGtk(argc, argv);
+//	    mainGtk(argc, argv);
 	}
     } catch (...) {
 	exception_handler();
     }
     return 0;
 }
+*/

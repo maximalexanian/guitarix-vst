@@ -37,7 +37,7 @@ class UnitRacks {
 public:
     std::vector<std::string> mono;
     std::vector<std::string> stereo;
-    sigc::signal<void,bool> rack_unit_order_changed;
+    sigc::signal<void (bool)> rack_unit_order_changed;
     UnitRacks() { mono.push_back("ampstack"); }
 };
 
@@ -185,7 +185,7 @@ public:
     void plugin_preset_list_remove(const PluginDef *pdef, const Glib::ustring& name);
     void create_default_scratch_preset();
     std::vector<std::string>& get_rack_unit_order(bool stereo) { return stereo ? rack_units.stereo : rack_units.mono; }
-    sigc::signal<void,bool>& signal_rack_unit_order_changed() { return rack_units.rack_unit_order_changed; }
+    sigc::signal<void (bool)>& signal_rack_unit_order_changed() { return rack_units.rack_unit_order_changed; }
     bool remove_rack_unit(const std::string& unit, bool stereo);
     void insert_rack_unit(const std::string& unit, const std::string& before, bool stereo);
     Glib::RefPtr<Gio::File> uri_to_name_filename(const Glib::ustring& uri, Glib::ustring& name, std::string& filename);

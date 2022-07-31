@@ -1508,8 +1508,8 @@ const char *Dsp::glade_def = "\
                             <property name=\"receives_default\">True</property>\n\
                             <property name=\"var_id\">graphiceq.g5</property>\n\
                           </object>\n\
-                          <packing>\n\
-                            <property name=\"expand\">True</property>\n\
+                          <packing>\n"
+"                            <property name=\"expand\">True</property>\n\
                             <property name=\"fill\">True</property>\n\
                             <property name=\"position\">1</property>\n\
                           </packing>\n\
@@ -1820,8 +1820,8 @@ const char *Dsp::glade_def = "\
                           </object>\n\
                           <packing>\n\
                             <property name=\"expand\">True</property>\n\
-                            <property name=\"fill\">True</property>\n\
-                            <property name=\"position\">1</property>\n\
+                            <property name=\"fill\">True</property>\n"
+"                            <property name=\"position\">1</property>\n\
                           </packing>\n\
                         </child>\n\
                       </object>\n\

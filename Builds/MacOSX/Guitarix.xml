@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<installer-gui-script minSpecVersion="1">
+    <title>Guitarix.vst virtual guitar amplifier</title>
+    <license file="License.rtf"/>
+    <pkg-ref id="com.guitarix.guitarix.pkg"/>
+    <options customize="never" require-scripts="false"/>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.guitarix.guitarix.pkg"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.guitarix.guitarix.pkg" visible="false">
+        <pkg-ref id="com.guitarix.guitarix.pkg"/>
+    </choice>
+    <pkg-ref id="com.guitarix.guitarix.pkg" version="1.0" onConclusion="none">GuitarixVST3.pkg</pkg-ref>
+</installer-gui-script>

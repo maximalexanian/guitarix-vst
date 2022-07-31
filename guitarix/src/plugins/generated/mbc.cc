@@ -918,8 +918,8 @@ const char *Dsp::glade_def = "\
                         </child>\n\
                       </object>\n\
                     </child>\n\
-                    <child type=\"tab\">\n\
-                      <object class=\"GtkLabel\" id=\"label1\">\n\
+                    <child type=\"tab\">\n"/*
+"                      <object class=\"GtkLabel\" id=\"label1\">\n\
                         <property name=\"visible\">True</property>\n\
                         <property name=\"can_focus\">False</property>\n\
                         <property name=\"label\" translatable=\"yes\">Band 1</property>\n\
@@ -1178,8 +1178,8 @@ const char *Dsp::glade_def = "\
                                 <property name=\"receives_default\">True</property>\n\
                                 <property name=\"var_id\">mbc.Release2</property>\n\
                               </object>\n\
-                              <packing>\n\
-                                <property name=\"left_attach\">3</property>\n\
+                              <packing>\n"
+"                                <property name=\"left_attach\">3</property>\n\
                                 <property name=\"right_attach\">4</property>\n\
                               </packing>\n\
                             </child>\n\
@@ -1442,8 +1442,8 @@ const char *Dsp::glade_def = "\
                                 <property name=\"receives_default\">True</property>\n\
                                 <property name=\"var_id\">mbc.crossover_b2_b3</property>\n\
                               </object>\n\
-                              <packing>\n\
-                                <property name=\"left_attach\">1</property>\n\
+                              <packing>\n"
+"                                <property name=\"left_attach\">1</property>\n\
                                 <property name=\"right_attach\">2</property>\n\
                                 <property name=\"top_attach\">1</property>\n\
                                 <property name=\"bottom_attach\">2</property>\n\
@@ -1705,8 +1705,8 @@ const char *Dsp::glade_def = "\
                               <object class=\"GtkLabel\" id=\"label_26:rack_label\">\n\
                                 <property name=\"visible\">True</property>\n\
                                 <property name=\"can_focus\">False</property>\n\
-                                <property name=\"xalign\">1</property>\n\
-                                <property name=\"label\" translatable=\"yes\">Rel</property>\n\
+                                <property name=\"xalign\">1</property>\n"
+"                                <property name=\"label\" translatable=\"yes\">Rel</property>\n\
                               </object>\n\
                               <packing>\n\
                                 <property name=\"left_attach\">2</property>\n\
@@ -1931,8 +1931,8 @@ const char *Dsp::glade_def = "\
                               </object>\n\
                               <packing>\n\
                                 <property name=\"left_attach\">1</property>\n\
-                                <property name=\"right_attach\">2</property>\n\
-                              </packing>\n\
+                                <property name=\"right_attach\">2</property>\n"
+"                              </packing>\n\
                             </child>\n\
                             <child>\n\
                               <object class=\"GtkLabel\" id=\"label_32:rack_label\">\n\
@@ -2173,7 +2173,7 @@ const char *Dsp::glade_def = "\
     </child>\n\
   </object>\n\
 </interface>\n\
-";
+"*/;
 
 inline int Dsp::load_ui_f(const UiBuilder& b, int form)
 {

@@ -34,7 +34,7 @@ namespace gx_child_process {
 
 class GxChild {
  public:
-    sigc::signal<void, bool> terminated;
+    sigc::signal<void (bool)> terminated;
     bool kill();
     bool hasPid(pid_t pid) { return pid == m_pid; }
     bool hasName(string name) { return name == m_name; }
@@ -92,7 +92,7 @@ class JackCapture: public sigc::trackable {
     static void stop();
 };
 #endif
-
+/*
 class Meterbridge: public sigc::trackable {
  private:
     Glib::RefPtr<Gtk::ToggleAction> action;
@@ -102,7 +102,7 @@ class Meterbridge: public sigc::trackable {
     static void start_stop(Glib::RefPtr<Gtk::ToggleAction>& action, gx_jack::GxJack& jack);
     static void stop();
 };
-
+*/
 /* -------------------------------------------------------------------------- */
 } /* end of gx_child_process namespace */
 #endif  // SRC_HEADERS_GX_CHILD_PROCESS_H_

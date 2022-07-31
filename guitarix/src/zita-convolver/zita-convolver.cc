@@ -18,13 +18,16 @@
 // ----------------------------------------------------------------------------
 
 
-#include <unistd.h>
+//#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include "zita-convolver.h"
 
 
+#ifdef _WINDOWS
+#define free _aligned_free
+#endif
 
 int zita_convolver_major_version (void)
 {
@@ -323,6 +326,14 @@ int Convproc::stop_process (void)
     return 0;
 }
 
+#ifdef _WINDOWS
+#include <chrono>
+#include <thread>
+#undef _stat
+#define usleep(x) std::this_thread::sleep_for(std::chrono::microseconds(x))
+#else
+#include <unistd.h>
+#endif
 
 int Convproc::cleanup (void)
 {
@@ -331,7 +342,7 @@ int Convproc::cleanup (void)
     while (! check_stop ())
     {
         usleep (100000);
-    }
+	}
     if (_state != ST_STOP)
     {
         return Converror::BAD_STATE;
@@ -390,16 +401,15 @@ void Convproc::print (FILE *F)
 }
 
 
-
+#ifdef ENABLE_VECTOR_MODE
 typedef float FV4 __attribute__ ((vector_size(16)));
-
+#endif
 
 Convlevel::Convlevel (void) :
     _stat (ST_IDLE),
     _npar (0),
     _parsize (0),
     _options (0),
-    _pthr (0),
     _inp_list (0),
     _out_list (0),
     _plan_r2c (0),
@@ -408,6 +418,7 @@ Convlevel::Convlevel (void) :
     _prep_data (0),
     _freq_data (0)
 {
+	//_pthr.p=0;
 }
 
 
@@ -417,13 +428,17 @@ Convlevel::~Convlevel (void)
     cleanup ();
 }
 
-
 void *Convlevel::alloc_aligned (size_t size)
 {
     void *p;
 
-    if (posix_memalign (&p, 16, size)) throw (Converror (Converror::MEM_ALLOC));
-    memset (p, 0, size);
+#ifdef _WINDOWS
+	p = _aligned_malloc(size, 16);
+	if (!p) throw (Converror (Converror::MEM_ALLOC));
+#else
+	if (posix_memalign (&p, 16, size)) throw (Converror (Converror::MEM_ALLOC));
+#endif
+	memset (p, 0, size);
     return p;
 }
 
@@ -618,7 +633,7 @@ void Convlevel::start (int abspri, int policy)
     pthread_attr_t     attr;
     struct sched_param parm;
 
-    _pthr = 0;
+    //_pthr.p = 0;
     min = sched_get_priority_min (policy);
     max = sched_get_priority_max (policy);
     abspri += _prio;
@@ -719,9 +734,9 @@ void Convlevel::main (void)
 	if (_stat == ST_TERM)
 	{
             _stat = ST_IDLE;
-	    _pthr = 0;
+	    //_pthr.p = 0;
             return;
-        }
+    }
 	process (false);
 	_done.post ();
     }

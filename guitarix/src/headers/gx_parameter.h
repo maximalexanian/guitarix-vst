@@ -205,10 +205,10 @@ public:
     BoolParameter& getBool();
     FileParameter &getFile();
     StringParameter &getString();
-    sigc::signal<void, float>& signal_changed_float();
-    sigc::signal<void, int>& signal_changed_int();
-    sigc::signal<void, bool>& signal_changed_bool();
-    sigc::signal<void, const Glib::ustring&>& signal_changed_string();
+    sigc::signal<void (float)>& signal_changed_float();
+    sigc::signal<void (int)>& signal_changed_int();
+    sigc::signal<void (bool)>& signal_changed_bool();
+    sigc::signal<void (const Glib::ustring&)>& signal_changed_string();
 };
 
 #ifndef NDEBUG
@@ -237,7 +237,7 @@ protected:
     float *value;
     float std_value;
     float lower, upper, step;
-    sigc::signal<void, float> changed;
+    sigc::signal<void (float)> changed;
     float value_storage;
     friend class ParamRegImpl;
 public:
@@ -268,7 +268,7 @@ public:
     ~ParameterV();
     ParameterV(gx_system::JsonParser& jp);
     virtual void serializeJSON(gx_system::JsonWriter& jw);
-    sigc::signal<void, float>& signal_changed() { return changed; }
+    sigc::signal<void (float)>& signal_changed() { return changed; }
 };
 
 /****************************************************************/
@@ -299,7 +299,7 @@ protected:
     int *value;
     int std_value;
     int lower, upper;
-    sigc::signal<void, int> changed;
+    sigc::signal<void (int)> changed;
     int value_storage;
 public:
     bool set(int val) const;
@@ -323,7 +323,7 @@ public:
     ~ParameterV();
     ParameterV(gx_system::JsonParser& jp);
     virtual void serializeJSON(gx_system::JsonWriter& jw);
-    sigc::signal<void, int>& signal_changed() { return changed; }
+    sigc::signal<void (int)>& signal_changed() { return changed; }
 };
 
 /****************************************************************/
@@ -354,7 +354,7 @@ protected:
     bool json_value;
     bool *value;
     bool std_value;
-    sigc::signal<void, bool> changed;
+    sigc::signal<void (bool)> changed;
     bool value_storage;
 public:
     bool set(bool val) const;
@@ -374,7 +374,7 @@ public:
     ~ParameterV();
     ParameterV(gx_system::JsonParser& jp);
     virtual void serializeJSON(gx_system::JsonWriter& jw);
-    sigc::signal<void, bool>& signal_changed() { return changed; }
+    sigc::signal<void (bool)>& signal_changed() { return changed; }
 };
 
 /****************************************************************/
@@ -386,9 +386,9 @@ protected:
     Glib::RefPtr<Gio::File> value;
     Glib::RefPtr<Gio::File> std_value;
     Glib::RefPtr<Gio::File> json_value;
-    sigc::signal<void> changed;
+    sigc::signal<void()> changed;
 public:
-    sigc::signal<void>& signal_changed() { return changed; }
+    sigc::signal<void ()>& signal_changed() { return changed; }
     bool set(const Glib::RefPtr<Gio::File>& val);
     void set_path(const string& path);
     const Glib::RefPtr<Gio::File>& get() const { return value; }
@@ -426,7 +426,7 @@ protected:
     Glib::ustring json_value;
     Glib::ustring *value;
     Glib::ustring std_value;
-    sigc::signal<void, const Glib::ustring&> changed;
+    sigc::signal<void (const Glib::ustring&)> changed;
     Glib::ustring value_storage;
 public:
     bool set(const Glib::ustring& val) const;
@@ -444,7 +444,7 @@ public:
     ~ParameterV();
     ParameterV(gx_system::JsonParser& jp);
     virtual void serializeJSON(gx_system::JsonWriter& jw);
-    sigc::signal<void, const Glib::ustring&>& signal_changed() { return changed; }
+    sigc::signal<void (const Glib::ustring&)>& signal_changed() { return changed; }
 };
 
 
@@ -481,25 +481,25 @@ inline StringParameter &Parameter::getString() {
     return static_cast<StringParameter&>(*this);
 }
 
-inline sigc::signal<void, float>& Parameter::signal_changed_float() {
+inline sigc::signal<void (float)>& Parameter::signal_changed_float() {
     FloatParameter *p = dynamic_cast<FloatParameter*>(this);
     assert(p);
     return p->signal_changed();
 }
 
-inline sigc::signal<void, int>& Parameter::signal_changed_int() {
+inline sigc::signal<void (int)>& Parameter::signal_changed_int() {
     IntParameter *p = dynamic_cast<IntParameter*>(this);
     assert(p);
     return p->signal_changed();
 }
 
-inline sigc::signal<void, bool>& Parameter::signal_changed_bool() {
+inline sigc::signal<void (bool)>& Parameter::signal_changed_bool() {
     BoolParameter *p = dynamic_cast<BoolParameter*>(this);
     assert(p);
     return p->signal_changed();
 }
 
-inline sigc::signal<void, const Glib::ustring&>& Parameter::signal_changed_string() {
+inline sigc::signal<void (const Glib::ustring&)>& Parameter::signal_changed_string() {
     StringParameter *p = dynamic_cast<StringParameter*>(this);
     assert(p);
     return p->signal_changed();
@@ -514,7 +514,7 @@ class ParamMap: boost::noncopyable {
  private:
     map<string, Parameter*> id_map;
     bool replace_mode;
-    sigc::signal<void,Parameter*,bool> insert_remove;
+    sigc::signal<void (Parameter*,bool)> insert_remove;
 #ifndef NDEBUG
     void unique_id(Parameter* param);
     void check_id(const string& id);
@@ -547,7 +547,7 @@ class ParamMap: boost::noncopyable {
     void set_init_values();
     void reset_unit(const PluginDef *pdef) const;
     bool unit_has_std_values(const PluginDef *pdef) const;
-    sigc::signal<void,Parameter*,bool> signal_insert_remove() { return insert_remove; }
+    sigc::signal<void (Parameter*,bool)> signal_insert_remove() { return insert_remove; }
     void unregister(Parameter *p);
     void unregister(const string& id);
     inline FloatParameter *reg_par(const string& id, const string& name, float *var, float std,
@@ -751,11 +751,11 @@ private:
     Glib::Dispatcher       mute_chg;
     Glib::Dispatcher       bank_chg;
     Glib::Dispatcher       val_chg;
-    sigc::signal<void>     changed;
-    sigc::signal<void,int> new_program;
-    sigc::signal<void,int> new_mute_state;
-    sigc::signal<void,int> new_bank;
-    sigc::signal<void, int, int> midi_value_changed;
+    sigc::signal<void()>     changed;
+    sigc::signal<void (int)> new_program;
+    sigc::signal<void (int)> new_mute_state;
+    sigc::signal<void (int)> new_bank;
+    sigc::signal<void (int, int)> midi_value_changed;
 private:
     void               on_pgm_chg();
     void               on_mute_chg();
@@ -783,16 +783,16 @@ public:
 	assert(n < ControllerArray::array_size); last_midi_control_value[n] = v; changed_midi_control_value[n] = 1; } //RT
     void set_controller_array(const ControllerArray& m);
     void remove_controlled_parameters(paramlist& plist, const ControllerArray *m);
-    sigc::signal<void>& signal_changed() { return changed; }
-    sigc::signal<void,int>& signal_new_program() { return new_program; }
-    sigc::signal<void,int>& signal_new_mute_state() { return new_mute_state; }
-    sigc::signal<void,int>& signal_new_bank() { return new_bank; }
+    sigc::signal<void ()>& signal_changed() { return changed; }
+    sigc::signal<void (int)>& signal_new_program() { return new_program; }
+    sigc::signal<void (int)>& signal_new_mute_state() { return new_mute_state; }
+    sigc::signal<void (int)>& signal_new_bank() { return new_bank; }
     void compute_midi_in(void* midi_input_port_buf, void *arg);  //RT
     void process_trans(int transport_state);  //RT
     void update_from_controller(int ctr);
     void update_from_controllers();
     void set_midi_channel(int s);
-    sigc::signal<void, int, int>& signal_midi_value_changed() { return midi_value_changed; }
+    sigc::signal<void (int, int)>& signal_midi_value_changed() { return midi_value_changed; }
     void request_midi_value_update();
 };
 

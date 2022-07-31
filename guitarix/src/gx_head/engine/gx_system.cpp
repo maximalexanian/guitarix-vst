@@ -21,13 +21,17 @@
  *
  * ----------------------------------------------------------------------------
  */
+#define _CRT_SECURE_NO_WARNINGS
+
+#include "engine.h"
 
 #include <dirent.h>
 #include <iostream>
 #include <iomanip>                  // NOLINT
 
-#include "engine.h"
-
+#if defined(__APPLE__)
+#include "GetPrefsPath.h"
+#endif
 namespace gx_system {
 
 /****************************************************************
@@ -331,8 +335,8 @@ IRFileListing::IRFileListing(const std::string& path) {
         Glib::RefPtr<Gio::FileInfo> file_info;
         while ((file_info = child_enumeration->next_file())) {
 			// fprintf(stderr,"G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE == %s\n",file_info->get_attribute_string(G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE).c_str());
-	    if ((file_info->get_attribute_string(G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE) == "audio/x-wav") ||
-	        (file_info->get_attribute_string(G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE) == "audio/x-aiff")){
+		std::string t = file_info->get_attribute_string(G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE);
+	    if (t == "audio/x-wav" || t == "audio/x-aiff" || t == ".wav" || t == ".aif" || t == ".aiff" || t == "com.microsoft.waveform-audio"){
 		listing.push_back(
 		    FileName(
 			file_info->get_attribute_byte_string(G_FILE_ATTRIBUTE_STANDARD_NAME),
@@ -352,7 +356,7 @@ static void list_subdirs(const Glib::RefPtr<Gio::File>& file, std::vector<FileNa
 				 "," G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME);
     Glib::RefPtr<Gio::FileInfo> file_info;
     while ((file_info = child_enumeration->next_file())) {
-	if (file_info->get_file_type() == Gio::FILE_TYPE_DIRECTORY) {
+	if (file_info->get_file_type() == Gio::FileType::DIRECTORY) {
 	    Glib::RefPtr<Gio::File> child = file->get_child(
 		file_info->get_attribute_byte_string(G_FILE_ATTRIBUTE_STANDARD_NAME));
 	    dirs.push_back(
@@ -379,15 +383,30 @@ void list_subdirs(PathList pl, std::vector<FileName>& dirs) {
 
 BasicOptions *BasicOptions::instance = 0;
 
-BasicOptions::BasicOptions()
+BasicOptions::BasicOptions(const char *modulepath)
     : user_dir(),
       user_IR_dir(),
       sys_IR_dir(GX_SOUND_DIR),
       IR_pathlist(),
       IR_prefixmap(),
     builder_dir(GX_BUILDER_DIR) {
+#if defined(__APPLE__)
     user_dir = Glib::build_filename(Glib::get_user_config_dir(), "guitarix");
+
+    char ppath[2048];
+    GetPrefsPath(ppath, sizeof(ppath)/sizeof(ppath[0]));
+    user_dir = Glib::build_filename(ppath, "guitarix");
+#else
+    user_dir = Glib::build_filename(Glib::get_user_config_dir(), "guitarix");
+#endif
     user_IR_dir = Glib::build_filename(user_dir, "IR");
+
+#if defined(_WINDOWS)
+	std::string p = Glib::path_get_dirname(modulepath);
+	sys_IR_dir = Glib::build_filename(p, sys_IR_dir);
+#elif defined(__APPLE__)
+    sys_IR_dir = Glib::build_filename(modulepath, "Contents/Resources", sys_IR_dir);
+#endif
 
     make_ending_slash(user_dir);
     make_ending_slash(user_IR_dir);
@@ -431,8 +450,8 @@ static inline const char *shellvar(const char *name) {
 #define TCLR(s)  "\033[1;32m" s "\033[0m" // light green
 #define TCLR2(s) TCLR(s), s
 
-CmdlineOptions::CmdlineOptions()
-    : BasicOptions(),
+CmdlineOptions::CmdlineOptions(const char *modulepath)
+    : BasicOptions(modulepath),
       main_group("",""),
       optgroup_style("style", TCLR2("GTK style configuration options")),
       optgroup_jack("jack", TCLR2("JACK configuration options")),
@@ -497,11 +516,26 @@ CmdlineOptions::CmdlineOptions()
       system_show_toolbar(false),
       system_show_rack(false),
       reload_lv2_presets(true) {
-    const char* home = getenv("HOME");
+    
+
+	/*const char* home = getenv("HOME");
     if (!home) {
 	throw GxFatalError(_("no HOME environment variable"));
     }
-    old_user_dir = string(home) + "/.gx_head/";
+    old_user_dir = string(home) + "/.gx_head/";*/
+
+#ifdef _WINDOWS
+	std::string p = Glib::path_get_dirname(modulepath);
+	style_dir = Glib::build_filename(p, style_dir);
+	factory_dir = Glib::build_filename(p, factory_dir);
+	pixmap_dir = Glib::build_filename(p, pixmap_dir);
+#elif defined(__APPLE__)
+    style_dir = Glib::build_filename(modulepath, "Contents/Resources", style_dir);
+    factory_dir = Glib::build_filename(modulepath, "Contents/Resources", factory_dir);
+    pixmap_dir = Glib::build_filename(modulepath, "Contents/Resources", pixmap_dir);
+#endif
+
+	old_user_dir = Glib::get_user_config_dir(); // "/.gx_head/";
     plugin_dir = Glib::build_filename(get_user_dir(), "plugins");
     preset_dir = Glib::build_filename(get_user_dir(), "banks");
     pluginpreset_dir = Glib::build_filename(get_user_dir(), "pluginpresets");
@@ -668,7 +702,7 @@ CmdlineOptions::CmdlineOptions()
     opt_watchdog_convolver.set_long_name("no-convolver-overload");
     opt_watchdog_convolver.set_description(
 	"disable overload on convolver missed deadline");
-    opt_watchdog_convolver.set_flags(Glib::OptionEntry::FLAG_REVERSE);
+    opt_watchdog_convolver.set_flags(Glib::OptionEntry::Flags::REVERSE);
     Glib::OptionEntry opt_watchdog_xrun;
     opt_watchdog_xrun.set_short_name('X');
     opt_watchdog_xrun.set_long_name("xrun-overload");
@@ -748,7 +782,7 @@ CmdlineOptions::~CmdlineOptions() {
 }
 
 void CmdlineOptions::read_ui_vars() {
-    ifstream i(Glib::build_filename(get_user_dir(), "ui_rc").c_str());
+    ifstream i(Glib::build_filename(get_user_dir(), "ui_rc").c_str(), ios_base::binary);
     if (i.fail()) {
 	return;
     }
@@ -813,7 +847,7 @@ void CmdlineOptions::read_ui_vars() {
 }
 
 void CmdlineOptions::write_ui_vars() {
-    ofstream o(Glib::build_filename(get_user_dir(), "ui_rc").c_str());
+    ofstream o(Glib::build_filename(get_user_dir(), "ui_rc").c_str(), ios_base::binary);
     if (o.fail()) {
 	return;
     }
@@ -883,7 +917,8 @@ static void log_terminal(const string& msg, GxLogger::MsgType tp, bool plugged) 
 
 void CmdlineOptions::process(int argc, char** argv) {
     path_to_program = Gio::File::create_for_path(argv[0])->get_path();
-    if (version) {
+
+	if (version) {
         std::cout << "Guitarix version \033[1;32m"
              << GX_VERSION << endl
              << "\033[0m   Copyright " << static_cast<char>(0x40) << " 2010 "
@@ -932,7 +967,9 @@ void CmdlineOptions::process(int argc, char** argv) {
     make_ending_slash(plugin_dir);
 
     skin.set_styledir(style_dir);
-    unsigned int n = skin.skin_list.size();
+    
+#if !defined(_WINDOWS) && !defined(__APPLE__)
+	unsigned int n = skin.skin_list.size();
     if (n < 1) {
         gx_print_fatal(_("main"), string(_("number of skins is 0")));
     }
@@ -946,6 +983,7 @@ void CmdlineOptions::process(int argc, char** argv) {
 		 % rcset).str());
 	}
     }
+#endif
     if (jack_outputs.size() > 2) {
 	gx_print_warning(
 	    _("main"),
@@ -971,7 +1009,7 @@ int gx_system_call(const string& cmd,
         str.append("&");
 
     //    cerr << " ********* \n system command = " << str.c_str() << endl;
-
+#ifndef _WINDOWS
     sigset_t waitset;
     sigemptyset(&waitset);
     sigaddset(&waitset, SIGCHLD);
@@ -979,6 +1017,9 @@ int gx_system_call(const string& cmd,
     int rc = system(str.c_str());
     sigprocmask(SIG_BLOCK, &waitset, NULL);
     return rc;
+#else
+	return 0;
+#endif
 }
 
 void strip(Glib::ustring& s) {

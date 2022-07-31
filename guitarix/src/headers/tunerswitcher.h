@@ -40,9 +40,9 @@ private:
     };
     gx_preset::GxSettings& settings;
     gx_engine::GxEngine& engine;
-    sigc::signal<void,const Glib::ustring&,const Glib::ustring&> display;
-    sigc::signal<void,SwitcherState> set_state;
-    sigc::signal<void, bool> selection_done;
+    sigc::signal<void (const Glib::ustring&,const Glib::ustring&)> display;
+    sigc::signal<void (SwitcherState)> set_state;
+    sigc::signal<void (bool)> selection_done;
     sigc::connection switcher_conn;
     sigc::connection timeout_conn;
     int current_note;
@@ -67,9 +67,9 @@ public:
     void activate(bool tuner_active);
     void deactivate();
     void toggle(bool tuner_active);
-    sigc::signal<void,const Glib::ustring&,const Glib::ustring&>& signal_display() { return display; }
-    sigc::signal<void,SwitcherState>& signal_set_state() { return set_state; }
-    sigc::signal<void, bool>& signal_selection_done() { return selection_done; }
+    sigc::signal<void (const Glib::ustring&,const Glib::ustring&)>& signal_display() { return display; }
+    sigc::signal<void (SwitcherState)>& signal_set_state() { return set_state; }
+    sigc::signal<void (bool)>& signal_selection_done() { return selection_done; }
 };
 
 #endif  // SRC_HEADERS_TUNERSWITCHER_H_

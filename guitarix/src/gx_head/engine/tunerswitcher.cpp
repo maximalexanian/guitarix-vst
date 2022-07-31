@@ -173,7 +173,7 @@ void TunerSwitcher::on_tuner_freq_changed() {
 	    if (!timeout_conn.connected()) {
 		current_note = no_note;
 		timeout_conn = Glib::signal_timeout().connect(
-		    sigc::mem_fun(this, &TunerSwitcher::on_state_timeout),
+		    sigc::mem_fun(*this, &TunerSwitcher::on_state_timeout),
 		    40);
 	    }
 	} else {
@@ -192,7 +192,7 @@ void TunerSwitcher::on_tuner_freq_changed() {
 	    if (!timeout_conn.connected()) {
 		current_note = no_note;
 		timeout_conn = Glib::signal_timeout().connect(
-		    sigc::mem_fun(this, &TunerSwitcher::on_state_timeout),
+		    sigc::mem_fun(*this, &TunerSwitcher::on_state_timeout),
 		    40);
 	    }
 	    return;
@@ -204,7 +204,7 @@ void TunerSwitcher::on_tuner_freq_changed() {
 	current_note = n;
 	if (!is_no_note(current_note)) {
 	    timeout_conn = Glib::signal_timeout().connect(
-		sigc::mem_fun(this, &TunerSwitcher::on_note_timeout),
+		sigc::mem_fun(*this, &TunerSwitcher::on_note_timeout),
 		40);
 	}
     } else {
@@ -223,8 +223,8 @@ void TunerSwitcher::activate(bool tuner_active) {
     new_engine_state = old_engine_state = engine.get_state();
     engine.set_state(gx_engine::kEngineOff);
     new_tuner_active = old_tuner_active = tuner_active;
-    switcher_conn = engine.tuner.signal_freq_changed().connect(
-	sigc::mem_fun(this, &TunerSwitcher::on_tuner_freq_changed));
+    /*switcher_conn = engine.tuner.signal_freq_changed().connect(
+	sigc::mem_fun(this, &TunerSwitcher::on_tuner_freq_changed));*///MAX
     if (running) {
 	on_tuner_freq_changed();
     }
@@ -234,7 +234,7 @@ void TunerSwitcher::deactivate() {
     if (!get_active()) {
 	return;
     }
-    switcher_conn.disconnect();
+    //switcher_conn.disconnect();//MAX
     timeout_conn.disconnect();
     engine.tuner.used_for_switching(false);
     change_state(normal_mode);

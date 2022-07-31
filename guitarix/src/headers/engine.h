@@ -40,13 +40,16 @@
 #include <boost/format.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/thread/mutex.hpp>
+
 #include <glibmm/i18n.h>     // NOLINT
 #include <glibmm/optioncontext.h>   // NOLINT
 #include <glibmm/dispatcher.h>
 #include <glibmm/miscutils.h>
 #include <giomm/file.h>
 
+
 /* LV2 header files */
+/*
 #include <lilv/lilv.h>
 #include "lv2/lv2plug.in/ns/ext/presets/presets.h"
 #include "lv2/lv2plug.in/ns/ext/state/state.h"
@@ -55,9 +58,40 @@
 #include <lv2/lv2plug.in/ns/ext/buf-size/buf-size.h>
 #include <lv2/lv2plug.in/ns/ext/options/options.h>
 #include <lv2/lv2plug.in/ns/ext/uri-map/uri-map.h>
+*/
 
 /* waf generated defines */
-#include "../config.h"
+#ifndef __SSE__
+#define __SSE__
+#endif
+
+#ifndef __SSE3__
+#define __SSE3__
+#endif
+
+#define GX_DATA_FOLDER "gx_head/"
+#define GX_STYLE_DIR GX_DATA_FOLDER ""
+#define GX_FACTORY_DIR GX_DATA_FOLDER "factorysettings"
+#define GX_SOUND_DIR GX_DATA_FOLDER "sounds"
+#define GX_SOUND_BPB_DIR GX_DATA_FOLDER "sounds/bands"
+#define GX_SOUND_BPA_DIR GX_DATA_FOLDER "sounds/amps"
+#define GX_BUILDER_DIR GX_DATA_FOLDER ""
+#define GX_ICON_DIR GX_DATA_FOLDER ""
+#define GX_PIXMAPS_DIR GX_DATA_FOLDER ""
+#define GX_FONTS_DIR GX_DATA_FOLDER ""
+#define GX_VERSION "0.38.1"
+/*
+#define GX_STYLE_DIR "/usr/local/share/gx_head/skins"
+#define GX_FACTORY_DIR "/usr/local/share/gx_head/factorysettings"
+#define GX_SOUND_DIR "/usr/local/share/gx_head/sounds"
+#define GX_SOUND_BPB_DIR "/usr/local/share/gx_head/sounds/bands"
+#define GX_SOUND_BPA_DIR "/usr/local/share/gx_head/sounds/amps"
+#define GX_BUILDER_DIR "/usr/local/share/gx_head/builder"
+#define GX_ICON_DIR "/usr/local/share/guitarix/icons"
+#define GX_PIXMAPS_DIR "/usr/local/share/pixmaps"
+#define GX_FONTS_DIR "/usr/local/share/fonts/truetype"
+*/
+//#include "../config.h"
 
 // define USE_MIDI_OUT to create a midi output port and
 // make the MidiAudioBuffer plugin activatable
@@ -97,6 +131,21 @@ using namespace std;
 
 #include "gx_jack.h"
 #include "tunerswitcher.h"
-#include "ladspaback.h"
+//#include "ladspaback.h"
+
+#ifdef _WINDOWS
+#include <io.h>
+#define R_OK    4       /* Test for read permission.  */
+#define W_OK    2       /* Test for write permission.  */
+#define X_OK    1       /* execute permission - unsupported in windows*/
+#define F_OK    0       /* Test for existence.  */
+#define access _access
+
+#include <chrono>
+#include <thread>
+#undef _stat
+//#define usleep(x) std::this_thread::sleep_for(std::chrono::microseconds(x))
+
+#endif
 
 #endif  // SRC_HEADERS_ENGINE_H_

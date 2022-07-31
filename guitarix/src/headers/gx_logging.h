@@ -23,6 +23,7 @@
 #ifndef SRC_HEADERS_GX_LOGGING_H_
 #define SRC_HEADERS_GX_LOGGING_H_
 
+#include <pthread.h>
 #include <glib/gi18n.h>
 #include <glibmm/dispatcher.h>
 #include <boost/thread/mutex.hpp>
@@ -41,7 +42,7 @@ public:
 	kMessageTypeCount // just count, must be last
     } MsgType;
 private:
-    typedef sigc::signal<void, const std::string&, MsgType, bool> msg_signal;
+    typedef sigc::signal<void (const std::string&, MsgType, bool)> msg_signal;
     struct logmsg {
 	std::string msg;
 	MsgType msgtype;
@@ -52,6 +53,7 @@ private:
     boost::mutex msgmutex;
     Glib::Dispatcher* got_new_msg;
     pthread_t ui_thread;
+    bool ui_thread_inited;
     msg_signal handlers;
     bool queue_all_msgs;
     std::string format(const char* func, const std::string& msg);
@@ -106,15 +108,15 @@ public:
 
 class GxExit {
 private:
-    sigc::signal<void, bool> exit_sig;
+    sigc::signal<void (bool)> exit_sig;
     pthread_t ui_thread;
-    sigc::signal<void,std::string> message;
+    sigc::signal<void (std::string)> message;
 public:
     GxExit();
     ~GxExit();
     void set_ui_thread() { ui_thread = pthread_self(); }
-    sigc::signal<void, bool>& signal_exit() { return exit_sig; }
-    sigc::signal<void,std::string>& signal_msg() { return message; }
+    sigc::signal<void (bool)>& signal_exit() { return exit_sig; }
+    sigc::signal<void (std::string)>& signal_msg() { return message; }
     void exit_program(std::string msg = "", int errcode = 1);
     void fatal_msg(const std::string& msg) { message(msg); exit_program(msg); }
     static GxExit& get_instance();

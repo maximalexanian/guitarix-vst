@@ -27,7 +27,7 @@
 #include <giomm/init.h>     // NOLINT
 #include <giomm/socketservice.h>
 //#include <ext/stdio_filebuf.h>
-#include "jsonrpc_methods.h"
+#include "jsonrpc_methods-generated.h"
 
 class GxService;
 
@@ -125,7 +125,7 @@ private:
     gx_preset::GxSettings& settings;
     gx_jack::GxJack& jack;
     TunerSwitcher& tuner_switcher;
-    sigc::slot<void> quit_mainloop;
+    sigc::slot<void()> quit_mainloop;
     time_t oldest_unsaved;
     time_t last_change;
     sigc::connection save_conn;
@@ -170,11 +170,11 @@ private:
     friend class CmdConnection;
 public:
     GxService(gx_preset::GxSettings& settings_, gx_jack::GxJack& jack_,
-	      TunerSwitcher& tunerswitcher, sigc::slot<void> quit_mainloop_,
+	      TunerSwitcher& tunerswitcher, sigc::slot<void()> quit_mainloop_,
 	      const Glib::ustring& host, int *port);
     ~GxService();
     void send_rack_changed(bool stereo, CmdConnection *cmd);
-    void ladspaloader_update_plugins(gx_system::JsonWriter *jw, CmdConnection *cmd);
+//    void ladspaloader_update_plugins(gx_system::JsonWriter *jw, CmdConnection *cmd);
     void update_maxlevel(CmdConnection *cmd = 0);
     float get_maxlevel(unsigned int channel) {
 	assert(channel < gx_engine::MaxLevel::channelcount);

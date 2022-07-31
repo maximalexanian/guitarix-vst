@@ -466,16 +466,16 @@ protected:
     Glib::ustring      current_bank;
     Glib::ustring      current_name;
     gx_engine::EngineControl& seq;
-    sigc::signal<void> selection_changed;
-    sigc::signal<void> presetlist_changed;
+    sigc::signal<void ()> selection_changed;
+    sigc::signal<void ()> presetlist_changed;
     bool loadsetting(PresetFile *p, const Glib::ustring& name);
 protected:
     void loadstate();
     void set_io(AbstractStateIO* st, AbstractPresetIO* pr) { state_io = st; preset_io = pr; }
 public:
-    inline sigc::signal<void>& signal_selection_changed() {
+    inline sigc::signal<void ()>& signal_selection_changed() {
 	return selection_changed; }
-    inline sigc::signal<void>& signal_presetlist_changed() {
+    inline sigc::signal<void ()>& signal_presetlist_changed() {
 	return presetlist_changed; }
     GxSettingsBase(gx_engine::EngineControl& seq_);
     ~GxSettingsBase();
@@ -499,6 +499,8 @@ public:
     bool rename_bank(const Glib::ustring& oldname, const Glib::ustring& newname, const std::string& newfile);
     bool remove_bank(const Glib::ustring& bank);
     bool rename_preset(PresetFile& pf, const Glib::ustring& oldname, const Glib::ustring& newname);
+
+	AbstractStateIO * get_state_io() { return state_io; }
 };
 
 } /* end of gx_system namespace */

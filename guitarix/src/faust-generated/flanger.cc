@@ -489,8 +489,8 @@ const char *Dsp::glade_def = "\
                 <property name=\"var_id\">flanger.level</property>\n\
                 <property name=\"show_value\">False</property>\n\
                 <property name=\"value_position\">right</property>\n\
-                <property name=\"value_xalign\">0.52000000000000002</property>\n\
-                <property name=\"label_ref\">label0:rack_label</property>\n\
+                <property name=\"value_xalign\">0.52000000000000002</property>\n"
+"                <property name=\"label_ref\">label0:rack_label</property>\n\
               </object>\n\
               <packing>\n\
                 <property name=\"expand\">False</property>\n\

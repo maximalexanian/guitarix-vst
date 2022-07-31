@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  * ---------------------------------------------------------------------------
  */
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "gx_logging.h"
 #include <iostream>
@@ -32,6 +33,7 @@ GxLogger::GxLogger()
       msgmutex(),
       got_new_msg(),
       ui_thread(),
+      ui_thread_inited(false),
       handlers(),
       queue_all_msgs(true) {
 }
@@ -65,11 +67,12 @@ GxLogger::~GxLogger() {
 }
 
 void GxLogger::set_ui_thread() {
-    if (ui_thread) {
+    if (ui_thread_inited) {
 	assert(pthread_equal(pthread_self(), ui_thread));
     } else {
 	got_new_msg = new Glib::Dispatcher;
 	ui_thread = pthread_self();
+    ui_thread_inited=true;
 	got_new_msg->connect(mem_fun(*this, &GxLogger::write_queued));
     }
 }
@@ -194,7 +197,8 @@ GxExit::GxExit(): exit_sig(), ui_thread() {}
 GxExit::~GxExit() {}
 
 void GxExit::exit_program(std::string msg, int errcode) {
-    exit_sig.emit_reverse(!pthread_equal(pthread_self(), ui_thread));
+    exit_sig.emit(!pthread_equal(pthread_self(), ui_thread));
+//TODO max    exit_sig.emit_reverse(!pthread_equal(pthread_self(), ui_thread));
     if (msg.empty()) {
 	msg = "** guitarix exit **";
     }

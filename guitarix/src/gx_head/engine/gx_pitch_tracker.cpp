@@ -50,7 +50,6 @@ PitchTracker::PitchTracker()
     : error(false),
       busy(false),
       tick(0),
-      m_pthr(0),
       resamp(),
       m_sampleRate(),
       fixed_sampleRate(41000),
@@ -66,6 +65,8 @@ PitchTracker::PitchTracker()
       m_audioLevel(false),
       m_fftwPlanFFT(0),
       m_fftwPlanIFFT(0) {
+	memset(&m_pthr, 0, sizeof(m_pthr));
+    m_pthr_inited=false;
     const int size = FFT_SIZE + (FFT_SIZE+1) / 2;
     m_fftwBufferTime = reinterpret_cast<float*>
                        (fftwf_malloc(size * sizeof(*m_fftwBufferTime)));
@@ -137,17 +138,17 @@ bool PitchTracker::setParameters(int priority, int policy, int sampleRate, int b
         return false;
     }
 
-    if (!m_pthr) {
+    if (!m_pthr_inited) {
         start_thread(priority, policy);
     }
     return !error;
 }
 
 void PitchTracker::stop_thread() {
-    if (m_pthr) {
+    if (m_pthr_inited) {
 	pthread_cancel (m_pthr);
 	pthread_join (m_pthr, NULL);
-	m_pthr = 0;
+    m_pthr_inited = false;
     }
 }
 
@@ -176,6 +177,7 @@ void PitchTracker::start_thread(int priority, int policy) {
 		_("error creating realtime thread - tuner not started"));
 	}
     }
+    m_pthr_inited = true;
     pthread_attr_destroy(&attr);
 }
 

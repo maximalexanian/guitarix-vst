@@ -42,7 +42,7 @@ private:
 		    acc = 0;
 		    active_samples = 0;
 		    full_samples = 0;
-		    counter = 0;
+			counter = 0;
 		}
 		void set_coef(float t /* 0..1 */, unsigned int full_samples) {
 		    set_full(0, full_samples, t*full_samples);

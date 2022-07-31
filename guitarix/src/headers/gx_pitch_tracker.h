@@ -53,6 +53,7 @@ class PitchTracker {
     int             tick;
     sem_t           m_trig;
     pthread_t       m_pthr;
+    bool            m_pthr_inited;
     Resampler       resamp;
     int             m_sampleRate;
     int             fixed_sampleRate;

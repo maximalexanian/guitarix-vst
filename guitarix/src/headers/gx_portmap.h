@@ -26,9 +26,9 @@
 #ifndef SRC_HEADERS_GX_PORTMAP_H_
 #define SRC_HEADERS_GX_PORTMAP_H_
 
-#include <gtk/gtk.h>
-#include <gtkmm.h>
-#include <jack/jack.h>
+//#include <gtk/gtk.h>
+//#include <gtkmm.h>
+//#include <jack/jack.h>
 
 #include <list>
 #include <string>
@@ -46,7 +46,7 @@ struct PortAttr {
     bool is_input;
     const char *port_type;
 };
-
+/*
 struct PortSection {
     Glib::RefPtr<Gtk::TreeStore> treestore;
     Gtk::ScrolledWindow *scrolled_window;
@@ -93,6 +93,6 @@ public:
     void connection_changed(string port1, string port2, bool conn);
     Glib::SignalProxy1<void,int> signal_response() { return window->signal_response(); }
 };
-
+*/
 } // end namespace gx_portmap
 #endif  // SRC_HEADERS_GX_PORTMAP_H_

@@ -24,7 +24,7 @@
 
 #ifndef SRC_HEADERS_GX_CAIRO_CALLBACKS_H_
 #define SRC_HEADERS_GX_CAIRO_CALLBACKS_H_
-
+/*
 namespace gx_cairo
 {
 // forwarddeclaration
@@ -34,6 +34,6 @@ gboolean error_box_expose(GtkWidget *wi, GdkEventExpose *ev, gpointer user_data)
 gboolean start_box_expose(GtkWidget *wi, GdkEventExpose *ev, gpointer user_data);
 gboolean rectangle_skin_color_expose(GtkWidget *wi, GdkEventExpose *ev, gpointer user_data);
 gboolean splash_expose(GtkWidget *wi, GdkEventExpose *ev, gpointer user_data);
-}
+}*/
 #endif  // SRC_HEADERS_GX_CAIRO_CALLBACKS_H_
 

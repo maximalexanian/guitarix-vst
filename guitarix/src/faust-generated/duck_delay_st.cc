@@ -704,8 +704,8 @@ const char *Dsp::glade_def = "\
               </packing>\n\
             </child>\n\
             <child>\n\
-              <object class=\"GtkLabel\" id=\"label0:rack_label\">\n\
-                <property name=\"visible\">True</property>\n\
+              <object class=\"GtkLabel\" id=\"label0:rack_label\">\n"
+"                <property name=\"visible\">True</property>\n\
                 <property name=\"can_focus\">False</property>\n\
                 <property name=\"xalign\">0</property>\n\
                 <property name=\"label\" translatable=\"yes\">Amount</property>\n\

@@ -808,8 +808,8 @@ const char *Dsp::glade_def = "\
                         <property name=\"left_attach\">2</property>\n\
                         <property name=\"right_attach\">3</property>\n\
                         <property name=\"top_attach\">1</property>\n\
-                        <property name=\"bottom_attach\">2</property>\n\
-                        <property name=\"x_options\">GTK_FILL</property>\n\
+                        <property name=\"bottom_attach\">2</property>\n"
+"                        <property name=\"x_options\">GTK_FILL</property>\n\
                       </packing>\n\
                     </child>\n\
                     <child>\n\

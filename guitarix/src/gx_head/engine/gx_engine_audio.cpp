@@ -26,6 +26,68 @@
 
 #include "engine.h"     // NOLINT
 
+#ifdef _WINDOWS
+#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+#include <windows.h>
+#include <winsock.h>
+
+#define CLOCK_REALTIME 0
+
+int clock_gettime(int, struct timespec *spec)      //C-file part
+{
+	__int64 wintime; GetSystemTimeAsFileTime((FILETIME*)&wintime);
+	wintime -= 116444736000000000i64;  //1jan1601 to 1jan1970
+	spec->tv_sec = wintime / 10000000i64;           //seconds
+	spec->tv_nsec = wintime % 10000000i64 * 100;      //nano-seconds
+	return 0;
+}
+
+
+/*
+#define exp7           10000000i64     //1E+7     //C-file part
+#define exp9         1000000000i64     //1E+9
+#define w2ux 116444736000000000i64     //1.jan1601 to 1.jan1970
+
+void unix_time(struct timespec *spec)
+{
+    __int64 wintime; GetSystemTimeAsFileTime((FILETIME*)&wintime);
+    wintime -= w2ux;  spec->tv_sec = wintime / exp7;
+    spec->tv_nsec = wintime % exp7 * 100;
+}
+
+int clock_gettime(int, timespec *spec)
+{
+    static  struct timespec startspec; static double ticks2nano;
+    static __int64 startticks, tps = 0;    __int64 tmp, curticks;
+    QueryPerformanceFrequency((LARGE_INTEGER*)&tmp); //some strange system can
+    if (tps != tmp) {
+        tps = tmp; //init ~~ONCE         //possibly change freq ?
+        QueryPerformanceCounter((LARGE_INTEGER*)&startticks);
+        unix_time(&startspec); ticks2nano = (double)exp9 / tps;
+    }
+    QueryPerformanceCounter((LARGE_INTEGER*)&curticks); curticks -= startticks;
+    spec->tv_sec = startspec.tv_sec + (curticks / tps);
+    spec->tv_nsec = startspec.tv_nsec + (double)(curticks % tps) * ticks2nano;
+    if (!(spec->tv_nsec < exp9)) { spec->tv_sec++; spec->tv_nsec -= exp9; }
+    return 0;
+}
+*/
+#define ERR(obj,fun,form,v1,v2) {char tt[250]; timespec _ts; clock_gettime(CLOCK_REALTIME, &_ts); sprintf(tt, "[%d] %lld.%03d | %llx | " fun " " form "\n", GetCurrentThreadId(), _ts.tv_sec%100000, _ts.tv_nsec/1000000, obj, v1, v2); ::OutputDebugStringA(tt); }
+//#define DBG(obj,fun,form,v1,v2) {char tt[250]; timespec _ts; clock_gettime(CLOCK_REALTIME, &_ts); sprintf(tt, "[%d] %lld.%03d | %llx | " fun " " form "\n", GetCurrentThreadId(), _ts.tv_sec%100000, _ts.tv_nsec/1000000, obj, v1, v2); ::OutputDebugStringA(tt); }
+
+#define DBG(obj,fun,form,v1,v2) 
+#else
+#define ERR(obj,fun,form,v1,v2)
+#define DBG(obj,fun,form,v1,v2)
+#endif
+
+#ifdef __APPLE__
+extern "C" int sem_timedwait (
+                              sem_t *sem,
+                              const struct timespec *abs_timeout);
+#endif
+
+
 namespace gx_engine {
 
 /****************************************************************
@@ -63,29 +125,25 @@ void __rt_func ProcessingChainBase::set_stopped(bool v) {
 
 bool ProcessingChainBase::wait_rt_finished() {
     if (stopped) {
-	return true;
+	    return true;
     }
 
-#ifdef __APPLE__
-    // no timedewait here
-     while (sem_wait(&sync_sem) == -1) {
-#else
     timespec ts;
-    clock_gettime(CLOCK_REALTIME, &ts);
-    const long ns_in_sec = 1000000000;
-    ts.tv_nsec += ns_in_sec / 10;
+	clock_gettime(CLOCK_REALTIME, &ts);
+	const long ns_in_sec = 1000000000;
+    ts.tv_nsec += ns_in_sec/10;
     if (ts.tv_nsec >= ns_in_sec) {
 	ts.tv_nsec -= ns_in_sec;
 	ts.tv_sec += 1;
     }
+
     while (sem_timedwait(&sync_sem, &ts) == -1) {
-#endif
-   
+
 	if (errno == EINTR) {
 	    continue;
 	}
 	if (errno == ETIMEDOUT) {
-	    gx_print_warning("sem_timedwait", "timeout");
+        DBG(this, "wait_rt_finished", "timeout %lld.%03d", ts.tv_sec%100000, ts.tv_nsec/1000000);
 	    return false;
 	}
 	gx_print_error("sem_timedwait", "unknown error");
@@ -95,60 +153,116 @@ bool ProcessingChainBase::wait_rt_finished() {
 }
 
 void ProcessingChainBase::set_latch() {
-    int val;
+//TODO max mac uncomment
+/*    int val;
     sem_getvalue(&sync_sem, &val);
     if (val > 0) {
-	sem_wait(&sync_sem);
-    }
+		sem_wait(&sync_sem);
+	}
     assert(sem_getvalue(&sync_sem, &val) == 0 && val == 0);
+    */
 }
 
 void ProcessingChainBase::wait_ramp_down_finished() {
+    DBG(this, "wait_ramp_down_finished", "ramp_mode %d stopped %d", ramp_mode, (int)stopped);
     if (stopped) {
-	return;
+        DBG(this, "\twait_ramp_down_finished", "stopped", 0, 0);
+    	return;
     }
     while (ramp_mode == ramp_mode_down) {
-	if (!wait_rt_finished()) {
-	    break;
-	}
+	    if (!wait_rt_finished()) {
+            DBG(this, "\twait_ramp_down_finished", "!wait_rt_finished", 0, 0);
+            break;
+	    }
     }
+    DBG(this, "\twait_ramp_down_finished", "return", 0, 0);
 }
 
 void ProcessingChainBase::start_ramp_up() {
     RampMode rm = get_ramp_mode();
+    DBG(this, "start_ramp_up", "ramp_mode %d stopped %d", rm, (int)stopped);
     if (!stopped) {
-	if (rm != ramp_mode_down_dead && rm != ramp_mode_down) {
-	    return;
-	}
-	set_ramp_value(0);
-	set_ramp_mode(ramp_mode_up_dead);
+	    if (rm != ramp_mode_down_dead && rm != ramp_mode_down) {
+            DBG(this, "\tstart_ramp_up", "rm != ramp_mode_down_dead && rm != ramp_mode_down", 0, 0);
+            return;
+	    }
+	    set_ramp_value(0);
+	    set_ramp_mode(ramp_mode_up_dead);
+        DBG(this, "\tstart_ramp_up", "set_ramp_mode ramp_mode_up_dead (%d)", ramp_mode_up_dead, 0);
     }
+    DBG(this, "\tstart_ramp_up", "return", 0, 0);
 }
 
 void ProcessingChainBase::start_ramp_down() {
     RampMode rm = get_ramp_mode();
+    DBG(this, "start_ramp_down", "ramp_mode %d stopped %d", rm, (int)stopped);
     if (rm == ramp_mode_down_dead || rm == ramp_mode_down) {
-	return;
+        DBG(this, "\tstart_ramp_down", "rm == ramp_mode_down_dead || rm == ramp_mode_down", 0, 0);
+        return;
     }
     int rv = min(steps_down,get_ramp_value());
     if (rv == 0) {
-	set_ramp_mode(ramp_mode_down_dead);
+	    set_ramp_mode(ramp_mode_down_dead);
+        DBG(this, "\tstart_ramp_down", "set_ramp_mode ramp_mode_down_dead (%d)", ramp_mode_down_dead, 0);
     } else {
-	set_ramp_value(rv);
-	set_ramp_mode(ramp_mode_down);
+	    set_ramp_value(rv);
+	    set_ramp_mode(ramp_mode_down);
+        DBG(this, "\tstart_ramp_down", "set_ramp_mode ramp_mode_down (%d)", ramp_mode_down, 0);
     }
+    DBG(this, "\tstart_ramp_down", "return", 0, 0);
 }
+
+void __rt_func ProcessingChainBase::process_ramp(int count) {
+    RampMode rm = get_ramp_mode();
+    if (rm == ramp_mode_down_dead) {
+        return;
+    }
+    if (rm == ramp_mode_off) {
+        return;
+    }
+    int rv = get_ramp_value();
+    int rv1 = rv;
+    RampMode rm1 = rm;
+    int i = 0;
+    if (rm1 == ramp_mode_up_dead) {
+        for (; i < count; ++i) {
+            if (++rv1 > steps_up_dead) {
+                rm1 = ramp_mode_up;
+                rv1 = 0;
+                break;
+            }
+        }
+    }
+    if (rm1 == ramp_mode_up) {
+        for (; i < count; ++i) {
+            if (++rv1 >= steps_up) {
+                rm1 = ramp_mode_off;
+                break;
+            }
+        }
+    }
+    else if (rm1 == ramp_mode_down) {
+        for (i = 0; i < count; ++i) {
+            if (--rv1 == 0) {
+                rm1 = ramp_mode_down_dead;
+                break;
+            }
+        }
+    }
+    try_set_ramp_mode(rm, rm1, rv, rv1);
+}
+
 
 void __rt_func ProcessingChainBase::try_set_ramp_mode(RampMode oldmode, RampMode newmode, int oldrv, int newrv) {
     if (oldmode != newmode) {
-	if (!gx_system::atomic_compare_and_exchange(&ramp_mode, oldmode, newmode)) {
-	    return;
-	}
+	    if (!gx_system::atomic_compare_and_exchange(&ramp_mode, oldmode, newmode)) {
+	        return;
+	    }
     }
     if (oldrv != newrv) {
-	if (!gx_system::atomic_compare_and_exchange(&ramp_value, oldrv, newrv)) {
-	    return;
-	}
+	    if (!gx_system::atomic_compare_and_exchange(&ramp_value, oldrv, newrv)) {
+	        return;
+	    }
     }
 }
 
@@ -161,8 +275,8 @@ bool lists_equal(const list<Plugin*>& p1, const list<Plugin*>& p2, bool *need_ra
     while (true) {
 	if (i1 == p1.end()) {
 	    if (i2 != p2.end()) {
-		ret = false;
-		nr = true;
+		    ret = false;
+		    nr = true;
 	    }
 	    break;
 	}
@@ -174,20 +288,20 @@ bool lists_equal(const list<Plugin*>& p1, const list<Plugin*>& p2, bool *need_ra
 	if (*i1 != *i2) {
 	    ret = false;
 	    while ((*i1)->get_pdef()->flags & PGN_SNOOP) {
-		++i1;
-		if (i1 == p1.end()) {
-		    break;
-		}
+		    ++i1;
+		    if (i1 == p1.end()) {
+		        break;
+		    }
 	    }
 	    while ((*i2)->get_pdef()->flags & PGN_SNOOP) {
-		++i2;
-		if (i2 == p2.end()) {
-		    break;
-		}
+		    ++i2;
+		    if (i2 == p2.end()) {
+		        break;
+		    }
 	    }
 	    if (*i1 != *i2) {
-		nr = true;
-		break;
+		    nr = true;
+		    break;
 	    }
 	}
 	++i1;
@@ -202,25 +316,25 @@ bool lists_equal(const list<Plugin*>& p1, const list<Plugin*>& p2, bool *need_ra
 
 bool ProcessingChainBase::set_plugin_list(const list<Plugin*> &p) {
     if (lists_equal(p, modules, &next_commit_needs_ramp)) {
-	return false;
+	    return false;
     }
     wait_latch();
     if (check_release()) {
-	release();
+	    release();
     }
     typedef set<const char*, stringcomp> pchar_set;
     pchar_set new_ids;
     for (list<Plugin*>::const_iterator i = p.begin(); i != p.end(); ++i) {
-	new_ids.insert((*i)->get_pdef()->id);
+	    new_ids.insert((*i)->get_pdef()->id);
     }
     for (list<Plugin*>::const_iterator i = modules.begin(); i != modules.end(); ++i) {
-	if (!(*i)->get_pdef()->activate_plugin) {
-	    continue;
-	}
-	pchar_set::iterator r = new_ids.find((*i)->get_pdef()->id);
-	if (r == new_ids.end()) {
-	    to_release.push_back(*i);
-	}
+	    if (!(*i)->get_pdef()->activate_plugin) {
+    	    continue;
+	    }
+	    pchar_set::iterator r = new_ids.find((*i)->get_pdef()->id);
+	    if (r == new_ids.end()) {
+	        to_release.push_back(*i);
+	    }
     }
     modules = p;
     return true;
@@ -228,19 +342,19 @@ bool ProcessingChainBase::set_plugin_list(const list<Plugin*> &p) {
 
 void ProcessingChainBase::clear_module_states() {
     for (list<Plugin*>::const_iterator p = modules.begin(); p != modules.end(); ++p) {
-	PluginDef* pd = (*p)->get_pdef();
-	if (pd->activate_plugin) {
-	    pd->activate_plugin(true, pd);
-	} else if (pd->clear_state) {
-	    pd->clear_state(pd);
-	}
+	    PluginDef* pd = (*p)->get_pdef();
+	    if (pd->activate_plugin) {
+	        pd->activate_plugin(true, pd);
+	    } else if (pd->clear_state) {
+	        pd->clear_state(pd);
+	    }
     }
 }
 
 void ProcessingChainBase::release() {
     wait_latch();
     for (list<Plugin*>::const_iterator p = to_release.begin(); p != to_release.end(); ++p) {
-	(*p)->get_pdef()->activate_plugin(false, (*p)->get_pdef());
+	    (*p)->get_pdef()->activate_plugin(false, (*p)->get_pdef());
     }
     to_release.clear();
 }
@@ -254,6 +368,16 @@ void ProcessingChainBase::print_chain_state(const char *title) {
 }
 #endif
 
+/*
+void ProcessingChainBase::post_rt_finished() { // RT
+	int val;
+	sem_getvalue(&sync_sem, &val);
+	if (val <= 0) {
+		{char tt[50]; sprintf(tt, "[%d] POST\n", GetCurrentThreadId()); ::OutputDebugStringA(tt); }
+		sem_post(&sync_sem);
+	}
+}
+*/
 
 /****************************************************************
  ** MonoModuleChain, StereoModuleChain
@@ -262,15 +386,16 @@ void ProcessingChainBase::print_chain_state(const char *title) {
 void __rt_func MonoModuleChain::process(int count, float *input, float *output) {
     RampMode rm = get_ramp_mode();
     if (rm == ramp_mode_down_dead) {
-	memset(output, 0, count*sizeof(float));
-	return;
+	    memset(output, 0, count*sizeof(float));
+	    return;
     }
     memcpy(output, input, count*sizeof(float));
     for (monochain_data *p = get_rt_chain(); p->func; ++p) {
-	p->func(count, output, output, p->plugin);
+        //if(strcmp(p->plugin->id,"con"))
+            p->func(count, output, output, p->plugin);
     }
     if (rm == ramp_mode_off) {
-	return;
+        return;
     }
     int rv = get_ramp_value();
     int rv1 = rv;
@@ -286,54 +411,56 @@ void __rt_func MonoModuleChain::process(int count, float *input, float *output) 
     }
     int i = 0;
     if (rm1 == ramp_mode_up_dead) {
-	for ( ; i < count; ++i) {
-	    if (++rv1 > steps_up_dead) {
-		rm1 = ramp_mode_up;
-		rv1 = 0;
-		break;
+	    for ( ; i < count; ++i) {
+	        if (++rv1 > steps_up_dead) {
+		        rm1 = ramp_mode_up;
+		        rv1 = 0;
+		        break;
+	        }
+	        output[i] = 0.0;
 	    }
-	    output[i] = 0.0;
-	}
     }
     if (rm1 == ramp_mode_up) {
-	for ( ; i < count; ++i) {
-	    if (++rv1 >= steps_up) {
-		rm1 = ramp_mode_off;
-		break;
+	    for ( ; i < count; ++i) {
+	        if (++rv1 >= steps_up) {
+		        rm1 = ramp_mode_off;
+		        break;
+	        }
+	        output[i] = (output[i] * rv1) / steps_up;
 	    }
-	    output[i] = (output[i] * rv1) / steps_up;
-	}
     }
     else if (rm1 == ramp_mode_down) {
-	for (i = 0; i < count; ++i) {
-	    if (--rv1 == 0) {
-		rm1 = ramp_mode_down_dead;
-		break;
+	    for (i = 0; i < count; ++i) {
+	        if (--rv1 == 0) {
+		        rm1 = ramp_mode_down_dead;
+		        break;
+	        }
+	        output[i] = (output[i] * rv1) / steps_down;
 	    }
-	    output[i] = (output[i] * rv1) / steps_down;
-	}
-	for ( ; i < count; ++i) {
-	    output[i] = 0.0;
-	}
+	    for ( ; i < count; ++i) {
+	        output[i] = 0.0;
+	    }
     }
     try_set_ramp_mode(rm, rm1, rv, rv1);
 }
 
-void __rt_func StereoModuleChain::process(int count, float *input1, float *input2, float *output1, float *output2) {
+void __rt_func StereoModuleChain::process(int count, float *input1, float *input2, float *output1, float *output2, bool feed) {
     // run stereo rack
     RampMode rm = get_ramp_mode();
     if (rm == ramp_mode_down_dead) {
-	memset(output1, 0, count*sizeof(float));
-	memset(output2, 0, count*sizeof(float));
-	return;
+	    memset(output1, 0, count*sizeof(float));
+	    memset(output2, 0, count*sizeof(float));
+	    return;
     }
     memcpy(output1, input1, count*sizeof(float));
     memcpy(output2, input2, count*sizeof(float));
     for (stereochain_data *p = get_rt_chain(); p->func; ++p) {
-	(p->func)(count, output1, output2, output1, output2, p->plugin);
+		if (!feed)
+            { feed = true; continue; }//max:
+		(p->func)(count, output1, output2, output1, output2, p->plugin);
     }
     if (rm == ramp_mode_off) {
-	return;
+	    return;
     }
     int rv = get_ramp_value();
     int rv1 = rv;
@@ -349,39 +476,39 @@ void __rt_func StereoModuleChain::process(int count, float *input1, float *input
     }
     int i = 0;
     if (rm1 == ramp_mode_up_dead) {
-	for ( ; i < count; ++i) {
-	    if (++rv1 > steps_up_dead) {
-		rm1 = ramp_mode_up;
-		rv1 = 0;
-		break;
+	    for ( ; i < count; ++i) {
+	        if (++rv1 > steps_up_dead) {
+		        rm1 = ramp_mode_up;
+		        rv1 = 0;
+		        break;
+	        }
+	        output1[i] = 0.0;
+	        output2[i] = 0.0;
 	    }
-	    output1[i] = 0.0;
-	    output2[i] = 0.0;
-	}
     }
     if (rm1 == ramp_mode_up) {
 	for ( ; i < count; ++i) {
 	    if (++rv1 >= steps_up) {
-		rm1 = ramp_mode_off;
-		break;
+		    rm1 = ramp_mode_off;
+		    break;
 	    }
 	    output1[i] = (output1[i] * rv1) / steps_up;
 	    output2[i] = (output2[i] * rv1) / steps_up;
 	}
     }
     else if (rm1 == ramp_mode_down) {
-	for (i = 0; i < count; ++i) {
-	    if (--rv1 == 0) {
-		rm1 = ramp_mode_down_dead;
-		break;
+	    for (i = 0; i < count; ++i) {
+	        if (--rv1 == 0) {
+		        rm1 = ramp_mode_down_dead;
+		        break;
+	        }
+	        output1[i] = (output1[i] * rv1) / steps_down;
+	        output2[i] = (output2[i] * rv1) / steps_down;
 	    }
-	    output1[i] = (output1[i] * rv1) / steps_down;
-	    output2[i] = (output2[i] * rv1) / steps_down;
-	}
-	for ( ; i < count; ++i) {
-	    output1[i] = 0.0;
-	    output2[i] = 0.0;
-	}
+	    for ( ; i < count; ++i) {
+	        output1[i] = 0.0;
+	        output2[i] = 0.0;
+	    }
     }
     try_set_ramp_mode(rm, rm1, rv, rv1);
 }
@@ -564,9 +691,10 @@ ModuleSequencer::ModuleSequencer()
       overload_reason(),
       ov_disabled(0),
       mono_chain(),
-      stereo_chain() {
+      stereo_chain(),
+      last_overload(-sporadic_interval) {
     overload_detected.connect(
-	sigc::mem_fun(this, &ModuleSequencer::check_overload));
+	sigc::mem_fun(*this, &ModuleSequencer::check_overload));
 }
 
 ModuleSequencer::~ModuleSequencer() {
@@ -591,20 +719,33 @@ void ModuleSequencer::wait_ramp_down_finished() {
 }
 
 bool ModuleSequencer::update_module_lists() {
-    if (!get_buffersize() || !get_samplerate()) {
-	return false;
+	//boost::mutex::scoped_lock lock(stateflags_mutex);
+	if (!get_buffersize() || !get_samplerate()) {
+	    return false;
     }
     if (prepare_module_lists()) {
-	commit_module_lists();
-	if (stateflags & SF_OVERLOAD) {
-	    // hack: jackd need some time for new load statistic
-	    Glib::signal_timeout().connect_once(
-		sigc::bind(
-		    sigc::mem_fun(this,&ModuleSequencer::clear_stateflag),
-		    SF_OVERLOAD), 1000);
-	}
-	return true;
+	    commit_module_lists();
+	    if (stateflags & SF_OVERLOAD) {
+	        // hack: jackd need some time for new load statistic
+#if defined(_WINDOWS) || defined(__APPLE__)
+            clearoverride_conn=signal_timeout().connect(
+                sigc::mem_fun(*this, &ModuleSequencer::clear_override));
+#else
+            Glib::signal_timeout().connect_once(
+	    	    sigc::bind(
+		            sigc::mem_fun(*this,&ModuleSequencer::clear_stateflag),
+		            SF_OVERLOAD), 1000);
+#endif
+        }
+	    return true;
     }
+    return false;
+}
+
+bool ModuleSequencer::clear_override()
+{
+    clear_stateflag(SF_OVERLOAD);
+    clearoverride_conn.disconnect();
     return false;
 }
 
@@ -633,7 +774,7 @@ void ModuleSequencer::set_rack_changed() {
 	return;
     }
     rack_changed = Glib::signal_idle().connect(
-	sigc::mem_fun(this, &ModuleSequencer::check_module_lists));
+	sigc::mem_fun(*this, &ModuleSequencer::check_module_lists));
 }
 
 bool ModuleSequencer::prepare_module_lists() {
@@ -677,31 +818,34 @@ void ModuleSequencer::commit_module_lists() {
     }
 }
 
-int ModuleSequencer::sporadic_interval = 0;
+int ModuleSequencer::sporadic_interval = 1;
 
 void __rt_func ModuleSequencer::overload(OverloadType tp, const char *reason) {
     if (!(audio_mode & PGN_MODE_NORMAL)) {
 	return; // no overload message in mute/bypass modes
     }
     if ((tp & ov_disabled) == ov_XRun) {
-	return; // the xrun should show up in the log anyhow
+        DBG(this, "GUITARIX OVERLOAD", "ov_XRun", 0,0);
+        return; // the xrun should show up in the log anyhow
     }
     bool ignore = false;
     if ((tp & ov_disabled) == ov_Convolver) {
-	ignore = true;
+        DBG(this, "GUITARIX OVERLOAD", "ov_XRun", 0, 0);
+        ignore = true;
     }
     if (sporadic_interval > 0 && !ignore && (tp & (ov_Convolver|ov_XRun))) {
-	static float last = -sporadic_interval;
-	timespec ts;
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	float now = ts.tv_sec + ts.tv_nsec * 1e-9;
-	if (now - last < sporadic_interval) { // max. 1 event every sporadic_interval seconds
-	    last = now;
-	    ignore = true;
-	}
+	    timespec ts;
+	    clock_gettime(CLOCK_REALTIME, &ts);
+	    float now = ts.tv_sec + ts.tv_nsec * 1e-9;
+	    if (now - last_overload < sporadic_interval) { // max. 1 event every sporadic_interval seconds
+	        ignore = true;
+            DBG(this, "GUITARIX OVERLOAD", "ignore", 0, 0);
+        }
+        last_overload = now;
     }
     if (!ignore) {
-	set_stateflag(SF_OVERLOAD);
+	    set_stateflag(SF_OVERLOAD);
+        DBG(this, "GUITARIX OVERLOAD", "set_stateflag(SF_OVERLOAD) %d", tp, 0);
     }
     gx_system::atomic_set(&overload_reason, reason);
     overload_detected();

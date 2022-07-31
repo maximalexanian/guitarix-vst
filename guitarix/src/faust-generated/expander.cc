@@ -461,8 +461,8 @@ const char *Dsp::glade_def = "\
             <property name=\"fill\">True</property>\n\
             <property name=\"position\">1</property>\n\
           </packing>\n\
-        </child>\n\
-      </object>\n\
+        </child>\n"
+"      </object>\n\
     </child>\n\
   </object>\n\
 </interface>\n\

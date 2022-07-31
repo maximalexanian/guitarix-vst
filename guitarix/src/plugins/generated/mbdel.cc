@@ -848,8 +848,8 @@ const char *Dsp::glade_def = "\
                               </packing>\n\
                             </child>\n\
                             <child>\n\
-                              <object class=\"GxSmallKnob\" id=\"gxsmallknob7\">\n\
-                                <property name=\"visible\">True</property>\n\
+                              <object class=\"GxSmallKnob\" id=\"gxsmallknob7\">\n"
+"                                <property name=\"visible\">True</property>\n\
                                 <property name=\"can_focus\">True</property>\n\
                                 <property name=\"receives_default\">True</property>\n\
                                 <property name=\"var_id\">mbdel.crossover_b1_b2</property>\n\
@@ -1121,8 +1121,8 @@ const char *Dsp::glade_def = "\
                               </packing>\n\
                             </child>\n\
                             <child>\n\
-                              <object class=\"GtkVBox\" id=\"vbox15\">\n\
-                                <property name=\"visible\">True</property>\n\
+                              <object class=\"GtkVBox\" id=\"vbox15\">\n"
+"                                <property name=\"visible\">True</property>\n\
                                 <property name=\"can_focus\">False</property>\n\
                                 <child>\n\
                                   <object class=\"GtkLabel\" id=\"label_93:rack_label\">\n\
@@ -1400,8 +1400,8 @@ const char *Dsp::glade_def = "\
                         <property name=\"position\">4</property>\n\
                         <property name=\"tab_fill\">False</property>\n\
                       </packing>\n\
-                    </child>\n\
-                  </object>\n\
+                    </child>\n"
+"                  </object>\n\
                   <packing>\n\
                     <property name=\"expand\">True</property>\n\
                     <property name=\"fill\">True</property>\n\

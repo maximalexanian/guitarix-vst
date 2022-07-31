@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Guitarix</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProductVersion>3.8</ProductVersion>
+    <ProjectGuid>{29c95186-0dbc-49fa-925e-b5b91f02ed7A}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>GuitarixSetup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccProvider>
+    </SccProvider>
+    <SccAuxPath>
+    </SccAuxPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Guitarix|x64' ">
+    <SuppressIces />
+    <OutputPath>..\..\..\output\Guitarix\x64\Release\</OutputPath>
+    <IntermediateOutputPath>..\..\..\temp\GuitarixSetup\</IntermediateOutputPath>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+    <SignOutput>true</SignOutput>
+  </PropertyGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GuitarixSetup.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GuitarixConfig.wxi" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <Target Name="SignBundleEngine">
+    <Exec Command="sign_1.cmd &quot;%(SignBundleEngine.Filename)&quot; &quot;@(SignBundleEngine)&quot;" />
+    <Exec Command="sign_2.cmd &quot;%(SignBundleEngine.Filename)&quot; &quot;@(SignBundleEngine)&quot;" />
+  </Target>
+  <Target Name="SignBundle">
+    <Exec Command="sign_1.cmd &quot;%(SignBundle.Filename)&quot; &quot;@(SignBundle)&quot;" />
+  </Target>
+  <Target Name="SignMsi">
+    <Exec Command="sign_1.cmd &quot;%(SignMsi.Filename)&quot; &quot;@(SignMsi)&quot;" />
+  </Target>
+  <Target Name="SignCabs">
+    <Exec Command="sign_1.cmd &quot;%(SignCabs.Filename)&quot; &quot;@(SignCabs)&quot;" />
+  </Target>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

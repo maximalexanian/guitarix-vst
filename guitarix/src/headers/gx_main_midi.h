@@ -34,7 +34,7 @@
 #endif
 
 #include <glibmm.h>
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
 
 #include <iomanip>
 #include <cstring>
@@ -44,7 +44,7 @@ namespace gx_main_midi {
 /****************************************************************
  ** MidiControllerTable
  */
-
+/*
 class MidiControllerTable: public sigc::trackable {
  private:
     enum {RESPONSE_DELETE_SELECTED};
@@ -67,11 +67,11 @@ class MidiControllerTable: public sigc::trackable {
  public:
     static void toggle(gx_engine::GxMachineBase& machine, Glib::RefPtr<Gtk::ToggleAction> item);
 };
-
+*/
 /*****************************************************************
  ** Midi Control
  */
-
+/*
 class MidiConnect {
  private:
     enum { RESPONSE_DELETE = 1 };
@@ -102,7 +102,7 @@ class MidiConnect {
     static gboolean check_midi_cb(gpointer);
     static void changed_text_handler(GtkEditable *entry, gpointer data);
 };
-
+*/
 } // end namespace
 #endif  // SRC_HEADERS_GX_MAIN_MIDI_H_
 

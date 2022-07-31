@@ -22,12 +22,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#ifdef _WINDOWS
+#include <corecrt_math_defines.h>
+#endif
+
 #include <cassert>
 #include "gx_plugin.h"
 
 #include "gx_faust_support.h"
-#include "../faust/vibe_lfo_sine.cc"
-#include "../faust/vibe_mono_lfo_sine.cc"
+#include "../faust-generated/vibe_lfo_sine.cc"
+#include "../faust-generated/vibe_mono_lfo_sine.cc"
 
 namespace pluginlib {
 namespace vibe {
@@ -125,6 +129,13 @@ public:
     static int registerparam(const ParamReg& reg);
     static int uiloader(const UiBuilder& builder, int form);
     static void del_instance(PluginDef *plugin);
+
+	void * operator new(size_t size) //max: lack of proper init, requires zeroes in allocated memory
+	{
+		void * p = ::operator new(size);
+		memset(p, 0, sizeof(Vibe));
+		return p;
+	}
 
 private:
     bool Pstereo;
@@ -602,7 +613,7 @@ void Vibe::init_vibes(unsigned int samplerate) {
     gr = 0.0f;
     for(int jj = 0; jj < 8; jj++) {
 	oldcvolt[jj] = 0.0f;
-    }
+	}
 
     // from rakarrack init_vibes
 

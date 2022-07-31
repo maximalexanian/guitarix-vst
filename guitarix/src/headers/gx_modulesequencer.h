@@ -70,11 +70,11 @@ public:
     bool set_plugin_list(const list<Plugin*> &p);
     void clear_module_states();
     inline void post_rt_finished() { // RT
-	int val;
-	sem_getvalue(&sync_sem, &val);
-	if (val == 0) {
-	    sem_post(&sync_sem);
-	}
+	    int val;
+	    sem_getvalue(&sync_sem, &val);
+	    if (val <= 0) {
+	        sem_post(&sync_sem);
+	    }
     }
     bool wait_rt_finished();
     void set_latch();
@@ -85,6 +85,7 @@ public:
     void wait_ramp_down_finished();
     void start_ramp_up();
     void start_ramp_down();
+    void process_ramp(int count);
     inline void set_down_dead() { set_ramp_mode(ramp_mode_down_dead); }
     inline bool is_down_dead() { return get_ramp_mode() == ramp_mode_down_dead; }
     void set_stopped(bool v);
@@ -226,7 +227,7 @@ public:
 class StereoModuleChain: public ThreadSafeChainPointer<stereochain_data> {
 public:
     StereoModuleChain(): ThreadSafeChainPointer<stereochain_data>() {}
-    void process(int count, float *input1, float *input2, float *output1, float *output2);
+    void process(int count, float *input1, float *input2, float *output1, float *output2, bool feed=true);
     inline void print() { printlist("Stereo", modules); }
 };
 
@@ -246,8 +247,8 @@ protected:
     // signal anyone who needs to be synchronously notified
     // BE CAREFUL: executed by RT thread (though not concurrent with audio
     // modules, and timing requirements are relaxed)
-    sigc::signal<void, unsigned int> buffersize_change;
-    sigc::signal<void, unsigned int> samplerate_change;
+    sigc::signal<void (unsigned int)> buffersize_change;
+    sigc::signal<void (unsigned int)> samplerate_change;
     unsigned int buffersize;
     unsigned int samplerate;
 public:
@@ -258,7 +259,7 @@ public:
     };
     PluginList pluginlist;  
     EngineControl();
-    ~EngineControl();
+    virtual ~EngineControl();
     void init(unsigned int samplerate, unsigned int buffersize,
 	      int policy, int priority);
     virtual void wait_ramp_down_finished() = 0;
@@ -273,12 +274,14 @@ public:
     virtual void set_rack_changed() = 0;
     void clear_rack_changed();
     bool get_rack_changed();
-    sigc::signal<void, unsigned int>& signal_buffersize_change() { return buffersize_change; }
-    sigc::signal<void, unsigned int>& signal_samplerate_change() { return samplerate_change; }
+    sigc::signal<void (unsigned int)>& signal_buffersize_change() { return buffersize_change; }
+    sigc::signal<void (unsigned int)>& signal_samplerate_change() { return samplerate_change; }
     void add_selector(ModuleSelector& sel);
     void registerParameter(ParameterGroups& groups);
     void get_sched_priority(int &policy, int &priority, int prio_dim = 0);
     ParamMap& get_param() { return pmap; }
+
+	virtual sigc::signal<bool ()>& signal_timeout()=0;
 };
 
 
@@ -298,11 +301,14 @@ protected:
     int audio_mode;     // GxEngineState coded as PGN_MODE_XX flags
     boost::mutex stateflags_mutex;
     int stateflags;
-    sigc::signal<void, GxEngineState> state_change;
-    Glib::Dispatcher    overload_detected;
+    sigc::signal<void (GxEngineState)> state_change;
+	Glib::Dispatcher    overload_detected;
     const char         *overload_reason;   // name of unit which detected overload
     int                 ov_disabled;	   // bitmask of OverloadType
     static int         sporadic_interval; // seconds; overload if at least 2 events in the timespan
+    float               last_overload;
+    sigc::signal<bool ()> _signal_timeout;
+    sigc::connection clearoverride_conn;
 protected:
     void check_overload();
 public:
@@ -316,15 +322,15 @@ public:
     };
 public:
     ModuleSequencer();
-    ~ModuleSequencer();
+    virtual ~ModuleSequencer();
     void clear_module_states() {
 	mono_chain.clear_module_states();
 	stereo_chain.clear_module_states();
     }
     virtual void set_samplerate(unsigned int samplerate);
-    virtual void start_ramp_up();
-    virtual void start_ramp_down();
-    virtual void wait_ramp_down_finished();
+    virtual void start_ramp_up() override;
+    virtual void start_ramp_down() override;
+    virtual void wait_ramp_down_finished() override;
     void ramp_down() {
 	start_ramp_down();
 	wait_ramp_down_finished();
@@ -335,16 +341,20 @@ public:
     }
     bool prepare_module_lists();
     void commit_module_lists();
-    virtual void set_rack_changed();
-    virtual bool update_module_lists();
+    virtual void set_rack_changed() override;
+    virtual bool update_module_lists() override;
     bool check_module_lists();
-    virtual void overload(OverloadType tp, const char *reason); // RT
+    virtual void overload(OverloadType tp, const char *reason) override; // RT
     void set_stateflag(StateFlag flag); // RT
     void clear_stateflag(StateFlag flag); // RT
     void set_state(GxEngineState state);
     GxEngineState get_state();
-    sigc::signal<void, GxEngineState>& signal_state_change() { return state_change; }
+    sigc::signal<void (GxEngineState)>& signal_state_change() { return state_change; }
     static void set_overload_interval(int i)  { sporadic_interval = i; }
+	sigc::signal<bool ()>& signal_timeout() override { return _signal_timeout; }
+
+    bool clear_override();
+
 #ifndef NDEBUG
     void print_engine_state();
 #endif

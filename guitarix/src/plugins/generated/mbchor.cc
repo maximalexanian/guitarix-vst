@@ -924,8 +924,8 @@ const char *Dsp::glade_def = "\
                                   </packing>\n\
                                 </child>\n\
                               </object>\n\
-                              <packing>\n\
-                                <property name=\"expand\">True</property>\n\
+                              <packing>\n"/*
+"                                <property name=\"expand\">True</property>\n\
                                 <property name=\"fill\">True</property>\n\
                                 <property name=\"position\">0</property>\n\
                               </packing>\n\
@@ -1192,8 +1192,8 @@ const char *Dsp::glade_def = "\
                                   </object>\n\
                                   <packing>\n\
                                     <property name=\"expand\">False</property>\n\
-                                    <property name=\"fill\">False</property>\n\
-                                    <property name=\"position\">1</property>\n\
+                                    <property name=\"fill\">False</property>\n"
+"                                    <property name=\"position\">1</property>\n\
                                   </packing>\n\
                                 </child>\n\
                               </object>\n\
@@ -1460,8 +1460,8 @@ const char *Dsp::glade_def = "\
                                   <object class=\"GxSmallKnobR\" id=\"gxmediumknob12\">\n\
                                     <property name=\"visible\">True</property>\n\
                                     <property name=\"can_focus\">True</property>\n\
-                                    <property name=\"receives_default\">True</property>\n\
-                                    <property name=\"var_id\">mbchor.depth4</property>\n\
+                                    <property name=\"receives_default\">True</property>\n"
+"                                    <property name=\"var_id\">mbchor.depth4</property>\n\
                                   </object>\n\
                                   <packing>\n\
                                     <property name=\"expand\">False</property>\n\
@@ -1729,8 +1729,8 @@ const char *Dsp::glade_def = "\
                                     <property name=\"position\">0</property>\n\
                                   </packing>\n\
                                 </child>\n\
-                                <child>\n\
-                                  <object class=\"GxSmallKnobR\" id=\"gxmediumknob20\">\n\
+                                <child>\n"
+"                                  <object class=\"GxSmallKnobR\" id=\"gxmediumknob20\">\n\
                                     <property name=\"visible\">True</property>\n\
                                     <property name=\"can_focus\">True</property>\n\
                                     <property name=\"receives_default\">True</property>\n\
@@ -1964,7 +1964,7 @@ const char *Dsp::glade_def = "\
     </child>\n\
   </object>\n\
 </interface>\n\
-";
+"*/;
 
 inline int Dsp::load_ui_f(const UiBuilder& b, int form)
 {

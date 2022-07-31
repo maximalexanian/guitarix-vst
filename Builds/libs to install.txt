@@ -1,0 +1,11 @@
+glib
+glibmm
+fftw3
+libsndfile win-static
+boost-iostreams
+boost-format
+boost-thread
+eigen3
+
+pthreads win
+

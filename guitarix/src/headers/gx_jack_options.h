@@ -34,7 +34,7 @@ class GxBuilder;
 /****************************************************************
  ** class SelectJackControlPgm
  */
-
+/*
 class SelectJackControlPgm: public Gtk::Window {
 private:
     Gtk::Label  *description;
@@ -57,8 +57,8 @@ public:
     static SelectJackControlPgm* create(gx_system::CmdlineOptions& opt, gx_engine::GxMachineBase& machine);
     sigc::signal<void>& signal_close() { return close; }
 };
-
+*/
 /* jack client and port mapping functions */
-bool gx_start_jack_dialog(Glib::RefPtr<Gdk::Pixbuf> gw_ib);
+//bool gx_start_jack_dialog(Glib::RefPtr<Gdk::Pixbuf> gw_ib);
 } // end namespace gx_gui
 #endif // SRC_HEADERS_GX_JACK_OPTIONS_H_

@@ -531,8 +531,8 @@ void always_inline Dsp::compute(int count, FAUSTFLOAT *input0, FAUSTFLOAT *outpu
 {
 	double 	fSlowdw0 = (0.01 * fsliderdw0);
 	double 	fSlowdw1 = (1 - fSlowdw0);
-	FAUSTFLOAT 	dryinput[count];
-	memcpy(&dryinput, input0, count * sizeof(float));
+	FAUSTFLOAT_BUF(dryinput,count);
+	memcpy(dryinput, input0, count * sizeof(float));//MAX FIXED memcpy(&dryinput, input0, count * sizeof(float));
 
 	double fSlow0 = (0.0070000000000000062 * double(fVslider0));
 	double fSlow1 = (0.0070000000000000062 * double(fVslider1));
@@ -552,7 +552,7 @@ void always_inline Dsp::compute(int count, FAUSTFLOAT *input0, FAUSTFLOAT *outpu
 		fRec3[1] = fRec3[0];
 	}
 
-	FAUSTFLOAT bufCl[smpCl.max_out_count(count)];
+	FAUSTFLOAT_BUF(bufCl,smpCl.max_out_count(count));
 	int ReCount = smpCl.up(count, output0, bufCl);
 	for (int i = 0; (i < ReCount); i = (i + 1)) {
 		fRecCl2[0] = (fConstCl6 * ((0.027 * (fRecCl1[1] + fRecCl1[2])) - (fConstCl7 * fRecCl2[1])));

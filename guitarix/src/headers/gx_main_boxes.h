@@ -30,7 +30,7 @@
 
 #ifndef SRC_HEADERS_GX_MAIN_BOXES_H_
 #define SRC_HEADERS_GX_MAIN_BOXES_H_
-
+/*
 #include <gtkmm/liststore.h>
 #include <gtkmm/window.h>
 #include <gtkmm/frame.h>
@@ -43,7 +43,7 @@
 #include <gtkmm/radiomenuitem.h>
 #include <gtkmm/paned.h>
 #include <gxwmm/switch.h>
-
+*/
 namespace gx_gui {
 
 void set_accessible(Gtk::Widget& widget,Gtk::Label& label);

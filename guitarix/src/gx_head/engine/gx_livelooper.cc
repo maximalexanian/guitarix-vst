@@ -67,7 +67,7 @@ int LiveLooper::FileResampler::run(int count, float *input, float *output)
 
 
 
-LiveLooper::LiveLooper(ParamMap& param_, sigc::slot<void> sync_, const string& loop_dir_)
+LiveLooper::LiveLooper(ParamMap& param_, sigc::slot<void()> sync_, const string& loop_dir_)
     : PluginDef(),
       tape1(NULL),
       tape1_size(4194304),
@@ -843,23 +843,23 @@ int LiveLooper::register_par(const ParamReg& reg)
     reg.registerVar("dubber.playall","","B",N_("play all tapes "),&play_all, 0.0, 0.0, 1.0, 1.0);
     reg.registerVar("dubber.dout","","B",N_("bypass the rack for direct output"),&dout, 0.0, 0.0, 1.0, 1.0);
     param["dubber.playall"].signal_changed_float().connect(
-        sigc::hide(sigc::mem_fun(this, &LiveLooper::play_all_tapes)));
+        sigc::hide(sigc::mem_fun(*this, &LiveLooper::play_all_tapes)));
     param.reg_non_midi_par("dubber.savefile", &save_p, false);
     param.reg_preset_string("dubber.filename", "", &preset_name, "tape");
     param["dubber.filename"].signal_changed_string().connect(
-        sigc::hide(sigc::mem_fun(this, &LiveLooper::set_p_state)));
+        sigc::hide(sigc::mem_fun(*this, &LiveLooper::set_p_state)));
     param.reg_string("dubber.loadfile1", "", &load_file1, "tape1");
     param.reg_string("dubber.loadfile2", "", &load_file2, "tape2");
     param.reg_string("dubber.loadfile3", "", &load_file3, "tape3");
     param.reg_string("dubber.loadfile4", "", &load_file4, "tape4");
     param["dubber.loadfile1"].signal_changed_string().connect(
-        sigc::hide(sigc::mem_fun(this, &LiveLooper::load_tape1)));
+        sigc::hide(sigc::mem_fun(*this, &LiveLooper::load_tape1)));
     param["dubber.loadfile2"].signal_changed_string().connect(
-        sigc::hide(sigc::mem_fun(this, &LiveLooper::load_tape2)));
+        sigc::hide(sigc::mem_fun(*this, &LiveLooper::load_tape2)));
     param["dubber.loadfile3"].signal_changed_string().connect(
-        sigc::hide(sigc::mem_fun(this, &LiveLooper::load_tape3)));
+        sigc::hide(sigc::mem_fun(*this, &LiveLooper::load_tape3)));
     param["dubber.loadfile4"].signal_changed_string().connect(
-        sigc::hide(sigc::mem_fun(this, &LiveLooper::load_tape4)));
+        sigc::hide(sigc::mem_fun(*this, &LiveLooper::load_tape4)));
     return 0;
 }
 

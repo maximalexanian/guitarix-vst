@@ -29,7 +29,7 @@ class PluginUI;
 class MainWindow;
 
 namespace gx_gui {
-
+/*
 class uiElement {
 public:
     virtual ~uiElement() {}
@@ -77,7 +77,7 @@ template<>
 inline void uiToggle<bool>::on_parameter_changed(bool v) {
     button->set_active(v);
 }
-
+*/
 /****************************************************************
  ** class GxBuilder
  **
@@ -100,7 +100,7 @@ inline void uiToggle<bool>::on_parameter_changed(bool v) {
  ** template function code mostly copied from Gtk::Builder, look
  ** there for comments.
  */
-
+/*
 class GxBuilder: public Gtk::Builder {
 private:
     // only implemented for base class, make inaccessable
@@ -241,11 +241,11 @@ protected:
     virtual bool load(gx_engine::Plugin *p);
 public:
     UiBuilderImpl(MainWindow *i, StackBoxBuilder *b, std::vector<PluginUI*> *pl=0);
-    bool load_unit(PluginDef *pl);
+	bool load_unit(PluginDef *pl) { return false; }
     friend class gx_engine::GxMachineRemote;
 };
 
 GtkWidget *load_toplevel(GtkBuilder *builder, const char* filename, const char* windowname);
-
+*/
 } /* end of gx_gui namespace */
 #endif  // SRC_HEADERS_GX_UI_BUILDER_H_

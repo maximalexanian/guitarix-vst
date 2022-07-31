@@ -46,7 +46,7 @@ inline unsigned int get_fpu_status_bits() {
 }
 #endif //__i386__
 #endif // !NDEBUG
-#ifdef __SSE__
+#if defined(__SSE__) && !defined(__arm64__)
 
 /* On Intel set FZ (Flush to Zero) and DAZ (Denormals Are Zero)
    flags to avoid costly denormals */
@@ -170,8 +170,8 @@ inline void Accum::add(int diff) {
     n += 1;
     sx += diff;
     sx2 += static_cast<float>(diff) * diff;
-    mn = std::min(mn, diff);
-    mx = std::max(mx, diff);
+    mn = min(mn, diff);
+    mx = max(mx, diff);
 }
 
 
@@ -203,22 +203,84 @@ class MeasureThreadsafe {
     unsigned int MXStatus;
     inline Measure *access() { return atomic_get(pmeasure); }
     inline int ts_diff(const timespec& ts1, const timespec& ts2);
+/*
+#ifdef _WINDOWS
+	LARGE_INTEGER getFILETIMEoffset()
+	{
+		SYSTEMTIME s;
+		FILETIME f;
+		LARGE_INTEGER t;
+
+		s.wYear = 1970;
+		s.wMonth = 1;
+		s.wDay = 1;
+		s.wHour = 0;
+		s.wMinute = 0;
+		s.wSecond = 0;
+		s.wMilliseconds = 0;
+		SystemTimeToFileTime(&s, &f);
+		t.QuadPart = f.dwHighDateTime;
+		t.QuadPart <<= 32;
+		t.QuadPart |= f.dwLowDateTime;
+		return (t);
+	}
+
+	int	clock_gettime(int X, struct timeval *tv)
+	{
+		LARGE_INTEGER           t;
+		FILETIME            f;
+		double                  microseconds;
+		static LARGE_INTEGER    offset;
+		static double           frequencyToMicroseconds;
+		static int              initialized = 0;
+		static BOOL             usePerformanceCounter = 0;
+
+		if (!initialized) {
+			LARGE_INTEGER performanceFrequency;
+			initialized = 1;
+			usePerformanceCounter = QueryPerformanceFrequency(&performanceFrequency);
+			if (usePerformanceCounter) {
+				QueryPerformanceCounter(&offset);
+				frequencyToMicroseconds = (double)performanceFrequency.QuadPart / 1000000.;
+			}
+			else {
+				offset = getFILETIMEoffset();
+				frequencyToMicroseconds = 10.;
+			}
+		}
+		if (usePerformanceCounter) QueryPerformanceCounter(&t);
+		else {
+			GetSystemTimeAsFileTime(&f);
+			t.QuadPart = f.dwHighDateTime;
+			t.QuadPart <<= 32;
+			t.QuadPart |= f.dwLowDateTime;
+		}
+
+		t.QuadPart -= offset.QuadPart;
+		microseconds = (double)t.QuadPart / frequencyToMicroseconds;
+		t.QuadPart = microseconds;
+		tv->tv_sec = t.QuadPart / 1000000;
+		tv->tv_usec = t.QuadPart % 1000000;
+		return (0);
+	}
+#endif
+*/
  public:
     MeasureThreadsafe();
     inline void start() {
 	clear_fpu_status_bits();
 	_MM_SET_EXCEPTION_STATE(0);
-	clock_gettime(CLOCK_MONOTONIC, &t1s);
+//	clock_gettime(CLOCK_MONOTONIC, &t1s);
     }
     inline void pause() {
-	clock_gettime(CLOCK_MONOTONIC, &t1e);
+//	clock_gettime(CLOCK_MONOTONIC, &t1e);
 	FPUStatus = get_fpu_status_bits();
 	MXStatus = _MM_GET_EXCEPTION_STATE();
     }
     inline void cont() {
 	clear_fpu_status_bits();
 	_MM_SET_EXCEPTION_STATE(0);
-	clock_gettime(CLOCK_MONOTONIC, &t2s);
+//	clock_gettime(CLOCK_MONOTONIC, &t2s);
     }
     inline void stop();
     void print(bool verbose = false);
@@ -237,7 +299,7 @@ inline int MeasureThreadsafe::ts_diff(const timespec& ts1, const timespec& ts2) 
 inline void MeasureThreadsafe::stop() {
     Measure& m = *access();
     timespec n;
-    clock_gettime(CLOCK_MONOTONIC, &n);
+//    clock_gettime(CLOCK_MONOTONIC, &n);
     m.FPUStatus2 |= get_fpu_status_bits();
     m.MXStatus2 |= _MM_GET_EXCEPTION_STATE();
     m.FPUStatus1 |= FPUStatus;
@@ -366,7 +428,7 @@ private:
 protected:
     static void make_ending_slash(std::string& dirpath);
 public:
-    BasicOptions();
+    BasicOptions(const char *modulepath);
     ~BasicOptions();
     std::string get_user_filepath(const std::string& basename) const { return user_dir + basename; }
     std::string get_user_ir_filepath(const std::string& basename) const { return user_IR_dir + basename; }
@@ -456,7 +518,7 @@ public:
     bool reload_lv2_presets;
 
 public:
-    CmdlineOptions();
+    CmdlineOptions(const char *modulepath);
     ~CmdlineOptions();
     void process(int argc, char** argv);
     const std::string& get_path_to_program() const { return path_to_program; }

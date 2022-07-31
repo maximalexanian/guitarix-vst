@@ -682,7 +682,7 @@ void SettingsFileHeader::read_major_minor(JsonParser& jp) {
 }
 
 bool SettingsFileHeader::make_empty_settingsfile(const string& name) {
-    ofstream os(name.c_str());
+    ofstream os(name.c_str(), ios_base::binary);
     if (!os.good()) {
 	return false;
     }
@@ -725,7 +725,7 @@ JsonParser *StateFile::create_reader() {
 	is->seekg(0);
     } else {
 	check_mtime(filename, mtime);
-	is = new ifstream(filename.c_str());
+	is = new ifstream(filename.c_str(), ios_base::binary);
     }
     JsonReader *jp = new JsonReader(is);
     jp->next(JsonParser::begin_array);
@@ -775,7 +775,7 @@ public:
 ModifyState::ModifyState(const string& name)
     : filename(name),
       tmpfile(filename + "_tmp"),
-      os(tmpfile.c_str()) {
+      os(tmpfile.c_str(), ios_base::binary) {
     set_stream(&os);
     begin_array();
     SettingsFileHeader::write(*this);
@@ -816,7 +816,7 @@ public:
 
 ModifyStatePreservePreset::ModifyStatePreservePreset(const string& name, bool *preserve_preset)
     : ModifyState(name),
-      is(name.c_str()),
+      is(name.c_str(), ios_base::binary),
       jp(&is) {
     bool copied = false;
     if (is.good()) {
@@ -1065,7 +1065,7 @@ void PresetFile::open() {
 	return;
     }
     check_mtime(filename, mtime);
-    is = new ifstream(filename.c_str());
+    is = new ifstream(filename.c_str(), ios_base::binary);
     JsonParser jp(is);
     jp.next(JsonParser::begin_array);
     header.read(jp);
@@ -1157,7 +1157,7 @@ PresetTransformer::PresetTransformer(string fname, istream* is_)
     : JsonWriter(),
       filename(fname),
       tmpfile(filename + "_tmp"),
-      os(tmpfile.c_str()),
+      os(tmpfile.c_str(), ios_base::binary),
       is(is_),
       jp(is_),
       header() {
@@ -1229,9 +1229,10 @@ ModifyPreset::~ModifyPreset() {
     close();
 }
 
-ModifyPreset::ModifyPreset(string fname, istream* is, const Glib::ustring& presname)
+ModifyPreset::ModifyPreset(string fname, istream* is, const Glib::ustring& prsname)
     : PresetTransformer(fname, is) {
     if (!is->fail()) {
+    std::string presname(prsname);
 	while (jp.peek() != JsonParser::end_array) {
 	    jp.next(JsonParser::value_string);
 	    if (jp.current_value() == presname) {
@@ -1519,7 +1520,7 @@ void PresetBanks::save() {
 	return;
     }
     std::string tmpfile = filepath + "_tmp";
-    ofstream os(tmpfile.c_str());
+    ofstream os(tmpfile.c_str(), ios_base::binary);
     gx_system::JsonWriter jw(&os);
     jw.begin_array(true);
     for (iterator i = begin(); i != end(); ++i) {
@@ -1546,7 +1547,7 @@ void PresetBanks::save() {
 }
 
 void PresetBanks::parse_factory_list(const std::string& path) {
-    ifstream is(Glib::build_filename(path, "dirlist.js").c_str());
+    ifstream is(Glib::build_filename(path, "dirlist.js").c_str(), ios_base::binary);
     if (is.fail()) {
 	gx_print_error(_("Presets"), _("factory preset list not found"));
 	return;
@@ -1585,7 +1586,7 @@ void PresetBanks::parse_factory_list(const std::string& path) {
 }
 
 void PresetBanks::parse_bank_list(bl_type::iterator pos) {
-    ifstream is(filepath.c_str());
+    ifstream is(filepath.c_str(), ios_base::binary);
     if (is.fail()) {
 	gx_print_error(
 	    _("Presets"), boost::format(_("banks not found: '%1%'")) % filepath);

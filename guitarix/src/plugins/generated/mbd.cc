@@ -796,8 +796,8 @@ const char *Dsp::glade_def = "\
                             <child>\n\
                               <object class=\"GxSmallKnob\" id=\"gxsmallknob7\">\n\
                                 <property name=\"visible\">True</property>\n\
-                                <property name=\"can_focus\">True</property>\n\
-                                <property name=\"receives_default\">True</property>\n\
+                                <property name=\"can_focus\">True</property>\n"
+"                                <property name=\"receives_default\">True</property>\n\
                                 <property name=\"var_id\">mbd.crossover_b1_b2</property>\n\
                               </object>\n\
                               <packing>\n\
@@ -1070,8 +1070,8 @@ const char *Dsp::glade_def = "\
                                   <object class=\"GtkLabel\" id=\"label_93:rack_label\">\n\
                                     <property name=\"visible\">True</property>\n\
                                     <property name=\"can_focus\">False</property>\n\
-                                    <property name=\"label\" translatable=\"yes\">Offset</property>\n\
-                                  </object>\n\
+                                    <property name=\"label\" translatable=\"yes\">Offset</property>\n"
+"                                  </object>\n\
                                   <packing>\n\
                                     <property name=\"expand\">False</property>\n\
                                     <property name=\"fill\">False</property>\n\
@@ -1357,8 +1357,8 @@ const char *Dsp::glade_def = "\
                   <object class=\"GtkVBox\" id=\"vbox5\">\n\
                     <property name=\"visible\">True</property>\n\
                     <property name=\"can_focus\">False</property>\n\
-                    <child>\n\
-                      <object class=\"GtkLabel\" id=\"label_99:rack_label\">\n\
+                    <child>\n"
+"                      <object class=\"GtkLabel\" id=\"label_99:rack_label\">\n\
                         <property name=\"visible\">True</property>\n\
                         <property name=\"can_focus\">False</property>\n\
                         <property name=\"label\" translatable=\"yes\">Gain</property>\n\

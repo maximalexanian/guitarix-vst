@@ -29,7 +29,7 @@
 
 #ifndef SRC_HEADERS_GX_MAIN_INTERFACE_H_
 #define SRC_HEADERS_GX_MAIN_INTERFACE_H_
-
+/*
 #include <gxwmm/bigknob.h>
 #include <gxwmm/midknob.h>
 #include <gxwmm/smallknob.h>
@@ -54,7 +54,7 @@
 #include <gtkmm/checkmenuitem.h>
 #include <gtkmm/radiomenuitem.h>
 #include <gtkmm/builder.h>
-
+*/
 #include <iostream>
 #include <map>
 #include <string>

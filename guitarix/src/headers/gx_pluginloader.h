@@ -87,6 +87,7 @@ public:
 
 class UiBuilderBase: public UiBuilder {
 public:
+    virtual ~UiBuilderBase() = default;
     virtual bool load(Plugin *p) = 0;
 };
 
@@ -142,7 +143,7 @@ protected:
 	PLUGIN_POS_COUNT		// keep last one
     };
     pluginmap pmap;
-    sigc::signal<void,const char*,bool> insert_remove;
+    sigc::signal<void (const char*,bool)> insert_remove;
 public:
     PluginListBase();
     ~PluginListBase();
@@ -185,7 +186,7 @@ public:
     void ordered_mono_list(list<Plugin*>& mono, int mode);
     void ordered_stereo_list(list<Plugin*>& stereo, int mode);
     void ordered_list(list<Plugin*>& l, bool stereo, int flagmask, int flagvalue);
-    sigc::signal<void,const char*,bool>& signal_insert_remove() { return insert_remove; }
+    sigc::signal<void (const char*,bool)>& signal_insert_remove() { return insert_remove; }
 #ifndef NDEBUG
     void printlist(bool ordered = true);
 #endif

@@ -27,7 +27,7 @@
 #include "engine.h"
 
 namespace gx_resample {
-
+	
 // copyed gcd from (zita) resampler.cc to get ratio_a and ratio_b for
 // calculate the correct buffer size resulting from resample
 static unsigned int gcd (unsigned int a, unsigned int b)

@@ -32,8 +32,8 @@
 #ifndef SRC_HEADERS_GUITARIX_H_
 #define SRC_HEADERS_GUITARIX_H_
 
-#include <gtk/gtk.h>
-#include <gdk/gdkkeysyms.h>
+//#include <gtk/gtk.h>
+//#include <gdk/gdkkeysyms.h>
 
 #ifndef GDK_KEY_0
 /* 
@@ -64,8 +64,12 @@
 #define GDK_KEY_Z GDK_Z
 #endif
 
-#include <gtkmm.h>
-#include <curl/curl.h>
+#ifdef _WINDOWS
+   // #define usleep(x) std::this_thread::sleep_for(std::chrono::microseconds(x))
+#endif
+
+//#include <gtkmm.h>
+//#include <curl/curl.h>
 
 #include "engine.h"
 #include "jsonrpc.h"
@@ -78,14 +82,14 @@
 #include "gx_jack_options.h"
 #include "gx_portmap.h"
 #include "gx_main_midi.h"
-#include "gx_main_boxes.h"
+//#include "gx_main_boxes.h"
 #include "gx_child_process.h"
-#include "gx_main_interface.h"
-#include "gx_jconv_settings.h"
-#include "gx_sequencer_settings.h"
-#include "gx_stackbox_builder.h"
-#include "gx_preset_window.h"
-#include "ladspalist.h"
-#include "gx_main_window.h"
+//#include "gx_main_interface.h"
+//#include "gx_jconv_settings.h"
+//#include "gx_sequencer_settings.h"
+//#include "gx_stackbox_builder.h"
+//#include "gx_preset_window.h"
+//#include "ladspalist.h"
+//#include "gx_main_window.h"
 
 #endif  // SRC_HEADERS_GUITARIX_H_

@@ -336,7 +336,7 @@ void always_inline Dsp::compute(int count, FAUSTFLOAT *input0, FAUSTFLOAT *outpu
 		}
 	}
 
-	FAUSTFLOAT bufCl[smpCl.max_out_count(count)];
+	FAUSTFLOAT_BUF(bufCl,smpCl.max_out_count(count));
 	int ReCount = smpCl.up(count, output0, bufCl);
 	for (int i = 0; (i < ReCount); i = (i + 1)) {
 		bufCl[i] = FAUSTFLOAT(double(asymclip4(double(double(bufCl[i])))));

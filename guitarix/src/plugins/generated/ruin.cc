@@ -3,7 +3,7 @@
 
 #include "gx_faust_support.h"
 #include "gx_plugin.h"
-#include "trany.h"
+#include "../trany.h"
 #include <string.h>
 
 namespace pluginlib {
@@ -193,10 +193,10 @@ void always_inline Dsp::compute(int count, FAUSTFLOAT *input0, FAUSTFLOAT *outpu
 {
 	double 	fSlowdw0 = (0.01 * fsliderdw0);
 	double 	fSlowdw1 = (1 - fSlowdw0);
-	FAUSTFLOAT 	dryinput[count];
-	memcpy(&dryinput, input0, count * sizeof(float));
+	FAUSTFLOAT_BUF(dryinput,count);
+	memcpy(dryinput, input0, count * sizeof(float));//MAX FIXED memcpy(&dryinput, input0, count * sizeof(float));
 
-	FAUSTFLOAT buf[smp.max_out_count(count)];
+	FAUSTFLOAT_BUF(buf,smp.max_out_count(count));
 	int ReCount = smp.up(count, input0, buf);
 	double fSlow0 = (0.0070000000000000062 * (1.0 - double(fVslider0)));
 	double fSlow1 = (0.0070000000000000062 * double(fVslider1));

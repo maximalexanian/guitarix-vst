@@ -445,7 +445,7 @@ private:
     bool need_thaw;
     int size_x;
     int size_y;
-    sigc::slot<void> work;
+    sigc::slot<void()> work;
 private:
     void do_thaw();
     bool thaw_timeout();
@@ -455,7 +455,7 @@ public:
     Freezer();
     ~Freezer();
     void freeze_until_width_update(Gtk::Window *w, int width);
-    void set_slot(sigc::slot<void> w);
+    void set_slot(sigc::slot<void()> w);
     void freeze_and_size_request(Gtk::Window *w, int width, int height);
     bool check_thaw(int width, int height);
 };

@@ -25,5 +25,12 @@ template<class T> inline T mydsp_faustpower6_f(T x) {return (((((x * x) * x) * x
 #ifndef NC_
 #define NC_(Context, String) (String)
 #endif
+#ifndef _
+#define _(String) (String)
+#endif
 
-#define always_inline inline __attribute__((__always_inline__))
+#define always_inline inline
+//#define always_inline inline __attribute__((__always_inline__))
+
+#define FAUSTFLOAT_BUF(buf, len) FAUSTFLOAT *buf=(FAUSTFLOAT*)alloca(sizeof(FAUSTFLOAT)*len)
+#define FLOAT_BUF(b,s) float *b=(float*)alloca(sizeof(float)*s)

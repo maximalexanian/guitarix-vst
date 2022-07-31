@@ -338,7 +338,7 @@ void always_inline Dsp::compute(int count, FAUSTFLOAT *input0, FAUSTFLOAT *outpu
 		}
 	}
 
-	FAUSTFLOAT bufCl[smpCl.max_out_count(count)];
+	FAUSTFLOAT_BUF( bufCl,smpCl.max_out_count(count));
 	int ReCount = smpCl.up(count, output0, bufCl);
 	for (int i = 0; (i < ReCount); i = (i + 1)) {
 		fRecCl2[0] = (fConstCl6 * ((0.027 * (fRecCl1[1] + fRecCl1[2])) - (fConstCl7 * fRecCl2[1])));

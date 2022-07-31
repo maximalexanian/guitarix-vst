@@ -26,7 +26,7 @@
 #define SRC_HEADERS_GX_GUI_HELPERS_H_
 
 namespace gx_gui {
-
+/*
 gint gx_nchoice_dialog_without_entry(
     const char* window_title,
     const char* msg,
@@ -36,14 +36,15 @@ gint gx_nchoice_dialog_without_entry(
     const gint  default_response,
     Glib::RefPtr<Gdk::Pixbuf> gw_ib
     );
-
+*/
 /* extra GUI helpers */
+/*
 int  gx_message_popup(const char*);
 void show_error_msg(const string& msg);
 void child_set_property(Gtk::Container& container, Gtk::Widget& child, const char *property_name, bool value);
 Glib::ustring logarithmic_format_value(double v, int prec);
 int logarithmic_input_value(gpointer obj, gpointer nv);
-
+*/
 /* -------------------------------------------------------------------------- */
 } /* end of gx_gui namespace */
 #endif  // SRC_HEADERS_GX_GUI_HELPERS_H_

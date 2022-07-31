@@ -250,7 +250,7 @@ string JackCapture::make_fname(string buf, size_t j, size_t i, int n) {
 list<string> JackCapture::capture_command(int& seq) {
     // open jack_capture setup file
     string gfilename = gx_system::sysvar.gx_user_dir + gx_system::sysvar.jcapsetup_file;
-    ifstream f(gfilename.c_str());
+    ifstream f(gfilename.c_str(), ios_base::binary);
 
     list<string> l;
     string buf;

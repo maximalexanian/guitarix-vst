@@ -32,6 +32,16 @@
 #define SCHED_IDLE SCHED_OTHER  // non-linux systems
 #endif
 
+#ifdef _WINDOWS
+    #include <chrono>
+    #include <thread>
+    #undef _stat
+    #define usleep(x) std::this_thread::sleep_for(std::chrono::microseconds(x))
+    #define WHAT(x) e.what()
+#else
+    #define WHAT(x) e.what()
+#endif
+
 namespace gx_preset {
 
 /****************************************************************
@@ -427,8 +437,8 @@ void PresetIO::read_online(gx_system::JsonParser &jp) {
     std::string FILE_;
     std::string INFO_;
     std::string AUTHOR_;
-    ifstream is(opt.get_online_config_filename().c_str());
-    ofstream os(opt.get_online_presets_filename().c_str());
+    ifstream is(opt.get_online_config_filename().c_str(), ios_base::binary);
+    ofstream os(opt.get_online_presets_filename().c_str(), ios_base::binary);
     if (!is.fail() && !os.fail()) {
         gx_system::JsonParser jp(&is);
         try {
@@ -575,7 +585,7 @@ void StateIO::read_state(gx_system::JsonParser &jp, const gx_system::SettingsFil
 	} else if (jp.current_value() == "midi_ctrl_names") {
 	    midi_std_control.readJSON(jp);
 	} else if (jp.current_value() == "jack_connections") {
-	    jack.read_connections(jp);
+		jack.read_connections(jp);
 	} else {
 	    gx_print_warning(
 		_("recall settings"),
@@ -604,8 +614,10 @@ void StateIO::write_state(gx_system::JsonWriter &jw, bool no_preset) {
 	write_intern(jw, false);
     }
 
-    jw.write("jack_connections");
+#if !defined(_WINDOWS) && !defined(__APPLE__)
+	jw.write("jack_connections");
     jack.write_connections(jw);
+#endif
 
     jw.newline();
 }
@@ -622,7 +634,7 @@ PluginPresetList::PluginPresetList(const std::string& fname, gx_engine::ParamMap
 
 bool PluginPresetList::start() {
     is.close();
-    is.open(filename.c_str());
+    is.open(filename.c_str(), ios_base::binary);
     jp.set_streampos(0);
     if (is.fail()) {
 	return false;
@@ -681,13 +693,14 @@ bool PluginPresetList::next(Glib::ustring& name, bool *is_set) {
     return true;
 }
 
-bool PluginPresetList::set(const Glib::ustring& name) {
+bool PluginPresetList::set(const Glib::ustring& nme) {
     gx_engine::paramlist plist;
     if (!start()) {
 	return false;
     }
     bool ret = false;
     try {
+    std::string name(nme);
 	while (jp.peek() != gx_system::JsonParser::end_array) {
 	    jp.next(gx_system::JsonParser::value_string);
 	    if (jp.current_value() != name) {
@@ -758,10 +771,11 @@ void PluginPresetList::write_values(gx_system::JsonWriter& jw, std::string id, c
     jw.end_object(true);
 }
 
-void PluginPresetList::save(const Glib::ustring& name, const std::string& id, const char **groups) {
+void PluginPresetList::save(const Glib::ustring& nme, const std::string& id, const char **groups) {
     try {
+    std::string name(nme);
 	std::string tmpfile(filename + "_tmp");
-	ofstream os(tmpfile.c_str());
+	ofstream os(tmpfile.c_str(), ios_base::binary);
 	gx_system::JsonWriter jw(&os);
 	jw.begin_array();
 	jw.write("gx_plugin_version");
@@ -803,10 +817,11 @@ void PluginPresetList::save(const Glib::ustring& name, const std::string& id, co
     }
 }
 
-bool PluginPresetList::remove(const Glib::ustring& name) {
+bool PluginPresetList::remove(const Glib::ustring& nme) {
     bool ret = false;
 	if (start()) {
 		try {
+            std::string name(nme);
 			std::string tmpfile(filename + "_tmp");
 			ofstream os(tmpfile.c_str());
 			gx_system::JsonWriter jw(&os);
@@ -886,9 +901,11 @@ GxSettings::GxSettings(gx_system::CmdlineOptions& opt, gx_jack::GxJack& jack_, g
     instance = this;
     GxExit::get_instance().signal_exit().connect(
 	sigc::mem_fun(*this, &GxSettings::exit_handler));
-    jack.signal_client_change().connect(
+#if !defined(_WINDOWS) && !defined(__APPLE__)
+	jack.signal_client_change().connect(
 	sigc::mem_fun(*this, &GxSettings::jack_client_changed));
-    set_preset.connect(sigc::mem_fun(*this, &GxSettings::preset_sync_set));
+#endif
+	set_preset.connect(sigc::mem_fun(*this, &GxSettings::preset_sync_set));
     get_sequencer_p.connect(sigc::mem_fun(*this, &GxSettings::on_get_sequencer_pos));
 }
 
@@ -903,7 +920,7 @@ void GxSettings::auto_save_state() {
     if (state_loaded) {
 	if (setting_is_preset()) {
 	    gx_system::PresetFile *pf = get_current_bank_file();
-	    if (pf->get_type() == gx_system::PresetFile::PRESET_SCRATCH &&
+	    if (pf && pf->get_type() == gx_system::PresetFile::PRESET_SCRATCH &&
 		!pf->get_flags()) {
 		save(*pf, current_name);
 	    }
@@ -938,6 +955,12 @@ void GxSettings::jack_client_changed() {
     loadstate();
 }
 
+#if !defined(_WINDOWS) && !defined(__APPLE__)
+#define JACK_INSTANCE_NAME jack.get_default_instancename()
+#else
+#define JACK_INSTANCE_NAME string("gx_head")
+#endif
+
 string GxSettings::make_default_state_filename() {
     if (!options.get_loadfile().empty()) {
 	return options.get_loadfile();
@@ -950,7 +973,7 @@ string GxSettings::make_default_state_filename() {
 	}
     }
     return options.get_user_filepath(
-	jack.get_default_instancename() + statename_postfix);
+		JACK_INSTANCE_NAME + statename_postfix);
 }
 
 string GxSettings::make_state_filename() {
@@ -958,21 +981,25 @@ string GxSettings::make_state_filename() {
 	return options.get_loadfile();
     }
     return options.get_user_filepath(
-	jack.get_instancename() + statename_postfix);
+		JACK_INSTANCE_NAME + statename_postfix);
 }
 
 bool GxSettings::check_create_config_dir(const Glib::ustring& dir) {
-    if (access((Glib::build_filename(dir, ".")).c_str(), R_OK|W_OK|X_OK) != 0) {
+    if (access((Glib::build_filename(dir, ".")).c_str(), R_OK|W_OK/*|X_OK*/) != 0) {
 	if (errno != ENOENT) {
 	    throw GxFatalError(
 		boost::format(_("no read/write access in guitarix config dir '%1%'"))
 		% dir);
 	}
+#if !defined(_WINDOWS)
 	if (mkdir(dir.c_str(), 0777) != 0) {
 	    throw GxFatalError(
 		boost::format(_("can't create guitarix config dir '%1%'"))
 		% dir);
 	}
+#else
+       // dsfsdfsd
+#endif
 	return true;
     }
     return false;
@@ -1030,7 +1057,7 @@ gx_system::PresetFile* GxSettings::bank_insert_uri(const Glib::ustring& uri, boo
     try {
 	rem->copy(dest);
     } catch (Gio::Error& e) {
-	gx_print_error(e.what().c_str(), _("can't copy to config dir"));
+	gx_print_error(WHAT(e), _("can't copy to config dir"));
 	return 0;
     }
     gx_system::PresetFile *f = new gx_system::PresetFile();
@@ -1041,7 +1068,7 @@ gx_system::PresetFile* GxSettings::bank_insert_uri(const Glib::ustring& uri, boo
 	try {
 	    dest->remove();
 	} catch (Gio::Error& e) {
-	    gx_print_error(e.what().c_str(), _("can't remove copied file!?"));
+	    gx_print_error(WHAT(e), _("can't remove copied file!?"));
 	}
 	return 0;
     }
@@ -1049,7 +1076,7 @@ gx_system::PresetFile* GxSettings::bank_insert_uri(const Glib::ustring& uri, boo
 	try {
 	    rem->remove();
 	} catch (Gio::Error& e) {
-	    gx_print_error(e.what().c_str(), _("can't move; file has been copied"));
+	    gx_print_error(WHAT(e), _("can't move; file has been copied"));
 	}
     }
     return f;
@@ -1065,7 +1092,7 @@ gx_system::PresetFile* GxSettings::bank_insert_content(const Glib::ustring& uri,
 	s->write(content);
 	s->close();
     } catch (Gio::Error& e) {
-	gx_print_error(e.what().c_str(), _("can't bank"));
+	gx_print_error(WHAT(e), _("can't bank"));
 	return 0;
     }
     gx_system::PresetFile *f = new gx_system::PresetFile();
@@ -1076,7 +1103,7 @@ gx_system::PresetFile* GxSettings::bank_insert_content(const Glib::ustring& uri,
 	try {
 	    dest->remove();
 	} catch (Gio::Error& e) {
-	    gx_print_error(e.what().c_str(), _("can't remove copied file!?"));
+	    gx_print_error(WHAT(e), _("can't remove copied file!?"));
 	}
 	return 0;
     }
@@ -1103,6 +1130,12 @@ bool GxSettings::rename_bank(const Glib::ustring& oldname, Glib::ustring& newnam
     return GxSettingsBase::rename_bank(oldname, newname, newfile);
 }
 
+#if !defined(_WINDOWS) && !defined(__APPLE__)
+#define JACK_INSTANCE_NAME_S gx_jack::GxJack::get_default_instancename()
+#else
+#define JACK_INSTANCE_NAME_S string("gx_head")
+#endif
+
 //static
 bool GxSettings::check_settings_dir(gx_system::CmdlineOptions& opt, bool *need_new_preset) {
     bool copied_from_old = false;
@@ -1116,7 +1149,7 @@ bool GxSettings::check_settings_dir(gx_system::CmdlineOptions& opt, bool *need_n
 	check_create_config_dir(opt.get_loop_dir());
 	check_create_config_dir(opt.get_user_IR_dir());
 	check_create_config_dir(opt.get_temp_dir());
-	std::string fname = gx_jack::GxJack::get_default_instancename() + statename_postfix;
+	std::string fname = JACK_INSTANCE_NAME_S + statename_postfix;
 	if (access(Glib::build_filename(opt.get_old_user_dir(), fname).c_str(), R_OK) == 0) {
 	    copied_from_old = true;
 	    Glib::RefPtr<Gio::File> f = Gio::File::create_for_path(
@@ -1124,19 +1157,19 @@ bool GxSettings::check_settings_dir(gx_system::CmdlineOptions& opt, bool *need_n
 	    try {
 		f->copy(Gio::File::create_for_path(opt.get_user_filepath(fname)));
 	    } catch (Gio::Error& e) {
-		gx_print_error(e.what().c_str(), _("can't copy to new config dir"));
+		gx_print_error(WHAT(e), _("can't copy to new config dir"));
 	    }
 	}
 	fname = Glib::build_filename(
 	    opt.get_old_user_dir(),
-	    gx_jack::GxJack::get_default_instancename() + "pre_rc");
+		JACK_INSTANCE_NAME_S + "pre_rc");
 	if (access(fname.c_str(), R_OK) == 0) {
 	    Glib::RefPtr<Gio::File> f = Gio::File::create_for_path(fname);
 	    oldpreset = opt.get_preset_filepath("oldpresets.gx");
 	    try {
 		f->copy(Gio::File::create_for_path(oldpreset));
 	    } catch (Gio::Error& e) {
-		gx_print_error(e.what().c_str(), _("can't copy to new config preset dir"));
+		gx_print_error(WHAT(e), _("can't copy to new config preset dir"));
 		oldpreset = "";
 	    }
 	}
@@ -1159,7 +1192,7 @@ bool GxSettings::check_settings_dir(gx_system::CmdlineOptions& opt, bool *need_n
     }
     fname = opt.get_preset_filepath(bank_list);
     if (access(fname.c_str(), R_OK) != 0) {
-	ofstream f(fname.c_str());
+	ofstream f(fname.c_str(), ios_base::binary);
 	if (!f.good()) {
 	    throw GxFatalError(
 		boost::format(_("can't create '%1%' in directory '%2%'"))
@@ -1243,8 +1276,8 @@ void GxSettings::on_get_sequencer_pos() {
 void *GxSettings::sync_run() {
     while (true) {
         get_sequencer_p();
-        usleep(50000);
-        if (gx_system::atomic_get(sequencer_pos) == 0) {
+		usleep(50000);
+		if (gx_system::atomic_get(sequencer_pos) == 0) {
               set_preset();
             break;
         }

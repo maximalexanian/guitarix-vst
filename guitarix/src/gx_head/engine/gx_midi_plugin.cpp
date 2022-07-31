@@ -78,7 +78,8 @@ void MidiAudioBuffer::fill_buffer(int count, float *input, float*,
     if (!self.jack) {
 	return;
     }
-    void *buf = self.jack->get_midi_buffer(count);
+#if !defined(_WINDOWS) && !defined(__APPLE__)
+	void *buf = self.jack->get_midi_buffer(count);
     if (buf) {
 	float load = self.jack->get_jcpu_load();
 	Load ol = (load < 65.0 ? load_low : load_high);
@@ -89,6 +90,7 @@ void MidiAudioBuffer::fill_buffer(int count, float *input, float*,
 	self.midi.process_midi(count, input, buf, load,
 			       self.tuner.get_freq(), self.tuner.get_note());
     }
+#endif
 }
 
 void MidiAudioBuffer::init(unsigned int samplingFreq, PluginDef *plugin) {

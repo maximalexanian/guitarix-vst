@@ -21,10 +21,11 @@
  *
  * ----------------------------------------------------------------------------
  */
+#define GSEAL(ident)      ident
 
 #include <guitarix.h>
-#include <gxw/GxLevelSlider.h>
-#include <gtkmm/accelmap.h>
+//#include <gxw/GxLevelSlider.h>
+//#include <gtkmm/accelmap.h>
 #include "jsonrpc.h"
 
 /****************************************************************
@@ -389,7 +390,7 @@ void Freezer::freeze(Gtk::Window *w, int width, int height) {
     }
 }
 
-void Freezer::set_slot(sigc::slot<void> w) {
+void Freezer::set_slot(sigc::slot<void()> w) {
     if (size_x == -1) {
 	w();
     } else {

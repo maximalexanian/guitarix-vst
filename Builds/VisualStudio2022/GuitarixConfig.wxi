@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+
+  <?define MLBuild=1995?>
+
+  <?if $(var.Configuration) = "Guitarix"?>
+    <?define ShortName = "Guitarix"?>
+    <?define DisplayName = "Guitarix"?>
+    <?define AppVersion = "1.38.1"?>
+    <?define AppVerMajor = "1"?>
+    <?define ProductVersion = "1.38.1.$(var.MLBuild)"?>
+    <?define Copyright = "Copyright (C) Hermann Meyer, James Warden, Andreas Degert, Pete Shorthose; Portions (C) 2022 Maxim Alexanian"?>
+    <?define AboutURL = "https://github.com/maximalexanian/guitarix-vst"?>
+    <?define HelpURL = "https://github.com/maximalexanian/guitarix-vst"?>
+    <?define pguidprefix = "3a123456-86C7-4D14-AEC1-"?>
+    
+    <?define ConfName = "Guitarix"?>
+  <?endif?>
+
+  <?define guidprefix = "$(var.pguidprefix)1"?>
+  <?define uguid = "$(var.guidprefix)FF5110BA4FD"?>
+  <?define fguidprefix = "$(var.guidprefix)FF3C8ABC4"?>
+
+  <?define InstallName="$(var.Configuration)"?>
+  <?define xguid = "$(var.guidprefix)FF5110BA4FD"?>
+
+  <?define CompanyNameS = "Guitarix"?>
+  <?define CompanyName = "Guitarix"?>
+
+  <?ifndef CabName?>
+    <?define CabName = "$(var.ShortName)"?>
+  <?endif?>
+  <?ifndef DisplayName?>
+    <?define DisplayName = "$(var.ShortName)"?>
+  <?endif?>
+  
+  <?define ProductString = "$(var.DisplayName)"?>
+</Include>

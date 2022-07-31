@@ -1,0 +1,2539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		50152786286259FA00D73331 /* Installer */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 50152787286259FA00D73331 /* Build configuration list for PBXAggregateTarget "Installer" */;
+			buildPhases = (
+				5015279028625A2100D73331 /* ShellScript */,
+			);
+			dependencies = (
+				5015278B28625A1800D73331 /* PBXTargetDependency */,
+				5015278D28625A1800D73331 /* PBXTargetDependency */,
+				5015278F28625A1800D73331 /* PBXTargetDependency */,
+			);
+			name = Installer;
+			productName = Installer;
+		};
+		B403409FFEA7B4739C52B329 /* Guitarix - All */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F35B8054CA34D8F8B437741D /* Build configuration list for PBXAggregateTarget "Guitarix - All" */;
+			buildPhases = (
+			);
+			dependencies = (
+				EF2C0CB1973C10046E26C4C8 /* PBXTargetDependency */,
+				002A06DB312AF53F8A74B282 /* PBXTargetDependency */,
+				479F405B16EF49136CBE510C /* PBXTargetDependency */,
+				ACF34DC616FF963D10EF008E /* PBXTargetDependency */,
+			);
+			name = "Guitarix - All";
+			productName = Guitarix;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0D318062A8BD054D1BAEA6F5 /* include_juce_audio_plugin_client_VST_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48E09A34905816955A8B34A0 /* include_juce_audio_plugin_client_VST_utils.mm */; };
+		0DE139756296B8903499B942 /* include_juce_core.mm in Sources */ = {isa = PBXBuildFile; fileRef = C29A1BC24C1711233035D790 /* include_juce_core.mm */; };
+		0FDD57C7CCA895FD28EDF444 /* include_juce_audio_plugin_client_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A79F11938E0D9DD1C15C4C0 /* include_juce_audio_plugin_client_utils.cpp */; };
+		273586EC2BB99A903DBDF649 /* include_juce_audio_plugin_client_Standalone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C8324FCA865726C18FF062DD /* include_juce_audio_plugin_client_Standalone.cpp */; };
+		2BB1639D21FAA42364B6D7DD /* include_juce_audio_basics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72A239A9C67B20A94BDC85E0 /* include_juce_audio_basics.mm */; };
+		35D64D7F716EAFB2EB257607 /* include_juce_audio_devices.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CD9CC55C0DAF25F610429A5 /* include_juce_audio_devices.mm */; };
+		4216B35C58A867B6D8A4BADA /* include_juce_events.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8DAE2547D48F0E7EC18368C /* include_juce_events.mm */; };
+		5015279728636F4800D73331 /* GetPrefsPath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5015279628636F4800D73331 /* GetPrefsPath.mm */; };
+		50161D8728553097003AF984 /* libglib-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9C27FBCD87005B9F44 /* libglib-2.0.a */; };
+		50161D8828553097003AF984 /* libgio-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7A27FBCD94005B9F44 /* libgio-2.0.a */; };
+		50161D8928553097003AF984 /* libgmodule-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4327FBCD87005B9F44 /* libgmodule-2.0.a */; };
+		50161D8B28553097003AF984 /* libgobject-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4827FBCD87005B9F44 /* libgobject-2.0.a */; };
+		50161DB72858044B003AF984 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DB22858044B003AF984 /* libmp3lame.a */; };
+		50161DB82858044B003AF984 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DB22858044B003AF984 /* libmp3lame.a */; };
+		50161DBC2858044B003AF984 /* libmpg123.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DB32858044B003AF984 /* libmpg123.a */; };
+		50161DBD2858044B003AF984 /* libmpg123.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DB32858044B003AF984 /* libmpg123.a */; };
+		50161DC32858185B003AF984 /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DBE2858185B003AF984 /* libpcre.a */; };
+		50161DC42858185B003AF984 /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DBE2858185B003AF984 /* libpcre.a */; };
+		50161DC82858185B003AF984 /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DBF2858185B003AF984 /* libffi.a */; };
+		50161DC92858185B003AF984 /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DBF2858185B003AF984 /* libffi.a */; };
+		50161E1E2859118A003AF984 /* include_juce_audio_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50161E1A2859118A003AF984 /* include_juce_audio_utils.mm */; };
+		50161E212859118A003AF984 /* include_juce_audio_formats.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50161E1D2859118A003AF984 /* include_juce_audio_formats.mm */; };
+		50161E7328591A45003AF984 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161E5B285919E6003AF984 /* libresolv.tbd */; };
+		50161E7428591A45003AF984 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161E5C285919F0003AF984 /* libiconv.tbd */; };
+		50161E7528591A45003AF984 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161E5B285919E6003AF984 /* libresolv.tbd */; };
+		50161E7628591A45003AF984 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161E5C285919F0003AF984 /* libiconv.tbd */; };
+		50161E7928591A46003AF984 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161E5B285919E6003AF984 /* libresolv.tbd */; };
+		50161E7A28591A46003AF984 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161E5C285919F0003AF984 /* libiconv.tbd */; };
+		50246FA127FBCD95005B9F44 /* libgmodule-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4327FBCD87005B9F44 /* libgmodule-2.0.a */; };
+		50246FA327FBCD95005B9F44 /* libgmodule-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4327FBCD87005B9F44 /* libgmodule-2.0.a */; };
+		50246FB527FBCD95005B9F44 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4727FBCD87005B9F44 /* libvorbisfile.a */; };
+		50246FB727FBCD95005B9F44 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4727FBCD87005B9F44 /* libvorbisfile.a */; };
+		50246FBA27FBCD95005B9F44 /* libgobject-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4827FBCD87005B9F44 /* libgobject-2.0.a */; };
+		50246FBC27FBCD95005B9F44 /* libgobject-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4827FBCD87005B9F44 /* libgobject-2.0.a */; };
+		502470A527FBCD96005B9F44 /* libboost_iostreams.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E7B27FBCD87005B9F44 /* libboost_iostreams.a */; };
+		502470A727FBCD96005B9F44 /* libboost_iostreams.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E7B27FBCD87005B9F44 /* libboost_iostreams.a */; };
+		502470AA27FBCD96005B9F44 /* libFLAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E7C27FBCD87005B9F44 /* libFLAC.a */; };
+		502470AC27FBCD96005B9F44 /* libFLAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E7C27FBCD87005B9F44 /* libFLAC.a */; };
+		502470D727FBCD96005B9F44 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8527FBCD87005B9F44 /* libz.a */; };
+		502470D927FBCD96005B9F44 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8527FBCD87005B9F44 /* libz.a */; };
+		502470E627FBCD96005B9F44 /* libglibmm-2.68.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8927FBCD87005B9F44 /* libglibmm-2.68.a */; };
+		502470E827FBCD96005B9F44 /* libglibmm-2.68.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8927FBCD87005B9F44 /* libglibmm-2.68.a */; };
+		5024711327FBCD96005B9F44 /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9527FBCD87005B9F44 /* libvorbisenc.a */; };
+		5024711527FBCD96005B9F44 /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9527FBCD87005B9F44 /* libvorbisenc.a */; };
+		5024711827FBCD96005B9F44 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9627FBCD87005B9F44 /* libopus.a */; };
+		5024711A27FBCD96005B9F44 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9627FBCD87005B9F44 /* libopus.a */; };
+		5024712727FBCD96005B9F44 /* libglib-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9C27FBCD87005B9F44 /* libglib-2.0.a */; };
+		5024712927FBCD96005B9F44 /* libglib-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9C27FBCD87005B9F44 /* libglib-2.0.a */; };
+		5024712C27FBCD96005B9F44 /* libgiomm-2.68.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9D27FBCD87005B9F44 /* libgiomm-2.68.a */; };
+		5024712E27FBCD96005B9F44 /* libgiomm-2.68.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9D27FBCD87005B9F44 /* libgiomm-2.68.a */; };
+		5024C0D227FBCDCA005B9F44 /* libfftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7527FBCD94005B9F44 /* libfftw3f.a */; };
+		5024C0D427FBCDCA005B9F44 /* libfftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7527FBCD94005B9F44 /* libfftw3f.a */; };
+		5024C0ED27FBCDCA005B9F44 /* libgio-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7A27FBCD94005B9F44 /* libgio-2.0.a */; };
+		5024C0FA27FBCDCA005B9F44 /* libintl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7D27FBCD94005B9F44 /* libintl.a */; };
+		5024C0FC27FBCDCA005B9F44 /* libintl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7D27FBCD94005B9F44 /* libintl.a */; };
+		5024C12227FBCDCA005B9F44 /* libsigc-3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F8827FBCD94005B9F44 /* libsigc-3.0.a */; };
+		5024C12427FBCDCA005B9F44 /* libsigc-3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F8827FBCD94005B9F44 /* libsigc-3.0.a */; };
+		5024C12C27FBCDCA005B9F44 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F8A27FBCD94005B9F44 /* libsndfile.a */; };
+		5024C12E27FBCDCA005B9F44 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F8A27FBCD94005B9F44 /* libsndfile.a */; };
+		5024C16327FBCDCA005B9F44 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F9A27FBCD94005B9F44 /* libvorbis.a */; };
+		5024C16527FBCDCA005B9F44 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F9A27FBCD94005B9F44 /* libvorbis.a */; };
+		5024C18527FBD227005B9F44 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8427FBCD87005B9F44 /* libogg.a */; };
+		5024C18727FBD228005B9F44 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8427FBCD87005B9F44 /* libogg.a */; };
+		5024C40E27FCE2AF005B9F44 /* gx_head in Resources */ = {isa = PBXBuildFile; fileRef = 5024C40C27FCE2AF005B9F44 /* gx_head */; };
+		5024C41027FCE2AF005B9F44 /* gx_head in Resources */ = {isa = PBXBuildFile; fileRef = 5024C40C27FCE2AF005B9F44 /* gx_head */; };
+		502EAD8827F256210054658D /* RecentFilesMenuTemplate.nib in Resources */ = {isa = PBXBuildFile; fileRef = 66975499CFA74B2D35906CE3 /* RecentFilesMenuTemplate.nib */; };
+		502EAD8927F256210054658D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6394EBF0ECB6E9C986493A5E /* Accelerate.framework */; };
+		502EAD8A27F256210054658D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9F311008FE14BA2AFE65C2 /* AudioToolbox.framework */; };
+		502EAD8B27F256210054658D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EC011B70F0A10EA0E31480 /* Carbon.framework */; };
+		502EAD8C27F256210054658D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F544B1F5613D054755C9A152 /* Cocoa.framework */; };
+		502EAD8D27F256210054658D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C525C440D2405A0B80621D97 /* CoreAudio.framework */; };
+		502EAD8E27F256210054658D /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C587FE27C479ED794DF7890 /* CoreAudioKit.framework */; };
+		502EAD8F27F256210054658D /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE502F75C74B557C1B7191F /* CoreMIDI.framework */; };
+		502EAD9027F256210054658D /* DiscRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5233513230727DD6025B2D10 /* DiscRecording.framework */; };
+		502EAD9127F256210054658D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B780E55C0D00C51F1FC9929 /* IOKit.framework */; };
+		502EAD9227F256210054658D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E568F61AAF794711F455E982 /* QuartzCore.framework */; };
+		502EAD9327F256210054658D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C4CFC757CC5E7F36792799 /* WebKit.framework */; };
+		502EADA027F256210054658D /* RecentFilesMenuTemplate.nib in Resources */ = {isa = PBXBuildFile; fileRef = 66975499CFA74B2D35906CE3 /* RecentFilesMenuTemplate.nib */; };
+		502EADA127F256210054658D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6394EBF0ECB6E9C986493A5E /* Accelerate.framework */; };
+		502EADA227F256210054658D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9F311008FE14BA2AFE65C2 /* AudioToolbox.framework */; };
+		502EADA327F256210054658D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EC011B70F0A10EA0E31480 /* Carbon.framework */; };
+		502EADA427F256210054658D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F544B1F5613D054755C9A152 /* Cocoa.framework */; };
+		502EADA527F256210054658D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C525C440D2405A0B80621D97 /* CoreAudio.framework */; };
+		502EADA627F256210054658D /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C587FE27C479ED794DF7890 /* CoreAudioKit.framework */; };
+		502EADA727F256210054658D /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE502F75C74B557C1B7191F /* CoreMIDI.framework */; };
+		502EADA827F256210054658D /* DiscRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5233513230727DD6025B2D10 /* DiscRecording.framework */; };
+		502EADA927F256210054658D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B780E55C0D00C51F1FC9929 /* IOKit.framework */; };
+		502EADAA27F256210054658D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E568F61AAF794711F455E982 /* QuartzCore.framework */; };
+		502EADAB27F256210054658D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C4CFC757CC5E7F36792799 /* WebKit.framework */; };
+		502EADAC27F256210054658D /* RecentFilesMenuTemplate.nib in Resources */ = {isa = PBXBuildFile; fileRef = 66975499CFA74B2D35906CE3 /* RecentFilesMenuTemplate.nib */; };
+		502EADAD27F256210054658D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6394EBF0ECB6E9C986493A5E /* Accelerate.framework */; };
+		502EADAE27F256210054658D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9F311008FE14BA2AFE65C2 /* AudioToolbox.framework */; };
+		502EADAF27F256210054658D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EC011B70F0A10EA0E31480 /* Carbon.framework */; };
+		502EADB027F256210054658D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F544B1F5613D054755C9A152 /* Cocoa.framework */; };
+		502EADB127F256210054658D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C525C440D2405A0B80621D97 /* CoreAudio.framework */; };
+		502EADB227F256210054658D /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C587FE27C479ED794DF7890 /* CoreAudioKit.framework */; };
+		502EADB327F256210054658D /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE502F75C74B557C1B7191F /* CoreMIDI.framework */; };
+		502EADB427F256210054658D /* DiscRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5233513230727DD6025B2D10 /* DiscRecording.framework */; };
+		502EADB527F256210054658D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B780E55C0D00C51F1FC9929 /* IOKit.framework */; };
+		502EADB627F256210054658D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E568F61AAF794711F455E982 /* QuartzCore.framework */; };
+		502EADB727F256210054658D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C4CFC757CC5E7F36792799 /* WebKit.framework */; };
+		502EADC927F2570D0054658D /* GuitarixProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 502EADC427F2570D0054658D /* GuitarixProcessor.cpp */; };
+		502EADCA27F2570D0054658D /* GuitarixEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 502EADC627F2570D0054658D /* GuitarixEditor.cpp */; };
+		502EADCB27F2570D0054658D /* JuceUiBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 502EADC727F2570D0054658D /* JuceUiBuilder.cpp */; };
+		50457EDA27F27DD900EF130D /* gx_paramtable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457EC727F27DD900EF130D /* gx_paramtable.cpp */; };
+		50457EDB27F27DD900EF130D /* gx_jack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457EC827F27DD900EF130D /* gx_jack.cpp */; };
+		50457EDC27F27DD900EF130D /* gx_engine_audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457EC927F27DD900EF130D /* gx_engine_audio.cpp */; };
+		50457EDD27F27DD900EF130D /* gx_pluginloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ECA27F27DD900EF130D /* gx_pluginloader.cpp */; };
+		50457EDE27F27DD900EF130D /* gx_convolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ECB27F27DD900EF130D /* gx_convolver.cpp */; };
+		50457EDF27F27DD900EF130D /* gx_internal_plugins.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ECC27F27DD900EF130D /* gx_internal_plugins.cpp */; };
+		50457EE027F27DD900EF130D /* gx_pitch_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ECD27F27DD900EF130D /* gx_pitch_tracker.cpp */; };
+		50457EE127F27DD900EF130D /* tunerswitcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ECE27F27DD900EF130D /* tunerswitcher.cpp */; };
+		50457EE227F27DD900EF130D /* gx_midi_plugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ECF27F27DD900EF130D /* gx_midi_plugin.cpp */; };
+		50457EE327F27DD900EF130D /* gx_logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED027F27DD900EF130D /* gx_logging.cpp */; };
+		50457EE427F27DD900EF130D /* gx_preset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED127F27DD900EF130D /* gx_preset.cpp */; };
+		50457EE527F27DD900EF130D /* gx_internal_ui_plugins.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED227F27DD900EF130D /* gx_internal_ui_plugins.cpp */; };
+		50457EE627F27DD900EF130D /* gx_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED327F27DD900EF130D /* gx_engine.cpp */; };
+		50457EE727F27DD900EF130D /* gx_faust_plugins.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED427F27DD900EF130D /* gx_faust_plugins.cpp */; };
+		50457EE827F27DD900EF130D /* gx_json.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED527F27DD900EF130D /* gx_json.cpp */; };
+		50457EE927F27DD900EF130D /* gx_engine_midi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED627F27DD900EF130D /* gx_engine_midi.cpp */; };
+		50457EEA27F27DD900EF130D /* gx_resampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED727F27DD900EF130D /* gx_resampler.cpp */; };
+		50457EEB27F27DD900EF130D /* gx_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED827F27DD900EF130D /* gx_system.cpp */; };
+		50457EEC27F27DD900EF130D /* jsonrpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457ED927F27DD900EF130D /* jsonrpc.cpp */; };
+		50457EF027F27E0E00EF130D /* machine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457EEE27F27E0E00EF130D /* machine.cpp */; };
+		50457EF127F27E0E00EF130D /* gx_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457EEF27F27E0E00EF130D /* gx_main.cpp */; };
+		50457EF927F27E9300EF130D /* vumeter_st.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457EF327F27E9300EF130D /* vumeter_st.cc */; };
+		50457EFA27F27E9300EF130D /* abgate.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457EF427F27E9300EF130D /* abgate.cc */; };
+		50457EFB27F27E9300EF130D /* reversedelay.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457EF527F27E9300EF130D /* reversedelay.cc */; };
+		50457EFC27F27E9300EF130D /* metronome.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457EF627F27E9300EF130D /* metronome.cc */; };
+		50457EFD27F27E9300EF130D /* vibe.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457EF727F27E9300EF130D /* vibe.cc */; };
+		50457EFE27F27E9300EF130D /* vumeter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457EF827F27E9300EF130D /* vumeter.cc */; };
+		50457F0027F27EA300EF130D /* jcm800pre.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50457EFF27F27EA300EF130D /* jcm800pre.cpp */; };
+		50457F2D27F27ED400EF130D /* susta.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0227F27ED100EF130D /* susta.cc */; };
+		50457F2E27F27ED400EF130D /* zita_rev1.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0327F27ED100EF130D /* zita_rev1.cc */; };
+		50457F2F27F27ED400EF130D /* foxeylady.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0427F27ED100EF130D /* foxeylady.cc */; };
+		50457F3027F27ED400EF130D /* mbdel.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0527F27ED100EF130D /* mbdel.cc */; };
+		50457F3127F27ED400EF130D /* mbcs.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0627F27ED200EF130D /* mbcs.cc */; };
+		50457F3227F27ED400EF130D /* coverd.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0727F27ED200EF130D /* coverd.cc */; };
+		50457F3327F27ED400EF130D /* bossds1.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0827F27ED200EF130D /* bossds1.cc */; };
+		50457F3427F27ED400EF130D /* astrofuzz.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0927F27ED200EF130D /* astrofuzz.cc */; };
+		50457F3527F27ED400EF130D /* mbe.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0A27F27ED200EF130D /* mbe.cc */; };
+		50457F3627F27ED400EF130D /* muff.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0B27F27ED200EF130D /* muff.cc */; };
+		50457F3727F27ED400EF130D /* ts9sim.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0C27F27ED200EF130D /* ts9sim.cc */; };
+		50457F3827F27ED400EF130D /* bmp.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0D27F27ED200EF130D /* bmp.cc */; };
+		50457F3927F27ED400EF130D /* rolandwah.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0E27F27ED200EF130D /* rolandwah.cc */; };
+		50457F3A27F27ED400EF130D /* dunwah.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F0F27F27ED200EF130D /* dunwah.cc */; };
+		50457F3B27F27ED400EF130D /* mbchor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1027F27ED200EF130D /* mbchor.cc */; };
+		50457F3C27F27ED400EF130D /* buzz.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1127F27ED200EF130D /* buzz.cc */; };
+		50457F3D27F27ED400EF130D /* gcb_95.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1227F27ED200EF130D /* gcb_95.cc */; };
+		50457F3E27F27ED400EF130D /* cstb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1327F27ED200EF130D /* cstb.cc */; };
+		50457F3F27F27ED400EF130D /* mbc.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1427F27ED200EF130D /* mbc.cc */; };
+		50457F4027F27ED400EF130D /* ffreak.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1527F27ED200EF130D /* ffreak.cc */; };
+		50457F4127F27ED400EF130D /* mole.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1627F27ED200EF130D /* mole.cc */; };
+		50457F4227F27ED400EF130D /* buffb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1727F27ED200EF130D /* buffb.cc */; };
+		50457F4327F27ED400EF130D /* hogsfoot.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1827F27ED200EF130D /* hogsfoot.cc */; };
+		50457F4427F27ED400EF130D /* fuzzfacefm.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1927F27ED200EF130D /* fuzzfacefm.cc */; };
+		50457F4527F27ED400EF130D /* mxrdist.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1A27F27ED200EF130D /* mxrdist.cc */; };
+		50457F4627F27ED400EF130D /* ruin.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1B27F27ED200EF130D /* ruin.cc */; };
+		50457F4727F27ED400EF130D /* flanger_gx.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1C27F27ED200EF130D /* flanger_gx.cc */; };
+		50457F4827F27ED400EF130D /* fumaster.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1D27F27ED300EF130D /* fumaster.cc */; };
+		50457F4927F27ED400EF130D /* bfuzz.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1E27F27ED300EF130D /* bfuzz.cc */; };
+		50457F4A27F27ED400EF130D /* rangem.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F1F27F27ED300EF130D /* rangem.cc */; };
+		50457F4B27F27ED400EF130D /* mbclipper.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2027F27ED300EF130D /* mbclipper.cc */; };
+		50457F4C27F27ED400EF130D /* aclipper.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2127F27ED300EF130D /* aclipper.cc */; };
+		50457F4D27F27ED400EF130D /* mbd.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2227F27ED300EF130D /* mbd.cc */; };
+		50457F4E27F27ED400EF130D /* hfb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2327F27ED300EF130D /* hfb.cc */; };
+		50457F4F27F27ED400EF130D /* eldist.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2427F27ED300EF130D /* eldist.cc */; };
+		50457F5027F27ED400EF130D /* fuzzfacerm.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2527F27ED300EF130D /* fuzzfacerm.cc */; };
+		50457F5127F27ED400EF130D /* colwah.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2627F27ED300EF130D /* colwah.cc */; };
+		50457F5227F27ED400EF130D /* axface.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2727F27ED300EF130D /* axface.cc */; };
+		50457F5327F27ED400EF130D /* bassboom.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2827F27ED300EF130D /* bassboom.cc */; };
+		50457F5427F27ED400EF130D /* fuzzdrive.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2927F27ED300EF130D /* fuzzdrive.cc */; };
+		50457F5527F27ED400EF130D /* hornet.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2A27F27ED300EF130D /* hornet.cc */; };
+		50457F5627F27ED400EF130D /* lpbboost.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2B27F27ED300EF130D /* lpbboost.cc */; };
+		50457F5727F27ED400EF130D /* scream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F2C27F27ED300EF130D /* scream.cc */; };
+		50457F5C27F27F2700EF130D /* zita-convolver.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F5A27F27F2700EF130D /* zita-convolver.cc */; };
+		50457F6127F27F3A00EF130D /* resampler-table.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F5F27F27F3A00EF130D /* resampler-table.cc */; };
+		50457F6227F27F3A00EF130D /* resampler.cc in Sources */ = {isa = PBXBuildFile; fileRef = 50457F6027F27F3A00EF130D /* resampler.cc */; };
+		50BC1F3E285952EE0024186D /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DBF2858185B003AF984 /* libffi.a */; };
+		50BC1F3F285959D70024186D /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DBE2858185B003AF984 /* libpcre.a */; };
+		50BC1F4028595AE50024186D /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DB22858044B003AF984 /* libmp3lame.a */; };
+		50BC1F4128595AE80024186D /* libmpg123.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DB32858044B003AF984 /* libmpg123.a */; };
+		50BE907D2895D4D600F0BFD8 /* gx_head in Resources */ = {isa = PBXBuildFile; fileRef = 5024C40C27FCE2AF005B9F44 /* gx_head */; };
+		50CB2AC7281B19BD00C477EA /* sem_timedwait.c in Sources */ = {isa = PBXBuildFile; fileRef = 50CB2AC6281B19BD00C477EA /* sem_timedwait.c */; };
+		50CFF3A9283D6F100092BF59 /* libgio-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7A27FBCD94005B9F44 /* libgio-2.0.a */; };
+		50CFF3B3283D77280092BF59 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4727FBCD87005B9F44 /* libvorbisfile.a */; };
+		50CFF3B6283D77580092BF59 /* libFLAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E7C27FBCD87005B9F44 /* libFLAC.a */; };
+		50CFF3B7283D778A0092BF59 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8427FBCD87005B9F44 /* libogg.a */; };
+		50CFF3B8283D77940092BF59 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8527FBCD87005B9F44 /* libz.a */; };
+		50CFF3B9283D77A20092BF59 /* libglibmm-2.68.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8927FBCD87005B9F44 /* libglibmm-2.68.a */; };
+		50CFF3BA283D77EB0092BF59 /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9527FBCD87005B9F44 /* libvorbisenc.a */; };
+		50CFF3BC283D78180092BF59 /* libgiomm-2.68.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9D27FBCD87005B9F44 /* libgiomm-2.68.a */; };
+		50CFF3BD283D789A0092BF59 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E9627FBCD87005B9F44 /* libopus.a */; };
+		50CFF3BF283D78CE0092BF59 /* libfftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7527FBCD94005B9F44 /* libfftw3f.a */; };
+		50CFF3C0283D78EC0092BF59 /* libintl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7D27FBCD94005B9F44 /* libintl.a */; };
+		50CFF3C1283D79340092BF59 /* libsigc-3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F8827FBCD94005B9F44 /* libsigc-3.0.a */; };
+		50CFF3C2283D79430092BF59 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F8A27FBCD94005B9F44 /* libsndfile.a */; };
+		50CFF3C3283D79620092BF59 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F9A27FBCD94005B9F44 /* libvorbis.a */; };
+		50CFF3C4283D79830092BF59 /* libboost_iostreams.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E7B27FBCD87005B9F44 /* libboost_iostreams.a */; };
+		76380948B6120930A4A3139F /* PluginEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29F469FAABFF6A3C8C12C43B /* PluginEditor.cpp */; };
+		7AB8EC534DB576DFE886B64A /* include_juce_gui_basics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 77A79ED2191CECFB88A7B5E4 /* include_juce_gui_basics.mm */; };
+		7CBF5E53F69C9855E1A59969 /* include_juce_audio_plugin_client_AU_1.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DAA1E57944DDC2AACC54C /* include_juce_audio_plugin_client_AU_1.mm */; };
+		975F0ACD13839BD38F351C85 /* include_juce_audio_plugin_client_AU_2.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE4365CE23662AABA4A370E0 /* include_juce_audio_plugin_client_AU_2.mm */; };
+		9947E347F99CEF29CCC098B1 /* include_juce_audio_plugin_client_AU.r in Rez */ = {isa = PBXBuildFile; fileRef = 075A2B072C84C2133892E149 /* include_juce_audio_plugin_client_AU.r */; };
+		A30B0BBA16528CF9173DBE4B /* include_juce_audio_plugin_client_VST3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A6058A64F50F6D8C2D3B7E6 /* include_juce_audio_plugin_client_VST3.cpp */; };
+		B0E5762E09D3C19DC1C0E035 /* include_juce_gui_extra.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0BA46900C2017C35D01E1F1C /* include_juce_gui_extra.mm */; };
+		D63A100DC23CE1C962617C47 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAE4EF6E178A3004BD4B7B3 /* AudioUnit.framework */; };
+		E8EF3172D42158AD061D7138 /* include_juce_data_structures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D58E0ACF8556577237BB5 /* include_juce_data_structures.mm */; };
+		EE685588AF991D5A459DF01B /* include_juce_graphics.mm in Sources */ = {isa = PBXBuildFile; fileRef = E7B7ADDAC38B2EDE27E8377D /* include_juce_graphics.mm */; };
+		FF2BCF37C99F11B1FB589312 /* include_juce_audio_processors.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19B1B66B6CFC4D8DAC2EB989 /* include_juce_audio_processors.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5015278A28625A1800D73331 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD21850413EABF60CC1DEC83;
+			remoteInfo = "Guitarix - AU";
+		};
+		5015278C28625A1800D73331 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B3E31000FC89064CCFCF463;
+			remoteInfo = "Guitarix - Standalone Plugin";
+		};
+		5015278E28625A1800D73331 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4353C73CBCA15145D7DDC9EF;
+			remoteInfo = "Guitarix - VST3";
+		};
+		502EADB827F256240054658D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1F254BBDAD72177BF2B59D;
+			remoteInfo = "Guitarix - Shared Code";
+		};
+		502EADBA27F256240054658D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1F254BBDAD72177BF2B59D;
+			remoteInfo = "Guitarix - Shared Code";
+		};
+		502EADBB27F256250054658D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1F254BBDAD72177BF2B59D;
+			remoteInfo = "Guitarix - Shared Code";
+		};
+		502EADBE27F256250054658D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4353C73CBCA15145D7DDC9EF;
+			remoteInfo = "Guitarix - VST3";
+		};
+		502EADC027F256250054658D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD21850413EABF60CC1DEC83;
+			remoteInfo = "Guitarix - AU";
+		};
+		502EADC127F256250054658D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B3E31000FC89064CCFCF463;
+			remoteInfo = "Guitarix - Standalone Plugin";
+		};
+		502EADC227F256250054658D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1F254BBDAD72177BF2B59D;
+			remoteInfo = "Guitarix - Shared Code";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03EC011B70F0A10EA0E31480 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		0579AADECFBD9078F42BBC21 /* juce_audio_formats */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_audio_formats; path = "../../JUCE-modules/juce_audio_formats"; sourceTree = SOURCE_ROOT; };
+		075A2B072C84C2133892E149 /* include_juce_audio_plugin_client_AU.r */ = {isa = PBXFileReference; lastKnownFileType = file.r; name = include_juce_audio_plugin_client_AU.r; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AU.r; sourceTree = SOURCE_ROOT; };
+		0A79F11938E0D9DD1C15C4C0 /* include_juce_audio_plugin_client_utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_utils.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_utils.cpp; sourceTree = SOURCE_ROOT; };
+		0B41B40C8181F015753B9E1D /* JuceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceHeader.h; path = ../../JuceLibraryCode/JuceHeader.h; sourceTree = SOURCE_ROOT; };
+		0BA46900C2017C35D01E1F1C /* include_juce_gui_extra.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_extra.mm; path = ../../JuceLibraryCode/include_juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
+		0D00BA1C012C044FF455FA03 /* include_juce_audio_plugin_client_VST2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_VST2.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST2.cpp; sourceTree = SOURCE_ROOT; };
+		19B1B66B6CFC4D8DAC2EB989 /* include_juce_audio_processors.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_processors.mm; path = ../../JuceLibraryCode/include_juce_audio_processors.mm; sourceTree = SOURCE_ROOT; };
+		1F19C4A9AC28C3B525100B37 /* Guitarix.component */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Guitarix.component; sourceTree = BUILT_PRODUCTS_DIR; };
+		233D181425B5A19E12A31248 /* libGuitarix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGuitarix.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		29F3DF5DF37ABD88198E48FF /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_gui_basics; path = "../../JUCE-modules/juce_gui_basics"; sourceTree = SOURCE_ROOT; };
+		29F469FAABFF6A3C8C12C43B /* PluginEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginEditor.cpp; path = ../../Source/PluginEditor.cpp; sourceTree = SOURCE_ROOT; };
+		2FFA07135E0FF2E895E1B333 /* juce_core */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_core; path = "../../JUCE-modules/juce_core"; sourceTree = SOURCE_ROOT; };
+		316E733CFF21C03BC4E9E266 /* include_juce_audio_plugin_client_AAX.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AAX.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AAX.mm; sourceTree = SOURCE_ROOT; };
+		32BB9BEAFD1FDF3EFD25C3C2 /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_gui_extra; path = "../../JUCE-modules/juce_gui_extra"; sourceTree = SOURCE_ROOT; };
+		3B780E55C0D00C51F1FC9929 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		3C8F4D83E0152883FC73B6EF /* Guitarix.vst3 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Guitarix.vst3; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EAE4EF6E178A3004BD4B7B3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		48E09A34905816955A8B34A0 /* include_juce_audio_plugin_client_VST_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_VST_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm; sourceTree = SOURCE_ROOT; };
+		4C587FE27C479ED794DF7890 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		4E2DAA1E57944DDC2AACC54C /* include_juce_audio_plugin_client_AU_1.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AU_1.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AU_1.mm; sourceTree = SOURCE_ROOT; };
+		5015279128625A6400D73331 /* make-vst3-pkg.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "make-vst3-pkg.sh"; sourceTree = "<group>"; };
+		5015279528636F4800D73331 /* GetPrefsPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetPrefsPath.h; path = ../../Source/GetPrefsPath.h; sourceTree = "<group>"; };
+		5015279628636F4800D73331 /* GetPrefsPath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GetPrefsPath.mm; path = ../../Source/GetPrefsPath.mm; sourceTree = "<group>"; };
+		50161DB22858044B003AF984 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		50161DB32858044B003AF984 /* libmpg123.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmpg123.a; sourceTree = "<group>"; };
+		50161DBE2858185B003AF984 /* libpcre.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpcre.a; sourceTree = "<group>"; };
+		50161DBF2858185B003AF984 /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
+		50161E1A2859118A003AF984 /* include_juce_audio_utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_utils.mm; sourceTree = "<group>"; };
+		50161E1D2859118A003AF984 /* include_juce_audio_formats.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_formats.mm; path = ../../JuceLibraryCode/include_juce_audio_formats.mm; sourceTree = "<group>"; };
+		50161E5B285919E6003AF984 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		50161E5C285919F0003AF984 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		50245E4327FBCD87005B9F44 /* libgmodule-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libgmodule-2.0.a"; sourceTree = "<group>"; };
+		50245E4727FBCD87005B9F44 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisfile.a; sourceTree = "<group>"; };
+		50245E4827FBCD87005B9F44 /* libgobject-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libgobject-2.0.a"; sourceTree = "<group>"; };
+		50245E7B27FBCD87005B9F44 /* libboost_iostreams.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libboost_iostreams.a; sourceTree = "<group>"; };
+		50245E7C27FBCD87005B9F44 /* libFLAC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFLAC.a; sourceTree = "<group>"; };
+		50245E8427FBCD87005B9F44 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
+		50245E8527FBCD87005B9F44 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libz.a; sourceTree = "<group>"; };
+		50245E8927FBCD87005B9F44 /* libglibmm-2.68.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libglibmm-2.68.a"; sourceTree = "<group>"; };
+		50245E9527FBCD87005B9F44 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisenc.a; sourceTree = "<group>"; };
+		50245E9627FBCD87005B9F44 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
+		50245E9C27FBCD87005B9F44 /* libglib-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libglib-2.0.a"; sourceTree = "<group>"; };
+		50245E9D27FBCD87005B9F44 /* libgiomm-2.68.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libgiomm-2.68.a"; sourceTree = "<group>"; };
+		50246F7527FBCD94005B9F44 /* libfftw3f.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfftw3f.a; sourceTree = "<group>"; };
+		50246F7A27FBCD94005B9F44 /* libgio-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libgio-2.0.a"; sourceTree = "<group>"; };
+		50246F7D27FBCD94005B9F44 /* libintl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libintl.a; sourceTree = "<group>"; };
+		50246F8827FBCD94005B9F44 /* libsigc-3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libsigc-3.0.a"; sourceTree = "<group>"; };
+		50246F8A27FBCD94005B9F44 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsndfile.a; sourceTree = "<group>"; };
+		50246F9A27FBCD94005B9F44 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbis.a; sourceTree = "<group>"; };
+		5024C40C27FCE2AF005B9F44 /* gx_head */ = {isa = PBXFileReference; lastKnownFileType = folder; name = gx_head; path = ../../Data/gx_head; sourceTree = "<group>"; };
+		502EADC327F2570C0054658D /* GuitarixProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuitarixProcessor.h; path = ../../Source/GuitarixProcessor.h; sourceTree = "<group>"; };
+		502EADC427F2570D0054658D /* GuitarixProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GuitarixProcessor.cpp; path = ../../Source/GuitarixProcessor.cpp; sourceTree = "<group>"; };
+		502EADC527F2570D0054658D /* GuitarixEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuitarixEditor.h; path = ../../Source/GuitarixEditor.h; sourceTree = "<group>"; };
+		502EADC627F2570D0054658D /* GuitarixEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GuitarixEditor.cpp; path = ../../Source/GuitarixEditor.cpp; sourceTree = "<group>"; };
+		502EADC727F2570D0054658D /* JuceUiBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JuceUiBuilder.cpp; path = ../../Source/JuceUiBuilder.cpp; sourceTree = "<group>"; };
+		502EADC827F2570D0054658D /* JuceUiBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JuceUiBuilder.h; path = ../../Source/JuceUiBuilder.h; sourceTree = "<group>"; };
+		50457EC727F27DD900EF130D /* gx_paramtable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_paramtable.cpp; path = ../../guitarix/src/gx_head/engine/gx_paramtable.cpp; sourceTree = "<group>"; };
+		50457EC827F27DD900EF130D /* gx_jack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_jack.cpp; path = ../../guitarix/src/gx_head/engine/gx_jack.cpp; sourceTree = "<group>"; };
+		50457EC927F27DD900EF130D /* gx_engine_audio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_engine_audio.cpp; path = ../../guitarix/src/gx_head/engine/gx_engine_audio.cpp; sourceTree = "<group>"; };
+		50457ECA27F27DD900EF130D /* gx_pluginloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_pluginloader.cpp; path = ../../guitarix/src/gx_head/engine/gx_pluginloader.cpp; sourceTree = "<group>"; };
+		50457ECB27F27DD900EF130D /* gx_convolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_convolver.cpp; path = ../../guitarix/src/gx_head/engine/gx_convolver.cpp; sourceTree = "<group>"; };
+		50457ECC27F27DD900EF130D /* gx_internal_plugins.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_internal_plugins.cpp; path = ../../guitarix/src/gx_head/engine/gx_internal_plugins.cpp; sourceTree = "<group>"; };
+		50457ECD27F27DD900EF130D /* gx_pitch_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_pitch_tracker.cpp; path = ../../guitarix/src/gx_head/engine/gx_pitch_tracker.cpp; sourceTree = "<group>"; };
+		50457ECE27F27DD900EF130D /* tunerswitcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tunerswitcher.cpp; path = ../../guitarix/src/gx_head/engine/tunerswitcher.cpp; sourceTree = "<group>"; };
+		50457ECF27F27DD900EF130D /* gx_midi_plugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_midi_plugin.cpp; path = ../../guitarix/src/gx_head/engine/gx_midi_plugin.cpp; sourceTree = "<group>"; };
+		50457ED027F27DD900EF130D /* gx_logging.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_logging.cpp; path = ../../guitarix/src/gx_head/engine/gx_logging.cpp; sourceTree = "<group>"; };
+		50457ED127F27DD900EF130D /* gx_preset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_preset.cpp; path = ../../guitarix/src/gx_head/engine/gx_preset.cpp; sourceTree = "<group>"; };
+		50457ED227F27DD900EF130D /* gx_internal_ui_plugins.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_internal_ui_plugins.cpp; path = ../../guitarix/src/gx_head/engine/gx_internal_ui_plugins.cpp; sourceTree = "<group>"; };
+		50457ED327F27DD900EF130D /* gx_engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_engine.cpp; path = ../../guitarix/src/gx_head/engine/gx_engine.cpp; sourceTree = "<group>"; };
+		50457ED427F27DD900EF130D /* gx_faust_plugins.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_faust_plugins.cpp; path = ../../guitarix/src/gx_head/engine/gx_faust_plugins.cpp; sourceTree = "<group>"; };
+		50457ED527F27DD900EF130D /* gx_json.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_json.cpp; path = ../../guitarix/src/gx_head/engine/gx_json.cpp; sourceTree = "<group>"; };
+		50457ED627F27DD900EF130D /* gx_engine_midi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_engine_midi.cpp; path = ../../guitarix/src/gx_head/engine/gx_engine_midi.cpp; sourceTree = "<group>"; };
+		50457ED727F27DD900EF130D /* gx_resampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_resampler.cpp; path = ../../guitarix/src/gx_head/engine/gx_resampler.cpp; sourceTree = "<group>"; };
+		50457ED827F27DD900EF130D /* gx_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_system.cpp; path = ../../guitarix/src/gx_head/engine/gx_system.cpp; sourceTree = "<group>"; };
+		50457ED927F27DD900EF130D /* jsonrpc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jsonrpc.cpp; path = ../../guitarix/src/gx_head/engine/jsonrpc.cpp; sourceTree = "<group>"; };
+		50457EEE27F27E0E00EF130D /* machine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = machine.cpp; path = ../../guitarix/src/gx_head/gui/machine.cpp; sourceTree = "<group>"; };
+		50457EEF27F27E0E00EF130D /* gx_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gx_main.cpp; path = ../../guitarix/src/gx_head/gui/gx_main.cpp; sourceTree = "<group>"; };
+		50457EF327F27E9300EF130D /* vumeter_st.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vumeter_st.cc; path = ../../guitarix/src/plugins/vumeter_st.cc; sourceTree = "<group>"; };
+		50457EF427F27E9300EF130D /* abgate.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = abgate.cc; path = ../../guitarix/src/plugins/abgate.cc; sourceTree = "<group>"; };
+		50457EF527F27E9300EF130D /* reversedelay.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reversedelay.cc; path = ../../guitarix/src/plugins/reversedelay.cc; sourceTree = "<group>"; };
+		50457EF627F27E9300EF130D /* metronome.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = metronome.cc; path = ../../guitarix/src/plugins/metronome.cc; sourceTree = "<group>"; };
+		50457EF727F27E9300EF130D /* vibe.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vibe.cc; path = ../../guitarix/src/plugins/vibe.cc; sourceTree = "<group>"; };
+		50457EF827F27E9300EF130D /* vumeter.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vumeter.cc; path = ../../guitarix/src/plugins/vumeter.cc; sourceTree = "<group>"; };
+		50457EFF27F27EA300EF130D /* jcm800pre.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jcm800pre.cpp; path = ../../guitarix/src/plugins/jcm800pre.cpp; sourceTree = "<group>"; };
+		50457F0227F27ED100EF130D /* susta.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = susta.cc; path = ../../guitarix/src/plugins/generated/susta.cc; sourceTree = "<group>"; };
+		50457F0327F27ED100EF130D /* zita_rev1.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zita_rev1.cc; path = ../../guitarix/src/plugins/generated/zita_rev1.cc; sourceTree = "<group>"; };
+		50457F0427F27ED100EF130D /* foxeylady.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = foxeylady.cc; path = ../../guitarix/src/plugins/generated/foxeylady.cc; sourceTree = "<group>"; };
+		50457F0527F27ED100EF130D /* mbdel.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mbdel.cc; path = ../../guitarix/src/plugins/generated/mbdel.cc; sourceTree = "<group>"; };
+		50457F0627F27ED200EF130D /* mbcs.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mbcs.cc; path = ../../guitarix/src/plugins/generated/mbcs.cc; sourceTree = "<group>"; };
+		50457F0727F27ED200EF130D /* coverd.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = coverd.cc; path = ../../guitarix/src/plugins/generated/coverd.cc; sourceTree = "<group>"; };
+		50457F0827F27ED200EF130D /* bossds1.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bossds1.cc; path = ../../guitarix/src/plugins/generated/bossds1.cc; sourceTree = "<group>"; };
+		50457F0927F27ED200EF130D /* astrofuzz.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = astrofuzz.cc; path = ../../guitarix/src/plugins/generated/astrofuzz.cc; sourceTree = "<group>"; };
+		50457F0A27F27ED200EF130D /* mbe.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mbe.cc; path = ../../guitarix/src/plugins/generated/mbe.cc; sourceTree = "<group>"; };
+		50457F0B27F27ED200EF130D /* muff.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = muff.cc; path = ../../guitarix/src/plugins/generated/muff.cc; sourceTree = "<group>"; };
+		50457F0C27F27ED200EF130D /* ts9sim.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ts9sim.cc; path = ../../guitarix/src/plugins/generated/ts9sim.cc; sourceTree = "<group>"; };
+		50457F0D27F27ED200EF130D /* bmp.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bmp.cc; path = ../../guitarix/src/plugins/generated/bmp.cc; sourceTree = "<group>"; };
+		50457F0E27F27ED200EF130D /* rolandwah.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rolandwah.cc; path = ../../guitarix/src/plugins/generated/rolandwah.cc; sourceTree = "<group>"; };
+		50457F0F27F27ED200EF130D /* dunwah.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dunwah.cc; path = ../../guitarix/src/plugins/generated/dunwah.cc; sourceTree = "<group>"; };
+		50457F1027F27ED200EF130D /* mbchor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mbchor.cc; path = ../../guitarix/src/plugins/generated/mbchor.cc; sourceTree = "<group>"; };
+		50457F1127F27ED200EF130D /* buzz.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = buzz.cc; path = ../../guitarix/src/plugins/generated/buzz.cc; sourceTree = "<group>"; };
+		50457F1227F27ED200EF130D /* gcb_95.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gcb_95.cc; path = ../../guitarix/src/plugins/generated/gcb_95.cc; sourceTree = "<group>"; };
+		50457F1327F27ED200EF130D /* cstb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cstb.cc; path = ../../guitarix/src/plugins/generated/cstb.cc; sourceTree = "<group>"; };
+		50457F1427F27ED200EF130D /* mbc.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mbc.cc; path = ../../guitarix/src/plugins/generated/mbc.cc; sourceTree = "<group>"; };
+		50457F1527F27ED200EF130D /* ffreak.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ffreak.cc; path = ../../guitarix/src/plugins/generated/ffreak.cc; sourceTree = "<group>"; };
+		50457F1627F27ED200EF130D /* mole.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mole.cc; path = ../../guitarix/src/plugins/generated/mole.cc; sourceTree = "<group>"; };
+		50457F1727F27ED200EF130D /* buffb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = buffb.cc; path = ../../guitarix/src/plugins/generated/buffb.cc; sourceTree = "<group>"; };
+		50457F1827F27ED200EF130D /* hogsfoot.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hogsfoot.cc; path = ../../guitarix/src/plugins/generated/hogsfoot.cc; sourceTree = "<group>"; };
+		50457F1927F27ED200EF130D /* fuzzfacefm.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fuzzfacefm.cc; path = ../../guitarix/src/plugins/generated/fuzzfacefm.cc; sourceTree = "<group>"; };
+		50457F1A27F27ED200EF130D /* mxrdist.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mxrdist.cc; path = ../../guitarix/src/plugins/generated/mxrdist.cc; sourceTree = "<group>"; };
+		50457F1B27F27ED200EF130D /* ruin.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ruin.cc; path = ../../guitarix/src/plugins/generated/ruin.cc; sourceTree = "<group>"; };
+		50457F1C27F27ED200EF130D /* flanger_gx.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = flanger_gx.cc; path = ../../guitarix/src/plugins/generated/flanger_gx.cc; sourceTree = "<group>"; };
+		50457F1D27F27ED300EF130D /* fumaster.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fumaster.cc; path = ../../guitarix/src/plugins/generated/fumaster.cc; sourceTree = "<group>"; };
+		50457F1E27F27ED300EF130D /* bfuzz.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bfuzz.cc; path = ../../guitarix/src/plugins/generated/bfuzz.cc; sourceTree = "<group>"; };
+		50457F1F27F27ED300EF130D /* rangem.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rangem.cc; path = ../../guitarix/src/plugins/generated/rangem.cc; sourceTree = "<group>"; };
+		50457F2027F27ED300EF130D /* mbclipper.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mbclipper.cc; path = ../../guitarix/src/plugins/generated/mbclipper.cc; sourceTree = "<group>"; };
+		50457F2127F27ED300EF130D /* aclipper.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = aclipper.cc; path = ../../guitarix/src/plugins/generated/aclipper.cc; sourceTree = "<group>"; };
+		50457F2227F27ED300EF130D /* mbd.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mbd.cc; path = ../../guitarix/src/plugins/generated/mbd.cc; sourceTree = "<group>"; };
+		50457F2327F27ED300EF130D /* hfb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hfb.cc; path = ../../guitarix/src/plugins/generated/hfb.cc; sourceTree = "<group>"; };
+		50457F2427F27ED300EF130D /* eldist.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = eldist.cc; path = ../../guitarix/src/plugins/generated/eldist.cc; sourceTree = "<group>"; };
+		50457F2527F27ED300EF130D /* fuzzfacerm.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fuzzfacerm.cc; path = ../../guitarix/src/plugins/generated/fuzzfacerm.cc; sourceTree = "<group>"; };
+		50457F2627F27ED300EF130D /* colwah.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = colwah.cc; path = ../../guitarix/src/plugins/generated/colwah.cc; sourceTree = "<group>"; };
+		50457F2727F27ED300EF130D /* axface.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = axface.cc; path = ../../guitarix/src/plugins/generated/axface.cc; sourceTree = "<group>"; };
+		50457F2827F27ED300EF130D /* bassboom.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bassboom.cc; path = ../../guitarix/src/plugins/generated/bassboom.cc; sourceTree = "<group>"; };
+		50457F2927F27ED300EF130D /* fuzzdrive.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fuzzdrive.cc; path = ../../guitarix/src/plugins/generated/fuzzdrive.cc; sourceTree = "<group>"; };
+		50457F2A27F27ED300EF130D /* hornet.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hornet.cc; path = ../../guitarix/src/plugins/generated/hornet.cc; sourceTree = "<group>"; };
+		50457F2B27F27ED300EF130D /* lpbboost.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lpbboost.cc; path = ../../guitarix/src/plugins/generated/lpbboost.cc; sourceTree = "<group>"; };
+		50457F2C27F27ED300EF130D /* scream.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scream.cc; path = ../../guitarix/src/plugins/generated/scream.cc; sourceTree = "<group>"; };
+		50457F5A27F27F2700EF130D /* zita-convolver.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "zita-convolver.cc"; path = "../../guitarix/src/zita-convolver/zita-convolver.cc"; sourceTree = "<group>"; };
+		50457F5B27F27F2700EF130D /* zita-convolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "zita-convolver.h"; path = "../../guitarix/src/zita-convolver/zita-convolver.h"; sourceTree = "<group>"; };
+		50457F5D27F27F3A00EF130D /* resampler-table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "resampler-table.h"; path = "../../guitarix/src/zita-resampler-1.1.0/zita-resampler/resampler-table.h"; sourceTree = "<group>"; };
+		50457F5E27F27F3A00EF130D /* resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resampler.h; path = "../../guitarix/src/zita-resampler-1.1.0/zita-resampler/resampler.h"; sourceTree = "<group>"; };
+		50457F5F27F27F3A00EF130D /* resampler-table.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "resampler-table.cc"; path = "../../guitarix/src/zita-resampler-1.1.0/resampler-table.cc"; sourceTree = "<group>"; };
+		50457F6027F27F3A00EF130D /* resampler.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = resampler.cc; path = "../../guitarix/src/zita-resampler-1.1.0/resampler.cc"; sourceTree = "<group>"; };
+		50CB2AC6281B19BD00C477EA /* sem_timedwait.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sem_timedwait.c; sourceTree = "<group>"; };
+		50FABAAD2885A26A00A2CC75 /* Guitarix.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Guitarix.xml; sourceTree = "<group>"; };
+		5233513230727DD6025B2D10 /* DiscRecording.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiscRecording.framework; path = System/Library/Frameworks/DiscRecording.framework; sourceTree = SDKROOT; };
+		54F2181F00EF7EB32EEBC70C /* PluginEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginEditor.h; path = ../../Source/PluginEditor.h; sourceTree = SOURCE_ROOT; };
+		6394EBF0ECB6E9C986493A5E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		644A13442FE833AF20F46280 /* JucePluginDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JucePluginDefines.h; path = ../../JuceLibraryCode/JucePluginDefines.h; sourceTree = SOURCE_ROOT; };
+		66975499CFA74B2D35906CE3 /* RecentFilesMenuTemplate.nib */ = {isa = PBXFileReference; lastKnownFileType = file.nib; path = RecentFilesMenuTemplate.nib; sourceTree = SOURCE_ROOT; };
+		6D7D58E0ACF8556577237BB5 /* include_juce_data_structures.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_data_structures.mm; path = ../../JuceLibraryCode/include_juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
+		704DFCCF4B4F7D964C01028A /* juce_audio_processors */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_audio_processors; path = "../../JUCE-modules/juce_audio_processors"; sourceTree = SOURCE_ROOT; };
+		72A239A9C67B20A94BDC85E0 /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
+		77A79ED2191CECFB88A7B5E4 /* include_juce_gui_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_basics.mm; path = ../../JuceLibraryCode/include_juce_gui_basics.mm; sourceTree = SOURCE_ROOT; };
+		7A6058A64F50F6D8C2D3B7E6 /* include_juce_audio_plugin_client_VST3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_VST3.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST3.cpp; sourceTree = SOURCE_ROOT; };
+		8AADAE387548185103840449 /* Info-Standalone_Plugin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Standalone_Plugin.plist"; sourceTree = SOURCE_ROOT; };
+		8BE502F75C74B557C1B7191F /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		8CD9CC55C0DAF25F610429A5 /* include_juce_audio_devices.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_devices.mm; path = ../../JuceLibraryCode/include_juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
+		931F96A7D67B0FA5A889F9AB /* juce_events */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_events; path = "../../JUCE-modules/juce_events"; sourceTree = SOURCE_ROOT; };
+		95C4CFC757CC5E7F36792799 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		993EC89A38EF94513C51B579 /* juce_graphics */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_graphics; path = "../../JUCE-modules/juce_graphics"; sourceTree = SOURCE_ROOT; };
+		9ADEA68AB14F30C0A50B7BEC /* juce_audio_devices */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_audio_devices; path = "../../JUCE-modules/juce_audio_devices"; sourceTree = SOURCE_ROOT; };
+		AF42ACE3731F038BF779036E /* juce_data_structures */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_data_structures; path = "../../JUCE-modules/juce_data_structures"; sourceTree = SOURCE_ROOT; };
+		B6DA21E8BCE77690B682CB3D /* Info-AU.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-AU.plist"; sourceTree = SOURCE_ROOT; };
+		B710157E95D231A8F291A253 /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_audio_basics; path = "../../JUCE-modules/juce_audio_basics"; sourceTree = SOURCE_ROOT; };
+		B8DAE2547D48F0E7EC18368C /* include_juce_events.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_events.mm; path = ../../JuceLibraryCode/include_juce_events.mm; sourceTree = SOURCE_ROOT; };
+		C29A1BC24C1711233035D790 /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
+		C525C440D2405A0B80621D97 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		C8324FCA865726C18FF062DD /* include_juce_audio_plugin_client_Standalone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_Standalone.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp; sourceTree = SOURCE_ROOT; };
+		CB9F311008FE14BA2AFE65C2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D2BED1CFE3AC586D2B8F1B41 /* juce_audio_utils */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_audio_utils; path = "../../JUCE-modules/juce_audio_utils"; sourceTree = SOURCE_ROOT; };
+		DB888095AD3CFAA67CB24DDF /* juce_audio_plugin_client */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_audio_plugin_client; path = "../../JUCE-modules/juce_audio_plugin_client"; sourceTree = SOURCE_ROOT; };
+		DE4365CE23662AABA4A370E0 /* include_juce_audio_plugin_client_AU_2.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AU_2.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AU_2.mm; sourceTree = SOURCE_ROOT; };
+		E568F61AAF794711F455E982 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E7B7ADDAC38B2EDE27E8377D /* include_juce_graphics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_graphics.mm; path = ../../JuceLibraryCode/include_juce_graphics.mm; sourceTree = SOURCE_ROOT; };
+		E7DF47C870A6032780B8A1F6 /* Guitarix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guitarix.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F544B1F5613D054755C9A152 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		F796837B1D9B3105F652195E /* Info-VST3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-VST3.plist"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4BB822D5DBF95A52A8D2C744 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50CFF3C1283D79340092BF59 /* libsigc-3.0.a in Frameworks */,
+				502EADAD27F256210054658D /* Accelerate.framework in Frameworks */,
+				502EADAE27F256210054658D /* AudioToolbox.framework in Frameworks */,
+				50161DB82858044B003AF984 /* libmp3lame.a in Frameworks */,
+				50161E7428591A45003AF984 /* libiconv.tbd in Frameworks */,
+				50CFF3B6283D77580092BF59 /* libFLAC.a in Frameworks */,
+				502EADAF27F256210054658D /* Carbon.framework in Frameworks */,
+				50161D8828553097003AF984 /* libgio-2.0.a in Frameworks */,
+				50161DC92858185B003AF984 /* libffi.a in Frameworks */,
+				502EADB027F256210054658D /* Cocoa.framework in Frameworks */,
+				50161E7328591A45003AF984 /* libresolv.tbd in Frameworks */,
+				50CFF3C3283D79620092BF59 /* libvorbis.a in Frameworks */,
+				50CFF3BF283D78CE0092BF59 /* libfftw3f.a in Frameworks */,
+				50CFF3BD283D789A0092BF59 /* libopus.a in Frameworks */,
+				50CFF3C2283D79430092BF59 /* libsndfile.a in Frameworks */,
+				50CFF3B7283D778A0092BF59 /* libogg.a in Frameworks */,
+				502EADB127F256210054658D /* CoreAudio.framework in Frameworks */,
+				50CFF3BC283D78180092BF59 /* libgiomm-2.68.a in Frameworks */,
+				50CFF3B8283D77940092BF59 /* libz.a in Frameworks */,
+				50161D8B28553097003AF984 /* libgobject-2.0.a in Frameworks */,
+				50CFF3C0283D78EC0092BF59 /* libintl.a in Frameworks */,
+				502EADB227F256210054658D /* CoreAudioKit.framework in Frameworks */,
+				50CFF3C4283D79830092BF59 /* libboost_iostreams.a in Frameworks */,
+				502EADB327F256210054658D /* CoreMIDI.framework in Frameworks */,
+				502EADB427F256210054658D /* DiscRecording.framework in Frameworks */,
+				50161DBD2858044B003AF984 /* libmpg123.a in Frameworks */,
+				50CFF3B9283D77A20092BF59 /* libglibmm-2.68.a in Frameworks */,
+				50161D8728553097003AF984 /* libglib-2.0.a in Frameworks */,
+				502EADB527F256210054658D /* IOKit.framework in Frameworks */,
+				50161DC42858185B003AF984 /* libpcre.a in Frameworks */,
+				50CFF3BA283D77EB0092BF59 /* libvorbisenc.a in Frameworks */,
+				50161D8928553097003AF984 /* libgmodule-2.0.a in Frameworks */,
+				502EADB627F256210054658D /* QuartzCore.framework in Frameworks */,
+				50CFF3B3283D77280092BF59 /* libvorbisfile.a in Frameworks */,
+				502EADB727F256210054658D /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A73CB3415993D26EE35CA414 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D63A100DC23CE1C962617C47 /* AudioUnit.framework in Frameworks */,
+				502EADA127F256210054658D /* Accelerate.framework in Frameworks */,
+				502EADA227F256210054658D /* AudioToolbox.framework in Frameworks */,
+				5024C0D427FBCDCA005B9F44 /* libfftw3f.a in Frameworks */,
+				502EADA327F256210054658D /* Carbon.framework in Frameworks */,
+				5024712927FBCD96005B9F44 /* libglib-2.0.a in Frameworks */,
+				50161E7628591A45003AF984 /* libiconv.tbd in Frameworks */,
+				50161DBC2858044B003AF984 /* libmpg123.a in Frameworks */,
+				502EADA427F256210054658D /* Cocoa.framework in Frameworks */,
+				5024C0ED27FBCDCA005B9F44 /* libgio-2.0.a in Frameworks */,
+				502470AC27FBCD96005B9F44 /* libFLAC.a in Frameworks */,
+				5024C16527FBCDCA005B9F44 /* libvorbis.a in Frameworks */,
+				5024712E27FBCD96005B9F44 /* libgiomm-2.68.a in Frameworks */,
+				502EADA527F256210054658D /* CoreAudio.framework in Frameworks */,
+				502470E827FBCD96005B9F44 /* libglibmm-2.68.a in Frameworks */,
+				50161DC82858185B003AF984 /* libffi.a in Frameworks */,
+				502470D927FBCD96005B9F44 /* libz.a in Frameworks */,
+				502EADA627F256210054658D /* CoreAudioKit.framework in Frameworks */,
+				50161E7528591A45003AF984 /* libresolv.tbd in Frameworks */,
+				50246FA327FBCD95005B9F44 /* libgmodule-2.0.a in Frameworks */,
+				50161DB72858044B003AF984 /* libmp3lame.a in Frameworks */,
+				502470A727FBCD96005B9F44 /* libboost_iostreams.a in Frameworks */,
+				502EADA727F256210054658D /* CoreMIDI.framework in Frameworks */,
+				502EADA827F256210054658D /* DiscRecording.framework in Frameworks */,
+				5024C18727FBD228005B9F44 /* libogg.a in Frameworks */,
+				5024C0FC27FBCDCA005B9F44 /* libintl.a in Frameworks */,
+				5024711527FBCD96005B9F44 /* libvorbisenc.a in Frameworks */,
+				502EADA927F256210054658D /* IOKit.framework in Frameworks */,
+				50246FBC27FBCD95005B9F44 /* libgobject-2.0.a in Frameworks */,
+				5024C12427FBCDCA005B9F44 /* libsigc-3.0.a in Frameworks */,
+				502EADAA27F256210054658D /* QuartzCore.framework in Frameworks */,
+				502EADAB27F256210054658D /* WebKit.framework in Frameworks */,
+				50246FB727FBCD95005B9F44 /* libvorbisfile.a in Frameworks */,
+				50161DC32858185B003AF984 /* libpcre.a in Frameworks */,
+				5024C12E27FBCDCA005B9F44 /* libsndfile.a in Frameworks */,
+				5024711A27FBCD96005B9F44 /* libopus.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B45E25E01AF5827E97F29041 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				502EAD8927F256210054658D /* Accelerate.framework in Frameworks */,
+				5024712727FBCD96005B9F44 /* libglib-2.0.a in Frameworks */,
+				502470E627FBCD96005B9F44 /* libglibmm-2.68.a in Frameworks */,
+				50BC1F4028595AE50024186D /* libmp3lame.a in Frameworks */,
+				5024C18527FBD227005B9F44 /* libogg.a in Frameworks */,
+				50161E7A28591A46003AF984 /* libiconv.tbd in Frameworks */,
+				502EAD8A27F256210054658D /* AudioToolbox.framework in Frameworks */,
+				5024C0FA27FBCDCA005B9F44 /* libintl.a in Frameworks */,
+				5024711327FBCD96005B9F44 /* libvorbisenc.a in Frameworks */,
+				502EAD8B27F256210054658D /* Carbon.framework in Frameworks */,
+				50161E7928591A46003AF984 /* libresolv.tbd in Frameworks */,
+				50BC1F3E285952EE0024186D /* libffi.a in Frameworks */,
+				50BC1F3F285959D70024186D /* libpcre.a in Frameworks */,
+				502470D727FBCD96005B9F44 /* libz.a in Frameworks */,
+				502EAD8C27F256210054658D /* Cocoa.framework in Frameworks */,
+				5024C12C27FBCDCA005B9F44 /* libsndfile.a in Frameworks */,
+				5024C16327FBCDCA005B9F44 /* libvorbis.a in Frameworks */,
+				5024711827FBCD96005B9F44 /* libopus.a in Frameworks */,
+				502EAD8D27F256210054658D /* CoreAudio.framework in Frameworks */,
+				5024C0D227FBCDCA005B9F44 /* libfftw3f.a in Frameworks */,
+				502EAD8E27F256210054658D /* CoreAudioKit.framework in Frameworks */,
+				5024C12227FBCDCA005B9F44 /* libsigc-3.0.a in Frameworks */,
+				502EAD8F27F256210054658D /* CoreMIDI.framework in Frameworks */,
+				502EAD9027F256210054658D /* DiscRecording.framework in Frameworks */,
+				5024712C27FBCD96005B9F44 /* libgiomm-2.68.a in Frameworks */,
+				50BC1F4128595AE80024186D /* libmpg123.a in Frameworks */,
+				50246FBA27FBCD95005B9F44 /* libgobject-2.0.a in Frameworks */,
+				502470AA27FBCD96005B9F44 /* libFLAC.a in Frameworks */,
+				50246FA127FBCD95005B9F44 /* libgmodule-2.0.a in Frameworks */,
+				50246FB527FBCD95005B9F44 /* libvorbisfile.a in Frameworks */,
+				502470A527FBCD96005B9F44 /* libboost_iostreams.a in Frameworks */,
+				502EAD9127F256210054658D /* IOKit.framework in Frameworks */,
+				502EAD9227F256210054658D /* QuartzCore.framework in Frameworks */,
+				50CFF3A9283D6F100092BF59 /* libgio-2.0.a in Frameworks */,
+				502EAD9327F256210054658D /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F5FD7FC8A0B34818B3149D8 /* JUCE Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B710157E95D231A8F291A253 /* juce_audio_basics */,
+				9ADEA68AB14F30C0A50B7BEC /* juce_audio_devices */,
+				0579AADECFBD9078F42BBC21 /* juce_audio_formats */,
+				DB888095AD3CFAA67CB24DDF /* juce_audio_plugin_client */,
+				704DFCCF4B4F7D964C01028A /* juce_audio_processors */,
+				D2BED1CFE3AC586D2B8F1B41 /* juce_audio_utils */,
+				2FFA07135E0FF2E895E1B333 /* juce_core */,
+				AF42ACE3731F038BF779036E /* juce_data_structures */,
+				931F96A7D67B0FA5A889F9AB /* juce_events */,
+				993EC89A38EF94513C51B579 /* juce_graphics */,
+				29F3DF5DF37ABD88198E48FF /* juce_gui_basics */,
+				32BB9BEAFD1FDF3EFD25C3C2 /* juce_gui_extra */,
+			);
+			name = "JUCE Modules";
+			sourceTree = "<group>";
+		};
+		50245E4227FBCD87005B9F44 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				50245E9C27FBCD87005B9F44 /* libglib-2.0.a */,
+				50161DBF2858185B003AF984 /* libffi.a */,
+				50161DBE2858185B003AF984 /* libpcre.a */,
+				50161DB22858044B003AF984 /* libmp3lame.a */,
+				50161DB32858044B003AF984 /* libmpg123.a */,
+				50245E4827FBCD87005B9F44 /* libgobject-2.0.a */,
+				50245E8927FBCD87005B9F44 /* libglibmm-2.68.a */,
+				50245E9D27FBCD87005B9F44 /* libgiomm-2.68.a */,
+				50246F7A27FBCD94005B9F44 /* libgio-2.0.a */,
+				50245E4327FBCD87005B9F44 /* libgmodule-2.0.a */,
+				50246F8827FBCD94005B9F44 /* libsigc-3.0.a */,
+				50246F7D27FBCD94005B9F44 /* libintl.a */,
+				50245E7B27FBCD87005B9F44 /* libboost_iostreams.a */,
+				50245E8527FBCD87005B9F44 /* libz.a */,
+				50246F8A27FBCD94005B9F44 /* libsndfile.a */,
+				50246F7527FBCD94005B9F44 /* libfftw3f.a */,
+				50246F9A27FBCD94005B9F44 /* libvorbis.a */,
+				50245E4727FBCD87005B9F44 /* libvorbisfile.a */,
+				50245E9527FBCD87005B9F44 /* libvorbisenc.a */,
+				50245E7C27FBCD87005B9F44 /* libFLAC.a */,
+				50245E8427FBCD87005B9F44 /* libogg.a */,
+				50245E9627FBCD87005B9F44 /* libopus.a */,
+			);
+			name = lib;
+			path = "../../../library/vcpkg-mac/uni-osx/lib";
+			sourceTree = "<group>";
+		};
+		502EADCC27F257A40054658D /* gx_head */ = {
+			isa = PBXGroup;
+			children = (
+				50457EC627F27D6800EF130D /* engine */,
+				50457EED27F27E0000EF130D /* gui */,
+			);
+			name = gx_head;
+			sourceTree = "<group>";
+		};
+		50457EC627F27D6800EF130D /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				50457ECB27F27DD900EF130D /* gx_convolver.cpp */,
+				50457EC927F27DD900EF130D /* gx_engine_audio.cpp */,
+				50457ED627F27DD900EF130D /* gx_engine_midi.cpp */,
+				50457ED327F27DD900EF130D /* gx_engine.cpp */,
+				50457ED427F27DD900EF130D /* gx_faust_plugins.cpp */,
+				50457ECC27F27DD900EF130D /* gx_internal_plugins.cpp */,
+				50457ED227F27DD900EF130D /* gx_internal_ui_plugins.cpp */,
+				50457EC827F27DD900EF130D /* gx_jack.cpp */,
+				50457ED527F27DD900EF130D /* gx_json.cpp */,
+				50457ED027F27DD900EF130D /* gx_logging.cpp */,
+				50457ECF27F27DD900EF130D /* gx_midi_plugin.cpp */,
+				50457EC727F27DD900EF130D /* gx_paramtable.cpp */,
+				50457ECD27F27DD900EF130D /* gx_pitch_tracker.cpp */,
+				50457ECA27F27DD900EF130D /* gx_pluginloader.cpp */,
+				50457ED127F27DD900EF130D /* gx_preset.cpp */,
+				50457ED727F27DD900EF130D /* gx_resampler.cpp */,
+				50457ED827F27DD900EF130D /* gx_system.cpp */,
+				50457ED927F27DD900EF130D /* jsonrpc.cpp */,
+				50457ECE27F27DD900EF130D /* tunerswitcher.cpp */,
+			);
+			name = engine;
+			sourceTree = "<group>";
+		};
+		50457EED27F27E0000EF130D /* gui */ = {
+			isa = PBXGroup;
+			children = (
+				50457EEF27F27E0E00EF130D /* gx_main.cpp */,
+				50457EEE27F27E0E00EF130D /* machine.cpp */,
+			);
+			name = gui;
+			sourceTree = "<group>";
+		};
+		50457EF227F27E4200EF130D /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				50457F0127F27EA800EF130D /* generated */,
+				50457EF427F27E9300EF130D /* abgate.cc */,
+				50457EFF27F27EA300EF130D /* jcm800pre.cpp */,
+				50457EF627F27E9300EF130D /* metronome.cc */,
+				50457EF527F27E9300EF130D /* reversedelay.cc */,
+				50457EF727F27E9300EF130D /* vibe.cc */,
+				50457EF327F27E9300EF130D /* vumeter_st.cc */,
+				50457EF827F27E9300EF130D /* vumeter.cc */,
+			);
+			name = plugins;
+			sourceTree = "<group>";
+		};
+		50457F0127F27EA800EF130D /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				50457F2127F27ED300EF130D /* aclipper.cc */,
+				50457F0927F27ED200EF130D /* astrofuzz.cc */,
+				50457F2727F27ED300EF130D /* axface.cc */,
+				50457F2827F27ED300EF130D /* bassboom.cc */,
+				50457F1E27F27ED300EF130D /* bfuzz.cc */,
+				50457F0D27F27ED200EF130D /* bmp.cc */,
+				50457F0827F27ED200EF130D /* bossds1.cc */,
+				50457F1727F27ED200EF130D /* buffb.cc */,
+				50457F1127F27ED200EF130D /* buzz.cc */,
+				50457F2627F27ED300EF130D /* colwah.cc */,
+				50457F0727F27ED200EF130D /* coverd.cc */,
+				50457F1327F27ED200EF130D /* cstb.cc */,
+				50457F0F27F27ED200EF130D /* dunwah.cc */,
+				50457F2427F27ED300EF130D /* eldist.cc */,
+				50457F1527F27ED200EF130D /* ffreak.cc */,
+				50457F1C27F27ED200EF130D /* flanger_gx.cc */,
+				50457F0427F27ED100EF130D /* foxeylady.cc */,
+				50457F1D27F27ED300EF130D /* fumaster.cc */,
+				50457F2927F27ED300EF130D /* fuzzdrive.cc */,
+				50457F1927F27ED200EF130D /* fuzzfacefm.cc */,
+				50457F2527F27ED300EF130D /* fuzzfacerm.cc */,
+				50457F1227F27ED200EF130D /* gcb_95.cc */,
+				50457F2327F27ED300EF130D /* hfb.cc */,
+				50457F1827F27ED200EF130D /* hogsfoot.cc */,
+				50457F2A27F27ED300EF130D /* hornet.cc */,
+				50457F2B27F27ED300EF130D /* lpbboost.cc */,
+				50457F1427F27ED200EF130D /* mbc.cc */,
+				50457F1027F27ED200EF130D /* mbchor.cc */,
+				50457F2027F27ED300EF130D /* mbclipper.cc */,
+				50457F0627F27ED200EF130D /* mbcs.cc */,
+				50457F2227F27ED300EF130D /* mbd.cc */,
+				50457F0527F27ED100EF130D /* mbdel.cc */,
+				50457F0A27F27ED200EF130D /* mbe.cc */,
+				50457F1627F27ED200EF130D /* mole.cc */,
+				50457F0B27F27ED200EF130D /* muff.cc */,
+				50457F1A27F27ED200EF130D /* mxrdist.cc */,
+				50457F1F27F27ED300EF130D /* rangem.cc */,
+				50457F0E27F27ED200EF130D /* rolandwah.cc */,
+				50457F1B27F27ED200EF130D /* ruin.cc */,
+				50457F2C27F27ED300EF130D /* scream.cc */,
+				50457F0227F27ED100EF130D /* susta.cc */,
+				50457F0C27F27ED200EF130D /* ts9sim.cc */,
+				50457F0327F27ED100EF130D /* zita_rev1.cc */,
+			);
+			name = generated;
+			sourceTree = "<group>";
+		};
+		50457F5827F27EFE00EF130D /* zita-convolver */ = {
+			isa = PBXGroup;
+			children = (
+				50457F5A27F27F2700EF130D /* zita-convolver.cc */,
+				50457F5B27F27F2700EF130D /* zita-convolver.h */,
+			);
+			name = "zita-convolver";
+			sourceTree = "<group>";
+		};
+		50457F5927F27F0700EF130D /* zita-resampler */ = {
+			isa = PBXGroup;
+			children = (
+				50457F5F27F27F3A00EF130D /* resampler-table.cc */,
+				50457F5D27F27F3A00EF130D /* resampler-table.h */,
+				50457F6027F27F3A00EF130D /* resampler.cc */,
+				50457F5E27F27F3A00EF130D /* resampler.h */,
+			);
+			name = "zita-resampler";
+			sourceTree = "<group>";
+		};
+		51C621655C233337735B9790 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50161E5B285919E6003AF984 /* libresolv.tbd */,
+				50161E5C285919F0003AF984 /* libiconv.tbd */,
+				50245E4227FBCD87005B9F44 /* lib */,
+				3EAE4EF6E178A3004BD4B7B3 /* AudioUnit.framework */,
+				6394EBF0ECB6E9C986493A5E /* Accelerate.framework */,
+				CB9F311008FE14BA2AFE65C2 /* AudioToolbox.framework */,
+				03EC011B70F0A10EA0E31480 /* Carbon.framework */,
+				F544B1F5613D054755C9A152 /* Cocoa.framework */,
+				C525C440D2405A0B80621D97 /* CoreAudio.framework */,
+				4C587FE27C479ED794DF7890 /* CoreAudioKit.framework */,
+				8BE502F75C74B557C1B7191F /* CoreMIDI.framework */,
+				5233513230727DD6025B2D10 /* DiscRecording.framework */,
+				3B780E55C0D00C51F1FC9929 /* IOKit.framework */,
+				E568F61AAF794711F455E982 /* QuartzCore.framework */,
+				95C4CFC757CC5E7F36792799 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6774B46EE948D1D349CADF19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C8F4D83E0152883FC73B6EF /* Guitarix.vst3 */,
+				1F19C4A9AC28C3B525100B37 /* Guitarix.component */,
+				E7DF47C870A6032780B8A1F6 /* Guitarix.app */,
+				233D181425B5A19E12A31248 /* libGuitarix.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6F2CD0DE44A19B839F742B71 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5015279128625A6400D73331 /* make-vst3-pkg.sh */,
+				50FABAAD2885A26A00A2CC75 /* Guitarix.xml */,
+				F68500619F2A20E466F73F22 /* Guitarix */,
+				2F5FD7FC8A0B34818B3149D8 /* JUCE Modules */,
+				7769E0E2E1ADB2772D4FC8FE /* JUCE Library Code */,
+				8AEC070169516A81CBAACE8A /* Resources */,
+				51C621655C233337735B9790 /* Frameworks */,
+				6774B46EE948D1D349CADF19 /* Products */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		7769E0E2E1ADB2772D4FC8FE /* JUCE Library Code */ = {
+			isa = PBXGroup;
+			children = (
+				50161E1D2859118A003AF984 /* include_juce_audio_formats.mm */,
+				50161E1A2859118A003AF984 /* include_juce_audio_utils.mm */,
+				72A239A9C67B20A94BDC85E0 /* include_juce_audio_basics.mm */,
+				8CD9CC55C0DAF25F610429A5 /* include_juce_audio_devices.mm */,
+				316E733CFF21C03BC4E9E266 /* include_juce_audio_plugin_client_AAX.mm */,
+				075A2B072C84C2133892E149 /* include_juce_audio_plugin_client_AU.r */,
+				4E2DAA1E57944DDC2AACC54C /* include_juce_audio_plugin_client_AU_1.mm */,
+				DE4365CE23662AABA4A370E0 /* include_juce_audio_plugin_client_AU_2.mm */,
+				C8324FCA865726C18FF062DD /* include_juce_audio_plugin_client_Standalone.cpp */,
+				0A79F11938E0D9DD1C15C4C0 /* include_juce_audio_plugin_client_utils.cpp */,
+				48E09A34905816955A8B34A0 /* include_juce_audio_plugin_client_VST_utils.mm */,
+				0D00BA1C012C044FF455FA03 /* include_juce_audio_plugin_client_VST2.cpp */,
+				7A6058A64F50F6D8C2D3B7E6 /* include_juce_audio_plugin_client_VST3.cpp */,
+				19B1B66B6CFC4D8DAC2EB989 /* include_juce_audio_processors.mm */,
+				C29A1BC24C1711233035D790 /* include_juce_core.mm */,
+				6D7D58E0ACF8556577237BB5 /* include_juce_data_structures.mm */,
+				B8DAE2547D48F0E7EC18368C /* include_juce_events.mm */,
+				E7B7ADDAC38B2EDE27E8377D /* include_juce_graphics.mm */,
+				77A79ED2191CECFB88A7B5E4 /* include_juce_gui_basics.mm */,
+				0BA46900C2017C35D01E1F1C /* include_juce_gui_extra.mm */,
+				0B41B40C8181F015753B9E1D /* JuceHeader.h */,
+				644A13442FE833AF20F46280 /* JucePluginDefines.h */,
+			);
+			name = "JUCE Library Code";
+			sourceTree = "<group>";
+		};
+		8AEC070169516A81CBAACE8A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5024C40C27FCE2AF005B9F44 /* gx_head */,
+				F796837B1D9B3105F652195E /* Info-VST3.plist */,
+				B6DA21E8BCE77690B682CB3D /* Info-AU.plist */,
+				8AADAE387548185103840449 /* Info-Standalone_Plugin.plist */,
+				66975499CFA74B2D35906CE3 /* RecentFilesMenuTemplate.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		ABE75E52F329EF5E8BF05041 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5015279528636F4800D73331 /* GetPrefsPath.h */,
+				5015279628636F4800D73331 /* GetPrefsPath.mm */,
+				50CB2AC6281B19BD00C477EA /* sem_timedwait.c */,
+				502EADC627F2570D0054658D /* GuitarixEditor.cpp */,
+				502EADC527F2570D0054658D /* GuitarixEditor.h */,
+				502EADC427F2570D0054658D /* GuitarixProcessor.cpp */,
+				502EADC327F2570C0054658D /* GuitarixProcessor.h */,
+				502EADC727F2570D0054658D /* JuceUiBuilder.cpp */,
+				502EADC827F2570D0054658D /* JuceUiBuilder.h */,
+				29F469FAABFF6A3C8C12C43B /* PluginEditor.cpp */,
+				54F2181F00EF7EB32EEBC70C /* PluginEditor.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		F68500619F2A20E466F73F22 /* Guitarix */ = {
+			isa = PBXGroup;
+			children = (
+				502EADCC27F257A40054658D /* gx_head */,
+				50457EF227F27E4200EF130D /* plugins */,
+				50457F5827F27EFE00EF130D /* zita-convolver */,
+				50457F5927F27F0700EF130D /* zita-resampler */,
+				ABE75E52F329EF5E8BF05041 /* Source */,
+			);
+			name = Guitarix;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2B3E31000FC89064CCFCF463 /* Guitarix - Standalone Plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97F71B427C5ED8E4646AD00E /* Build configuration list for PBXNativeTarget "Guitarix - Standalone Plugin" */;
+			buildPhases = (
+				2D151726D2906D6D4855255D /* Resources */,
+				3F35A842A89D99E00E1D0019 /* Sources */,
+				4BB822D5DBF95A52A8D2C744 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB6C147FB3365AB56854A80A /* PBXTargetDependency */,
+			);
+			name = "Guitarix - Standalone Plugin";
+			productName = Guitarix;
+			productReference = E7DF47C870A6032780B8A1F6 /* Guitarix.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4353C73CBCA15145D7DDC9EF /* Guitarix - VST3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6A85FBB89E411B5BB5A5F1D /* Build configuration list for PBXNativeTarget "Guitarix - VST3" */;
+			buildPhases = (
+				48AFB6CD15E0DF2548D604C9 /* Resources */,
+				A2AFAB0F64484B733082E91F /* Sources */,
+				B45E25E01AF5827E97F29041 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9607EDD6C2B122B8424F22C /* PBXTargetDependency */,
+			);
+			name = "Guitarix - VST3";
+			productName = Guitarix;
+			productReference = 3C8F4D83E0152883FC73B6EF /* Guitarix.vst3 */;
+			productType = "com.apple.product-type.bundle";
+		};
+		AD21850413EABF60CC1DEC83 /* Guitarix - AU */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32218844FC81C71A2FB5B30E /* Build configuration list for PBXNativeTarget "Guitarix - AU" */;
+			buildPhases = (
+				2BE897E357679D138AC0B7DF /* Resources */,
+				2A886132AC868A196E0E0A76 /* Rez */,
+				A030A4D16590AAA3899A54D7 /* Sources */,
+				A73CB3415993D26EE35CA414 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4036176074B28683502222E1 /* PBXTargetDependency */,
+			);
+			name = "Guitarix - AU";
+			productName = Guitarix;
+			productReference = 1F19C4A9AC28C3B525100B37 /* Guitarix.component */;
+			productType = "com.apple.product-type.bundle";
+		};
+		CE1F254BBDAD72177BF2B59D /* Guitarix - Shared Code */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 041053AB9B27A5D392FD3FDF /* Build configuration list for PBXNativeTarget "Guitarix - Shared Code" */;
+			buildPhases = (
+				7887E12EEB6FD35297B1E05C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Guitarix - Shared Code";
+			productName = Guitarix;
+			productReference = 233D181425B5A19E12A31248 /* libGuitarix.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		10BCCDEA56DDDBF7F116BBDC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				DefaultBuildSystemTypeForWorkspace = Latest;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = Guitarix;
+				TargetAttributes = {
+					2B3E31000FC89064CCFCF463 = {
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.HardenedRuntime = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					4353C73CBCA15145D7DDC9EF = {
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.HardenedRuntime = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					50152786286259FA00D73331 = {
+						CreatedOnToolsVersion = 13.4.1;
+						DevelopmentTeam = N255PH35YQ;
+						ProvisioningStyle = Automatic;
+					};
+					AD21850413EABF60CC1DEC83 = {
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.HardenedRuntime = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					B403409FFEA7B4739C52B329 = {
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.HardenedRuntime = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					CE1F254BBDAD72177BF2B59D = {
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.HardenedRuntime = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = F6C8A70E98EF23E009291E50 /* Build configuration list for PBXProject "Guitarix" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6F2CD0DE44A19B839F742B71 /* Source */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B403409FFEA7B4739C52B329 /* Guitarix - All */,
+				4353C73CBCA15145D7DDC9EF /* Guitarix - VST3 */,
+				AD21850413EABF60CC1DEC83 /* Guitarix - AU */,
+				2B3E31000FC89064CCFCF463 /* Guitarix - Standalone Plugin */,
+				CE1F254BBDAD72177BF2B59D /* Guitarix - Shared Code */,
+				50152786286259FA00D73331 /* Installer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2BE897E357679D138AC0B7DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				502EADA027F256210054658D /* RecentFilesMenuTemplate.nib in Resources */,
+				5024C41027FCE2AF005B9F44 /* gx_head in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D151726D2906D6D4855255D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				502EADAC27F256210054658D /* RecentFilesMenuTemplate.nib in Resources */,
+				50BE907D2895D4D600F0BFD8 /* gx_head in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48AFB6CD15E0DF2548D604C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				502EAD8827F256210054658D /* RecentFilesMenuTemplate.nib in Resources */,
+				5024C40E27FCE2AF005B9F44 /* gx_head in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		2A886132AC868A196E0E0A76 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9947E347F99CEF29CCC098B1 /* include_juce_audio_plugin_client_AU.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5015279028625A2100D73331 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbash $SRCROOT/make-vst3-pkg.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F35A842A89D99E00E1D0019 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				273586EC2BB99A903DBDF649 /* include_juce_audio_plugin_client_Standalone.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7887E12EEB6FD35297B1E05C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50457F4127F27ED400EF130D /* mole.cc in Sources */,
+				50457F0027F27EA300EF130D /* jcm800pre.cpp in Sources */,
+				50457EFD27F27E9300EF130D /* vibe.cc in Sources */,
+				76380948B6120930A4A3139F /* PluginEditor.cpp in Sources */,
+				50457F3227F27ED400EF130D /* coverd.cc in Sources */,
+				50457EE327F27DD900EF130D /* gx_logging.cpp in Sources */,
+				50457F3C27F27ED400EF130D /* buzz.cc in Sources */,
+				50457F6227F27F3A00EF130D /* resampler.cc in Sources */,
+				50457EF027F27E0E00EF130D /* machine.cpp in Sources */,
+				50457F3727F27ED400EF130D /* ts9sim.cc in Sources */,
+				50457F4527F27ED400EF130D /* mxrdist.cc in Sources */,
+				50457F4C27F27ED400EF130D /* aclipper.cc in Sources */,
+				2BB1639D21FAA42364B6D7DD /* include_juce_audio_basics.mm in Sources */,
+				50457F2D27F27ED400EF130D /* susta.cc in Sources */,
+				50457EEC27F27DD900EF130D /* jsonrpc.cpp in Sources */,
+				502EADC927F2570D0054658D /* GuitarixProcessor.cpp in Sources */,
+				50457EFC27F27E9300EF130D /* metronome.cc in Sources */,
+				50457EDA27F27DD900EF130D /* gx_paramtable.cpp in Sources */,
+				50457F2E27F27ED400EF130D /* zita_rev1.cc in Sources */,
+				50457F4327F27ED400EF130D /* hogsfoot.cc in Sources */,
+				502EADCA27F2570D0054658D /* GuitarixEditor.cpp in Sources */,
+				50457F3D27F27ED400EF130D /* gcb_95.cc in Sources */,
+				50457EDE27F27DD900EF130D /* gx_convolver.cpp in Sources */,
+				50457F3A27F27ED400EF130D /* dunwah.cc in Sources */,
+				50457F5027F27ED400EF130D /* fuzzfacerm.cc in Sources */,
+				35D64D7F716EAFB2EB257607 /* include_juce_audio_devices.mm in Sources */,
+				50457F3327F27ED400EF130D /* bossds1.cc in Sources */,
+				0FDD57C7CCA895FD28EDF444 /* include_juce_audio_plugin_client_utils.cpp in Sources */,
+				50161E212859118A003AF984 /* include_juce_audio_formats.mm in Sources */,
+				0D318062A8BD054D1BAEA6F5 /* include_juce_audio_plugin_client_VST_utils.mm in Sources */,
+				FF2BCF37C99F11B1FB589312 /* include_juce_audio_processors.mm in Sources */,
+				50457EE627F27DD900EF130D /* gx_engine.cpp in Sources */,
+				50457F3B27F27ED400EF130D /* mbchor.cc in Sources */,
+				50457EDB27F27DD900EF130D /* gx_jack.cpp in Sources */,
+				50457F3027F27ED400EF130D /* mbdel.cc in Sources */,
+				502EADCB27F2570D0054658D /* JuceUiBuilder.cpp in Sources */,
+				50161E1E2859118A003AF984 /* include_juce_audio_utils.mm in Sources */,
+				5015279728636F4800D73331 /* GetPrefsPath.mm in Sources */,
+				50CB2AC7281B19BD00C477EA /* sem_timedwait.c in Sources */,
+				50457F4F27F27ED400EF130D /* eldist.cc in Sources */,
+				50457F4927F27ED400EF130D /* bfuzz.cc in Sources */,
+				50457F5327F27ED400EF130D /* bassboom.cc in Sources */,
+				50457EE027F27DD900EF130D /* gx_pitch_tracker.cpp in Sources */,
+				50457F5727F27ED400EF130D /* scream.cc in Sources */,
+				50457EFB27F27E9300EF130D /* reversedelay.cc in Sources */,
+				50457EDC27F27DD900EF130D /* gx_engine_audio.cpp in Sources */,
+				50457EE727F27DD900EF130D /* gx_faust_plugins.cpp in Sources */,
+				50457EF927F27E9300EF130D /* vumeter_st.cc in Sources */,
+				50457F4627F27ED400EF130D /* ruin.cc in Sources */,
+				50457F4427F27ED400EF130D /* fuzzfacefm.cc in Sources */,
+				50457F3E27F27ED400EF130D /* cstb.cc in Sources */,
+				50457F4A27F27ED400EF130D /* rangem.cc in Sources */,
+				50457F3627F27ED400EF130D /* muff.cc in Sources */,
+				50457EEB27F27DD900EF130D /* gx_system.cpp in Sources */,
+				50457F3427F27ED400EF130D /* astrofuzz.cc in Sources */,
+				50457F5227F27ED400EF130D /* axface.cc in Sources */,
+				0DE139756296B8903499B942 /* include_juce_core.mm in Sources */,
+				50457EE827F27DD900EF130D /* gx_json.cpp in Sources */,
+				50457EFA27F27E9300EF130D /* abgate.cc in Sources */,
+				E8EF3172D42158AD061D7138 /* include_juce_data_structures.mm in Sources */,
+				50457F3F27F27ED400EF130D /* mbc.cc in Sources */,
+				4216B35C58A867B6D8A4BADA /* include_juce_events.mm in Sources */,
+				50457EDD27F27DD900EF130D /* gx_pluginloader.cpp in Sources */,
+				50457F5527F27ED400EF130D /* hornet.cc in Sources */,
+				50457F4B27F27ED400EF130D /* mbclipper.cc in Sources */,
+				50457F4827F27ED400EF130D /* fumaster.cc in Sources */,
+				50457F5427F27ED400EF130D /* fuzzdrive.cc in Sources */,
+				50457EE527F27DD900EF130D /* gx_internal_ui_plugins.cpp in Sources */,
+				EE685588AF991D5A459DF01B /* include_juce_graphics.mm in Sources */,
+				50457F5127F27ED400EF130D /* colwah.cc in Sources */,
+				50457F3127F27ED400EF130D /* mbcs.cc in Sources */,
+				50457F3527F27ED400EF130D /* mbe.cc in Sources */,
+				50457F4027F27ED400EF130D /* ffreak.cc in Sources */,
+				50457F2F27F27ED400EF130D /* foxeylady.cc in Sources */,
+				50457F3827F27ED400EF130D /* bmp.cc in Sources */,
+				50457EE927F27DD900EF130D /* gx_engine_midi.cpp in Sources */,
+				50457F5627F27ED400EF130D /* lpbboost.cc in Sources */,
+				50457F4D27F27ED400EF130D /* mbd.cc in Sources */,
+				50457EDF27F27DD900EF130D /* gx_internal_plugins.cpp in Sources */,
+				7AB8EC534DB576DFE886B64A /* include_juce_gui_basics.mm in Sources */,
+				50457F4727F27ED400EF130D /* flanger_gx.cc in Sources */,
+				50457F5C27F27F2700EF130D /* zita-convolver.cc in Sources */,
+				50457EE127F27DD900EF130D /* tunerswitcher.cpp in Sources */,
+				50457F6127F27F3A00EF130D /* resampler-table.cc in Sources */,
+				50457EFE27F27E9300EF130D /* vumeter.cc in Sources */,
+				50457F4227F27ED400EF130D /* buffb.cc in Sources */,
+				50457EEA27F27DD900EF130D /* gx_resampler.cpp in Sources */,
+				50457F4E27F27ED400EF130D /* hfb.cc in Sources */,
+				50457EE227F27DD900EF130D /* gx_midi_plugin.cpp in Sources */,
+				50457F3927F27ED400EF130D /* rolandwah.cc in Sources */,
+				50457EF127F27E0E00EF130D /* gx_main.cpp in Sources */,
+				B0E5762E09D3C19DC1C0E035 /* include_juce_gui_extra.mm in Sources */,
+				50457EE427F27DD900EF130D /* gx_preset.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A030A4D16590AAA3899A54D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CBF5E53F69C9855E1A59969 /* include_juce_audio_plugin_client_AU_1.mm in Sources */,
+				975F0ACD13839BD38F351C85 /* include_juce_audio_plugin_client_AU_2.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2AFAB0F64484B733082E91F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A30B0BBA16528CF9173DBE4B /* include_juce_audio_plugin_client_VST3.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		002A06DB312AF53F8A74B282 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD21850413EABF60CC1DEC83 /* Guitarix - AU */;
+			targetProxy = 502EADC027F256250054658D /* PBXContainerItemProxy */;
+		};
+		4036176074B28683502222E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1F254BBDAD72177BF2B59D /* Guitarix - Shared Code */;
+			targetProxy = 502EADBA27F256240054658D /* PBXContainerItemProxy */;
+		};
+		479F405B16EF49136CBE510C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B3E31000FC89064CCFCF463 /* Guitarix - Standalone Plugin */;
+			targetProxy = 502EADC127F256250054658D /* PBXContainerItemProxy */;
+		};
+		5015278B28625A1800D73331 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD21850413EABF60CC1DEC83 /* Guitarix - AU */;
+			targetProxy = 5015278A28625A1800D73331 /* PBXContainerItemProxy */;
+		};
+		5015278D28625A1800D73331 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B3E31000FC89064CCFCF463 /* Guitarix - Standalone Plugin */;
+			targetProxy = 5015278C28625A1800D73331 /* PBXContainerItemProxy */;
+		};
+		5015278F28625A1800D73331 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4353C73CBCA15145D7DDC9EF /* Guitarix - VST3 */;
+			targetProxy = 5015278E28625A1800D73331 /* PBXContainerItemProxy */;
+		};
+		ACF34DC616FF963D10EF008E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1F254BBDAD72177BF2B59D /* Guitarix - Shared Code */;
+			targetProxy = 502EADC227F256250054658D /* PBXContainerItemProxy */;
+		};
+		D9607EDD6C2B122B8424F22C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1F254BBDAD72177BF2B59D /* Guitarix - Shared Code */;
+			targetProxy = 502EADB827F256240054658D /* PBXContainerItemProxy */;
+		};
+		EF2C0CB1973C10046E26C4C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4353C73CBCA15145D7DDC9EF /* Guitarix - VST3 */;
+			targetProxy = 502EADBE27F256250054658D /* PBXContainerItemProxy */;
+		};
+		FB6C147FB3365AB56854A80A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1F254BBDAD72177BF2B59D /* Guitarix - Shared Code */;
+			targetProxy = 502EADBB27F256250054658D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		06147676F0AE5439E147483D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2E1ACF0FF4C2F15B57BDE657 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GX_VCPKG_INCLUDE = "";
+				"GX_VCPKG_INCLUDE[arch=arm64]" = "../../../library/vcpkg-arm64-osx/installed/arm64-osx";
+				"GX_VCPKG_INCLUDE[arch=x86_64]" = "../../../library/vcpkg-x64-osx/installed/x64-osx";
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "../../../library/vcpkg-mac/uni-osx/lib";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = Guitarix;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-Wreorder";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		4810B6980A501405B81F6BDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		493C5B374803D7133552D549 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				DEPLOYMENT_LOCATION = YES;
+				DEVELOPMENT_TEAM = "";
+				DSTROOT = /;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"JucePlugin_VersionCode=0x10000",
+					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"_DEBUG=1",
+					"DEBUG=1",
+					"JUCE_USE_OGGVORBIS=0",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=1.0.0",
+					"JUCE_APP_VERSION_HEX=0x10000",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=1",
+					"JucePlugin_Build_AU=1",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_RTAS=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=1",
+					"JucePlugin_Build_Unity=0",
+					"JUCE_SHARED_CODE=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=1",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=0",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Name=\\\"Guitarix\\\"",
+					"JucePlugin_Desc=\\\"Guitarix\\\"",
+					"JucePlugin_Manufacturer=\\\"Guitarix\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x4d616e75",
+					"JucePlugin_PluginCode=0x4835316d",
+					"JucePlugin_IsSynth=0",
+					"JucePlugin_WantsMidiInput=0",
+					"JucePlugin_ProducesMidiOutput=0",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategEffect",
+					"JucePlugin_Vst3Category=\\\"Fx\\\"",
+					"JucePlugin_AUMainType='aufx'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=GuitarixAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"GuitarixAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_RTASCategory=0",
+					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
+					"JucePlugin_RTASDisableBypass=0",
+					"JucePlugin_RTASDisableMultiMono=0",
+					"JucePlugin_AAXIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=0",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757278",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Guitarix:\\ Guitarix\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../JUCE-modules/juce_audio_processors/format_types/VST3_SDK",
+					../../JuceLibraryCode,
+					"../../JUCE-modules",
+					"../../JUCE-modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Info-AU.plist";
+				INFOPLIST_PREPROCESS = NO;
+				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/Components/";
+				LIBRARY_STYLE = Bundle;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.38.1.1995;
+				OTHER_LDFLAGS = (
+					"-bundle",
+					"-lGuitarix",
+				);
+				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -d ppc64_$ppc64 -d x86_64_$x86_64 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I \"$(DEVELOPER_DIR)/Extras/CoreAudio/AudioUnits/AUPublic/AUBase\" -I \"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/AudioUnit.framework/Headers\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
+				PRODUCT_NAME = Guitarix;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				USE_HEADERMAP = NO;
+				WRAPPER_EXTENSION = component;
+			};
+			name = Debug;
+		};
+		50152788286259FA00D73331 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N255PH35YQ;
+				GX_PRODUCT_VERSION = 1.38.1.1995;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		50152789286259FA00D73331 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N255PH35YQ;
+				GX_PRODUCT_VERSION = 1.38.1.1995;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		5CADFC78DC74BC3AA3E6DAC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				DEAD_CODE_STRIPPING = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DEVELOPMENT_TEAM = "";
+				DSTROOT = /;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"_NDEBUG=1",
+					"NDEBUG=1",
+					"JUCE_USE_OGGVORBIS=0",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=1.0.0",
+					"JUCE_APP_VERSION_HEX=0x10000",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=1",
+					"JucePlugin_Build_AU=1",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_RTAS=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=1",
+					"JucePlugin_Build_Unity=0",
+					"JUCE_SHARED_CODE=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=1",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=0",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Name=\\\"Guitarix\\\"",
+					"JucePlugin_Desc=\\\"Guitarix\\\"",
+					"JucePlugin_Manufacturer=\\\"Guitarix\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x4d616e75",
+					"JucePlugin_PluginCode=0x4835316d",
+					"JucePlugin_IsSynth=0",
+					"JucePlugin_WantsMidiInput=0",
+					"JucePlugin_ProducesMidiOutput=0",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategEffect",
+					"JucePlugin_Vst3Category=\\\"Fx\\\"",
+					"JucePlugin_AUMainType='aufx'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=GuitarixAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"GuitarixAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_RTASCategory=0",
+					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
+					"JucePlugin_RTASDisableBypass=0",
+					"JucePlugin_RTASDisableMultiMono=0",
+					"JucePlugin_AAXIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=0",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757278",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Guitarix:\\ Guitarix\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../JUCE-modules/juce_audio_processors/format_types/VST3_SDK",
+					../../JuceLibraryCode,
+					"../../JUCE-modules",
+					"../../JUCE-modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Info-VST3.plist";
+				INFOPLIST_PREPROCESS = NO;
+				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/VST3/";
+				LIBRARY_STYLE = Bundle;
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.38.1.1995;
+				OTHER_LDFLAGS = (
+					"-bundle",
+					"-lGuitarix",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
+				PRODUCT_NAME = Guitarix;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				USE_HEADERMAP = NO;
+				WRAPPER_EXTENSION = vst3;
+			};
+			name = Release;
+		};
+		5DF7A3B8F35D7D023A5383CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				DEAD_CODE_STRIPPING = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DEVELOPMENT_TEAM = "";
+				DSTROOT = /;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"JucePlugin_VersionCode=0x10000",
+					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"_NDEBUG=1",
+					"NDEBUG=1",
+					"JUCE_USE_OGGVORBIS=0",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=1.0.0",
+					"JUCE_APP_VERSION_HEX=0x10000",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=1",
+					"JucePlugin_Build_AU=1",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_RTAS=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=1",
+					"JucePlugin_Build_Unity=0",
+					"JUCE_SHARED_CODE=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=1",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=0",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Name=\\\"Guitarix\\\"",
+					"JucePlugin_Desc=\\\"Guitarix\\\"",
+					"JucePlugin_Manufacturer=\\\"Guitarix\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x4d616e75",
+					"JucePlugin_PluginCode=0x4835316d",
+					"JucePlugin_IsSynth=0",
+					"JucePlugin_WantsMidiInput=0",
+					"JucePlugin_ProducesMidiOutput=0",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategEffect",
+					"JucePlugin_Vst3Category=\\\"Fx\\\"",
+					"JucePlugin_AUMainType='aufx'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=GuitarixAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"GuitarixAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_RTASCategory=0",
+					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
+					"JucePlugin_RTASDisableBypass=0",
+					"JucePlugin_RTASDisableMultiMono=0",
+					"JucePlugin_AAXIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=0",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757278",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Guitarix:\\ Guitarix\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../JUCE-modules/juce_audio_processors/format_types/VST3_SDK",
+					../../JuceLibraryCode,
+					"../../JUCE-modules",
+					"../../JUCE-modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Info-AU.plist";
+				INFOPLIST_PREPROCESS = NO;
+				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/Components/";
+				LIBRARY_STYLE = Bundle;
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.38.1.1995;
+				OTHER_LDFLAGS = (
+					"-bundle",
+					"-lGuitarix",
+				);
+				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -d ppc64_$ppc64 -d x86_64_$x86_64 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I \"$(DEVELOPER_DIR)/Extras/CoreAudio/AudioUnits/AUPublic/AUBase\" -I \"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/AudioUnit.framework/Headers\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
+				PRODUCT_NAME = Guitarix;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				USE_HEADERMAP = NO;
+				WRAPPER_EXTENSION = component;
+			};
+			name = Release;
+		};
+		6A6582A08AF54758A9741820 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				DEPLOYMENT_LOCATION = YES;
+				DEVELOPMENT_TEAM = "";
+				DSTROOT = /;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"_DEBUG=1",
+					"DEBUG=1",
+					"JUCE_USE_OGGVORBIS=0",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=1.0.0",
+					"JUCE_APP_VERSION_HEX=0x10000",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=1",
+					"JucePlugin_Build_AU=1",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_RTAS=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=1",
+					"JucePlugin_Build_Unity=0",
+					"JUCE_SHARED_CODE=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=1",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=0",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Name=\\\"Guitarix\\\"",
+					"JucePlugin_Desc=\\\"Guitarix\\\"",
+					"JucePlugin_Manufacturer=\\\"Guitarix\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x4d616e75",
+					"JucePlugin_PluginCode=0x4835316d",
+					"JucePlugin_IsSynth=0",
+					"JucePlugin_WantsMidiInput=0",
+					"JucePlugin_ProducesMidiOutput=0",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategEffect",
+					"JucePlugin_Vst3Category=\\\"Fx\\\"",
+					"JucePlugin_AUMainType='aufx'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=GuitarixAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"GuitarixAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_RTASCategory=0",
+					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
+					"JucePlugin_RTASDisableBypass=0",
+					"JucePlugin_RTASDisableMultiMono=0",
+					"JucePlugin_AAXIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=0",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757278",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Guitarix:\\ Guitarix\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../JUCE-modules/juce_audio_processors/format_types/VST3_SDK",
+					../../JuceLibraryCode,
+					"../../JUCE-modules",
+					"../../JUCE-modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Info-VST3.plist";
+				INFOPLIST_PREPROCESS = NO;
+				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/VST3/";
+				LIBRARY_STYLE = Bundle;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.38.1.1995;
+				OTHER_LDFLAGS = (
+					"-bundle",
+					"-lGuitarix",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
+				PRODUCT_NAME = Guitarix;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				USE_HEADERMAP = NO;
+				WRAPPER_EXTENSION = vst3;
+			};
+			name = Debug;
+		};
+		89967A76CAA736B0142DBC04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"_DEBUG=1",
+					"DEBUG=1",
+					"JUCE_USE_OGGVORBIS=0",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=1.0.0",
+					"JUCE_APP_VERSION_HEX=0x10000",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=1",
+					"JucePlugin_Build_AU=1",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_RTAS=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=1",
+					"JucePlugin_Build_Unity=0",
+					"JUCE_SHARED_CODE=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=1",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=0",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Name=\\\"Guitarix\\\"",
+					"JucePlugin_Desc=\\\"Guitarix\\\"",
+					"JucePlugin_Manufacturer=\\\"Guitarix\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x4d616e75",
+					"JucePlugin_PluginCode=0x4835316d",
+					"JucePlugin_IsSynth=0",
+					"JucePlugin_WantsMidiInput=0",
+					"JucePlugin_ProducesMidiOutput=0",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategEffect",
+					"JucePlugin_Vst3Category=\\\"Fx\\\"",
+					"JucePlugin_AUMainType='aufx'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=GuitarixAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"GuitarixAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_RTASCategory=0",
+					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
+					"JucePlugin_RTASDisableBypass=0",
+					"JucePlugin_RTASDisableMultiMono=0",
+					"JucePlugin_AAXIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=0",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757278",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Guitarix:\\ Guitarix\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"../../JUCE-modules/juce_audio_processors/format_types/VST3_SDK",
+					../../JuceLibraryCode,
+					"../../JUCE-modules",
+					"../../JUCE-modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Info-Standalone_Plugin.plist";
+				INFOPLIST_PREPROCESS = NO;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/glib/2.72.2/lib,
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.38.1.1995;
+				OTHER_LDFLAGS = "-lGuitarix";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
+				PRODUCT_NAME = Guitarix;
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		AC2153072F5E3D7C62BAC571 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GX_VCPKG_INCLUDE = "";
+				"GX_VCPKG_INCLUDE[arch=arm64]" = "../../../library/vcpkg-arm64-osx/installed/arm64-osx";
+				"GX_VCPKG_INCLUDE[arch=x86_64]" = "../../../library/vcpkg-x64-osx/installed/x64-osx";
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "../../../library/vcpkg-mac/x64-osx/debug/lib";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Guitarix;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-Wreorder";
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		B10A01AC95E613941D9089F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"_DEBUG=1",
+					"DEBUG=1",
+					BOOST_ALL_NO_LIB,
+					"JUCE_USE_OGGVORBIS=0",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=1.0.0",
+					"JUCE_APP_VERSION_HEX=0x10000",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=1",
+					"JucePlugin_Build_AU=1",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_RTAS=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=1",
+					"JucePlugin_Build_Unity=0",
+					"JUCE_SHARED_CODE=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=1",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=0",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Name=\\\"Guitarix\\\"",
+					"JucePlugin_Desc=\\\"Guitarix\\\"",
+					"JucePlugin_Manufacturer=\\\"Guitarix\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x4d616e75",
+					"JucePlugin_PluginCode=0x4835316d",
+					"JucePlugin_IsSynth=0",
+					"JucePlugin_WantsMidiInput=0",
+					"JucePlugin_ProducesMidiOutput=0",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategEffect",
+					"JucePlugin_Vst3Category=\\\"Fx\\\"",
+					"JucePlugin_AUMainType='aufx'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=GuitarixAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"GuitarixAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_RTASCategory=0",
+					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
+					"JucePlugin_RTASDisableBypass=0",
+					"JucePlugin_RTASDisableMultiMono=0",
+					"JucePlugin_AAXIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=0",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757278",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Guitarix:\\ Guitarix\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					../../guitarix/src/headers,
+					../../guitarix/libgxw,
+					../../guitarix/libgxwmm,
+					../../guitarix/src/gx_head/engine,
+					"../../guitarix/src/zita-resampler-1.1.0",
+					"../../JUCE-modules/juce_audio_processors/format_types/VST3_SDK",
+					../../JuceLibraryCode,
+					"../../JUCE-modules",
+					"../../JUCE-modules/juce_audio_plugin_client",
+					"$(inherited)",
+					"../../guitarix/src/zita-convolver",
+					../../Source,
+				);
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
+				PRODUCT_NAME = Guitarix;
+				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = "$(GX_VCPKG_INCLUDE)/include $(GX_VCPKG_INCLUDE)/include/glibmm-2.68 $(GX_VCPKG_INCLUDE)/debug/lib/** $(GX_VCPKG_INCLUDE)/include/glib-2.0 $(GX_VCPKG_INCLUDE)/include/giomm-2.68 $(GX_VCPKG_INCLUDE)/include/sigc++-3.0";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		C5C7B5A1A937DA883531DCE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"_NDEBUG=1",
+					"NDEBUG=1",
+					"JUCE_USE_OGGVORBIS=0",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=1.0.0",
+					"JUCE_APP_VERSION_HEX=0x10000",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=1",
+					"JucePlugin_Build_AU=1",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_RTAS=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=1",
+					"JucePlugin_Build_Unity=0",
+					"JUCE_SHARED_CODE=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=1",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=0",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Name=\\\"Guitarix\\\"",
+					"JucePlugin_Desc=\\\"Guitarix\\\"",
+					"JucePlugin_Manufacturer=\\\"Guitarix\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x4d616e75",
+					"JucePlugin_PluginCode=0x4835316d",
+					"JucePlugin_IsSynth=0",
+					"JucePlugin_WantsMidiInput=0",
+					"JucePlugin_ProducesMidiOutput=0",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategEffect",
+					"JucePlugin_Vst3Category=\\\"Fx\\\"",
+					"JucePlugin_AUMainType='aufx'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=GuitarixAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"GuitarixAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_RTASCategory=0",
+					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
+					"JucePlugin_RTASDisableBypass=0",
+					"JucePlugin_RTASDisableMultiMono=0",
+					"JucePlugin_AAXIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=0",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757278",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Guitarix:\\ Guitarix\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"../../JUCE-modules/juce_audio_processors/format_types/VST3_SDK",
+					../../JuceLibraryCode,
+					"../../JUCE-modules",
+					"../../JUCE-modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Info-Standalone_Plugin.plist";
+				INFOPLIST_PREPROCESS = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glib/2.72.2/lib,
+				);
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.38.1.1995;
+				OTHER_LDFLAGS = "-lGuitarix";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
+				PRODUCT_NAME = Guitarix;
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		CD3239880E3F80175B1FD2C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"_NDEBUG=1",
+					"NDEBUG=1",
+					"JUCE_USE_OGGVORBIS=0",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=1.0.0",
+					"JUCE_APP_VERSION_HEX=0x10000",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=1",
+					"JucePlugin_Build_AU=1",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_RTAS=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=1",
+					"JucePlugin_Build_Unity=0",
+					"JUCE_SHARED_CODE=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=1",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=0",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Name=\\\"Guitarix\\\"",
+					"JucePlugin_Desc=\\\"Guitarix\\\"",
+					"JucePlugin_Manufacturer=\\\"Guitarix\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x4d616e75",
+					"JucePlugin_PluginCode=0x4835316d",
+					"JucePlugin_IsSynth=0",
+					"JucePlugin_WantsMidiInput=0",
+					"JucePlugin_ProducesMidiOutput=0",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategEffect",
+					"JucePlugin_Vst3Category=\\\"Fx\\\"",
+					"JucePlugin_AUMainType='aufx'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=GuitarixAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"GuitarixAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_RTASCategory=0",
+					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
+					"JucePlugin_RTASDisableBypass=0",
+					"JucePlugin_RTASDisableMultiMono=0",
+					"JucePlugin_AAXIdentifier=com.Guitarix.Guitarix",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=0",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757278",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Guitarix:\\ Guitarix\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					../../guitarix/src/headers,
+					../../guitarix/libgxw,
+					../../guitarix/libgxwmm,
+					../../guitarix/src/gx_head/engine,
+					"../../guitarix/src/zita-resampler-1.1.0",
+					"../../JUCE-modules/juce_audio_processors/format_types/VST3_SDK",
+					../../JuceLibraryCode,
+					"../../JUCE-modules",
+					"../../JUCE-modules/juce_audio_plugin_client",
+					"$(inherited)",
+					"../../guitarix/src/zita-convolver",
+					../../Source,
+				);
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
+				PRODUCT_NAME = Guitarix;
+				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = "$(GX_VCPKG_INCLUDE)/include $(GX_VCPKG_INCLUDE)/include/glibmm-2.68 $(GX_VCPKG_INCLUDE)/include/glib-2.0 $(GX_VCPKG_INCLUDE)/include/giomm-2.68 $(GX_VCPKG_INCLUDE)/include/sigc++-3.0 $(GX_VCPKG_INCLUDE)/lib/glib-2.0/include $(GX_VCPKG_INCLUDE)/lib/glibmm-2.68/include $(GX_VCPKG_INCLUDE)/lib/sigc++-3.0/include $(GX_VCPKG_INCLUDE)/lib/giomm-2.68/include";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		041053AB9B27A5D392FD3FDF /* Build configuration list for PBXNativeTarget "Guitarix - Shared Code" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10A01AC95E613941D9089F0 /* Debug */,
+				CD3239880E3F80175B1FD2C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		32218844FC81C71A2FB5B30E /* Build configuration list for PBXNativeTarget "Guitarix - AU" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				493C5B374803D7133552D549 /* Debug */,
+				5DF7A3B8F35D7D023A5383CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		50152787286259FA00D73331 /* Build configuration list for PBXAggregateTarget "Installer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50152788286259FA00D73331 /* Debug */,
+				50152789286259FA00D73331 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		97F71B427C5ED8E4646AD00E /* Build configuration list for PBXNativeTarget "Guitarix - Standalone Plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89967A76CAA736B0142DBC04 /* Debug */,
+				C5C7B5A1A937DA883531DCE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D6A85FBB89E411B5BB5A5F1D /* Build configuration list for PBXNativeTarget "Guitarix - VST3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A6582A08AF54758A9741820 /* Debug */,
+				5CADFC78DC74BC3AA3E6DAC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F35B8054CA34D8F8B437741D /* Build configuration list for PBXAggregateTarget "Guitarix - All" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06147676F0AE5439E147483D /* Debug */,
+				4810B6980A501405B81F6BDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F6C8A70E98EF23E009291E50 /* Build configuration list for PBXProject "Guitarix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2153072F5E3D7C62BAC571 /* Debug */,
+				2E1ACF0FF4C2F15B57BDE657 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 10BCCDEA56DDDBF7F116BBDC /* Project object */;
+}
