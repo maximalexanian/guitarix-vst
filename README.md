@@ -6,7 +6,7 @@ Branch from version 0.38.1 https://sourceforge.net/p/guitarix/git/ci/V0.38.1/tre
 
 GUI is recreated with JUCE. Added mono/stereo input option. Works with VST3 hosts on Windows 64-bit and macOS 64-bit Intel and M1. Preset handling is made via VST3 standard preset files.
 
-# Building environment
+# Build environment
 
 Tools: XCode 13 on Mac, Visual Studio 2022 with WiX 3 (for making msi) on Windows.
 
