@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Include>
 
-  <?define MLBuild=1995?>
+  <?define MLBuild=1997?>
 
   <?if $(var.Configuration) = "Guitarix"?>
     <?define ShortName = "Guitarix"?>

@@ -34,15 +34,13 @@ namespace gx_engine {
  **  class NoiseGate
  */
 
-PluginDef NoiseGate::inputdef = PluginDef();
-float NoiseGate::fnglevel = 0;
-float NoiseGate::ngate = 1;
-bool NoiseGate::off = true;
-Plugin NoiseGate::inputlevel = Plugin();
-PluginDef NoiseGate::outputgate = PluginDef();
-
-NoiseGate::NoiseGate() {
-
+NoiseGate::NoiseGate():
+    fnglevel(0),
+    ngate(1),
+    off(true),
+    inputdef(this),
+    outputdef(this)
+{
     inputdef.version = PLUGINDEF_VERSION;
     inputdef.flags = PGN_SNOOP;
     inputdef.id = "noise_gate";
@@ -52,47 +50,56 @@ NoiseGate::NoiseGate() {
 
     inputlevel.set_pdef(&inputdef);
 
-    outputgate.version = PLUGINDEF_VERSION;
-    outputgate.id = "noiseshut";
-    outputgate.name = "?noiseshut";
-    outputgate.mono_audio = outputgate_compute;
-    outputgate.activate_plugin = outputgate_activate;
+    outputdef.version = PLUGINDEF_VERSION;
+    outputdef.id = "noiseshut";
+    outputdef.name = "?noiseshut";
+    outputdef.mono_audio = outputgate_compute;
+    outputdef.activate_plugin = outputgate_activate;
 
+    outputgate.set_pdef(&outputdef);
 }
 
 inline float sqrf(float x) {
     return x * x;
 }
 
-void NoiseGate::inputlevel_compute(int count, float *input, float *output, PluginDef*) {
+void NoiseGate::inputlevel_compute(int count, float *input, float *output, PluginDef* pdef) {
+    NoiseGate& self = *(static_cast<InputLevel*>(pdef)->parent);
+
     float sumnoise = 0;
     for (int i = 0; i < count; i++) {
         sumnoise += sqrf(input[i]);
     }
-    if (sumnoise/count > sqrf(fnglevel * 0.01)) {
-        ngate = 1; // -75db 0.001 = 65db
-    } else if (ngate > 0.01) {
-        ngate *= 0.996;
+    if (sumnoise/count > sqrf(self.fnglevel * 0.01)) {
+        self.ngate = 1; // -75db 0.001 = 65db
+    } else if (self.ngate > 0.01) {
+        self.ngate *= 0.996;
     }
 }
 
 int NoiseGate::noisegate_register(const ParamReg& reg) {
-    reg.registerVar("noise_gate.threshold", N_("Threshold"), "S", "", &fnglevel,
+    NoiseGate& self = *(static_cast<InputLevel*>(reg.plugin)->parent);
+
+    reg.registerVar("noise_gate.threshold", N_("Threshold"), "S", "", &self.fnglevel,
 		    0.017f, 0.01f, 0.31f, 0.001f);
     return 0;
 }
 
-void NoiseGate::outputgate_compute(int count, float *input, float *output, PluginDef*) {
-    if (off) {
+void NoiseGate::outputgate_compute(int count, float *input, float *output, PluginDef*pdef) {
+    NoiseGate& self = *(static_cast<OutputGate*>(pdef)->parent);
+
+    if (self.off) {
 	return;
     }
     while (count--) {
-	*output++ = ngate * *input++;
+	*output++ = self.ngate * *input++;
     }}
 
 int NoiseGate::outputgate_activate(bool start, PluginDef *pdef) {
+    NoiseGate& self = *(static_cast<OutputGate*>(pdef)->parent);
+
     if (start) {
-	off = !inputlevel.get_on_off();
+        self.off = !self.inputlevel.get_on_off();
     }
     return 0;
 }

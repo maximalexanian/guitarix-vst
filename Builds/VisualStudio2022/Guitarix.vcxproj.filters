@@ -33,811 +33,275 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\headers\tunerswitcher.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\engine.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\guitarix.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_cairo_callbacks.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_child_process.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_compiler.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_convolver.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_engine.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_faust_plugins.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_faust_support.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_gui_helpers.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_internal_plugins.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_jack.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_jack_options.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_jconv_settings.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_json.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_logging.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_main_boxes.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_main_interface.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_main_midi.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_main_window.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_modulesequencer.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_parameter.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_pitch_tracker.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_plugin.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_pluginloader.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_portmap.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_preset.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_preset_window.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_resampler.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_sequencer_settings.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_stackbox_builder.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_system.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\gx_ui_builder.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\jsonrpc.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\ladspa.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\ladspaback.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\ladspalist.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\headers\machine.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\faust-generated\jconv_post.h">
-      <Filter>faust-generated</Filter>
-    </ClInclude>
-    <ClInclude Include="..\faust-generated\jconv_post_mono.h">
-      <Filter>faust-generated</Filter>
-    </ClInclude>
-    <ClInclude Include="..\faust-generated\preamp_impulse_former.h">
-      <Filter>faust-generated</Filter>
-    </ClInclude>
-    <ClInclude Include="..\faust-generated\preamp_impulse_former_st.h">
-      <Filter>faust-generated</Filter>
-    </ClInclude>
-    <ClInclude Include="..\faust-generated\presence_level.h">
-      <Filter>faust-generated</Filter>
-    </ClInclude>
-    <ClInclude Include="..\faust-generated\cabinet_impulse_former.h">
-      <Filter>faust-generated</Filter>
-    </ClInclude>
-    <ClInclude Include="..\faust-generated\cabinet_impulse_former_st.h">
-      <Filter>faust-generated</Filter>
-    </ClInclude>
-    <ClInclude Include="..\faust-generated\drumseq.h">
-      <Filter>faust-generated</Filter>
-    </ClInclude>
-    <ClInclude Include="..\gx_head\engine\valve.h">
-      <Filter>gx_head\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\zita-convolver\zita-convolver.h">
-      <Filter>zita-convolver</Filter>
-    </ClInclude>
-    <ClInclude Include="..\zita-resampler-1.1.0\zita-resampler\resampler.h">
-      <Filter>zite-resampler</Filter>
-    </ClInclude>
-    <ClInclude Include="..\zita-resampler-1.1.0\zita-resampler\resampler-table.h">
-      <Filter>zite-resampler</Filter>
-    </ClInclude>
+    <ClInclude Include="..\..\guitarix\src\faust-generated\cabinet_impulse_former.h" />
+    <ClInclude Include="..\..\guitarix\src\faust-generated\cabinet_impulse_former_st.h" />
+    <ClInclude Include="..\..\guitarix\src\faust-generated\drumseq.h" />
+    <ClInclude Include="..\..\guitarix\src\faust-generated\jconv_post.h" />
+    <ClInclude Include="..\..\guitarix\src\faust-generated\jconv_post_mono.h" />
+    <ClInclude Include="..\..\guitarix\src\faust-generated\preamp_impulse_former.h" />
+    <ClInclude Include="..\..\guitarix\src\faust-generated\preamp_impulse_former_st.h" />
+    <ClInclude Include="..\..\guitarix\src\faust-generated\presence_level.h" />
+    <ClInclude Include="..\..\guitarix\src\gx_head\engine\valve.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\engine.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\guitarix.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_cairo_callbacks.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_child_process.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_compiler.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_convolver.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_engine.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_faust_plugins.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_faust_support.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_gui_helpers.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_internal_plugins.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_jack.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_jack_options.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_jconv_settings.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_json.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_logging.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_main_boxes.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_main_interface.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_main_midi.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_main_window.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_modulesequencer.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_parameter.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_pitch_tracker.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_plugin.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_pluginloader.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_portmap.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_preset.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_preset_window.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_resampler.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_sequencer_settings.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_stackbox_builder.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_system.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\gx_ui_builder.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\jsonrpc.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\ladspa.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\ladspaback.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\ladspalist.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\machine.h" />
+    <ClInclude Include="..\..\guitarix\src\headers\tunerswitcher.h" />
+    <ClInclude Include="..\..\guitarix\src\zita-convolver\zita-convolver.h" />
+    <ClInclude Include="..\..\guitarix\src\zita-resampler-1.1.0\zita-resampler\resampler-table.h" />
+    <ClInclude Include="..\..\guitarix\src\zita-resampler-1.1.0\zita-resampler\resampler.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\faust-generated\gx_ampmodul.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gx_ampout.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gx_ampout_ladspa.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gx_distortion.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gx_feedback.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gx_outputlevel.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gx_outputlevel_ladspa.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp2.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp3.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp4.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp5.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp6.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp7.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp8.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp9.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp10.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp11.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp12.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp13.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp14.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp15.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp16.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp17.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxamp18.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxfeed.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxnoamp.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\highbooster.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\impulseresponse.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\jconv_post.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\jconv_post_mono.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\jenbasswah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\jenwah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\low_high_pass.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\maestrowah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\moog.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\noise_shaper.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\overdrive.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\panoram_enhancer.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\peak_eq.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\phaser.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\phaser_mono.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\preamp_impulse_former.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\preamp_impulse_former_st.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\presence_level.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\ring_modulator.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\ring_modulator_st.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\rolwah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\selecteq.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\selwah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\softclip.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\stereodelay.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\stereoecho.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\stereoverb.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\thick_distortion.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonecontroll.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_ac15.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_ac30.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_ampeg.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_ampeg_rev.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_bassman.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_bogner.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_crunch.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_default.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_engl.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_fender_blues.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_fender_default.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_fender_deville.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_gibsen.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_groove.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_ibanez.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_jcm800.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_jcm2000.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_jtm45.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_m2199.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_mesa.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_mlead.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_peavey.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_princeton.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_roland.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_soldano.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_sovtek.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tonestack_twin.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\trbuff.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\tremolo.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\vibe_lfo_sine.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\vibe_mono_lfo_sine.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\voxwah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\autowah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\balance.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\bass_enhancer.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\bassbooster.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\baxandall.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\biquad.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\bitdowner.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\cabinet_impulse_former.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\cabinet_impulse_former_st.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\chorus.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\chorus_mono.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\colbwah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\colwah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\compressor.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\crybaby.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\dallaswah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\dattorros_progenitor.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\delay.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\digital_delay.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\digital_delay_st.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\distortion2.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\drumseq.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\duck_delay.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\duck_delay_st.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\echo.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\expander.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\flanger.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\flanger_mono.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\foxwah.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\freeverb.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\fuzzface.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gain.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\graphiceq.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_convolver.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_engine.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_engine_audio.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_engine_midi.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_faust_plugins.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_internal_plugins.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_json.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_logging.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_midi_plugin.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_paramtable.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_pitch_tracker.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_pluginloader.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_preset.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_resampler.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_system.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\tunerswitcher.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\zita-convolver\zita-convolver.cc">
-      <Filter>zita-convolver</Filter>
-    </ClCompile>
-    <ClCompile Include="..\zita-resampler-1.1.0\resampler.cc">
-      <Filter>zite-resampler</Filter>
-    </ClCompile>
-    <ClCompile Include="..\zita-resampler-1.1.0\resampler-table.cc">
-      <Filter>zite-resampler</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_internal_ui_plugins.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\aclipper.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\astrofuzz.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\axface.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\bassboom.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\bfuzz.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\bmp.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\bossds1.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\buffb.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\buzz.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\colwah.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\coverd.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\cstb.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\dunwah.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\eldist.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\ffreak.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\flanger_gx.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\foxeylady.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\fumaster.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\fuzzdrive.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\fuzzfacefm.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\fuzzfacerm.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\gcb_95.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\hfb.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\hogsfoot.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\hornet.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\lpbboost.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mbc.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mbchor.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mbclipper.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mbcs.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mbd.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mbdel.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mbe.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mole.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\muff.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\mxrdist.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\rangem.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\rolandwah.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\ruin.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\scream.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\susta.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\ts9sim.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\generated\zita_rev1.cc">
-      <Filter>plugins\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_jack_options.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_jconv_settings.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_main.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_main_boxes.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_main_midi.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_main_window.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_mono_rack_builder.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_portmap.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_preset_window.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_sequencer_settings.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_stackbox_builder.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_stereo_rack_builder.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_ui_builder.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gxw_mm_controllers.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\ladspalist.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\liveplay.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\machine.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\rack.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\avahi_discover.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_cairo_callbacks.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_child_process.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\gui\gx_gui_helpers.cpp">
-      <Filter>gx_head\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\gx_jack.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gx_head\engine\jsonrpc.cpp">
-      <Filter>gx_head\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\ringbuffer.c">
-      <Filter>misc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\abgate.cc">
-      <Filter>plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\jcm800pre.cpp">
-      <Filter>plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\metronome.cc">
-      <Filter>plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\reversedelay.cc">
-      <Filter>plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\vibe.cc">
-      <Filter>plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\vumeter.cc">
-      <Filter>plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\plugins\vumeter_st.cc">
-      <Filter>plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\faust-generated\gxfeedreverb.cc">
-      <Filter>faust-generated</Filter>
-    </ClCompile>
+    <ClCompile Include="..\..\Source\ringbuffer.c" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\autowah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\balance.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\bassbooster.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\bass_enhancer.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\baxandall.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\biquad.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\bitdowner.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\cabinet_impulse_former.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\cabinet_impulse_former_st.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\chorus.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\chorus_mono.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\colbwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\colwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\compressor.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\crybaby.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\dallaswah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\dattorros_progenitor.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\delay.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\digital_delay.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\digital_delay_st.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\distortion2.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\drumseq.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\duck_delay.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\duck_delay_st.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\echo.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\expander.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\flanger.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\flanger_mono.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\foxwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\freeverb.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\fuzzface.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gain.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\graphiceq.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp10.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp11.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp12.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp13.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp14.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp15.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp16.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp17.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp18.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp2.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp3.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp4.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp5.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp6.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp7.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp8.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxamp9.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxfeed.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxfeedreverb.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gxnoamp.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gx_ampmodul.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gx_ampout.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gx_ampout_ladspa.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gx_distortion.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gx_feedback.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gx_outputlevel.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\gx_outputlevel_ladspa.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\highbooster.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\impulseresponse.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\jconv_post.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\jconv_post_mono.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\jenbasswah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\jenwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\low_high_pass.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\maestrowah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\moog.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\noise_shaper.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\overdrive.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\panoram_enhancer.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\peak_eq.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\phaser.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\phaser_mono.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\preamp_impulse_former.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\preamp_impulse_former_st.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\presence_level.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\ring_modulator.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\ring_modulator_st.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\rolwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\selecteq.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\selwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\softclip.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\stereodelay.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\stereoecho.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\stereoverb.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\thick_distortion.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonecontroll.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_ac15.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_ac30.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_ampeg.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_ampeg_rev.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_bassman.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_bogner.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_crunch.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_default.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_engl.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_fender_blues.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_fender_default.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_fender_deville.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_gibsen.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_groove.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_ibanez.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_jcm2000.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_jcm800.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_jtm45.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_m2199.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_mesa.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_mlead.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_peavey.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_princeton.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_roland.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_soldano.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_sovtek.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tonestack_twin.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\trbuff.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\tremolo.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\vibe_lfo_sine.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\vibe_mono_lfo_sine.cc" />
+    <ClCompile Include="..\..\guitarix\src\faust-generated\voxwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_convolver.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_engine.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_engine_audio.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_engine_midi.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_faust_plugins.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_internal_plugins.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_internal_ui_plugins.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_jack.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_json.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_logging.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_midi_plugin.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_paramtable.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_pitch_tracker.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_pluginloader.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_preset.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_resampler.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\gx_system.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\jsonrpc.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\engine\tunerswitcher.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\avahi_discover.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gxw_mm_controllers.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_cairo_callbacks.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_child_process.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_gui_helpers.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_jack_options.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_jconv_settings.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_main.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_main_boxes.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_main_midi.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_main_window.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_mono_rack_builder.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_portmap.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_preset_window.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_sequencer_settings.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_stackbox_builder.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_stereo_rack_builder.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\gx_ui_builder.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\ladspalist.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\liveplay.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\machine.cpp" />
+    <ClCompile Include="..\..\guitarix\src\gx_head\gui\rack.cpp" />
+    <ClCompile Include="..\..\guitarix\src\plugins\abgate.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\aclipper.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\astrofuzz.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\axface.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\bassboom.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\bfuzz.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\bmp.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\bossds1.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\buffb.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\buzz.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\colwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\coverd.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\cstb.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\dunwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\eldist.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\ffreak.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\flanger_gx.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\foxeylady.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\fumaster.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\fuzzdrive.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\fuzzfacefm.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\fuzzfacerm.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\gcb_95.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\hfb.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\hogsfoot.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\hornet.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\lpbboost.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mbc.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mbchor.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mbclipper.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mbcs.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mbd.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mbdel.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mbe.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mole.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\muff.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\mxrdist.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\rangem.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\rolandwah.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\ruin.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\scream.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\susta.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\ts9sim.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\generated\zita_rev1.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\jcm800pre.cpp" />
+    <ClCompile Include="..\..\guitarix\src\plugins\metronome.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\reversedelay.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\vibe.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\vumeter.cc" />
+    <ClCompile Include="..\..\guitarix\src\plugins\vumeter_st.cc" />
+    <ClCompile Include="..\..\guitarix\src\zita-convolver\zita-convolver.cc" />
+    <ClCompile Include="..\..\guitarix\src\zita-resampler-1.1.0\resampler-table.cc" />
+    <ClCompile Include="..\..\guitarix\src\zita-resampler-1.1.0\resampler.cc" />
   </ItemGroup>
 </Project>

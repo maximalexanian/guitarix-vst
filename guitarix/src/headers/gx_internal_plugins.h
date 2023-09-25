@@ -203,17 +203,26 @@ public:
 
 class NoiseGate {
 private:
-    static PluginDef inputdef;
-    static float fnglevel;
-    static float ngate;
-    static bool off;
+    float fnglevel;
+    float ngate;
+    bool off;
     static int noisegate_register(const ParamReg& reg);
     static void inputlevel_compute(int count, float *input0, float *output0, PluginDef*);
     static void outputgate_compute(int count, float *input, float *output, PluginDef*);
     static int outputgate_activate(bool start, PluginDef *pdef);
 public:
-    static Plugin inputlevel;
-    static PluginDef outputgate;
+    class InputLevel: public PluginDef{
+        public:
+        InputLevel(NoiseGate * parent): parent(parent) {memset(this, 0, sizeof(PluginDef));}
+        NoiseGate * parent;
+    } inputdef;
+    Plugin inputlevel;
+    class OutputGate: public PluginDef{
+        public:
+        OutputGate(NoiseGate * parent): parent(parent) {memset(this, 0, sizeof(PluginDef));}
+        NoiseGate * parent;
+    } outputdef;
+    Plugin outputgate;
     NoiseGate();
 };
 

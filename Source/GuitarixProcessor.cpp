@@ -26,6 +26,9 @@
 #include <windows.h>
 #endif
 
+#define DBGRT(x)
+#define DBG(x)
+
 using namespace juce;
 
 extern gx_jack::GxJack* gx_start(int argc, char *argv[], gx_engine::GxMachine*& machine);
@@ -100,7 +103,7 @@ GuitarixProcessor::GuitarixProcessor()
 
 	gx_preset::GxSettings *settings = &(machine->get_settings());
 	gx_engine::ParamMap& pmap = settings->get_param();
-	pmap.signal_insert_remove().connect(
+    pmap.signal_insert_remove().connect(
 		sigc::bind(sigc::mem_fun(*this, &GuitarixProcessor::on_param_insert_remove), false));
 	for (gx_engine::ParamMap::iterator i = pmap.begin(); i != pmap.end(); ++i) {
 		connect_value_changed_signal(i->second, false);
@@ -480,6 +483,12 @@ void GuitarixProcessor::setCurrentProgram (int index)
 }
 
 //==============================================================================
+const PluginHostType& getHostType()
+{
+    static PluginHostType hostType;
+    return hostType;
+}
+
 void GuitarixProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
@@ -513,9 +522,14 @@ void GuitarixProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
         }
         else
         {
-            if(buffersize>=1024) quantum=buffersize/4;
-            else if(buffersize>=512) quantum=buffersize/2;
             delay=0;
+            if(getHostType().isLogic() || getHostType().isGarageBand() || getHostType().isMainStage())
+            {
+                if(buffersize>=2048) quantum=buffersize/16;
+                else if(buffersize>=1024) quantum=buffersize/8;
+                else if(buffersize>=512) quantum=buffersize/4;
+                else quantum=buffersize/2;
+            }
         }
         wpos=0;
         rpos=0;
@@ -585,8 +599,6 @@ float GuitarixProcessor::getRMSLevel(float* data, int len) const
         sum+=data[i]*data[i];
     return (float)std::sqrt(sum/len);
 }
-
-#define DBGRT(x)
 
 void GuitarixProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {

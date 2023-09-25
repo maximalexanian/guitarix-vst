@@ -16,7 +16,7 @@ To install and build libraries I've used vcpkg (commit 38bb87c55 from June 3, 20
 
 # Building and running
 
-Project are in ./Builds folder. Please setup  Use Installer Scheme on Mac and GuitarixSetup project on Windows. Build results are in ../output. Mac version will run right after build, installer just adds VST3 presets to proper place. Windows version is more sophisticated since libraries are dynamic - bunch of dlls and proper regisrty key in nessesary, so use installer (or ) to have it proper setup. 
+Project are in ./Builds folder. Please setup  Use Installer Scheme on Mac and GuitarixSetup project on Windows. Build results are in ../output. Mac version will run right after build, installer just adds VST3 presets to proper place. Windows version is more sophisticated since libraries are dynamic - bunch of dlls and proper regisrty key in nessesary, so use installer to setup it properly. 
 
 # Future development
 

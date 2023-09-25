@@ -70,7 +70,7 @@
       <PreprocessorDefinitions>_TIMESPEC_DEFINED;BOOST_ALL_NO_LIB;_DEBUG;GUITARIX_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\..\guitarix\src\headers;..\..\guitarix\libgxw;..\..\guitarix\libgxwmm;..\gx_head\engine;..\..\guitarix\src\zita-convolver;..\..\guitarix\src\zita-resampler-1.1.0;..\..\..\library\vcpkg\installed\x64-windows\include\glibmm-2.68;..\..\..\library\vcpkg\installed\x64-windows\include\glib-2.0;..\..\..\library\vcpkg\installed\x64-windows\include\giomm-2.68;..\..\..\library\vcpkg\installed\x64-windows\include\sigc++-3.0;..\..\..\library\vcpkg\installed\x64-windows\debug\lib\glibmm-2.68\include;..\..\..\library\vcpkg\installed\x64-windows\debug\lib\glib-2.0\include;..\..\..\library\vcpkg\installed\x64-windows\debug\lib\giomm-2.68\include;..\..\..\library\vcpkg\installed\x64-windows\debug\lib\sigc++-3.0\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>

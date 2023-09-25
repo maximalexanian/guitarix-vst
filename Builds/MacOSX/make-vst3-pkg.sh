@@ -63,11 +63,12 @@ if ! pkgbuild --root "$Build/Payload" \
    --identifier "$PkgId" \
    --version "$ProdVersion" \
    --scripts "$Build/Scripts" \
-   "$Build/GuitarixVST3.pkg"
+   "$Build/GuitarixVST3Unsigned.pkg"
 then echo "Not built: error $?"; exit 2; fi
 
-#if ! productsign --sign "Developer ID Installer" --timestamp "$Build/GuitarixVST3.pkg" "$Build/GuitarixVST3.pkg"
+#if ! productsign --sign "Developer ID Installer" --timestamp "$Build/GuitarixVST3Unsigned.pkg" "$Build/GuitarixVST3.pkg"
 #then echo "Not signed: error $?"; exit 3; fi
+mv "$Build/GuitarixVST3Unsigned.pkg" "$Build/GuitarixVST3.pkg"
 
 mkdir -p "$Build/Resources"
 pushd "$Build/Resources" >> /dev/null
@@ -86,5 +87,6 @@ if ! productbuild \
 then echo "productbuild error $?"; exit 1; fi
 #if ! productsign --sign "Developer ID Installer" --timestamp "$Build/Guitarix.pkg" "$Dst/GuitarixSetup$ProdVersion.pkg"
 #then echo "productsign error $?"; exit 2; fi
+cp "$Build/Guitarix.pkg" "$Dst/GuitarixSetup$ProdVersion.pkg"
 
 rm -R "$Build"

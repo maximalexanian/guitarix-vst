@@ -103,6 +103,7 @@
 		5024C18727FBD228005B9F44 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E8427FBCD87005B9F44 /* libogg.a */; };
 		5024C40E27FCE2AF005B9F44 /* gx_head in Resources */ = {isa = PBXBuildFile; fileRef = 5024C40C27FCE2AF005B9F44 /* gx_head */; };
 		5024C41027FCE2AF005B9F44 /* gx_head in Resources */ = {isa = PBXBuildFile; fileRef = 5024C40C27FCE2AF005B9F44 /* gx_head */; };
+		5024C41127FCE2AF005B9F44 /* gx_head in Resources */ = {isa = PBXBuildFile; fileRef = 5024C40C27FCE2AF005B9F44 /* gx_head */; };
 		502EAD8827F256210054658D /* RecentFilesMenuTemplate.nib in Resources */ = {isa = PBXBuildFile; fileRef = 66975499CFA74B2D35906CE3 /* RecentFilesMenuTemplate.nib */; };
 		502EAD8927F256210054658D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6394EBF0ECB6E9C986493A5E /* Accelerate.framework */; };
 		502EAD8A27F256210054658D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9F311008FE14BA2AFE65C2 /* AudioToolbox.framework */; };
@@ -220,7 +221,6 @@
 		50BC1F3F285959D70024186D /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DBE2858185B003AF984 /* libpcre.a */; };
 		50BC1F4028595AE50024186D /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DB22858044B003AF984 /* libmp3lame.a */; };
 		50BC1F4128595AE80024186D /* libmpg123.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50161DB32858044B003AF984 /* libmpg123.a */; };
-		50BE907D2895D4D600F0BFD8 /* gx_head in Resources */ = {isa = PBXBuildFile; fileRef = 5024C40C27FCE2AF005B9F44 /* gx_head */; };
 		50CB2AC7281B19BD00C477EA /* sem_timedwait.c in Sources */ = {isa = PBXBuildFile; fileRef = 50CB2AC6281B19BD00C477EA /* sem_timedwait.c */; };
 		50CFF3A9283D6F100092BF59 /* libgio-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50246F7A27FBCD94005B9F44 /* libgio-2.0.a */; };
 		50CFF3B3283D77280092BF59 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50245E4727FBCD87005B9F44 /* libvorbisfile.a */; };
@@ -1162,7 +1162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				502EADAC27F256210054658D /* RecentFilesMenuTemplate.nib in Resources */,
-				50BE907D2895D4D600F0BFD8 /* gx_head in Resources */,
+				5024C41127FCE2AF005B9F44 /* gx_head in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1471,7 +1471,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				CURRENT_PROJECT_VERSION = 1.38.1.1997;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = "";
 				DSTROOT = /;
@@ -1479,7 +1479,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"JucePlugin_VersionCode=0x10000",
-					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"JucePlugin_VersionString=\\\"1.38.1.1997\\\"",
 					"_DEBUG=1",
 					"DEBUG=1",
 					"JUCE_USE_OGGVORBIS=0",
@@ -1568,7 +1568,7 @@
 				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/Components/";
 				LIBRARY_STYLE = Bundle;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.38.1.1995;
+				MARKETING_VERSION = 1.38.1.1997;
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-lGuitarix",
@@ -1587,7 +1587,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N255PH35YQ;
-				GX_PRODUCT_VERSION = 1.38.1.1995;
+				GX_PRODUCT_VERSION = 1.38.1.1997;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1597,7 +1597,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N255PH35YQ;
-				GX_PRODUCT_VERSION = 1.38.1.1995;
+				GX_PRODUCT_VERSION = 1.38.1.1997;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1611,7 +1611,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				CURRENT_PROJECT_VERSION = 1.38.1.1997;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1619,7 +1619,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"JucePlugin_VersionString=\\\"1.38.1.1997\\\"",
 					"_NDEBUG=1",
 					"NDEBUG=1",
 					"JUCE_USE_OGGVORBIS=0",
@@ -1709,7 +1709,7 @@
 				LIBRARY_STYLE = Bundle;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.38.1.1995;
+				MARKETING_VERSION = 1.38.1.1997;
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-lGuitarix",
@@ -1731,7 +1731,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				CURRENT_PROJECT_VERSION = 1.38.1.1997;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1740,7 +1740,7 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"JucePlugin_VersionCode=0x10000",
-					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"JucePlugin_VersionString=\\\"1.38.1.1997\\\"",
 					"_NDEBUG=1",
 					"NDEBUG=1",
 					"JUCE_USE_OGGVORBIS=0",
@@ -1830,7 +1830,7 @@
 				LIBRARY_STYLE = Bundle;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.38.1.1995;
+				MARKETING_VERSION = 1.38.1.1997;
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-lGuitarix",
@@ -1854,14 +1854,14 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				CURRENT_PROJECT_VERSION = 1.38.1.1997;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = "";
 				DSTROOT = /;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"JucePlugin_VersionString=\\\"1.38.1.1997\\\"",
 					"_DEBUG=1",
 					"DEBUG=1",
 					"JUCE_USE_OGGVORBIS=0",
@@ -1950,7 +1950,7 @@
 				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/VST3/";
 				LIBRARY_STYLE = Bundle;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.38.1.1995;
+				MARKETING_VERSION = 1.38.1.1997;
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-lGuitarix",
@@ -1972,11 +1972,11 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				CURRENT_PROJECT_VERSION = 1.38.1.1997;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"JucePlugin_VersionString=\\\"1.38.1.1997\\\"",
 					"_DEBUG=1",
 					"DEBUG=1",
 					"JUCE_USE_OGGVORBIS=0",
@@ -2066,7 +2066,7 @@
 					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.38.1.1995;
+				MARKETING_VERSION = 1.38.1.1997;
 				OTHER_LDFLAGS = "-lGuitarix";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
 				PRODUCT_NAME = Guitarix;
@@ -2141,7 +2141,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"JucePlugin_VersionString=\\\"1.38.1.1997\\\"",
 					"_DEBUG=1",
 					"DEBUG=1",
 					BOOST_ALL_NO_LIB,
@@ -2250,12 +2250,12 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.38.1.1995;
+				CURRENT_PROJECT_VERSION = 1.38.1.1997;
 				DEAD_CODE_STRIPPING = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"JucePlugin_VersionString=\\\"1.38.1.1997\\\"",
 					"_NDEBUG=1",
 					"NDEBUG=1",
 					"JUCE_USE_OGGVORBIS=0",
@@ -2346,7 +2346,7 @@
 				);
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.38.1.1995;
+				MARKETING_VERSION = 1.38.1.1997;
 				OTHER_LDFLAGS = "-lGuitarix";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Guitarix.Guitarix;
 				PRODUCT_NAME = Guitarix;
@@ -2366,7 +2366,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"JucePlugin_VersionString=\\\"1.38.1.1995\\\"",
+					"JucePlugin_VersionString=\\\"1.38.1.1997\\\"",
 					"_NDEBUG=1",
 					"NDEBUG=1",
 					"JUCE_USE_OGGVORBIS=0",

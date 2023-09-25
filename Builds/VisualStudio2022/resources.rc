@@ -1,7 +1,7 @@
 #pragma code_page(65001)
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION  1,38,1,1995
+FILEVERSION  1,38,1,1997
 BEGIN
   BLOCK "StringFileInfo"
   BEGIN
@@ -9,9 +9,9 @@ BEGIN
     BEGIN
       VALUE "LegalCopyright",  "(C) Hermann Meyer, James Warden, Andreas Degert, Pete Shorthose; Portions (C) 2022 Maxim Alexanian\0"
       VALUE "FileDescription",  "Guitarix VST\0"
-      VALUE "FileVersion",  "1.38.1.1995\0"
+      VALUE "FileVersion",  "1.38.1.1997\0"
       VALUE "ProductName",  "Guitarix VST\0"
-      VALUE "ProductVersion",  "1.38.1.1995\0"
+      VALUE "ProductVersion",  "1.38.1.1997\0"
     END
   END
 
